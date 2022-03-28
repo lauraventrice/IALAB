@@ -88,4 +88,17 @@ get_index(Elem, [_|Tail], CurrentIndex, ResultIndex) :-
     NewCurrent is CurrentIndex + 1,
     get_index(Elem, Tail, NewCurrent, ResultIndex).
 
-%swap(elem1, elem2, list, list_result)
+/*
+Return a new list which has Elem1 and Elem2 swapped. 
+PRECOND: List contains both Elem1 and Elem2. 
+swap(Elem1, Elem2, List, ListResult)
+*/
+
+swap(_, _, [], []) :- !.
+swap(Elem1, Elem2, [Head|Tail], [Elem2|ListResult]) :-
+    Elem1 == Head, !, swap(Elem1, Elem2, Tail, ListResult). 
+swap(Elem1, Elem2, [Head|Tail], [Elem1|ListResult]) :-
+    Elem2 == Head, !, swap(Elem1, Elem2, Tail, ListResult). 
+swap(Elem1, Elem2, [Head|Tail], [Head|ListResult]) :-
+    Elem1 \== Head, Elem2 \== Head, swap(Elem1, Elem2, Tail, ListResult). 
+
