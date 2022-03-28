@@ -109,3 +109,10 @@ trasforma(Num, CurrentState, ResultState)
 */
 trasforma(Num, CurrentState, ResultState) :-
     swap(Num, v, CurrentState, ResultState).
+
+
+/*
+Stati visitati -> lista di liste!
+*/
+
+
