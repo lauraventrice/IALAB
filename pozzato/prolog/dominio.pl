@@ -102,3 +102,10 @@ swap(Elem1, Elem2, [Head|Tail], [Elem1|ListResult]) :-
 swap(Elem1, Elem2, [Head|Tail], [Head|ListResult]) :-
     Elem1 \== Head, Elem2 \== Head, swap(Elem1, Elem2, Tail, ListResult). 
 
+
+/*
+Change current state with swap between Num and v, which is the empty position. 
+trasforma(Num, CurrentState, ResultState)
+*/
+trasforma(Num, CurrentState, ResultState) :-
+    swap(Num, v, CurrentState, ResultState).
