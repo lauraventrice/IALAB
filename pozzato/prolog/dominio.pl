@@ -29,48 +29,77 @@ membership(Elem, [_|Tail]) :-
 
 
 iniziale([1, 2, 3, 4, v, 5, 6, 7, 8]).
+%iniziale([1, 2, 3, 4, 5, 6, 7, v, 8]).
 finale([1, 2, 3, 4, 5, 6, 7, 8, v]).
 
 /*
-applicabile(IndexEmptyPosition, NumberToMove, CurrentState) :-
-    get_index_wrapper(NumberToMove, CurrentState, IndexOFElement),   --find the index of the element to move
-    membership(IndexOfElement, *list of indexes which can move*).    --if the index is in the list we can move the number
+applicabile(NumberToMove, CurrentState) :-
+    get_index_wrapper(v, CurrentState, IndexV),
+    get_index_wrapper(Numero, CurrentState, IndexNum),
+    number_that_can_be_moved(IndexV, S),
+    membership(IndexNum, S). 
 */
-applicabile(0, Num, CurrentState) :-
-    get_index_wrapper(Num, CurrentState, IndexOfElement),   
-    membership(IndexOfElement, [1, 3]). 
 
-applicabile(1, Num, CurrentState) :-
-    get_index_wrapper(Num, CurrentState, IndexOfElement),    
-    membership(IndexOfElement, [0, 2, 4]).   
-
-applicabile(2, Num, CurrentState) :-
-    get_index_wrapper(Num, CurrentState, IndexOfElement),
-    membership(IndexOfElement, [1, 5]).     
-
-applicabile(3, Num, CurrentState) :-
-    get_index_wrapper(Num, CurrentState, IndexOfElement),
-    membership(IndexOfElement, [0, 4, 6]).
-
-applicabile(4, Num, CurrentState) :-
-    get_index_wrapper(Num, CurrentState, IndexOfElement),  
-    membership(IndexOfElement, [1, 3, 4, 6]).     
-
-applicabile(5, Num, CurrentState) :-
-    get_index_wrapper(Num, CurrentState, IndexOfElement),   
-    membership(IndexOfElement, [2, 4, 8]).    
+applicabile(1, CurrentState) :-
+    get_index_wrapper(v, CurrentState, IndexV),
+    get_index_wrapper(1, CurrentState, IndexNum),
+    index_move(IndexV, S),
+    membership(IndexNum, S).
     
-applicabile(6, Num, CurrentState) :-
-    get_index_wrapper(Num, CurrentState, IndexOfElement),   
-    membership(IndexOfElement, [3, 7]). 
-        
-applicabile(7, Num, CurrentState) :-
-    get_index_wrapper(Num, CurrentState, IndexOfElement),
-    membership(IndexOfElement, [4, 6, 8]).     
-        
-applicabile(8, Num, CurrentState) :-
-    get_index_wrapper(Num, CurrentState, IndexOfElement), 
-    membership(IndexOfElement, [5, 7]).     
+applicabile(2, CurrentState) :-
+    get_index_wrapper(v, CurrentState, IndexV),
+    get_index_wrapper(2, CurrentState, IndexNum),
+    index_move(IndexV, S),
+    membership(IndexNum, S).    
+
+applicabile(3, CurrentState) :-
+    get_index_wrapper(v, CurrentState, IndexV),
+    get_index_wrapper(3, CurrentState, IndexNum),
+    index_move(IndexV, S),
+    membership(IndexNum, S).
+
+applicabile(4, CurrentState) :-
+    get_index_wrapper(v, CurrentState, IndexV),
+    get_index_wrapper(4, CurrentState, IndexNum),
+    index_move(IndexV, S),
+    membership(IndexNum, S).
+
+applicabile(5, CurrentState) :-
+    get_index_wrapper(v, CurrentState, IndexV),
+    get_index_wrapper(5, CurrentState, IndexNum),
+    index_move(IndexV, S),
+    membership(IndexNum, S).
+
+applicabile(6, CurrentState) :-
+    get_index_wrapper(v, CurrentState, IndexV),
+    get_index_wrapper(6, CurrentState, IndexNum),
+    index_move(IndexV, S),
+    membership(IndexNum, S).
+
+applicabile(7, CurrentState) :-
+    get_index_wrapper(v, CurrentState, IndexV),
+    get_index_wrapper(7, CurrentState, IndexNum),
+    index_move(IndexV, S),
+    membership(IndexNum, S).
+
+applicabile(8, CurrentState) :-
+    get_index_wrapper(v, CurrentState, IndexV),
+    get_index_wrapper(8, CurrentState, IndexNum),
+    index_move(IndexV, S),
+    membership(IndexNum, S).
+
+% index_move(FreePosition, IndexList). indici che possono essere spostati in base alla FreePosition
+index_move(0, [1, 3]).
+index_move(1, [0, 2, 4]).
+index_move(2, [1, 5]). 
+index_move(3, [0, 4, 6]).
+index_move(4, [1, 3, 5, 7]).
+index_move(5, [2, 4, 8]).
+index_move(6, [3, 7]).
+index_move(7, [4, 6, 8]).
+index_move(8, [5, 7]).
+
+
         
 /*
 Return the index of the occurence of the specified element (ElemToFind) in
@@ -115,4 +144,80 @@ trasforma(Num, CurrentState, ResultState) :-
 Stati visitati -> lista di liste!
 */
 
+% cerca_soluzione(-ActionList)
+cerca_soluzione(ActionList) :-
+    iniziale(InitialS),
+    profondita(InitialS, ActionList, []).
 
+% profondita(CurrentState, ActionList, VisitatedStates)
+profondita(CurrentS, [], _):-
+    finale(CurrentS), !.
+profondita(CurrentS,[Az|ActionList],Visited):-
+    write(CurrentS),
+    applicabile(Az, CurrentS),
+    trasforma(Az,CurrentS,NewS),
+    \+member(NewS,Visited),
+    profondita(NewS,ActionList,[CurrentS|Visited]).
+
+
+iterative_deepening_wrapper(ActionList, StartIndex, Limit) :-
+    iterative_deepening(ActionList, StartIndex, Limit).
+
+iterative_deepening(_, Bound, Limit) :-
+    Bound == Limit, !.
+iterative_deepening(ActionList, Bound, Limit) :-
+    %write(Bound),
+    %write("\n"),
+    Bound < Limit,
+    NewBound is Bound + 1,
+    \+cerca_soluzione_soglia(ActionList, Bound), 
+    iterative_deepening(ActionList, NewBound, Limit).
+
+
+% cerca_soluzione_soglia(-ActionList,+Limit)
+cerca_soluzione_soglia(ActionList, Bound):-
+    iniziale(InitialS),
+    prof_limitata(InitialS,ActionList,[],Bound).
+
+% prof_limitata(S,ListaAzioni,Visitati,Soglia)
+prof_limitata(CurrentS,[],_,_):-finale(CurrentS),!.
+
+prof_limitata(CurrentS, [Az|ActionList], Visited, Bound):-
+    applicabile(Az, CurrentS),
+    trasforma(Az, CurrentS, NewS),
+    \+member(NewS, Visited),
+    Bound>0,
+    NewBound is Bound-1,
+    prof_limitata(NewS, ActionList, [CurrentS|Visited], NewBound).
+
+
+/*
+findall è un predicato con 3 argomenti,
+
+trovami tutti i valori di X per cui il secondo parametro è vero e mettimi il risultato in una lista (terzo paramertro)
+
+?- findall(X, member(X, [1,2,ciccio]), Risultato).
+Risultato = [1, 2, ciccio].
+
+
+?- iniziale(S), findall(Azione, applicabile(Azione, S), AzioniApplicabili).
+S = pos(4, 2),
+AzioniApplicabili = [nord, sud, ovest, est].
+
+mi trova tutte le azioni applicabili in S
+
+?- findall(Azione, applicabile(Azione, pos(1,1)), AzioniApplicabili).
+AzioniApplicabili = [sud, est].
+
+mi trova tutte le azioni applicabili in pos(1,1)
+*/
+
+/*
+6 4 2
+3 5 1
+v 8 7
+
+[4,2,v,6,5,1,3,8,7][4,2,v,6,5,1,3,8,7][4,v,2,6,5,1,3,8,7][4,v,2,6,5,1,3,8,7]
+[v,4,2,6,5,1,3,8,7][v,4,2,6,5,1,3,8,7][6,4,2,v,5,1,3,8,7][6,4,2,v,5,1,3,8,7]
+[6,4,2,3,5,1,v,8,7][6,4,2,3,5,1,v,8,7][6,4,2,3,5,1,8,v,7][6,4,2,3,5,1,8,v,7][6,4,2,3,5,1,8,7,v]
+*/

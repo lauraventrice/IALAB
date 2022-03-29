@@ -1,3 +1,4 @@
+
 % cerca_soluzione(-ListaAzioni)
 cerca_soluzione(ListaAzioni):-
     iniziale(SIniziale),
