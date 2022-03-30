@@ -1,14 +1,10 @@
 % elenco delle squadre del campionato di Serie A
-squadra(atalanta; bologna; cagliari; empoli; fiorentina; genoa; inter; juventus; lazio; milan; napoli; roma; salernitana; sampdoria; sassuolo; spezia; torino; udinese; venezia; verona).
+squadra(atalanta; genoa; inter; juventus; lazio; milan; napoli; roma; sampdoria; torino).
 
 % elenco delle città
-citta(bergamo; bologna; cagliari; empoli; firenze; genova; milano; torino; roma; napoli; salerno; sassuolo; spezia; udine; venezia; verona).
+citta(bergamo; bologna; empoli; firenze; genova; milano; torino; roma; napoli).
 % associazione di ogni squadra alla propria citta
 squadraInCitta(atalanta, bergamo).
-squadraInCitta(bologna, bologna).
-squadraInCitta(cagliari, cagliari).
-squadraInCitta(empoli, empoli).
-squadraInCitta(fiorentina, firenze).
 squadraInCitta(genoa, genova).
 squadraInCitta(inter, milano).
 squadraInCitta(juventus, torino).
@@ -16,18 +12,13 @@ squadraInCitta(lazio, roma).
 squadraInCitta(milan, milano).
 squadraInCitta(napoli, napoli).
 squadraInCitta(roma, roma).
-squadraInCitta(salernitana, salerno).   % o napoli??? cosa vuole il prof? credo voglia salerno perchè nei vincoli dice che ci sono TRE derby (torino, milano e roma)
 squadraInCitta(sampdoria, genova).
-squadraInCitta(sassuolo, sassuolo).
-squadraInCitta(spezia, spezia). % vuole genova il prof?
 squadraInCitta(torino, torino).
-squadraInCitta(udinese, udine).
 squadraInCitta(venezia, venezia).
-squadraInCitta(verona, verona).
 
 % NON SONO CONVINTO DI CIO' CHE HO SCRITTO DA QUA IN POI
 
-giornata(1..38). % è come dire giornata(1), giornata(2), ... , giornata(38)
+giornata(1..18). % è come dire giornata(1), giornata(2), ... , giornata(38)
 
 
 % vogliamo organizzare le 38 giornate di campionato
