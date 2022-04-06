@@ -48,6 +48,9 @@ prof_limitata(CurrentS, [Move|MoveList], Visited, Bound):-
 % heuristic_1(CurrentState, FinalState)
 % i due stati sono rappresentati da liste di lunghezza uguale
 % ATTENZIONE: contiamo anche la tessera vuota (CHISSà?)
+heuristic_1_wrapper_fake(_, Result) :-
+    Result is 0.
+
 heuristic_1_wrapper(CurrentState, Result) :-
     finale(FinalState),
     heuristic_1(CurrentState, FinalState, 0, Result).
@@ -64,25 +67,38 @@ heuristic_1([_|TailCS], [_|TailFS], Count, Result) :-
 
 ida_star_wrapper(MoveList) :-
     iniziale(InitialS),
-    ida_star(InitialS, MoveList, []).
+    ida_star(InitialS, MoveList, [InitialS]),
+    write(MoveList).
 
 ida_star(InitialS, MoveList, Visited):-
     heuristic_1_wrapper(InitialS, Bound), 
-    ida_star_loop(InitialS, MoveList, Visited, 0, Bound, []).
+    \+ida_star_loop(InitialS, MoveList, Visited, 0, Bound).   % se mettiamo una negazione per fallimento otteniamo true
 
-ida_star_loop(InitialS, MoveList, Visited, G, Bound, CostList):-
-    \+ricerca(InitialS, MoveList, Visited, G, Bound, CostList),
+ida_star_loop(InitialS, MoveList, Visited, G, Bound) :-
+    \+ricerca(InitialS, MoveList, Visited, G, Bound),
+    findall(FS, ida_node(_, FS), CostList),
     exclude(>=(Bound), CostList, OverCostList),
     sort(OverCostList, SortedOverCostList), 
     nth0(0, SortedOverCostList, NewBound),
-    ida_star_loop(InitialS,MoveList, Visited, 0, NewBound, []).
+    retractall(ida_node(_, _)),
+    ida_star_loop(InitialS,MoveList, Visited, 0, NewBound).
 
-ricerca(CurrentS, [Move|MoveList], Visited, G, Bound, CostList) :-
+ricerca(S, [], _, _, _):-
+    finale(S),
+    write("LO STATO E' FINALE!\n"), !.
+ricerca(CurrentS, [Move|MoveList], Visited, G, Bound) :-
+    write("CurrentS: "), write(CurrentS), write("\n"),
     applicabile(Move, CurrentS),
+    write("Move: "), write(Move), write("\n"),
     trasforma(Move,CurrentS,NewState),
     \+member(NewState,Visited),
-    GNewState is G + 1,
+    write("NewState: "), write(NewState), write("\n"),
+    GNewState is G+1,
     heuristic_1_wrapper(NewState, HeuristicNewState),
-    FNewState is GNewState + HeuristicNewState, 
-    ricerca(NewState, MoveList, [NewState|Visited], GNewState, Bound, [FNewState|CostList]). 
+    write("HeuristicNewState: "), write(HeuristicNewState), write("\n"), 
+    FNewState is GNewState + HeuristicNewState,
+    assert(ida_node(NewState, FNewState)),  % aggiunto
+    write("FNewState: "), write(FNewState), write("\n"),  write("Bound: "), write(Bound),  write("\n"),  write("\n"),
+    FNewState =< Bound,
+    ricerca(NewState, MoveList, [NewState|Visited], GNewState, Bound). 
 
