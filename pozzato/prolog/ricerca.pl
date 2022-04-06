@@ -19,6 +19,9 @@ profondita(CurrentS,[Move|MoveList],Visited):-
 
 
 %ITERATIVE DEEPENING
+% iterative_deepening_wrapper(MoveList, UBound) :-
+%     iterative_deepening(MoveList, 1, UBound).
+
 iterative_deepening(_, LBound, UBound) :-
     LBound == UBound, !.
 iterative_deepening(MoveList, LBound, UBound) :-
