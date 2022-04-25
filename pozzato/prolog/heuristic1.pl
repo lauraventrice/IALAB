@@ -3,6 +3,9 @@
 % heuristic_1(CurrentState, FinalState)
 % i due stati sono rappresentati da liste di lunghezza uguale
 % ATTENZIONE: contiamo anche la tessera vuota -> questo non è affatto un problema
+
+:- ['dominio.pl'].
+
 heuristic_1_wrapper_fake(_, Result) :-
     Result is 0.
 

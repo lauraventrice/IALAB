@@ -6,6 +6,8 @@ applicabile(NumberToMove, CurrentState) :-
     membership(IndexNum, S). 
 */
 
+:- ['dominio.pl'].
+
 applicabile(1, CurrentState) :-
     get_index_wrapper(v, CurrentState, IndexV),
     get_index_wrapper(1, CurrentState, IndexNum),
