@@ -11,24 +11,64 @@ cerca_soluzione(MoveList) :-
 profondita(CurrentS, [], _):-
     finale(CurrentS), !.
 profondita(CurrentS,[Move|MoveList],Visited):-
-    write(CurrentS),
+    %write(CurrentS),
     applicabile(Move, CurrentS),
     trasforma(Move,CurrentS,NewS),
     \+member(NewS,Visited),
     profondita(NewS,MoveList,[CurrentS|Visited]).
 
 
-%ITERATIVE DEEPENING
-% iterative_deepening_wrapper(MoveList, UBound) :-
-%     iterative_deepening(MoveList, 1, UBound).
+%%%%%%%%%%%%%%%%%%%%
+ricercaSoluzioniIterativeDeepening(ListaAzioni):-
+    iniziale(CurrentS),
+    iterativeDeepening(CurrentS,ListaAzioni,0),
+    write(ListaAzioni),nl.
 
-iterative_deepening(_, LBound, UBound) :-
-    LBound == UBound, !.
-iterative_deepening(MoveList, LBound, UBound) :-
+iterativeDeepening(CurrentS,ListaAzioni,ProfonditaCorrente):-
+    prof_limitata(CurrentS, ListaAzioni, [],ProfonditaCorrente),
+    write("Profondità:"), write(ProfonditaCorrente),nl,
+    !.
+
+iterativeDeepening(CurrentS,ListaAzioni,ProfonditaCorrente):-
+    ProfonditaNuova is ProfonditaCorrente + 1,
+    iterativeDeepening(CurrentS,ListaAzioni,ProfonditaNuova).
+
+
+%%%%%%%%%%%%%%%%%%%%%
+
+%ITERATIVE DEEPENING
+iterative_deepening_wrapper(MoveList, UBound) :-
+    iniziale(S),
+    iterative_deepening(S, MoveList, 1, UBound).
+
+iterative_deepening(CurrentS, _, _, _) :-
+    finale(CurrentS),
+    write("Lo stato è finale\n"), !.
+iterative_deepening(_, _, LBound, UBound) :-
+    LBound == UBound,
+    write("Siamo arrivati all'upper bound\n"), !.
+iterative_deepening(_, MoveList, LBound, UBound) :-
+    write("Siamo qua 1\n"),
     LBound < UBound,
+    write("Siamo qua 2\n"),
     NewLBound is LBound + 1,
+    write("Siamo qua 3\n"),
     \+cerca_soluzione_limitata(MoveList, LBound), 
-    iterative_deepening(MoveList, NewLBound, UBound).
+    finale(S),
+    iterative_deepening(S, MoveList, NewLBound, UBound).
+
+% start:-
+%     id(S, 14),
+%     write(S).
+
+id(Sol, UBound):-
+    iniziale(S),
+    length(_, L),
+    L =< UBound,
+    write("Depth is "), write(L), write("\n"),
+    prof_limitata(S, Sol, [S], L),
+    write("\n"),
+    write(Sol).
 
 
 %VISITA IN PROFONDITà LIMITATA
@@ -39,7 +79,7 @@ cerca_soluzione_limitata(MoveList, Bound):-
 
 % prof_limitata(CurrentS, MoveListAzioni, Visited, Bound)
 prof_limitata(CurrentS,[],_,_):-
-    finale(CurrentS),!.
+    finale(CurrentS), !.
 prof_limitata(CurrentS, [Move|MoveList], Visited, Bound):-
     applicabile(Move, CurrentS),
     trasforma(Move, CurrentS, NewS),
@@ -75,20 +115,33 @@ ida_star_wrapper(MoveList) :-
 
 ida_star(InitialS, MoveList, Visited):-
     heuristic_1_wrapper(InitialS, Bound), 
-    \+ida_star_loop(InitialS, MoveList, Visited, 0, Bound).   % se mettiamo una negazione per fallimento otteniamo true
+    \+ida_star_loop(InitialS, MoveList, Visited, 0, Bound),
+    write("\n"), write(MoveList).   % se mettiamo una negazione per fallimento otteniamo true
+
+
+%%%%
+
+ida_wrapper(ListaAzioni):-
+    iniziale(S),
+    heuristic_1_wrapper(S, InitialThreshold),
+    ida_star_loop(S, ListaAzioni, [S], 0, InitialThreshold),
+    write("\n"), write(ListaAzioni).
 
 ida_star_loop(InitialS, MoveList, Visited, G, Bound) :-
-    \+ricerca(InitialS, MoveList, Visited, G, Bound),
-    findall(FS, ida_node(_, FS), CostList),
+    ricerca(InitialS, MoveList, Visited, G, Bound), !.
+
+ida_star_loop(InitialS, MoveList, Visited, _, Bound) :-
+    %\+ricerca(InitialS, MoveList, Visited, G, Bound),
+    findall(FS, costoNodo(_, FS), CostList),
     exclude(>=(Bound), CostList, OverCostList),
     sort(OverCostList, SortedOverCostList), 
     nth0(0, SortedOverCostList, NewBound),
-    retractall(ida_node(_, _)),
+    retractall(costoNodo(_, _)),
     ida_star_loop(InitialS,MoveList, Visited, 0, NewBound).
 
 ricerca(S, [], _, _, _):-
     finale(S),
-    write("LO STATO E' FINALE!\n"), !.
+    write("LO STATO E' FINALE!\n").
 ricerca(CurrentS, [Move|MoveList], Visited, G, Bound) :-
     write("CurrentS: "), write(CurrentS), write("\n"),
     applicabile(Move, CurrentS),
@@ -100,7 +153,7 @@ ricerca(CurrentS, [Move|MoveList], Visited, G, Bound) :-
     heuristic_1_wrapper(NewState, HeuristicNewState),
     write("HeuristicNewState: "), write(HeuristicNewState), write("\n"), 
     FNewState is GNewState + HeuristicNewState,
-    assert(ida_node(NewState, FNewState)),  % aggiunto
+    assert(costoNodo(NewState, FNewState)),  % aggiunto
     write("FNewState: "), write(FNewState), write("\n"),  write("Bound: "), write(Bound),  write("\n"),  write("\n"),
     FNewState =< Bound,
     ricerca(NewState, MoveList, [NewState|Visited], GNewState, Bound). 
