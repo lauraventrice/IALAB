@@ -1,5 +1,7 @@
 % algoritmo IDA* che utilizza l'euristica 1, ovvero il numero di tessere fuori posto.
 
+:-['dominio.pl', 'heuristic1.pl', 'regole.pl'].
+
 ida_wrapperV1(MoveList):-
     iniziale(S),
     heuristic_1_wrapper(S, InitialThreshold),

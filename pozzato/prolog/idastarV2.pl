@@ -1,5 +1,7 @@
 % algoritmo IDA* che utilizza l'euristica 2, ovvero il numero si inversioni nella lista rappresentante lo stato.
 
+:-['dominio.pl', 'heuristic2.pl', 'regole.pl'].
+
 ida_wrapperV2(MoveList):-
     iniziale(S),
     heuristic_2_wrapper(S, InitialThreshold),
