@@ -56,47 +56,6 @@ applicabile(8, CurrentState) :-
     index_move(IndexV, S),
     membership(IndexNum, S).
 
-applicabile(9, CurrentState) :-
-    get_index_wrapper(v, CurrentState, IndexV),
-    get_index_wrapper(9, CurrentState, IndexNum),
-    index_move(IndexV, S),
-    membership(IndexNum, S).
-
-applicabile(10, CurrentState) :-
-    get_index_wrapper(v, CurrentState, IndexV),
-    get_index_wrapper(10, CurrentState, IndexNum),
-    index_move(IndexV, S),
-    membership(IndexNum, S).
-
-applicabile(11, CurrentState) :-
-    get_index_wrapper(v, CurrentState, IndexV),
-    get_index_wrapper(11, CurrentState, IndexNum),
-    index_move(IndexV, S),
-    membership(IndexNum, S).
-
-applicabile(12, CurrentState) :-
-    get_index_wrapper(v, CurrentState, IndexV),
-    get_index_wrapper(12, CurrentState, IndexNum),
-    index_move(IndexV, S),
-    membership(IndexNum, S).
-
-applicabile(13, CurrentState) :-
-    get_index_wrapper(v, CurrentState, IndexV),
-    get_index_wrapper(13, CurrentState, IndexNum),
-    index_move(IndexV, S),
-    membership(IndexNum, S).
-
-applicabile(14, CurrentState) :-
-    get_index_wrapper(v, CurrentState, IndexV),
-    get_index_wrapper(14, CurrentState, IndexNum),
-    index_move(IndexV, S),
-    membership(IndexNum, S).
-
-applicabile(15, CurrentState) :-
-    get_index_wrapper(v, CurrentState, IndexV),
-    get_index_wrapper(15, CurrentState, IndexNum),
-    index_move(IndexV, S),
-    membership(IndexNum, S).
 
 /*
 Change current state with swap between Num and v, which is the empty position. 

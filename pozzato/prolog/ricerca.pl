@@ -21,7 +21,7 @@ profondita(CurrentS,[Move|MoveList],Visited):-
 % ITERATIVE DEEPENING
 ricercaSoluzioniIterativeDeepening(MoveList):-
     iniziale(CurrentS),
-    iterativeDeepening(CurrentS,MoveList,0),
+    iterativeDeepening(CurrentS,MoveList,30), %%%%%%%%%%%%%%%%%%%%%%%%
     write("\nLista azioni: "), write(MoveList).
 
 iterativeDeepening(CurrentS,MoveList,ProfonditaCorrente):-
@@ -31,6 +31,7 @@ iterativeDeepening(CurrentS,MoveList,ProfonditaCorrente):-
 
 iterativeDeepening(CurrentS,MoveList,ProfonditaCorrente):-
     ProfonditaNuova is ProfonditaCorrente + 1,
+    write("\nProfondità: "), write(ProfonditaNuova), nl,
     iterativeDeepening(CurrentS,MoveList,ProfonditaNuova).
 
 %VISITA IN PROFONDITA' LIMITATA

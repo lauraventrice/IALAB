@@ -3,6 +3,7 @@
 
 % regola per avviare l'algoritmo IDA* con l'eurisitca 1
 startIDAstarHeuristic1 :- 
+    set_prolog_flag(stack_limit, 3 000 000 000),
     statistics(cputime, TStart),
     write("Tempo di avvio: "), write(TStart), nl,
     ida_wrapperV1(_),
@@ -36,7 +37,7 @@ startRicercaProfonditaBasic :-
 startRicercaProfonditaLimitata :- 
     statistics(cputime, TStart),
     write("Tempo di avvio: "), write(TStart), nl,
-    cerca_soluzione_limitata(_, 14),
+    cerca_soluzione_limitata(_, 50),
     statistics(cputime, TEnd), nl, nl,
     write("Tempo di fine: "), write(TEnd), nl, nl,
     TotalTime is TEnd - TStart,
