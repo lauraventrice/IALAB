@@ -24,17 +24,17 @@ ricercaV1(S, [], _, _, _):-
     finale(S).
     %write("LO STATO E' FINALE!\n").
 ricercaV1(CurrentS, [Move|MoveList], Visited, G, Bound) :-
-    %write("CurrentS: "), write(CurrentS), write("\n"),
+    write("CurrentS: "), write(CurrentS), write("\n"),
     applicabile(Move, CurrentS),
-    %write("Move: "), write(Move), write("\n"),
+    write("Move: "), write(Move), write("\n"),
     trasforma(Move,CurrentS,NewState),
     \+member(NewState,Visited),
-    %write("NewState: "), write(NewState), write("\n"),
+    write("NewState: "), write(NewState), write("\n"),
     GNewState is G+1,
     heuristic_1_wrapper(NewState, HeuristicNewState),
-    %write("HeuristicNewState: "), write(HeuristicNewState), write("\n"), 
+    write("HeuristicNewState: "), write(HeuristicNewState), write("\n"), 
     FNewState is GNewState + HeuristicNewState,
     assert(costoNodo(NewState, FNewState)),  % aggiunto
-    %write("FNewState: "), write(FNewState), write("\n"),  write("Bound: "), write(Bound),  write("\n"),  write("\n"),
+    write("FNewState: "), write(FNewState), write("\n"),  write("Bound: "), write(Bound),  write("\n"),  write("\n"),
     FNewState =< Bound,
     ricercaV1(NewState, MoveList, [NewState|Visited], GNewState, Bound). 

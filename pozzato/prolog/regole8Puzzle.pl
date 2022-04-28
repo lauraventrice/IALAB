@@ -6,7 +6,7 @@ applicabile(NumberToMove, CurrentState) :-
     membership(IndexNum, S). 
 */
 
-:- ['dominio.pl'].
+:- ['dominio8puzzle.pl'].
 
 applicabile(1, CurrentState) :-
     get_index_wrapper(v, CurrentState, IndexV),
