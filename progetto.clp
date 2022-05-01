@@ -431,7 +431,7 @@
                 (ascensore no) (boxauto no) (terrazzino no) (prezzorichiesto 500000) ; questo appartamento non ha il boxauto e quindi non ha specificato la grandezza di esso
     )
 
-    ; lista appartamenti a trastevere (roma)
+    ; lista appartamenti a campitelli (roma)
     (apartment  (name "Bilocale in vendita in piazza Margana, 20")
                 (metriquadri 60) (numerovani 2) (numeroservizi 1) (piano terra) (citta roma) (zona centro) (quartiere campitelli)
                 (ascensore no) (boxauto no) (terrazzino no) (prezzorichiesto 460000) ; questo appartamento non ha il boxauto e quindi non ha specificato la grandezza di esso
@@ -446,6 +446,39 @@
                 (metriquadri 120) (numerovani 2) (numeroservizi 2) (piano quarto) (citta roma) (zona centro) (quartiere campitelli)
                 (ascensore si) (boxauto no) (terrazzino no) (prezzorichiesto 950000) ; questo appartamento non ha il boxauto e quindi non ha specificato la grandezza di esso
     )
+
+    ; lista appartamenti a san siro (milano)
+    (apartment  (name "Bilocale in vendita in piazza Margana, 20")
+                (metriquadri 63) (numerovani 2) (numeroservizi 1) (piano primo) (citta milano) (zona primacintura) (quartiere sansiro)
+                (ascensore no) (boxauto no) (terrazzino no) (prezzorichiesto 200000) ; questo appartamento non ha il boxauto e quindi non ha specificato la grandezza di esso
+    )
+
+    (apartment  (name "Appartamento su due piani in vendita in via Matteo Civitali, 41")
+                (metriquadri 66) (numerovani 2) (numeroservizi 1) (piano terzo) (citta milano) (zona primacintura) (quartiere sansiro)
+                (ascensore no) (boxauto si) (metriqudriboxauto 4) (terrazzino no) (prezzorichiesto 450000)
+    )
+
+    (apartment  (name "Appartamento in vendita in piazza Santa Maria Nascente s.n.c")
+                (metriquadri 200) (numerovani 5) (numeroservizi 1) (piano primo) (citta milano) (zona centro) (quartiere sansiro)
+                (ascensore no) (boxauto si) (metriqudriboxauto 6) (terrazzino no) (prezzorichiesto 890000)
+    )
+
+    ; lista appartamenti a san siro (navigli)
+    (apartment  (name "Trilocale in vendita in via San Calocero, 9")
+                (metriquadri 102) (numerovani 3) (numeroservizi 3) (piano terzo) (citta milano) (zona centro) (quartiere navigli)
+                (ascensore si) (boxauto si) (metriqudriboxauto 6) (terrazzino no) (prezzorichiesto 950000)
+    )
+
+    (apartment  (name "Bilocale in vendita in piazza Ventiquattro Maggio s.n.c")
+                (metriquadri 50) (numerovani 2) (numeroservizi 2) (piano primo) (citta milano) (zona periferia) (quartiere navigli)
+                (ascensore no) (boxauto si) (metriqudriboxauto 4) (terrazzino si) (prezzorichiesto 235000)
+    )
+
+    (apartment  (name "Monolocale in vendita in piazza Serafino Belfanti, 1")
+                (metriquadri 36) (numerovani 1) (numeroservizi 1) (piano primo) (citta milano) (zona periferia) (quartiere navigli)
+                (ascensore si) (boxauto no) (terrazzino si) (prezzorichiesto 165000) ; questo appartamento non ha il boxauto e quindi non ha specificato la grandezza di esso
+    )
+
 
 )
   
