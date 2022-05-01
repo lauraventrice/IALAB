@@ -411,7 +411,7 @@
     (slot quartiere (default ?NONE))
     (slot ascensore (default ?NONE))
     (slot boxauto (default ?NONE))
-    (slot metriqudriboxauto (default ?NONE))
+    (slot metriqudriboxauto (default any))
     (slot terrazzino (default ?NONE))
     (slot prezzorichiesto (default ?NONE)) ; capire se possa avere senso usare un multislot per il prezzo richiesto: secondo me no!
   )
