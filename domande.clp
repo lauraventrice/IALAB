@@ -33,14 +33,30 @@
                 (the-question "In quale città cerca l'appartamento? ")
                 (valid-answers torino roma milano firenze unknown))
 
+    ; domande sul quartiere in base alla città inserita
+    ; ----------------------------------------------------------------------------------------
+    
     (question (attribute quartiere)
-                ;(precursors boxauto is si) ;TODO: capire cosa fare in questo caso! bisogna prima chiedere la città per poter chiedere il quartiere?
+                (precursors citta is torino)
                 (the-question "In quale quartiere cerca l'appartamento? ")
-                (valid-answers lingotto moncalieri trastevere campitelli sansiro navigli santacroce rovezzano unknown))
+                (valid-answers lingotto moncalieri unknown))
 
-    ;NB: se è necessario chiedere la città prima del quartiere allora bisogna creare tante domande per il quartiere quante sono le città
-    ;in questo modo se la risposta alla domanda sulla città è 'torino' allora verrà fatta la domanda sul quartiere che accetta come risposte solo lingotto e moncalieri
-    ;stesso discorso in caso di scelta di una delle altre città
+    (question (attribute quartiere)
+                (precursors citta is roma)
+                (the-question "In quale quartiere cerca l'appartamento? ")
+                (valid-answers trastevere campitelli unknown))
+
+    (question (attribute quartiere)
+                (precursors citta is milano)
+                (the-question "In quale quartiere cerca l'appartamento? ")
+                (valid-answers sansiro navigli unknown))
+
+    (question (attribute quartiere)
+                (precursors citta is firenze)
+                (the-question "In quale quartiere cerca l'appartamento? ")
+                (valid-answers santacroce rovezzano unknown))
+
+    ; ----------------------------------------------------------------------------------------
 
     (question (attribute ascensore)
                 (the-question "Deve essere presente l'ascensore?? ")
