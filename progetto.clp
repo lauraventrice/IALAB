@@ -463,7 +463,7 @@
                 (ascensore no) (boxauto si) (metriqudriboxauto 6) (terrazzino no) (prezzorichiesto 890000)
     )
 
-    ; lista appartamenti a san siro (navigli)
+    ; lista appartamenti a navigli (milano)
     (apartment  (name "Trilocale in vendita in via San Calocero, 9")
                 (metriquadri 102) (numerovani 3) (numeroservizi 3) (piano terzo) (citta milano) (zona centro) (quartiere navigli)
                 (ascensore si) (boxauto si) (metriqudriboxauto 6) (terrazzino no) (prezzorichiesto 950000)
@@ -475,10 +475,41 @@
     )
 
     (apartment  (name "Monolocale in vendita in piazza Serafino Belfanti, 1")
-                (metriquadri 36) (numerovani 1) (numeroservizi 1) (piano primo) (citta milano) (zona periferia) (quartiere navigli)
+                (metriquadri 36) (numerovani 1) (numeroservizi 1) (piano primo) (citta milano) (zona primacintura) (quartiere navigli)
                 (ascensore si) (boxauto no) (terrazzino si) (prezzorichiesto 165000) ; questo appartamento non ha il boxauto e quindi non ha specificato la grandezza di esso
     )
 
+    ; lista appartamenti a santa croce (firenze)
+    (apartment  (name "Trilocale in vendita in Campo San Giacomo da l'Orio s.n.c")
+                (metriquadri 85) (numerovani 3) (numeroservizi 2) (piano primo) (citta firenze) (zona centro) (quartiere santacroce)
+                (ascensore si) (boxauto no) (terrazzino no) (prezzorichiesto 330000) ; questo appartamento non ha il boxauto e quindi non ha specificato la grandezza di esso
+    )
+
+    (apartment  (name "Quadrilocale in vendita in Santa Croce")
+                (metriquadri 110) (numerovani 4) (numeroservizi 1) (piano primo) (citta firenze) (zona centro) (quartiere santacroce)
+                (ascensore no) (boxauto no) (terrazzino no) (prezzorichiesto 590000) ; questo appartamento non ha il boxauto e quindi non ha specificato la grandezza di esso
+    )
+
+    (apartment  (name "Bilocale in vendita a Santa Croce")
+                (metriquadri 39) (numerovani 2) (numeroservizi 1) (piano primo) (citta firenze) (zona primacintura) (quartiere santacroce)
+                (ascensore no) (boxauto no) (terrazzino no) (prezzorichiesto 220000) ; questo appartamento non ha il boxauto e quindi non ha specificato la grandezza di esso
+    )
+
+    ; lista appartamenti a rovezzano (firenze)
+    (apartment  (name "Quadrilocale in vendita in via SANT'ANDREA A ROVEZZANO s.n.c")
+                (metriquadri 110) (numerovani 4) (numeroservizi 2) (piano primo) (citta firenze) (zona centro) (quartiere rovezzano)
+                (ascensore no) (boxauto no) (terrazzino no) (prezzorichiesto 280000) ; questo appartamento non ha il boxauto e quindi non ha specificato la grandezza di esso
+    )
+
+    (apartment  (name "Bilocale in vendita in piazza Ventiquattro Maggio s.n.c")
+                (metriquadri 250) (numerovani 1) (numeroservizi 2) (piano primo) (citta firenze) (zona primacintura) (quartiere rovezzano)
+                (ascensore no) (boxauto si) (metriqudriboxauto 6) (terrazzino si) (prezzorichiesto 500000)
+    )
+
+    (apartment  (name "Monolocale in vendita in via di Rocca Tedalda s.n.c")
+                (metriquadri 30) (numerovani 1) (numeroservizi 1) (piano terra) (citta firenze) (zona periferia) (quartiere rovezzano)
+                (ascensore no) (boxauto si) (metriqudriboxauto 6) (terrazzino si) (prezzorichiesto 168000)
+    )
 
 )
   
