@@ -115,7 +115,7 @@
 
     (question (attribute zona)
                 (the-question "In che zona vorrebbe acquistare casa? ")
-                (valid-answers centro primacintura periferia unknown)) ; qua possiamo mettere 'unknown' come risposta valida?
+                (valid-answers centro primacintura periferia unknown))
 
     (question (attribute metri-quadri)
                 (the-question "Di quanti metri quadri vorrebbe l'appartamento? ")
@@ -245,6 +245,21 @@
   =>
   (modify ?f (then ?rest))
   (assert (attribute (name ?attribute) (value ?value) (certainty ?c1))))
+
+
+
+
+;;*******************************
+;;* QUESTO MODULO E' DA SISTEMAREEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE *
+;;*******************************
+
+
+
+
+
+
+
+
 
 ;;*******************************
 ;;* CHOOSE WINE QUALITIES RULES *
@@ -377,11 +392,13 @@
 
 (defmodule APPARTAMENTI (import MAIN ?ALL))
 
+;;************************************** SISTEMARE ****************************************************************
 ;;TODO: capire come adattare qualcosa del genere al nostro dominio degli appartamenti
 (deffacts any-attributes
   (attribute (name best-color) (value any))
   (attribute (name best-body) (value any))
   (attribute (name best-sweetness) (value any)))
+;;******************************************************************************************************
 
 (deftemplate APPARTAMENTI::apartment
     (slot name (default ?NONE))
@@ -529,8 +546,10 @@
     )
 
 )
-  
-(defrule APPARTAMENTI::generate-wines
+
+;;************************************** SISTEMARE ****************************************************************
+
+(defrule APPARTAMENTI::generate-apartments
   (wine (name ?name)
         (color $? ?c $?)
         (body $? ?b $?)
@@ -542,8 +561,10 @@
   (assert (attribute (name wine) (value ?name)
                      (certainty (min ?certainty-1 ?certainty-2 ?certainty-3)))))
 
+;;************************************** SISTEMARE ****************************************************************
+
 ;;*****************************
-;;* PRINT SELECTED WINE RULES *
+;;* PRINT SELECTED APARTMENTS RULES *
 ;;*****************************
 
 (defmodule PRINT-RESULTS (import MAIN ?ALL))
@@ -552,10 +573,10 @@
    (declare (salience 10))
    =>
    (printout t t)
-   (printout t "        SELECTED WINES" t t)
-   (printout t " WINE                  CERTAINTY" t)
+   (printout t "        SELECTED APARTMENTS" t t)
+   (printout t " APARTMENT                  CERTAINTY" t)
    (printout t " -------------------------------" t)
-   (assert (phase print-wines)))
+   (assert (phase print-apartments)))
 
 (defrule PRINT-RESULTS::print-wine ""
   ?rem <- (attribute (name wine) (value ?name) (certainty ?per))		  
