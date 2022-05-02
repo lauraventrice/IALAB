@@ -26,7 +26,7 @@ squadraInCitta(udinese, udine).
 squadraInCitta(venezia, venezia).
 squadraInCitta(verona, verona).
 
-giornata(1..38). % è come dire giornata(1), giornata(2), ... , giornata(38)
+giornata(1..38). 
 
 partitePerGiornata(1..10).
 
