@@ -1,0 +1,36 @@
+##RECAP: 
+# Dobbiamo avere:
+# - operatori di movimento, immaginiamo destra e sinistra?
+# - Uno o più operatori di combinazioni di oggetti, cosa creano, quali #sono ammissibli e quelli non ammissibili devono avere rinforzo negativo, NB: dopo la combinazione NON li togliamo dal mondo, perchè gli oggetti originali non servono per risolvere il problema, non li riutilizza ma usa solo quelli combinati.
+# - Oggetti: devono essere descritti -> ci possiamo fare alcune cose e non altre
+# - Finestra: è un oggetto, ma alcuni attributi della finestra servono ad identificare lo stato goal che vogliamo raggiungere. (rotta/intera)
+# - Definire l'agente, come l'altezza
+# - Definire la finestra, come l’altezza della finestra
+# - Dobbiamo definire le proprietà che rendono la finestra rompibile in alcuni punti e su azioni ripetute
+# - L'agente deve saper afferrare degli oggetti, combinarli, lanciare (lanciare forse no, dipende come lo progettiamo), deve saper salire
+# - Trovare un modo poco scontato per rompere la finestra, guardare la consegna!
+# - Modelliamo solo gli elementi di conoscenza che servono all'agente rispetto al goal, dovendosi muovere direi che la dimensione della
+##
+
+##
+# Per runnare ricorda: 
+#     - load 
+#     - watch 5 
+#     - Step (se vuoi)
+#     - print --full --rl
+#     - Run 
+#     - print --full --rl
+#     - print --rl
+#     - se vuoi vedere l'apprendimento fai init-soar e riparti dalla quinta istruzione! :)  
+##
+
+
+
+# 1. Far muovere questo agente
+# 2. Definisci lo spazio in cui si muove (4 x 4 x 4 (NB: finestra h 3.5))
+# 3. Dagli struttura, è importante per noi la sua altezza (1.5 metri)
+# 4. Posizione la finestra, con una struttura (NB: h 3.5) 
+# 5. Fai raggiungere l'agente alla stessa posizione della finestra in modo che possa arrivarci con i due tronchi
+# 6. Definire gli oggetti: molla, rametto in legno, pietre, 2 tronchi di legno
+# 7. Aggiungere un reward per la creazione degli oggetti come detto nella consegna
+# 8. Capire come gestire il fatto di rompere la finestra 
