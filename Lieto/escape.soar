@@ -9,7 +9,7 @@
 # - Dobbiamo definire le proprietà che rendono la finestra rompibile in alcuni punti e su azioni ripetute
 # - L'agente deve saper afferrare degli oggetti, combinarli, lanciare (lanciare forse no, dipende come lo progettiamo), deve saper salire
 # - Trovare un modo poco scontato per rompere la finestra, guardare la consegna!
-# - Modelliamo solo gli elementi di conoscenza che servono all'agente rispetto al goal, dovendosi muovere direi che la dimensione della
+# - Modelliamo solo gli elementi di conoscenza che servono all'agente rispetto al goal, dovendosi muovere direi che la dimensione della stanza è importante
 ##
 
 ##
@@ -24,8 +24,7 @@
 #     - se vuoi vedere l'apprendimento fai init-soar e riparti dalla quinta istruzione! :)  
 ##
 
-
-
+##TODO: 
 # 1. Far muovere questo agente
 # 2. Definisci lo spazio in cui si muove (4 x 4 x 4 (NB: finestra h 3.5))
 # 3. Dagli struttura, è importante per noi la sua altezza (1.5 metri)
@@ -34,3 +33,244 @@
 # 6. Definire gli oggetti: molla, rametto in legno, pietre, 2 tronchi di legno
 # 7. Aggiungere un reward per la creazione degli oggetti come detto nella consegna
 # 8. Capire come gestire il fatto di rompere la finestra 
+
+#################################################################################################BEGIN
+
+
+
+##
+###	I.	Propose the top space
+###
+### The code in this section proposes a simple space to work in, and a
+### simple state to start working in.
+
+sp {propose*initialize-es
+    (state <s> -^name ^superstate nil)
+    -->
+    (<s> ^operator <o> +)
+    (<o> ^name initialize-escape)
+}
+
+##
+# Store the available directions
+# and associated reward on the state
+##
+sp {apply*initialize-escape
+   (state <s> ^operator <o>)
+   (<o> ^name initialize-escape)
+    -->
+   (<s> ^name escape
+        ^location <loc>
+        ^desired <d>)
+   (<loc> ^x 2 ^y 2)      
+   (<d> ^x 3 ^y 4)
+}
+
+
+###
+###	II.	Propose the main operators
+###
+### The code in this section proposes the four operators left, right, backward and forward. 
+### Propose moving in any available direction
+
+##
+# Propose rule for moving left
+##
+sp {es*propose*left
+   (state <s> ^desired <d>
+              ^location <loc>)
+   (<d> ^x <val2>)
+   (<loc> ^x <val1> > <val2>)
+    -->
+   (<s> ^operator <op>)
+   (<op> ^name move
+         ^dir left)
+}
+
+##
+# Propose rule for moving right 
+##
+
+sp {es*propose*right
+   (state <s> ^desired <d>
+              ^location <loc>)
+   (<d> ^x <val2>)
+   (<loc> ^x <val1> < <val2>)
+    -->
+   (<s> ^operator <op>)
+   (<op> ^name move
+         ^dir right)
+}
+
+
+##
+# Propose rule for moving backward
+##
+
+sp {es*propose*backward
+   (state <s> ^desired <d>
+              ^location <loc>)
+   (<d> ^y <val2>)
+   (<loc> ^y <val1> > <val2>)
+    -->
+   (<s> ^operator <op>)
+   (<op> ^name move
+         ^dir backward)
+}
+
+##
+# Propose rule for moving forward
+##
+
+sp {es*propose*forward
+   (state <s> ^desired <d>
+              ^location <loc>)
+   (<d> ^y <val2>)
+   (<loc> ^y <val1> < <val2>)      
+    -->
+   (<s> ^operator <op>)
+   (<op> ^name move
+         ^dir forward)
+}
+
+
+sp {es*compare*right*better*forward
+  (state <s> ^desired <d>
+             ^location <loc>)
+  (<d> ^x <val2>)
+  (<loc> ^x <val1> < <val2>) 
+  (<s> ^operator <op-right> +)
+  (<op-right> ^name move
+              ^dir right)
+  (<s> ^operator <op-forward> +)
+  (<op-forward> ^name move
+                ^dir forward)
+  -->
+  (<s> ^operator <op-right> > <op-forward>)
+}
+
+sp {es*compare*left*better*backward
+  (state <s> ^desired <d>
+             ^location <loc>)
+  (<d> ^x <val2>)
+  (<loc> ^x <val1> > <val2>) 
+  (<s> ^operator <op-left> +)
+  (<op-left> ^name move
+             ^dir left)
+  (<s> ^operator <op-backward> +)
+  (<op-backward> ^name move
+                 ^dir backward)
+  -->
+  (<s> ^operator <op-left> > <op-backward>)
+}  
+
+###
+###	III.	Implement the main operators
+###
+
+## Implement the operators with productions that modify the state once
+## the operators have been selected, and then terminate them after
+## they have done
+
+## what they need to do
+##
+## Note: We make the new value acceptable and reject the previous
+## value.
+
+##
+## The reconsider preference effectively terminates the operator on 
+## the next decision cycle after it has done what its supposed to do.
+
+sp {es*apply-op*left
+  (state <s>  ^operator <o>
+              ^location <loc>)
+  (<o> ^name move
+       ^dir left)
+  (<loc> ^x <val>)
+  -->
+  (<loc> ^x  (- <val> 1))
+  (<o> ^name move_terminated)
+}
+
+
+## Implement right
+
+sp {es*apply-op*right
+  (state <s>  ^operator <o>
+              ^location <loc>)
+  (<o> ^name move
+       ^dir right)
+  (<loc> ^x <val>)
+  -->
+  (<loc> ^x (+ <val> 1))
+  (<o> ^name move_terminated)
+}
+
+## Implement backward
+
+sp {es*apply-op*backward
+  (state <s>  ^operator <o>
+              ^location <loc>)
+  (<o> ^name move
+       ^dir backward)
+  (<loc> ^y <val>)
+  -->
+  (<loc> ^y (- <val> 1))
+  (<o> ^name move_terminated)
+}
+
+
+## Implement forward
+
+sp {es*apply-op*forward
+  (state <s>  ^operator <o>
+              ^location <loc>)
+  (<o> ^name move
+       ^dir forward)
+  (<loc> ^y <val>)
+  -->
+  (<loc> ^y (+ <val> 1))
+  (<o> ^name move_terminated)
+}
+
+
+sp {es*terminate*move
+  (state <s>  ^operator <o>
+              ^location <loc>
+              ^desired <d>)
+  (<loc> ^x <val1> ^y <val2>)
+  (<o> ^name move_terminated
+       ^dir <dir>)
+  -->
+  (write (crlf) |          Moved: | <dir> | ! | current location: x: | <val1> | y: | <val2> |)
+  (<s> ^operator <o> -)
+}
+
+###
+###	IV.	Noticing when full
+###
+### This code terminates the problem solving when the goal is reached.
+
+
+## How to tell if you can stop
+sp {es*evaluate*state*success
+  (state <s> ^desired <d>
+             ^location <loc>)
+  (<d> ^x <val1> ^y <val2>)
+  (<loc> ^x <val1> ^y <val2>)
+  -->
+  (<s> ^success <d>)
+}
+
+
+## One of the default rules is brought in to notice that we are 
+## finished.  (Slightly modified to be more compact and less general.)
+
+sp {default*top-goal*halt*state*success
+    :default
+  (state <s>  ^desired <eb>) 
+  (<s> ^success <eb>)
+  -->
+  (write (crlf)  |  goal for  | <s>  | achieved | )
+  (halt)
+}
