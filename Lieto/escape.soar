@@ -25,7 +25,7 @@
 ##
 
 ##TODO: 
-# 1. Far muovere questo agente
+# 1. Far muovere questo agente 
 # 2. Definisci lo spazio in cui si muove (4 x 4 x 4 (NB: finestra h 3.5))
 # 3. Dagli struttura, è importante per noi la sua altezza (1.5 metri)
 # 4. Posizione la finestra, con una struttura (NB: h 3.5) 
@@ -188,8 +188,9 @@ sp {es*apply-op*left
        ^dir left)
   (<loc> ^x <val>)
   -->
-  (<loc> ^x  (- <val> 1))
-  (<o> ^name move_terminated)
+  (<loc> ^x <val> - (- <val> 1))
+  (write (crlf) |          Moved: left! | current location: | x: | (- <val> 1))
+  (<s> ^operator <o> -)
 }
 
 
@@ -202,8 +203,9 @@ sp {es*apply-op*right
        ^dir right)
   (<loc> ^x <val>)
   -->
-  (<loc> ^x (+ <val> 1))
-  (<o> ^name move_terminated)
+  (<loc> ^x <val> - (+ <val> 1))
+  (write (crlf) |          Moved: right! | current | | location: | x: | (+ <val> 1))
+  (<s> ^operator <o> -)
 }
 
 ## Implement backward
@@ -215,8 +217,9 @@ sp {es*apply-op*backward
        ^dir backward)
   (<loc> ^y <val>)
   -->
-  (<loc> ^y (- <val> 1))
-  (<o> ^name move_terminated)
+  (<loc> ^y <val> - (- <val> 1))
+  (write (crlf) |          Moved: backward! | current | | location: | y: | (- <val> 1))
+  (<s> ^operator <o> -)
 }
 
 
@@ -229,22 +232,11 @@ sp {es*apply-op*forward
        ^dir forward)
   (<loc> ^y <val>)
   -->
-  (<loc> ^y (+ <val> 1))
-  (<o> ^name move_terminated)
-}
-
-
-sp {es*terminate*move
-  (state <s>  ^operator <o>
-              ^location <loc>
-              ^desired <d>)
-  (<loc> ^x <val1> ^y <val2>)
-  (<o> ^name move_terminated
-       ^dir <dir>)
-  -->
-  (write (crlf) |          Moved: | <dir> | ! | current location: x: | <val1> | y: | <val2> |)
+  (<loc> ^y <val> - (+ <val> 1))
+  (write (crlf) |          Moved: forward! | current | | location: | y: | (+ <val> 1))
   (<s> ^operator <o> -)
 }
+
 
 ###
 ###	IV.	Noticing when full
