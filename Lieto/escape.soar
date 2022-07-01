@@ -149,6 +149,21 @@ sp {es*compare*right*better*forward
   (<s> ^operator <op-right> > <op-forward>)
 }
 
+sp {es*compare*right*better*backward
+  (state <s> ^desired <d>
+             ^location <loc>)
+  (<d> ^x <val2>)
+  (<loc> ^x <val1> < <val2>) 
+  (<s> ^operator <op-right> +)
+  (<op-right> ^name move
+              ^dir right)
+  (<s> ^operator <op-backward> +)
+  (<op-backward> ^name move
+                ^dir backward)
+  -->
+  (<s> ^operator <op-right> > <op-backward>)
+}
+
 sp {es*compare*left*better*backward
   (state <s> ^desired <d>
              ^location <loc>)
@@ -162,6 +177,22 @@ sp {es*compare*left*better*backward
                  ^dir backward)
   -->
   (<s> ^operator <op-left> > <op-backward>)
+}  
+
+
+sp {es*compare*left*better*forward
+  (state <s> ^desired <d>
+             ^location <loc>)
+  (<d> ^x <val2>)
+  (<loc> ^x <val1> > <val2>) 
+  (<s> ^operator <op-left> +)
+  (<op-left> ^name move
+             ^dir left)
+  (<s> ^operator <op-forward> +)
+  (<op-forward> ^name move
+                 ^dir forward)
+  -->
+  (<s> ^operator <op-left> > <op-forward>)
 }  
 
 ###
