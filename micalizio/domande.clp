@@ -82,20 +82,20 @@
 
     ; ; TODO: capire che fare -> PER ME LA RISPSOTA UNKNOWN NON HA SENSO PER QUESTE DOMANDE!
 
-    ; (question (attribute ha-figli-piccoli)
-    ;     (the-question "Ha dei figli piccoli? ")
-    ;     (valid-answers si no unknown))  
+    (question (attribute ha-figli-piccoli)
+        (the-question "Ha dei figli piccoli? ")
+        (valid-answers si no unknown))  
 
-    ; (question (attribute ha-animali)
-    ;     (the-question "Ha degli animali domestici? ")
-    ;     (valid-answers si no unknown))
+    (question (attribute ha-animali)
+        (the-question "Ha degli animali domestici? ")
+        (valid-answers si no unknown))
 
-    ; (question (attribute ha-piudi60anni)
-    ;     (the-question "Ha più di 60 anni? ")
-    ;     (valid-answers si no unknown))
+    (question (attribute ha-piudi60anni)
+        (the-question "Ha più di 60 anni? ")
+        (valid-answers si no unknown))
 
-    ; (question (attribute e-sportivo)
-    ;     (the-question "E' uno sportivo? ")
-    ;     (valid-answers si no unknown))
+    (question (attribute e-sportivo)
+        (the-question "E' uno sportivo? ")
+        (valid-answers si no unknown))
 
 )
