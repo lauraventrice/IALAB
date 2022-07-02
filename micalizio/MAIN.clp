@@ -38,3 +38,6 @@
   =>
   (retract ?rem1)
   (modify ?rem2 (certainty (/ (- (* 100 (+ ?per1 ?per2)) (* ?per1 ?per2)) 100))))
+
+(defmethod float ((?s STRING))
+   (float (string-to-field ?s)))
