@@ -76,3 +76,4 @@
     (question (attribute terrazzino)
         (the-question "Deve essere presente il terrazzino? ")
         (valid-answers si no unknown))
+)

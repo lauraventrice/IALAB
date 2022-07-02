@@ -2,7 +2,7 @@
 ;;* QUESTION RULES *
 ;;******************
 
-(defmodule QUESTIONS (export ?ALL))
+(defmodule QUESTIONS (import MAIN ?ALL) (export ?ALL))
 
 (deftemplate QUESTIONS::question
    (slot attribute (default ?NONE))
@@ -27,7 +27,7 @@
                    (precursors ?name is ?value $?rest))
          (attribute (name ?name) (value ?value))
    =>
-   (if (eq (nth 1 ?rest) and) 
+   (if (eq (nth$ 1 ?rest) and) 
     then (modify ?f (precursors (rest$ ?rest)))
     else (modify ?f (precursors ?rest))))
 
@@ -36,6 +36,6 @@
                    (precursors ?name is-not ?value $?rest))
          (attribute (name ?name) (value ~?value))
    =>
-   (if (eq (nth 1 ?rest) and) 
+   (if (eq (nth$ 1 ?rest) and) 
     then (modify ?f (precursors (rest$ ?rest)))
     else (modify ?f (precursors ?rest))))

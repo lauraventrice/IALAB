@@ -1,0 +1,2 @@
+(load "/Volumes/DATI/GIT/IALAB/micalizio/codiceProf/progetto-vini.clp")
+(load "/Volumes/DATI/GIT/IALAB/micalizio/codiceProf/test.clp")
