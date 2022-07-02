@@ -2,21 +2,21 @@
 ;;* APARTMENT SELECTION RULES *
 ;;************************
 
-(defmodule APPARTAMENTI) 
+(defmodule APPARTAMENTI (import MAIN ?ALL))
 
-;;(deffacts any-attributes
-  ;;(attribute (name best-metriquadri) (value any))
-  ;;(attribute (name best-numerovani) (value any))
-  ;;(attribute (name best-numeroservizi) (value any))
-  ;;(attribute (name best-piano) (value any))
-  ;;(attribute (name best-citta) (value any))
-  ;;(attribute (name best-zona) (value any))
-  ;;(attribute (name best-quartiere) (value any))
-  ;;(attribute (name best-ascensore) (value any))
-  ;;(attribute (name best-boxauto) (value any))
-  ;;(attribute (name best-metri-quadri-boxauto) (value any))
-  ;;(attribute (name best-terrazzino) (value any))
-  ;;(attribute (name best-prezzorichiesto) (value any))
+(deffacts any-attributes
+  (attribute (name best-metri-quadri) (value any))
+  (attribute (name best-numero-vani) (value any))
+  (attribute (name best-numero-servizi) (value any))
+  (attribute (name best-piano) (value any))
+  (attribute (name best-citta) (value any))
+  (attribute (name best-zona) (value any))
+  (attribute (name best-quartiere) (value any))
+  (attribute (name best-ascensore) (value any))
+  (attribute (name best-boxauto) (value any))
+  (attribute (name best-metri-quadri-boxauto) (value any))
+  (attribute (name best-terrazzino) (value any))
+  (attribute (name best-prezzo-richiesto) (value any))
   )
 ;;******************************************************************************************************
 

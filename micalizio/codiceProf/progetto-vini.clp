@@ -295,6 +295,8 @@
   (rule (if preferred-sweetness is sweet)
         (then best-sweetness is sweet with certainty 40))
 
+
+; TODO: NEL NOSTRO CASO QUESTE REGOLE COME POTREBBERO ESSERE?
   (rule (if best-sweetness is sweet and
             preferred-sweetness is dry)
         (then best-sweetness is medium))
