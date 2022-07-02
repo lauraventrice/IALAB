@@ -61,12 +61,33 @@ sp {apply*initialize-escape
    (<s> ^name escape
         ^location <loc>
         ^desired <d>
-        ^finestra <f>
-        ^robot <r>)
+        ^window <f>
+        ^robot <r>
+        ^spring yes
+        ^sprig yes
+        ^stone 5
+        ^trunck yes
+        ^comb <c1> <c2> <c3> <c4> <c5>)
+   (<num> ^val 5)
    (<loc> ^x 5.0 ^y 3.0)      
    (<d> ^x 3.0 ^y 4.0)
-   (<f> ^rotta no ^altezza 3.5)
-   (<r> ^altezza 1.5)
+   (<f> ^broken no ^height 3.5)
+   (<r> ^height 1.5)
+   (<c1> ^name stone-sprig
+         ^built no
+         ^reward -1)
+   (<c2> ^name spring-sprig
+         ^built no
+         ^reward +1)
+   (<c3> ^name stone-spring
+         ^built no
+         ^reward -1)
+   (<c4> ^name stone-trunck
+         ^built no
+         ^reward -1)
+   (<c5> ^name truncks
+         ^built no
+         ^reward +1)
 }
 
 
@@ -270,9 +291,178 @@ sp {es*apply-op*forward
   (<s> ^operator <o> -)
 }
 
+###
+###	IV.		Propose the main operators to combine objects into a useful object to escape the room
+###
+
+## Propose to combine of stone and sprig of wood
+sp {es*propose*combine*stone*sprig
+   (state <s> ^window <f>
+              ^sprig yes
+              ^comb <c>)
+   (<f> broken no)  
+   (<s> ^stone <num> > 0)    
+   (<c> ^name stone-sprig 
+        ^built no)     
+    -->
+   (<s> ^operator <op> +)
+   (<op> ^name combine 
+         ^obj stone-sprig)
+}
+
+## Propose to combine of spring and sprig of wood
+
+sp {es*propose*combine*spring*sprig
+   (state <s> ^window <f>
+              ^spring yes
+              ^sprig yes
+              ^comb <c>)
+   (<f> broken no) 
+   (<c> ^name spring-sprig
+        ^built no)     
+    -->
+   (<s> ^operator <op> +)
+   (<op> ^name combine 
+         ^obj spring-sprig)
+}
+
+## Propose to combine of stone and spring
+
+sp {es*propose*combine*stone*spring
+   (state <s> ^window <f>
+              ^spring yes
+              ^comb <c>)
+   (<f> broken no)
+   (<s> ^stone <num> > 0) 
+   (<c> ^name stone-spring
+        ^built no)     
+    -->
+   (<s> ^operator <op> +)
+   (<op> ^name combine 
+         ^obj stone-spring)
+}
+
+## Propose to combine of stone and trunck
+
+sp {es*propose*combine*stone*trunck
+   (state <s> ^window <f>
+              ^trunck yes
+              ^comb <c>)
+   (<f> broken no)
+   (<s> ^stone <num> > 0) 
+   (<c> ^name stone-trunck
+        ^built no)     
+    -->
+   (<s> ^operator <op> +)
+   (<op> ^name combine 
+         ^obj stone-trunck)
+}
+
+
+## Propose to combine of truncks
+
+sp {es*propose*combine*stone*trunck
+   (state <s> ^window <f>
+              ^trunck yes
+              ^comb <c>)
+   (<f> broken no)
+   (<c> ^name truncks
+        ^built no)     
+    -->
+   (<s> ^operator <op> +)
+   (<op> ^name combine 
+         ^obj truncks)
+}
+
 
 ###
-###	IV.	Noticing when full
+### V.     Soar reinforcement learning for the main operators that combine objects into a useful object to escape the room
+###
+
+## Soar-RL rule for combine of stone and sprig of wood -1
+
+sp {es*rl*combine*stone*sprig
+   (state <s> ^operator <op> +)
+   (<op> ^name combine
+         ^obj stone-sprigs)
+-->
+   (<s> ^operator <op> = 0)
+}
+
+## Soar-RL rule for combine of spring and sprig of wood +1
+
+sp {es*rl*combine*sprig*wood
+   (state <s> ^operator <op> +)
+   (<op> ^name combine
+         ^obj sprig-wood)
+-->
+   (<s> ^operator <op> = 0)
+}
+
+## Soar-RL rule for combine of stone and spring -1
+
+sp {es*rl*combine*stone*spring
+   (state <s> ^operator <op> +)
+   (<op> ^name combine
+         ^obj stone-spring)
+-->
+   (<s> ^operator <op> = 0)
+}
+
+## Soar-RL rule for combine of stone and trunck -1
+
+sp {es*rl*combine*stone*trunck
+   (state <s> ^operator <op> +)
+   (<op> ^name combine
+         ^obj stone-trunk)
+-->
+   (<s> ^operator <op> = 0)
+}
+
+## Soar-RL rule for combine of truck +1 -> mi serve per salire su e uscire dalla stanza
+
+sp {es*rl*combine*stone*sprig
+   (state <s> ^operator <op> +)
+   (<op> ^name combine
+         ^obj trunks)
+-->
+   (<s> ^operator <op> = 0)
+}
+
+##
+# When a combine is chosen:
+# - change object built
+# - output built
+##
+sp {apply*combine
+   (state <s> ^operator <op>)
+   (<op> ^name combine
+         ^obj <obj>)
+-->
+   (<s> ^comb <c>)
+   (<c> ^name <obj>
+        ^built yes)
+   (write (crlf) |Built: | <obj>)
+}
+
+##
+# When a combine is chosen, assert the associated reward
+##
+sp {elaborate*reward
+   (state <s> ^reward-link <r>
+              ^combine <dir>)
+   (<dir> ^name <d-name> 
+          ^reward <d-reward>
+          ^built yes)
+-->
+   (<r> ^reward <rr>)
+   (<rr> ^value <d-reward>)
+}
+
+
+
+###
+###	VII.	Noticing when goal is reached
 ###
 ### This code terminates the problem solving when the goal is reached.
 
