@@ -26,13 +26,12 @@
 
 ##TODO: 
 # 1. Far muovere questo agente 
-# 2. Definisci lo spazio in cui si muove (4 x 4 x 4 (NB: finestra h 3.5))
+# 2. Definire la finestra, in particolare la sua altezza (NB: h 3.5) 
 # 3. Dagli struttura, è importante per noi la sua altezza (1.5 metri)
-# 4. Posizione la finestra, con una struttura (NB: h 3.5) 
-# 5. Fai raggiungere l'agente alla stessa posizione della finestra in modo che possa arrivarci con i due tronchi
-# 6. Definire gli oggetti: molla, rametto in legno, pietre, 2 tronchi di legno
-# 7. Aggiungere un reward per la creazione degli oggetti come detto nella consegna
-# 8. Capire come gestire il fatto di rompere la finestra 
+# 4. Fai raggiungere l'agente alla stessa posizione della finestra in modo che possa arrivarci con i due tronchi
+# 5. Definire gli oggetti: molla, rametto in legno, pietre, 2 tronchi di legno
+# 6. Aggiungere un reward per la creazione degli oggetti come detto nella consegna
+# 7. Capire come gestire il fatto di rompere la finestra 
 
 #################################################################################################BEGIN
 
@@ -61,9 +60,11 @@ sp {apply*initialize-escape
     -->
    (<s> ^name escape
         ^location <loc>
-        ^desired <d>)
-   (<loc> ^x 2 ^y 2)      
-   (<d> ^x 3 ^y 4)
+        ^desired <d>
+        ^finestra <f>)
+   (<loc> ^x 5.0 ^y 3.0)      
+   (<d> ^x 3.0 ^y 4.0)
+   (<f> ^rotta no ^altezza 3.5)
 }
 
 
@@ -71,7 +72,6 @@ sp {apply*initialize-escape
 ###	II.	Propose the main operators
 ###
 ### The code in this section proposes the four operators left, right, backward and forward. 
-### Propose moving in any available direction
 
 ##
 # Propose rule for moving left
@@ -219,8 +219,8 @@ sp {es*apply-op*left
        ^dir left)
   (<loc> ^x <val>)
   -->
-  (<loc> ^x <val> - (- <val> 1))
-  (write (crlf) |          Moved: left! | current location: | x: | (- <val> 1))
+  (<loc> ^x <val> - (- <val> 0.5))
+  (write (crlf) |          Moved: left! | current | | location: | x: | (- <val> 0.5))
   (<s> ^operator <o> -)
 }
 
@@ -234,8 +234,8 @@ sp {es*apply-op*right
        ^dir right)
   (<loc> ^x <val>)
   -->
-  (<loc> ^x <val> - (+ <val> 1))
-  (write (crlf) |          Moved: right! | current | | location: | x: | (+ <val> 1))
+  (<loc> ^x <val> - (+ <val> 0.5))
+  (write (crlf) |          Moved: right! | current | | location: | x: | (+ <val> 0.5))
   (<s> ^operator <o> -)
 }
 
@@ -248,8 +248,8 @@ sp {es*apply-op*backward
        ^dir backward)
   (<loc> ^y <val>)
   -->
-  (<loc> ^y <val> - (- <val> 1))
-  (write (crlf) |          Moved: backward! | current | | location: | y: | (- <val> 1))
+  (<loc> ^y <val> - (- <val> 0.5))
+  (write (crlf) |          Moved: backward! | current | | location: | y: | (- <val> 0.5))
   (<s> ^operator <o> -)
 }
 
@@ -263,8 +263,8 @@ sp {es*apply-op*forward
        ^dir forward)
   (<loc> ^y <val>)
   -->
-  (<loc> ^y <val> - (+ <val> 1))
-  (write (crlf) |          Moved: forward! | current | | location: | y: | (+ <val> 1))
+  (<loc> ^y <val> - (+ <val> 0.5))
+  (write (crlf) |          Moved: forward! | current | | location: | y: | (+ <val> 0.5))
   (<s> ^operator <o> -)
 }
 
