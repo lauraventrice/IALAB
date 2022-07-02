@@ -25,12 +25,12 @@
 ##
 
 ##TODO: 
-# 1. Far muovere questo agente 
-# 2. Definire la finestra, in particolare la sua altezza (NB: h 3.5) 
-# 3. Dagli struttura, è importante per noi la sua altezza (1.5 metri)
-# 4. Fai raggiungere l'agente alla stessa posizione della finestra in modo che possa arrivarci con i due tronchi
+# 1. Far muovere questo agente                                                              OK
+# 2. Definire la finestra, in particolare la sua altezza (NB: h 3.5)                        OK
+# 3. Dagli struttura, è importante per noi la sua altezza (1.5 metri)                       OK
+# 4. Fai raggiungere l'agente la stessa pos della finestra per arrivarci con i due tronchi  OK? ne discutiamo un attimo
 # 5. Definire gli oggetti: molla, rametto in legno, pietre, 2 tronchi di legno
-# 6. Aggiungere un reward per la creazione degli oggetti come detto nella consegna
+# 6. Aggiungere un reward per la creazione degli oggetti definiti come nella consegna
 # 7. Capire come gestire il fatto di rompere la finestra 
 
 #################################################################################################BEGIN
@@ -61,10 +61,12 @@ sp {apply*initialize-escape
    (<s> ^name escape
         ^location <loc>
         ^desired <d>
-        ^finestra <f>)
+        ^finestra <f>
+        ^robot <r>)
    (<loc> ^x 5.0 ^y 3.0)      
    (<d> ^x 3.0 ^y 4.0)
    (<f> ^rotta no ^altezza 3.5)
+   (<r> ^altezza 1.5)
 }
 
 
