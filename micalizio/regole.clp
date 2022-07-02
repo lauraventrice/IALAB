@@ -67,7 +67,7 @@
 
 (deffacts the-apartment-rules
 
-  ; Regole per selezionare il best-metri-quadri 
+  ; TODO: Regole per selezionare il best-metri-quadri 
 
 
   ; Regole per selezionare il best-numero-vani 
@@ -184,8 +184,15 @@
               best-zona is primacintura with certainty 20 and
               best-zona is periferia with certainty 20))
 
-  ; Regole per selezionare il best-quartiere  
+  ; TODO: Regole per selezionare il best-quartiere  
+  ; TODO: NON SO SE QUESTE REGOLE VADANO BENE COSI'
 
+  (rule (if citta is torino and
+            zona is primacintura)
+      (then best-quartiere is moncalieri with certainty 70 and
+            best-quartiere is mirafiori with certainty 50))
+ 
+  ; TODO: SE VANNO BENE COSI' BISOGNA FARLE PER TUTTE LE COMBINAZIONI DI QUARTIERI E CITTA'
 
   ; Regole per selezionare il best-ascensore 
 
@@ -199,6 +206,9 @@
         (then best-ascensore is si with certainty 20 and
               best-ascensore is si with certainty 20))
 
+  (rule (if ha-piudi60anni is si)
+      (then best-ascensore is si with certainty 70))  ;se ha più di 60 anni è bene consigliare appartamenti dotati di ascensore!
+
   ; Regole per selezionare il best-boxauto
 
   (rule (if boxauto is si)
@@ -211,7 +221,7 @@
         (then best-boxauto is si with certainty 20 and
               best-boxauto is si with certainty 20))
 
-  ; Regole per selezionare il best-metri-quadri-boxauto  
+  ; TODO: Regole per selezionare il best-metri-quadri-boxauto  
 
 
 
@@ -228,6 +238,30 @@
               best-terrazzino is si with certainty 20))
 
 
-  ; Regole per selezionare il best-prezzo-richiesto 
+  ; TODO: Regole per selezionare il best-prezzo-richiesto 
+
+
+
+  ; Regole per selezionare il bast-servizi-vicino
+
+  (rule (if ha-figli-piccoli is si and
+            ha-animali is si)
+      (then best-servizio-vicino is parco with certainty 90 and
+            best-servizio-vicino is scuola with certainty 70))
+
+  (rule (if ha-figli-piccoli is si)
+      (then best-servizio-vicino is parco with certainty 70 and
+            best-servizio-vicino is scuola with certainty 70))
+
+  (rule (if ha-animali is si)
+      (then best-servizio-vicino is parco with certainty 85))
+
+  (rule (if e-sportivo is si)
+      (then best-servizio-vicino is parco with certainty 75 and
+            best-servizio-vicino is palestra with certainty 90))
+
+  (rule (if ha-piudi60anni is si)
+      (then best-servizio-vicino is ospedale with certainty 70 and
+            best-servizio-vicino is mezzipubblici with certainty 60))
 
 )

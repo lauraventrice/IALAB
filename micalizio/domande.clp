@@ -38,22 +38,22 @@
     
     (question (attribute quartiere)
         (precursors citta is torino)
-        (the-question "Preferirebbe trovare l'appartamento in zona lingotto o moncalieri?")
+        (the-question "Preferirebbe trovare l'appartamento in zona lingotto o moncalieri? ")
         (valid-answers lingotto moncalieri unknown))
 
     (question (attribute quartiere)
         (precursors citta is roma)
-        (the-question "Preferirebbe trovare l'appartamento in zona trastevere o campitelli?")
+        (the-question "Preferirebbe trovare l'appartamento in zona trastevere o campitelli? ")
         (valid-answers trastevere campitelli unknown))
 
     (question (attribute quartiere)
         (precursors citta is milano)
-        (the-question "Preferirebbe trovare l'appartamento in zona sansiro o navigli?")
+        (the-question "Preferirebbe trovare l'appartamento in zona sansiro o navigli? ")
         (valid-answers sansiro navigli unknown))
 
     (question (attribute quartiere)
         (precursors citta is firenze)
-        (the-question "Preferirebbe trovare l'appartamento in zona santacroce o rovezzano?")
+        (the-question "Preferirebbe trovare l'appartamento in zona santacroce o rovezzano? ")
         (valid-answers santacroce rovezzano unknown))
 
 
@@ -76,4 +76,26 @@
     (question (attribute terrazzino)
         (the-question "Deve essere presente il terrazzino? ")
         (valid-answers si no unknown))
+
+    ; Domande più generiche sulla persona che cerca l'appartamento
+    ; ----------------------------------------------------------------------------------------
+
+    ; TODO: capire che fare -> PER ME LA RISPSOTA UNKNOWN NON HA SENSO PER QUESTE DOMANDE!
+
+    (question (attribute ha-figli-piccoli)
+        (the-question "Ha dei figli piccoli? ")
+        (valid-answers si no unknown))  
+
+    (question (attribute ha-animali)
+        (the-question "Ha degli animali domestici? ")
+        (valid-answers si no unknown))
+
+    (question (attribute ha-piudi60anni)
+        (the-question "Ha più di 60 anni? ")
+        (valid-answers si no unknown))
+
+    (question (attribute e-sportivo)
+        (the-question "E' uno sportivo? ")
+        (valid-answers si no unknown))
+
 )

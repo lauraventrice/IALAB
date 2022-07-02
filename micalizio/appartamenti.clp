@@ -42,7 +42,7 @@
     ; lista appartamenti a moncalieri (torino)
     (apartment  (name "Appartamento su due piani in vendita in strada dei Cunioli Alti, 137")
                 (metriquadri 137) (numerovani 4) (numeroservizi 3) (piano secondo) (citta torino) (zona primacintura) (quartiere moncalieri)
-                (ascensore no) (boxauto si) (metri-quadri-boxauto 3) (terrazzino si) (prezzorichiesto 375000) (servizivicino parco scuola mezzipubblici)
+                (ascensore no) (boxauto si) (metri-quadri-boxauto 3) (terrazzino si) (prezzorichiesto 375000) (servizivicino parco scuola mezzipubblici palestra)
     )
 
     (apartment  (name "Quadrilocale in vendita in strada Genova, 255 /4")
@@ -52,7 +52,7 @@
 
     (apartment  (name "Trilocale in vendita in strada Genova, 208")
                 (metriquadri 83) (numerovani 3) (numeroservizi 1) (piano primo) (citta torino) (zona periferia) (quartiere moncalieri)
-                (ascensore no) (boxauto si) (metri-quadri-boxauto 3) (terrazzino si) (prezzorichiesto 157000) (servizivicino parco mezzipubblici)
+                (ascensore no) (boxauto si) (metri-quadri-boxauto 3) (terrazzino si) (prezzorichiesto 157000) (servizivicino parco mezzipubblici palestra)
     )
 
     ; lista appartamenti a lingotto (torino)
@@ -63,12 +63,12 @@
 
     (apartment  (name "Trilocale in vendita in via Fratel Teodoreto, 3")
                 (metriquadri 75) (numerovani 3) (numeroservizi 1) (piano primo) (citta torino) (zona primacintura) (quartiere lingotto)
-                (ascensore si) (boxauto no) (terrazzino si) (prezzorichiesto 114000) (servizivicino parco scuola) ; questo appartamento non ha il boxauto e quindi non ha specificato la grandezza di esso
+                (ascensore si) (boxauto no) (terrazzino si) (prezzorichiesto 114000) (servizivicino parco scuola palestra) ; questo appartamento non ha il boxauto e quindi non ha specificato la grandezza di esso
     )
 
     (apartment  (name "Appartamento in vendita in via Filadelfia, 50")
                 (metriquadri 130) (numerovani 5) (numeroservizi 2) (piano primo) (citta torino) (zona centro) (quartiere lingotto)
-                (ascensore si) (boxauto si) (metri-quadri-boxauto 4) (terrazzino si) (prezzorichiesto 260000) (servizivicino ospedale mezzipubblici)
+                (ascensore si) (boxauto si) (metri-quadri-boxauto 4) (terrazzino si) (prezzorichiesto 260000) (servizivicino ospedale mezzipubblici palestra)
     )
 
     ; lista appartamenti a trastevere (roma)
@@ -79,12 +79,12 @@
   
     (apartment  (name "Trilocale in vendita in vicolo del Bologna s.n.c")
                 (metriquadri 68) (numerovani 3) (numeroservizi 2) (piano terra) (citta roma) (zona primacintura) (quartiere trastevere)
-                (ascensore no) (boxauto no) (terrazzino no) (prezzorichiesto 315000) (servizivicino ospedale scuola) ; questo appartamento non ha il boxauto e quindi non ha specificato la grandezza di esso
+                (ascensore no) (boxauto no) (terrazzino no) (prezzorichiesto 315000) (servizivicino ospedale scuola palestra) ; questo appartamento non ha il boxauto e quindi non ha specificato la grandezza di esso
     )
 
     (apartment  (name "Bilocale in vendita in via del Politeama")
                 (metriquadri 84) (numerovani 2) (numeroservizi 2) (piano terra) (citta roma) (zona centro) (quartiere trastevere)
-                (ascensore no) (boxauto no) (terrazzino no) (prezzorichiesto 500000) (servizivicino ospedale mezzipubblici) ; questo appartamento non ha il boxauto e quindi non ha specificato la grandezza di esso
+                (ascensore no) (boxauto no) (terrazzino no) (prezzorichiesto 500000) (servizivicino ospedale mezzipubblici palestra) ; questo appartamento non ha il boxauto e quindi non ha specificato la grandezza di esso
     )
 
     ; lista appartamenti a campitelli (roma)
@@ -95,18 +95,18 @@
 
     (apartment  (name "Quadrilocale in vendita in via fori imperiali")
                 (metriquadri 120) (numerovani 4) (numeroservizi 2) (piano terzo) (citta roma) (zona centro) (quartiere campitelli)
-                (ascensore si) (boxauto no) (terrazzino no) (prezzorichiesto 747000) (servizivicino ospedale); questo appartamento non ha il boxauto e quindi non ha specificato la grandezza di esso
+                (ascensore si) (boxauto no) (terrazzino no) (prezzorichiesto 747000) (servizivicino ospedale palestra); questo appartamento non ha il boxauto e quindi non ha specificato la grandezza di esso
     )
 
     (apartment  (name "Bilocale in vendita a Aventino - San Saba")
                 (metriquadri 120) (numerovani 2) (numeroservizi 2) (piano quarto) (citta roma) (zona periferia) (quartiere campitelli)
-                (ascensore si) (boxauto no) (terrazzino no) (prezzorichiesto 950000) (servizivicino ospedale parco scuola) ; questo appartamento non ha il boxauto e quindi non ha specificato la grandezza di esso
+                (ascensore si) (boxauto no) (terrazzino no) (prezzorichiesto 950000) (servizivicino ospedale parco scuola palestra) ; questo appartamento non ha il boxauto e quindi non ha specificato la grandezza di esso
     )
 
     ; lista appartamenti a san siro (milano)
     (apartment  (name "Bilocale in vendita in piazza Margana, 20")
                 (metriquadri 63) (numerovani 2) (numeroservizi 1) (piano primo) (citta milano) (zona primacintura) (quartiere sansiro)
-                (ascensore no) (boxauto no) (terrazzino no) (prezzorichiesto 200000) (servizivicino ospedale parco) ; questo appartamento non ha il boxauto e quindi non ha specificato la grandezza di esso
+                (ascensore no) (boxauto no) (terrazzino no) (prezzorichiesto 200000) (servizivicino ospedale parco palestra) ; questo appartamento non ha il boxauto e quindi non ha specificato la grandezza di esso
     )
 
     (apartment  (name "Appartamento su due piani in vendita in via Matteo Civitali, 41")
@@ -116,7 +116,7 @@
 
     (apartment  (name "Appartamento in vendita in piazza Santa Maria Nascente s.n.c")
                 (metriquadri 200) (numerovani 5) (numeroservizi 1) (piano primo) (citta milano) (zona centro) (quartiere sansiro)
-                (ascensore no) (boxauto si) (metri-quadri-boxauto 6) (terrazzino no) (prezzorichiesto 890000) (servizivicino mezzipubblici)
+                (ascensore no) (boxauto si) (metri-quadri-boxauto 6) (terrazzino no) (prezzorichiesto 890000) (servizivicino mezzipubblici palestra)
     )
 
     ; lista appartamenti a navigli (milano)
@@ -127,12 +127,12 @@
 
     (apartment  (name "Bilocale in vendita in piazza Ventiquattro Maggio s.n.c")
                 (metriquadri 50) (numerovani 2) (numeroservizi 2) (piano primo) (citta milano) (zona periferia) (quartiere navigli)
-                (ascensore no) (boxauto si) (metri-quadri-boxauto 4) (terrazzino si) (prezzorichiesto 235000) (servizivicino ospedale parco scuola mezzipubblici)
+                (ascensore no) (boxauto si) (metri-quadri-boxauto 4) (terrazzino si) (prezzorichiesto 235000) (servizivicino ospedale parco scuola mezzipubblici palestra)
     )
 
     (apartment  (name "Monolocale in vendita in piazza Serafino Belfanti, 1")
                 (metriquadri 36) (numerovani 1) (numeroservizi 1) (piano primo) (citta milano) (zona primacintura) (quartiere navigli)
-                (ascensore si) (boxauto no) (terrazzino si) (prezzorichiesto 165000) (servizivicino parco scuola) ; questo appartamento non ha il boxauto e quindi non ha specificato la grandezza di esso
+                (ascensore si) (boxauto no) (terrazzino si) (prezzorichiesto 165000) (servizivicino parco scuola palestra) ; questo appartamento non ha il boxauto e quindi non ha specificato la grandezza di esso
     )
 
     ; lista appartamenti a santa croce (firenze)
@@ -148,7 +148,7 @@
 
     (apartment  (name "Bilocale in vendita a Santa Croce")
                 (metriquadri 39) (numerovani 2) (numeroservizi 1) (piano primo) (citta firenze) (zona primacintura) (quartiere santacroce)
-                (ascensore no) (boxauto no) (terrazzino no) (prezzorichiesto 220000) (servizivicino parco scuola mezzipubblici) ; questo appartamento non ha il boxauto e quindi non ha specificato la grandezza di esso
+                (ascensore no) (boxauto no) (terrazzino no) (prezzorichiesto 220000) (servizivicino parco scuola mezzipubblici palestra) ; questo appartamento non ha il boxauto e quindi non ha specificato la grandezza di esso
     )
 
     ; lista appartamenti a rovezzano (firenze)
@@ -164,7 +164,7 @@
 
     (apartment  (name "Monolocale in vendita in via di Rocca Tedalda s.n.c")
                 (metriquadri 30) (numerovani 1) (numeroservizi 1) (piano terra) (citta firenze) (zona periferia) (quartiere rovezzano)
-                (ascensore no) (boxauto si) (metri-quadri-boxauto 6) (terrazzino si) (prezzorichiesto 168000) (servizivicino parco scuola mezzipubblici)
+                (ascensore no) (boxauto si) (metri-quadri-boxauto 6) (terrazzino si) (prezzorichiesto 168000) (servizivicino parco scuola mezzipubblici palestra)
     )
 )
 
