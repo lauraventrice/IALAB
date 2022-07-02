@@ -1,5 +1,5 @@
 ;;*****************************
-;;* PRINT SELECTED WINE RULES *
+;;* PRINT SELECTED APARTMENT RULES *
 ;;*****************************
 
 (defmodule PRINT-RESULTS (import MAIN ?ALL))

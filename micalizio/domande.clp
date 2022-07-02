@@ -6,31 +6,31 @@
 
 (deffacts APARTMENTS-QUESTIONS::question-attributes
     (question (attribute prezzo-massimo)
-        (the-question "Qual è il prezzo massimo che è interessat* spendere per l'appartamento? ")
+        (the-question "Qual è il prezzo massimo che preferirebbe spendere per l'appartamento? ")
         (valid-answers 200000 300000 400000 500000 600000 700000 800000 unknown)) ;; una soglia ragionevole può essere + o - 50000 euro
 
     (question (attribute zona)
-        (the-question "In che zona vorrebbe acquistare casa? ")
+        (the-question "Preferirebbe trovare la casa in centro, nella primacintura o in periferia? ")
         (valid-answers centro primacintura periferia unknown))
 
     (question (attribute metri-quadri)
-        (the-question "Di quanti metri quadri vorrebbe l'appartamento? ")
+        (the-question "Di quanti metri quadri preferirebbe l'appartamento? ")
         (valid-answers 50 70 90 110 130 150 170 190 210 230 250 270 290 310 unknown))
 
     (question (attribute numero-vani)
-        (the-question "Quanti vani devono esserci nell'appartamento? ")
+        (the-question "Preferirebbe avere 1, 2, 3, 4, 5 o 6 vani nell'appartamento? ")
         (valid-answers 1 2 3 4 5 6 unknown))
 
     (question (attribute numero-servizi)
-        (the-question "Quanti servizi devono esserci nell'appartamento? ")
+        (the-question "Preferirebbe avere 1, 2 o 3 servizi nell'appartamento? ")
         (valid-answers 1 2 3 unknown))
 
     (question (attribute piano)
-        (the-question "A quale piano cerca l'appartamento? ")
+        (the-question "Preferirebbe trovare la casa al primo, secondo, terzo, quarto o quinto piano?  ")
         (valid-answers terra primo secondo terzo quarto quinto unknown))
 
     (question (attribute citta)
-        (the-question "In quale città cerca l'appartamento? ")
+        (the-question "Preferirebbe trovare l'appartamento a torino, roma, milano o firenze? ")
         (valid-answers torino roma milano firenze unknown)) 
 
     ; domande sul quartiere in base alla città inserita
@@ -38,22 +38,22 @@
     
     (question (attribute quartiere)
         (precursors citta is torino)
-        (the-question "In quale quartiere cerca l'appartamento? ")
+        (the-question "Preferirebbe trovare l'appartamento in zona lingotto o moncalieri?")
         (valid-answers lingotto moncalieri unknown))
 
     (question (attribute quartiere)
         (precursors citta is roma)
-        (the-question "In quale quartiere cerca l'appartamento? ")
+        (the-question "Preferirebbe trovare l'appartamento in zona trastevere o campitelli?")
         (valid-answers trastevere campitelli unknown))
 
     (question (attribute quartiere)
         (precursors citta is milano)
-        (the-question "In quale quartiere cerca l'appartamento? ")
+        (the-question "Preferirebbe trovare l'appartamento in zona sansiro o navigli?")
         (valid-answers sansiro navigli unknown))
 
     (question (attribute quartiere)
         (precursors citta is firenze)
-        (the-question "In quale quartiere cerca l'appartamento? ")
+        (the-question "Preferirebbe trovare l'appartamento in zona santacroce o rovezzano?")
         (valid-answers santacroce rovezzano unknown))
 
 
@@ -61,7 +61,7 @@
     ; ----------------------------------------------------------------------------------------
 
     (question (attribute ascensore)
-        (the-question "Deve essere presente l'ascensore?? ")
+        (the-question "Deve essere presente l'ascensore? ")
         (valid-answers si no unknown))
 
     (question (attribute boxauto)

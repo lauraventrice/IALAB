@@ -65,7 +65,7 @@
 
 (defrule CHOOSE-QUALITIES::startit => (focus RULES))
 
-(deffacts the-wine-rules
+(deffacts the-apartment-rules
 
   ; Regole per selezionare il best-metri-quadri 
 
