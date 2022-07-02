@@ -191,6 +191,16 @@
             zona is primacintura)
       (then best-quartiere is moncalieri with certainty 70 and
             best-quartiere is mirafiori with certainty 50))
+
+  (rule (if citta is unknown)
+      (then best-quartiere is moncalieri with certainty 20 and
+            best-quartiere is lingotto with certainty 20 and
+            best-quartiere is trastevere with certainty 20 and
+            best-quartiere is campitelli with certainty 20 and
+            best-quartiere is sansiro with certainty 20 and
+            best-quartiere is navigli with certainty 20 and
+            best-quartiere is santacroce with certainty 20 and
+            best-quartiere is rovezzano with certainty 20))
  
   ; TODO: SE VANNO BENE COSI' BISOGNA FARLE PER TUTTE LE COMBINAZIONI DI QUARTIERI E CITTA'
 
@@ -204,7 +214,7 @@
 
   (rule (if ascensore is unknown)
         (then best-ascensore is si with certainty 20 and
-              best-ascensore is si with certainty 20))
+              best-ascensore is no with certainty 20))
 
   (rule (if ha-piudi60anni is si)
       (then best-ascensore is si with certainty 70))  ;se ha più di 60 anni è bene consigliare appartamenti dotati di ascensore!
@@ -219,7 +229,7 @@
 
   (rule (if boxauto is unknown)
         (then best-boxauto is si with certainty 20 and
-              best-boxauto is si with certainty 20))
+              best-boxauto is no with certainty 20))
 
   ; TODO: Regole per selezionare il best-metri-quadri-boxauto  
 
@@ -235,11 +245,19 @@
 
   (rule (if terrazzino is unknown)
         (then best-terrazzino is si with certainty 20 and
-              best-terrazzino is si with certainty 20))
+              best-terrazzino is no with certainty 20))
 
 
   ; TODO: Regole per selezionare il best-prezzo-richiesto 
 
+  (rule (if prezzo-massimo is unknown)
+      (then best-prezzo-richiesto is 200000 with certainty 20 and
+            best-prezzo-richiesto is 300000 with certainty 20 and
+            best-prezzo-richiesto is 400000 with certainty 20 and
+            best-prezzo-richiesto is 500000 with certainty 20 and
+            best-prezzo-richiesto is 600000 with certainty 20 and
+            best-prezzo-richiesto is 700000 with certainty 20 and
+            best-prezzo-richiesto is 800000 with certainty 20))
 
 
   ; Regole per selezionare il bast-servizi-vicino

@@ -9,9 +9,9 @@
     ;     (the-question "Qual è il prezzo massimo che preferirebbe spendere per l'appartamento? ")
     ;     (valid-answers 200000 300000 400000 500000 600000 700000 800000 unknown)) ;; una soglia ragionevole può essere + o - 50000 euro
 
-    ; (question (attribute zona)
-    ;     (the-question "Preferirebbe trovare la casa in centro, nella primacintura o in periferia? ")
-    ;     (valid-answers centro primacintura periferia unknown))
+    (question (attribute zona)
+        (the-question "Preferirebbe trovare la casa in centro, nella primacintura o in periferia? ")
+        (valid-answers centro primacintura periferia unknown))
 
     ; (question (attribute metri-quadri)
     ;     (the-question "Di quanti metri quadri preferirebbe l'appartamento? ")
@@ -29,9 +29,9 @@
         (the-question "Preferirebbe trovare la casa al primo, secondo, terzo, quarto o quinto piano?  ")
         (valid-answers terra primo secondo terzo quarto quinto unknown))
 
-    ; (question (attribute citta)
-    ;     (the-question "Preferirebbe trovare l'appartamento a torino, roma, milano o firenze? ")
-    ;     (valid-answers torino roma milano firenze unknown)) 
+    (question (attribute citta)
+        (the-question "Preferirebbe trovare l'appartamento a torino, roma, milano o firenze? ")
+        (valid-answers torino roma milano firenze unknown)) 
 
     ; ; domande sul quartiere in base alla città inserita
     ; ; ----------------------------------------------------------------------------------------
@@ -60,22 +60,22 @@
     ; ; Caratteristiche aggiuntive dell'appartamento
     ; ; ----------------------------------------------------------------------------------------
 
-    ; (question (attribute ascensore)
-    ;     (the-question "Deve essere presente l'ascensore? ")
-    ;     (valid-answers si no unknown))
+    (question (attribute ascensore)
+        (the-question "Deve essere presente l'ascensore? ")
+        (valid-answers si no unknown))
 
-    ; (question (attribute boxauto)
-    ;     (the-question "Deve essere presente il box auto? ")
-    ;     (valid-answers si no unknown))
+    (question (attribute boxauto)
+        (the-question "Deve essere presente il box auto? ")
+        (valid-answers si no unknown))
 
     ; (question (attribute metri-quadri-boxauto)
     ;     (precursors boxauto is si)  ; questa domanda deve essere fatta solo se la persona è interessata al box-auto
     ;     (the-question "Di quanti metri quadri deve essere il box auto? ")
     ;     (valid-answers unknown)) ;; TODO: sistemare -> capire che valori mettere di metri quadri 
 
-    ; (question (attribute terrazzino)
-    ;     (the-question "Deve essere presente il terrazzino? ")
-    ;     (valid-answers si no unknown))
+    (question (attribute terrazzino)
+        (the-question "Deve essere presente il terrazzino? ")
+        (valid-answers si no unknown))
 
     ; ; Domande più generiche sulla persona che cerca l'appartamento
     ; ; ----------------------------------------------------------------------------------------
