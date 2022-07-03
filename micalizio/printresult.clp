@@ -10,7 +10,7 @@
    (printout t t)
    (printout t "        SELECTED APARTMENT" t t)
    (printout t " APARTMENT                  CERTAINTY" t)
-   (printout t " -------------------------------" t)
+   (printout t " -------------------------------" t crlf)
    (assert (phase print-apartment)))
 
 (defrule PRINT-RESULTS::print-apartment ""
