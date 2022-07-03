@@ -98,36 +98,42 @@
 
 ; regola che controlla se il prezzo massimo che l'utente vuole spendere èì compreso tra il prezzo della casa meno il 20 % e il prezzo della casa più il 20%
 (defrule CHOOSE-QUALITIES::checking-input-20-perc
-   (declare (salience 100))
+   (declare (salience 10000))
+   ?s <- (attribute (name best-prezzo-richiesto) (value any) (certainty ?perc))
+   (test (= (float ?perc) (float 100)))
+   ;?s <- (attribute (name best-prezzo-richiesto) (value any) (certainty 100.0))
    (attribute (name prezzo-massimo) (value ?prezzomassimo))
    (apartment (name ?name1) (prezzorichiesto ?prezzorichiesto))
    ;?p <- (/ (float (+ (float ?prezzomassimo) (float "20"))) (float "100")) ; calcolo il 20% di prezzomassimo
    (and (test (<= (float (str-cat ?prezzomassimo)) (+ (float  (str-cat ?prezzorichiesto)) (float (/ (float (* (float ?prezzomassimo) (float "20"))) (float "100"))))))
        (test (>= (float (str-cat ?prezzomassimo)) (- (float (str-cat ?prezzorichiesto)) (float (/ (float (* (float ?prezzomassimo) (float "20"))) (float "100")))))))
    =>
-   (printout t "20 PERC APPARTAMENTO" ?name1 crlf))
+   (printout t "20 PERC APPARTAMENTO" ?name1 crlf)
+   (retract ?s)
+   (assert (attribute (name best-prezzo-richiesto)
+                      (value any) (certainty 85.0))))
 
-; regola che controlla se il prezzo massimo che l'utente vuole spendere èì compreso tra il prezzo della casa meno il 90 % e il prezzo della casa più il 90%
-(defrule CHOOSE-QUALITIES::checking-input-50-perc
-   (declare (salience 1000))
-   (attribute (name prezzo-massimo) (value ?prezzomassimo))
-   (apartment (name ?name1) (prezzorichiesto ?prezzorichiesto))
-   ;?p <- (/ (* (float ?prezzomassimo) (float "20")) (float "100")) ; calcolo il 20% di prezzomassimo
-   (and (test (<= (float (str-cat ?prezzomassimo)) (+ (float  (str-cat ?prezzorichiesto)) (float (/ (float (* (float ?prezzomassimo) (float "50"))) (float "100"))))))
-       (test (>= (float (str-cat ?prezzomassimo)) (- (float (str-cat ?prezzorichiesto)) (float (/ (float (* (float ?prezzomassimo) (float "50"))) (float "100")))))))
-   =>
-   (printout t "50 PERC APPARTAMENTO" ?name1 crlf))
+; ; regola che controlla se il prezzo massimo che l'utente vuole spendere èì compreso tra il prezzo della casa meno il 90 % e il prezzo della casa più il 90%
+; (defrule CHOOSE-QUALITIES::checking-input-50-perc
+;    (declare (salience 1000))
+;    (attribute (name prezzo-massimo) (value ?prezzomassimo))
+;    (apartment (name ?name1) (prezzorichiesto ?prezzorichiesto))
+;    ;?p <- (/ (* (float ?prezzomassimo) (float "20")) (float "100")) ; calcolo il 20% di prezzomassimo
+;    (and (test (<= (float (str-cat ?prezzomassimo)) (+ (float  (str-cat ?prezzorichiesto)) (float (/ (float (* (float ?prezzomassimo) (float "50"))) (float "100"))))))
+;        (test (>= (float (str-cat ?prezzomassimo)) (- (float (str-cat ?prezzorichiesto)) (float (/ (float (* (float ?prezzomassimo) (float "50"))) (float "100")))))))
+;    =>
+;    (printout t "50 PERC APPARTAMENTO" ?name1 crlf))
 
-; regola che controlla se il prezzo massimo che l'utente vuole spendere èì compreso tra il prezzo della casa meno il 90 % e il prezzo della casa più il 90%
-(defrule CHOOSE-QUALITIES::checking-input-90-perc
-   (declare (salience 10000))
-   (attribute (name prezzo-massimo) (value ?prezzomassimo))
-   (apartment (name ?name1) (prezzorichiesto ?prezzorichiesto))
-   ;?p <- (/ (* (float ?prezzomassimo) (float "20")) (float "100")) ; calcolo il 20% di prezzomassimo
-   (and (test (<= (float (str-cat ?prezzomassimo)) (+ (float  (str-cat ?prezzorichiesto)) (float (/ (float (* (float ?prezzomassimo) (float "90"))) (float "100"))))))
-       (test (>= (float (str-cat ?prezzomassimo)) (- (float (str-cat ?prezzorichiesto)) (float (/ (float (* (float ?prezzomassimo) (float "90"))) (float "100")))))))
-   =>
-   (printout t "90 PERC APPARTAMENTO" ?name1 crlf))
+; ; regola che controlla se il prezzo massimo che l'utente vuole spendere èì compreso tra il prezzo della casa meno il 90 % e il prezzo della casa più il 90%
+; (defrule CHOOSE-QUALITIES::checking-input-90-perc
+;    (declare (salience 100))
+;    (attribute (name prezzo-massimo) (value ?prezzomassimo))
+;    (apartment (name ?name1) (prezzorichiesto ?prezzorichiesto))
+;    ;?p <- (/ (* (float ?prezzomassimo) (float "20")) (float "100")) ; calcolo il 20% di prezzomassimo
+;    (and (test (<= (float (str-cat ?prezzomassimo)) (+ (float  (str-cat ?prezzorichiesto)) (float (/ (float (* (float ?prezzomassimo) (float "90"))) (float "100"))))))
+;        (test (>= (float (str-cat ?prezzomassimo)) (- (float (str-cat ?prezzorichiesto)) (float (/ (float (* (float ?prezzomassimo) (float "90"))) (float "100")))))))
+;    =>
+;    (printout t "90 PERC APPARTAMENTO" ?name1 crlf))
 
 ;---------------------------------------------------------------------FINE REGOLE PER IL MIGLIOR PREZZO---------------------------------------------------------------------
 
