@@ -61,9 +61,75 @@
 
 (defmodule CHOOSE-QUALITIES (import RULES ?ALL)
                             (import QUESTIONS ?ALL)
+                            (import APPARTAMENTI ?ALL)
                             (import MAIN ?ALL))
 
 (defrule CHOOSE-QUALITIES::startit => (focus RULES))
+
+; (defrule CHOOSE-QUALITIES::checking-input
+;    (attribute (name prezzo-massimo) (value ?prezzomassimo))
+;    (apartment (name ?name1) (prezzorichiesto ?prezzorichiesto))
+;    (test (= (float (str-cat ?prezzomassimo)) (float (str-cat ?prezzorichiesto))))
+;    ;?p <- (/ =(* ?prezzomassimo (float "20")) =(float "100")) ; calcolo il 20% di prezzomassimo
+;    =>
+;    (printout t "APPARTAMENTO CORRISPONDENTE " ?name1 crlf))
+
+;  (defrule CHOOSE-QUALITIES::checking-input-minore
+;    (attribute (name prezzo-massimo) (value ?prezzomassimo))
+;    (apartment (name ?name1) (prezzorichiesto ?prezzorichiesto))
+;    (test (<= (float (str-cat ?prezzomassimo)) (float (str-cat ?prezzorichiesto))))
+;    ;?p <- (/ =(* ?prezzomassimo (float "20")) =(float "100")) ; calcolo il 20% di prezzomassimo
+;    =>
+;    (printout t "APPARTAMENTO CORRISPONDENTE PREZZO MINORE " ?name1 crlf))
+
+(defrule CHOOSE-QUALITIES::checking-input-20-perc
+   (declare (salience 100))
+   (attribute (name prezzo-massimo) (value ?prezzomassimo))
+   (apartment (name ?name1) (prezzorichiesto ?prezzorichiesto))
+   ;?p <- (/ (* (float ?prezzomassimo) (float "20")) (float "100")) ; calcolo il 20% di prezzomassimo
+   (and (test (<= (float (str-cat ?prezzomassimo)) (+ (float  (str-cat ?prezzorichiesto)) (float 50000))))
+       (test (>= (float (str-cat ?prezzomassimo)) (- (float (str-cat ?prezzorichiesto)) (float 50000)))))
+   =>
+   (printout t "20 PERC APPARTAMENTO" ?name1 crlf))
+
+; TODO: rimuovermi se funziona bene quella con l'OR
+; (defrule CHOOSE-QUALITIES::checking-input-20-perc-meno
+;    (attribute (name prezzo-massimo) (value ?prezzomassimo))
+;    (apartment (name ?name1) (prezzorichiesto ?prezzorichiesto))
+;    ;?p <- (/ (* (float ?prezzomassimo) (float "20")) (float "100")) ; calcolo il 20% di prezzomassimo
+;    (test (>= (float (str-cat ?prezzomassimo)) (- (float (str-cat ?prezzorichiesto)) (float 200000))))
+;    =>
+;    (printout t "20 PERC MENO APPARTAMENTO" ?name1 crlf))
+
+; TODO: rimuovermi se funziona bene quella con l'OR
+; (defrule CHOOSE-QUALITIES::checking-input-20-perc-meno-piu
+;    (attribute (name prezzo-massimo) (value ?prezzomassimo))
+;    (apartment (name ?name1) (prezzorichiesto ?prezzorichiesto))
+;    ;?p <- (/ (* (float ?prezzomassimo) (float "20")) (float "100")) ; calcolo il 20% di prezzomassimo
+;    (test (<= (float (str-cat ?prezzomassimo)) (+ (float  (str-cat ?prezzorichiesto)) (float 200000))))
+;    =>
+;    (printout t "20 PERC PIU APPARTAMENTO" ?name1 crlf))
+
+(defrule CHOOSE-QUALITIES::checking-input-50-perc
+   (declare (salience 1000))
+   (attribute (name prezzo-massimo) (value ?prezzomassimo))
+   (apartment (name ?name1) (prezzorichiesto ?prezzorichiesto))
+   ;?p <- (/ (* (float ?prezzomassimo) (float "20")) (float "100")) ; calcolo il 20% di prezzomassimo
+   (and (test (<= (float (str-cat ?prezzomassimo)) (+ (float  (str-cat ?prezzorichiesto)) (float 50000))))
+       (test (>= (float (str-cat ?prezzomassimo)) (- (float (str-cat ?prezzorichiesto)) (float 50000)))))
+   =>
+   (printout t "50 PERC APPARTAMENTO" ?name1 crlf))
+
+(defrule CHOOSE-QUALITIES::checking-input-90-perc
+   (declare (salience 10000))
+   (attribute (name prezzo-massimo) (value ?prezzomassimo))
+   (apartment (name ?name1) (prezzorichiesto ?prezzorichiesto))
+   ;?p <- (/ (* (float ?prezzomassimo) (float "20")) (float "100")) ; calcolo il 20% di prezzomassimo
+   (and (test (<= (float (str-cat ?prezzomassimo)) (+ (float  (str-cat ?prezzorichiesto)) (float 50000))))
+       (test (>= (float (str-cat ?prezzomassimo)) (- (float (str-cat ?prezzorichiesto)) (float 50000)))))
+   =>
+   (printout t "90 PERC APPARTAMENTO" ?name1 crlf))
+
 
 (deffacts the-apartment-rules
 
@@ -250,6 +316,7 @@
 
   ; TODO: Regole per selezionare il best-prezzo-richiesto 
 
+
   (rule (if prezzo-massimo is unknown)
       (then best-prezzo-richiesto is 200000 with certainty 20 and
             best-prezzo-richiesto is 300000 with certainty 20 and
@@ -283,3 +350,4 @@
             best-servizio-vicino is mezzipubblici with certainty 60))
 
 )
+

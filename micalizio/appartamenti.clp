@@ -2,7 +2,7 @@
 ;;* APARTMENT SELECTION RULES *
 ;;************************
 
-(defmodule APPARTAMENTI (import MAIN ?ALL))
+(defmodule APPARTAMENTI (import MAIN ?ALL) (export ?ALL))
 
 (deffacts any-attributes
   ;(attribute (name best-metri-quadri) (value any))
@@ -88,7 +88,7 @@
     )
 
     ; lista appartamenti a campitelli (roma)
-    (apartment  (name "Bilocale in vendita in piazza Margana, 20")
+    (apartment  (name "Bilocale in vendita in piazza Gae Aulenti, 12")
                 (metriquadri 60) (numerovani 2) (numeroservizi 1) (piano terra) (citta roma) (zona centro) (quartiere campitelli)
                 (ascensore no) (boxauto no) (terrazzino no) (prezzorichiesto 460000) (servizivicino ospedale mezzipubblici); questo appartamento non ha il boxauto e quindi non ha specificato la grandezza di esso
     )
@@ -169,6 +169,8 @@
 )
 
 
+
+
 (defrule APPARTAMENTI::generate-apartments
   (apartment (name ?name)
         (metriquadri ?mq)
@@ -183,19 +185,20 @@
         (metri-quadri-boxauto $? ?mqba $?)
         (terrazzino ?t)
         (prezzorichiesto ?pr))
-  ; (attribute (name best-metri-quadri) (value ?mq) (certainty ?certainty-1))
-  (attribute (name best-numero-vani) (value ?nv) (certainty ?certainty-2))
-  (attribute (name best-numero-servizi) (value ?ns) (certainty ?certainty-3))
-  (attribute (name best-numero-piano) (value ?p) (certainty ?certainty-4))
-  (attribute (name best-citta) (value ?c) (certainty ?certainty-5))
-  (attribute (name best-zona) (value ?z) (certainty ?certainty-6))
-  (attribute (name best-quartiere) (value ?q) (certainty ?certainty-7))
-  (attribute (name best-ascensore) (value ?a) (certainty ?certainty-8))
-  (attribute (name best-boxauto) (value ?ba) (certainty ?certainty-9))
-  ; (attribute (name best-metri-quadri-boxauto) (value ?mqba) (certainty ?certainty-10))
-  (attribute (name best-terrazzino) (value ?t) (certainty ?certainty-11))
-  ;(attribute (name best-prezzo-richiesto) (value ?pr) (certainty ?certainty-12))
+  ; ; (attribute (name best-metri-quadri) (value ?mq) (certainty ?certainty-1))
+  ; (attribute (name best-numero-vani) (value ?nv) (certainty ?certainty-2))
+  ; (attribute (name best-numero-servizi) (value ?ns) (certainty ?certainty-3))
+  ; (attribute (name best-numero-piano) (value ?p) (certainty ?certainty-4))
+  ; (attribute (name best-citta) (value ?c) (certainty ?certainty-5))
+  ; (attribute (name best-zona) (value ?z) (certainty ?certainty-6))
+  ; (attribute (name best-quartiere) (value ?q) (certainty ?certainty-7))
+  ; (attribute (name best-ascensore) (value ?a) (certainty ?certainty-8))
+  ; (attribute (name best-boxauto) (value ?ba) (certainty ?certainty-9))
+  ; ; (attribute (name best-metri-quadri-boxauto) (value ?mqba) (certainty ?certainty-10))
+  ; (attribute (name best-terrazzino) (value ?t) (certainty ?certainty-11))
+  (attribute (name best-prezzo-richiesto) (value ?pr) (certainty ?certainty-12))
   =>
   (assert (attribute (name apartment) (value ?name)
-                     (certainty (min ?certainty-2 ?certainty-3 ?certainty-4 ?certainty-5 ?certainty-6 ?certainty-7 ?certainty-8 ?certainty-9 ?certainty-11)))))
+                     (certainty (min ?certainty-12 ?certainty-12)))))
 
+; ?certainty-2 ?certainty-3 ?certainty-4 ?certainty-5 ?certainty-6 ?certainty-7 ?certainty-8 ?certainty-9 ?certainty-11
