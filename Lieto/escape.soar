@@ -32,10 +32,13 @@
 # 5. Definire gli oggetti: molla, rametto in legno, pietre, 2 tronchi di legno              OK
 # 6. Aggiungere un reward per la creazione degli oggetti definiti come nella consegna       OK 
 # 7. Capire come gestire il fatto di rompere la finestra 
-# 8. Capire come gestire il fatto di salire e uscire dalla stanza                                               OK
+# 8. Capire come gestire il fatto di salire e uscire dalla stanza                           OK
 
 #################################################################################################BEGIN
 
+rl -s learning on # enable RL
+indifferent-selection -g # use epsilon-greedy decision making
+indifferent-selection -e 0.1 # 10% deviation from greedy
 
 
 ##
@@ -68,7 +71,8 @@ sp {apply*initialize-escape
         ^sprig yes
         ^stone 5
         ^trunck yes
-        ^comb <c1> <c2> <c3> <c4> <c5>)
+        ^comb <c1> <c2> <c3> <c4> <c5>
+        ^out no)
    (<num> ^val 5)
    (<loc> ^x 5.0 ^y 3.0)      
    (<d> ^x 3.0 ^y 4.0)
@@ -79,7 +83,7 @@ sp {apply*initialize-escape
          ^reward -1)
    (<c2> ^name spring-sprig
          ^built no
-         ^reward +1)
+         ^reward 1)
    (<c3> ^name stone-spring
          ^built no
          ^reward -1)
@@ -88,7 +92,7 @@ sp {apply*initialize-escape
          ^reward -1)
    (<c5> ^name truncks
          ^built no
-         ^reward +1)
+         ^reward 1)
 }
 
 
@@ -501,10 +505,25 @@ sp {elaborate*reward
    (<rr> ^value <d-reward>)
 }
 
+###
+### VI. Propose and apply the main operator to break the window throwing stones
+###
 
+
+sp {es*propose*stone*throwing
+   (state <s> ^window <f>
+              ^comb <c>)
+   (<f> broken no)
+   (<c> ^name spring-sprig
+        ^built yes)     
+    -->
+   (<s> ^operator <op> +)
+   (<op> ^name combine 
+         ^attempts 0)
+}
 
 ###
-###	VII.	Propose and apply to go out of the room
+###	VIII.	Propose and apply to go out of the room
 ###
 
 ## Se è rotta e sono alla finestra allora esco. 
@@ -537,7 +556,7 @@ sp {elaborate*reward
 
 
 ###
-###	VIII.	Noticing when goal is reached
+###	IX.	Noticing when goal is reached
 ###
 ### This code terminates the problem solving when the goal is reached. 
 ### --QUANDO SONO FUORI DALLA STANZA HO RAGGIUNTO IL GOAL out è yes!
