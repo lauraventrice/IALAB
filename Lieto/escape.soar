@@ -29,9 +29,10 @@
 # 2. Definire la finestra, in particolare la sua altezza (NB: h 3.5)                        OK
 # 3. Dagli struttura, è importante per noi la sua altezza (1.5 metri)                       OK
 # 4. Fai raggiungere l'agente la stessa pos della finestra per arrivarci con i due tronchi  OK? ne discutiamo un attimo
-# 5. Definire gli oggetti: molla, rametto in legno, pietre, 2 tronchi di legno
-# 6. Aggiungere un reward per la creazione degli oggetti definiti come nella consegna
+# 5. Definire gli oggetti: molla, rametto in legno, pietre, 2 tronchi di legno              OK
+# 6. Aggiungere un reward per la creazione degli oggetti definiti come nella consegna       OK 
 # 7. Capire come gestire il fatto di rompere la finestra 
+# 8. Capire come gestire il fatto di salire e uscire dalla stanza                                               OK
 
 #################################################################################################BEGIN
 
@@ -156,6 +157,31 @@ sp {es*propose*forward
          ^dir forward)
 }
 
+##
+# Propose rule for moving up with truncks
+##
+
+#sp {es*propose*up
+#   (state <s> ^desired <d>
+#              ^location <loc>
+#              ^comb <c>
+#              ^robot <r>
+#              ^window <f>)
+#   (<d> ^x <val1> ^y <val2>)
+#   (<loc> ^x <val1> ^y <val2>)      ##bisogna essere nella stessa pos della finestra
+#   (<f> ^height <val3>)
+#   (<r> ^height <val4> < <val3>)  #non sono ancora arrivata alla finestra
+#   (<c> ^name truncks ^built yes)   ##bisogna avere i tronchi
+#    -->
+#   (<s> ^operator <op>)
+#   (<op> ^name move
+#         ^dir up)
+#}
+
+
+##
+# Comparison between movements
+##
 
 sp {es*compare*right*better*forward
   (state <s> ^desired <d>
@@ -290,6 +316,22 @@ sp {es*apply-op*forward
   (write (crlf) |          Moved: forward! | current | | location: | y: | (+ <val> 0.5))
   (<s> ^operator <o> -)
 }
+
+
+## Implement up
+
+#sp {es*apply-op*up
+#  (state <s>  ^operator <o>
+#              ^robot <r>)
+#  (<o> ^name move
+#       ^dir up)
+#  (<r> ^height <val>)
+#  -->
+#  (<r> ^height <val> - (+ <val> 0.5))
+#  (write (crlf) |          Moved: up! | current | | location: | height: | (+ <val> 0.5))
+#  (<s> ^operator <o> -)
+#}
+
 
 ###
 ###	IV.		Propose the main operators to combine objects into a useful object to escape the room
@@ -462,9 +504,43 @@ sp {elaborate*reward
 
 
 ###
-###	VII.	Noticing when goal is reached
+###	VII.	Propose and apply to go out of the room
 ###
-### This code terminates the problem solving when the goal is reached.
+
+## Se è rotta e sono alla finestra allora esco. 
+#sp {es*propose*out
+#   (state <s> ^desired <d>
+#              ^location <loc>
+#              ^robot <r>
+#              ^window <f>)
+#   (<d> ^x <val1> ^y <val2>)
+#   (<loc> ^x <val1> ^y <val2>)
+#   (<r> ^height <h>)
+#   (<f> ^height <h>
+#        ^broken yes) 
+#    -->
+#   (<s> ^operator <op>)
+#   (<op> ^name move
+#         ^dir out)
+#}
+
+
+#sp {es*apply-op*out
+#  (state <s>  ^operator <o>)
+#  (<o> ^name move
+#       ^dir out)
+#  -->
+#  (<s> ^out no - yes)
+#  (write (crlf) |          Moved: out! )
+#  (<s> ^operator <o> -)
+#}
+
+
+###
+###	VIII.	Noticing when goal is reached
+###
+### This code terminates the problem solving when the goal is reached. 
+### --QUANDO SONO FUORI DALLA STANZA HO RAGGIUNTO IL GOAL out è yes!
 
 
 ## How to tell if you can stop
