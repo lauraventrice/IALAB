@@ -66,6 +66,9 @@
 
 (defrule CHOOSE-QUALITIES::startit => (focus RULES))
 
+
+;---------------------------------------------------------------------REGOLE DI PROVA---------------------------------------------------------------------
+
 ; (defrule CHOOSE-QUALITIES::checking-input
 ;    (attribute (name prezzo-massimo) (value ?prezzomassimo))
 ;    (apartment (name ?name1) (prezzorichiesto ?prezzorichiesto))
@@ -82,53 +85,52 @@
 ;    =>
 ;    (printout t "APPARTAMENTO CORRISPONDENTE PREZZO MINORE " ?name1 crlf))
 
+;---------------------------------------------------------------------FINE REGOLE DI PROVA---------------------------------------------------------------------
+
+
+
+
+
+
+;---------------------------------------------------------------------REGOLE PER IL MIGLIOR PREZZO---------------------------------------------------------------------
+
+; TODO: capire come scrivere il conseguente e soprattutto come applicare solo una delle regole (quella con la percentuale più bassa) in caso di possibilità di applicarle tutte  
+
+; regola che controlla se il prezzo massimo che l'utente vuole spendere èì compreso tra il prezzo della casa meno il 20 % e il prezzo della casa più il 20%
 (defrule CHOOSE-QUALITIES::checking-input-20-perc
    (declare (salience 100))
    (attribute (name prezzo-massimo) (value ?prezzomassimo))
    (apartment (name ?name1) (prezzorichiesto ?prezzorichiesto))
-   ;?p <- (/ (* (float ?prezzomassimo) (float "20")) (float "100")) ; calcolo il 20% di prezzomassimo
-   (and (test (<= (float (str-cat ?prezzomassimo)) (+ (float  (str-cat ?prezzorichiesto)) (float 50000))))
-       (test (>= (float (str-cat ?prezzomassimo)) (- (float (str-cat ?prezzorichiesto)) (float 50000)))))
+   ;?p <- (/ (float (+ (float ?prezzomassimo) (float "20"))) (float "100")) ; calcolo il 20% di prezzomassimo
+   (and (test (<= (float (str-cat ?prezzomassimo)) (+ (float  (str-cat ?prezzorichiesto)) (float (/ (float (* (float ?prezzomassimo) (float "20"))) (float "100"))))))
+       (test (>= (float (str-cat ?prezzomassimo)) (- (float (str-cat ?prezzorichiesto)) (float (/ (float (* (float ?prezzomassimo) (float "20"))) (float "100")))))))
    =>
    (printout t "20 PERC APPARTAMENTO" ?name1 crlf))
 
-; TODO: rimuovermi se funziona bene quella con l'OR
-; (defrule CHOOSE-QUALITIES::checking-input-20-perc-meno
-;    (attribute (name prezzo-massimo) (value ?prezzomassimo))
-;    (apartment (name ?name1) (prezzorichiesto ?prezzorichiesto))
-;    ;?p <- (/ (* (float ?prezzomassimo) (float "20")) (float "100")) ; calcolo il 20% di prezzomassimo
-;    (test (>= (float (str-cat ?prezzomassimo)) (- (float (str-cat ?prezzorichiesto)) (float 200000))))
-;    =>
-;    (printout t "20 PERC MENO APPARTAMENTO" ?name1 crlf))
-
-; TODO: rimuovermi se funziona bene quella con l'OR
-; (defrule CHOOSE-QUALITIES::checking-input-20-perc-meno-piu
-;    (attribute (name prezzo-massimo) (value ?prezzomassimo))
-;    (apartment (name ?name1) (prezzorichiesto ?prezzorichiesto))
-;    ;?p <- (/ (* (float ?prezzomassimo) (float "20")) (float "100")) ; calcolo il 20% di prezzomassimo
-;    (test (<= (float (str-cat ?prezzomassimo)) (+ (float  (str-cat ?prezzorichiesto)) (float 200000))))
-;    =>
-;    (printout t "20 PERC PIU APPARTAMENTO" ?name1 crlf))
-
+; regola che controlla se il prezzo massimo che l'utente vuole spendere èì compreso tra il prezzo della casa meno il 90 % e il prezzo della casa più il 90%
 (defrule CHOOSE-QUALITIES::checking-input-50-perc
    (declare (salience 1000))
    (attribute (name prezzo-massimo) (value ?prezzomassimo))
    (apartment (name ?name1) (prezzorichiesto ?prezzorichiesto))
    ;?p <- (/ (* (float ?prezzomassimo) (float "20")) (float "100")) ; calcolo il 20% di prezzomassimo
-   (and (test (<= (float (str-cat ?prezzomassimo)) (+ (float  (str-cat ?prezzorichiesto)) (float 50000))))
-       (test (>= (float (str-cat ?prezzomassimo)) (- (float (str-cat ?prezzorichiesto)) (float 50000)))))
+   (and (test (<= (float (str-cat ?prezzomassimo)) (+ (float  (str-cat ?prezzorichiesto)) (float (/ (float (* (float ?prezzomassimo) (float "50"))) (float "100"))))))
+       (test (>= (float (str-cat ?prezzomassimo)) (- (float (str-cat ?prezzorichiesto)) (float (/ (float (* (float ?prezzomassimo) (float "50"))) (float "100")))))))
    =>
    (printout t "50 PERC APPARTAMENTO" ?name1 crlf))
 
+; regola che controlla se il prezzo massimo che l'utente vuole spendere èì compreso tra il prezzo della casa meno il 90 % e il prezzo della casa più il 90%
 (defrule CHOOSE-QUALITIES::checking-input-90-perc
    (declare (salience 10000))
    (attribute (name prezzo-massimo) (value ?prezzomassimo))
    (apartment (name ?name1) (prezzorichiesto ?prezzorichiesto))
    ;?p <- (/ (* (float ?prezzomassimo) (float "20")) (float "100")) ; calcolo il 20% di prezzomassimo
-   (and (test (<= (float (str-cat ?prezzomassimo)) (+ (float  (str-cat ?prezzorichiesto)) (float 50000))))
-       (test (>= (float (str-cat ?prezzomassimo)) (- (float (str-cat ?prezzorichiesto)) (float 50000)))))
+   (and (test (<= (float (str-cat ?prezzomassimo)) (+ (float  (str-cat ?prezzorichiesto)) (float (/ (float (* (float ?prezzomassimo) (float "90"))) (float "100"))))))
+       (test (>= (float (str-cat ?prezzomassimo)) (- (float (str-cat ?prezzorichiesto)) (float (/ (float (* (float ?prezzomassimo) (float "90"))) (float "100")))))))
    =>
    (printout t "90 PERC APPARTAMENTO" ?name1 crlf))
+
+;---------------------------------------------------------------------FINE REGOLE PER IL MIGLIOR PREZZO---------------------------------------------------------------------
+
 
 
 (deffacts the-apartment-rules
