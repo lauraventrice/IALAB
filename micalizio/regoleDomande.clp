@@ -24,23 +24,23 @@
                          ;(printout t "RISPOSTA DATA: " ?the-question crlf)
                          )
    
-(defrule QUESTIONS::ask-a-question-2      ;Quindi al principio questa regola sarà attivata per tutte le domande
-     (declare (salience 10000))
-   ?f <- (question (already-asked FALSE)
-                   (precursors)
-                   (the-question ?the-question)
-                   (attribute ?the-attribute)
-                   (valid-answers $?valid-answers))
-   ?a <- (attribute (name ?the-attribute)
-                      (value unknown))
-   =>
-   (printout t crlf "ASK A QUESTION 2 " crlf)
-   (retract ?a)
-   ; (modify ?f (already-asked TRUE))
-   ; (assert (attribute (name ?the-attribute)
-   ;                    (value (ask-question ?the-question ?valid-answers))))
-                         ;(printout t "RISPOSTA DATA: " ?the-question crlf)
-                         )
+; (defrule QUESTIONS::ask-a-question-2      ;Quindi al principio questa regola sarà attivata per tutte le domande
+;      (declare (salience 10000))
+;    ?f <- (question (already-asked FALSE)
+;                    (precursors)
+;                    (the-question ?the-question)
+;                    (attribute ?the-attribute)
+;                    (valid-answers $?valid-answers))
+;    ?a <- (attribute (name ?the-attribute)
+;                       (value unknown))
+;    =>
+;    (printout t crlf "ASK A QUESTION 2 " crlf)
+;    (retract ?a)
+;    ; (modify ?f (already-asked TRUE))
+;    ; (assert (attribute (name ?the-attribute)
+;    ;                    (value (ask-question ?the-question ?valid-answers))))
+;                          ;(printout t "RISPOSTA DATA: " ?the-question crlf)
+;                          )
 
 (defrule QUESTIONS::precursor-is-satisfied 
    ?f <- (question (already-asked FALSE)

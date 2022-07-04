@@ -9,7 +9,7 @@
                             (import MAIN ?ALL))
 
 (defrule PRINT-RESULTS::header ""
-   (declare (salience 1000))
+   (declare (salience 10000))
    =>
    (printout t t)
    (printout t "        SELECTED APARTMENT" t t)
@@ -18,6 +18,7 @@
    (assert (phase print-apartment)))
 
 (defrule PRINT-RESULTS::print-apartment ""
+ (declare (salience 1000))
   ?rem <- (attribute (name apartment) (value ?name) (certainty ?per))		  
   (not (attribute (name apartment) (certainty ?per1&:(> ?per1 ?per))))
   =>
@@ -26,6 +27,7 @@
   )
 
 (defrule PRINT-RESULTS::remove-poor-apartment-choices ""
+  (declare (salience 1000))
   ?rem <- (attribute (name apartment) (certainty ?per&:(< ?per 20)))
   =>
   (retract ?rem))
@@ -38,11 +40,58 @@
 
 
 (defrule PRINT-RESULTS::end-cycle      ;Quindi al principio questa regola sarà attivata per tutte le domande
-  (attribute (name fine-ciclo))                  
+  (declare (salience 1000))
+  ;(attribute (name fine-ciclo))         
+  (test (neq (length$ (find-all-facts ((?f attribute)) (eq ?f:name fine-ciclo))) 2))         
    =>
-    (printout t "Vuoi cambiare le risposte? : " crlf)
+    (printout t "        Vuoi cambiare le risposte alle domande a cui hai risposto unknown? : " crlf)
     (assert (attribute (name risposta) (value (read)) (certainty 100.0)))
 )
+
+
+
+
+(defrule PRINT-RESULTS::generate-apartments-v2
+
+  (attribute (name fine-ciclo))
+  ; (test (eq (length$ (find-all-facts ((?f attribute)) (eq ?f:name fine-ciclo))) 1))         
+  (apartment (name ?name)
+        (metriquadri ?mq)
+        (numerovani ?nv)
+        (numeroservizi ?ns)
+        (piano ?p)
+        (citta ?c)
+        (zona ?z)
+        (quartiere ?q)
+        (ascensore ?a)
+        (boxauto ?ba)
+        (metri-quadri-boxauto $? ?mqba $?)
+        (terrazzino ?t)
+        (prezzorichiesto ?pr))
+  ; ; (attribute (name best-metri-quadri) (value ?mq) (certainty ?certainty-1))
+  ; (attribute (name best-numero-vani) (value ?nv) (certainty ?certainty-2))
+  ; (attribute (name best-numero-servizi) (value ?ns) (certainty ?certainty-3))
+  ; (attribute (name best-numero-piano) (value ?p) (certainty ?certainty-4))
+  ; (attribute (name best-citta) (value ?c) (certainty ?certainty-5))
+  ; (attribute (name best-zona) (value ?z) (certainty ?certainty-6))
+  ; (attribute (name best-quartiere) (value ?q) (certainty ?certainty-7))
+    (attribute (name best-ascensore) (value ?a) (certainty ?certainty-8))
+  ; ; (attribute (name best-boxauto) (value ?ba) (certainty ?certainty-9))
+  ; ; ; (attribute (name best-metri-quadri-boxauto) (value ?mqba) (certainty ?certainty-10))
+  ; ; (attribute (name best-terrazzino) (value ?t) (certainty ?certainty-11))
+
+   (attribute (name best-prezzo-richiesto) (value ?name) (certainty ?certainty-12))
+  ;(attribute (name best-metri-quadri) (value ?name) (certainty ?certainty-1))
+  =>
+  ;(printout t "GENERO ASSERT APPARTAMENTI V2" crlf)
+   (assert (attribute (name apartment) (value ?name)
+                      (certainty (min ?certainty-8 ?certainty-12))))
+                     )
+
+
+
+
+
 
 
 (defrule PRINT-RESULTS::first-change-response-done      ;Quindi al principio questa regola sarà attivata per tutte le domande
@@ -50,7 +99,7 @@
   (attribute (name risposta) (value si))   
   (attribute (name ?name) (value unknown))     
    =>
-    (printout t "ASSERISCO UN FATTO PER LE RISPOSTE UNKNOWN " crlf)
+    ;(printout t "ASSERISCO UN FATTO PER LE RISPOSTE UNKNOWN " crlf)
     (assert (attribute (name risposta-unknown) (value ?name)))
     )
 
@@ -64,7 +113,7 @@
                 (attribute ?name)
                 (valid-answers $?valid-answers))     
    =>
-    (printout t "MODIFICO DOMANDA; ORA POSSO RIFARLA " crlf)
+    ;(printout t "MODIFICO DOMANDA; ORA POSSO RIFARLA " crlf)
     (retract ?r)
     (modify ?f (already-asked FALSE))
 )
@@ -79,7 +128,7 @@
   ?f <- (attribute (name fine-ciclo)) 
   =>
   (retract ?s)
-  (retract ?f)
+  ;(retract ?f)
   (set-fact-duplication TRUE)
   (focus QUESTIONS CHOOSE-QUALITIES APPARTAMENTI PRINT-RESULTS)
 )

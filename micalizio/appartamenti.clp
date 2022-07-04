@@ -194,8 +194,6 @@
 )
 
 
-
-
 (defrule APPARTAMENTI::generate-apartments
   (apartment (name ?name)
         (metriquadri ?mq)
@@ -225,8 +223,10 @@
   (attribute (name best-prezzo-richiesto) (value ?name) (certainty ?certainty-12))
   ;(attribute (name best-metri-quadri) (value ?name) (certainty ?certainty-1))
   =>
-  (printout t "GENERO ASSERT APPARTAMENTI" crlf)
+  ;(printout t "GENERO ASSERT APPARTAMENTI" crlf)
   (assert (attribute (name apartment) (value ?name)
                      (certainty (min ?certainty-8 ?certainty-12)))))
+
+
 
 ; ?certainty-2 ?certainty-3 ?certainty-4 ?certainty-5 ?certainty-6 ?certainty-7 ?certainty-8 ?certainty-9 ?certainty-11

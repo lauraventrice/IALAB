@@ -151,7 +151,7 @@
    (test (eq ?prezzomassimo unknown))    ; se la risposta è unknown bisogna usare questa regola
    ;(not (attribute (name best-prezzo-richiesto) (value ?name1) (certainty ?cert)))
    =>
-   (printout t "VERSIONE 1 PREZZO UNKNOWN APPARTAMENTO: " ?name1 crlf)
+   ;(printout t "VERSIONE 1 PREZZO UNKNOWN APPARTAMENTO: " ?name1 crlf)
    (assert (attribute (name best-prezzo-richiesto) (value ?name1) (certainty 20.0))))
 
 ; ; ; regola che viene eseguita solo se la risposta è unknown
