@@ -5,17 +5,17 @@
 (defmodule APARTMENTS-QUESTIONS (import QUESTIONS ?ALL))
 
 (deffacts APARTMENTS-QUESTIONS::question-attributes
-    (question (attribute prezzo-massimo)
-        (the-question "Qual è il prezzo massimo che preferirebbe spendere per l'appartamento? ")
-        (valid-answers 200000 300000 400000 500000 600000 700000 800000 unknown)) ;; una soglia ragionevole può essere + o - 50000 euro
+    ; (question (attribute prezzo-massimo)
+    ;     (the-question "Qual è il prezzo massimo che preferirebbe spendere per l'appartamento? ")
+    ;     (valid-answers 200000 300000 400000 500000 600000 700000 800000 unknown)) ;; una soglia ragionevole può essere + o - 50000 euro
 
     ; (question (attribute zona)
     ;     (the-question "Preferirebbe trovare la casa in centro, nella primacintura o in periferia? ")
     ;     (valid-answers centro primacintura periferia unknown))
 
-    ; ; (question (attribute metri-quadri)
-    ; ;     (the-question "Di quanti metri quadri preferirebbe l'appartamento? ")
-    ; ;     (valid-answers 50 70 90 110 130 150 170 190 210 230 250 270 290 310 unknown))
+    (question (attribute metri-quadri)
+        (the-question "Di quanti metri quadri preferirebbe l'appartamento? possibili valori (50 70 90 110 130 150 170 190 210 230 250 270 290 310): ")
+        (valid-answers 50 70 90 110 130 150 170 190 210 230 250 270 290 310 unknown))
 
     ; (question (attribute numero-vani)
     ;     (the-question "Preferirebbe avere 1, 2, 3, 4, 5 o 6 vani nell'appartamento? ")

@@ -94,8 +94,6 @@
 
 ;---------------------------------------------------------------------REGOLE PER IL MIGLIOR PREZZO---------------------------------------------------------------------
 
-; TODO: capire come scrivere il conseguente e soprattutto come applicare solo una delle regole (quella con la percentuale più bassa) in caso di possibilità di applicarle tutte  
-
 ; regola che controlla se il prezzo massimo che l'utente vuole spendere èì compreso tra il prezzo della casa meno il 20 % e il prezzo della casa più il 20%
 (defrule CHOOSE-QUALITIES::checking-input-20-perc
    (declare (salience 10000))
@@ -108,7 +106,7 @@
    (and (test (<= (float (str-cat ?prezzomassimo)) (+ (float  (str-cat ?prezzorichiesto)) (float (/ (float (* (float ?prezzomassimo) (float "20"))) (float "100"))))))
        (test (>= (float (str-cat ?prezzomassimo)) (- (float (str-cat ?prezzorichiesto)) (float (/ (float (* (float ?prezzomassimo) (float "20"))) (float "100")))))))
    =>
-   (printout t "20 PERC APPARTAMENTO: " ?name1 crlf)
+   (printout t "PREZZO 20 PERC APPARTAMENTO: " ?name1 crlf)
    ;(retract ?s)
    (assert (attribute (name best-prezzo-richiesto) (value ?name1) (certainty 85.0))))
 
@@ -123,7 +121,7 @@
    (and (test (<= (float (str-cat ?prezzomassimo)) (+ (float  (str-cat ?prezzorichiesto)) (float (/ (float (* (float ?prezzomassimo) (float "50"))) (float "100"))))))
        (test (>= (float (str-cat ?prezzomassimo)) (- (float (str-cat ?prezzorichiesto)) (float (/ (float (* (float ?prezzomassimo) (float "50"))) (float "100")))))))
    =>
-   (printout t "50 PERC APPARTAMENTO: " ?name1 crlf)
+   (printout t "PREZZO 50 PERC APPARTAMENTO: " ?name1 crlf)
    ;(retract ?s)
    (assert (attribute (name best-prezzo-richiesto) (value ?name1) (certainty 60.0))))
 
@@ -138,32 +136,71 @@
    (and (test (<= (float (str-cat ?prezzomassimo)) (+ (float  (str-cat ?prezzorichiesto)) (float (/ (float (* (float ?prezzomassimo) (float "100"))) (float "100"))))))
        (test (>= (float (str-cat ?prezzomassimo)) (- (float (str-cat ?prezzorichiesto)) (float (/ (float (* (float ?prezzomassimo) (float "100"))) (float "100")))))))
    =>
-   (printout t "90 PERC APPARTAMENTO: " ?name1 crlf)
+   (printout t "PREZZO 90 PERC APPARTAMENTO: " ?name1 crlf)
    ;(retract ?s)
    (assert (attribute (name best-prezzo-richiesto) (value ?name1) (certainty 10.0))))
 
-; (defrule CHOOSE-QUALITIES::checking-input-50-perc
-;    (declare (salience 1000))
-;    (attribute (name prezzo-massimo) (value ?prezzomassimo))
-;    (apartment (name ?name1) (prezzorichiesto ?prezzorichiesto))
-;    ;?p <- (/ (* (float ?prezzomassimo) (float "20")) (float "100")) ; calcolo il 20% di prezzomassimo
-;    (and (test (<= (float (str-cat ?prezzomassimo)) (+ (float  (str-cat ?prezzorichiesto)) (float (/ (float (* (float ?prezzomassimo) (float "50"))) (float "100"))))))
-;        (test (>= (float (str-cat ?prezzomassimo)) (- (float (str-cat ?prezzorichiesto)) (float (/ (float (* (float ?prezzomassimo) (float "50"))) (float "100")))))))
-;    =>
-;    (printout t "50 PERC APPARTAMENTO" ?name1 crlf))
+;---------------------------------------------------------------------FINE REGOLE PER IL MIGLIOR PREZZO---------------------------------------------------------------------
+
+
+;---------------------------------------------------------------------REGOLE PER I MIGLIORI MQ---------------------------------------------------------------------
+
+; regola che controlla se il prezzo massimo che l'utente vuole spendere èì compreso tra il prezzo della casa meno il 20 % e il prezzo della casa più il 20%
+(defrule CHOOSE-QUALITIES::checking-mq-20-perc
+   (declare (salience 10000))
+   (attribute (name metri-quadri) (value ?mq))
+   (apartment (name ?name1) (metriquadri ?metriquadriapartment))
+   (not (attribute (name best-metri-quadri) (value ?name1) (certainty ?perc)))
+   ;(test (= (float ?perc) (float 100)))
+   ;?s <- (attribute (name best-metri-quadri) (value any) (certainty 100.0))
+   ;?p <- (/ (float (+ (float ?mq) (float "20"))) (float "100")) ; calcolo il 20% di mq
+   (and (test (<= (float (str-cat ?mq)) (+ (float  (str-cat ?metriquadriapartment)) (float (/ (float (* (float ?mq) (float "20"))) (float "100"))))))
+       (test (>= (float (str-cat ?mq)) (- (float (str-cat ?metriquadriapartment)) (float (/ (float (* (float ?mq) (float "20"))) (float "100")))))))
+   =>
+   (printout t "MQ 20 PERC APPARTAMENTO: " ?name1 crlf)
+   ;(retract ?s)
+   (assert (attribute (name best-metri-quadri) (value ?name1) (certainty 85.0))))
+
+; ; regola che controlla se il prezzo massimo che l'utente vuole spendere èì compreso tra il prezzo della casa meno il 50 % e il prezzo della casa più il 50%
+(defrule CHOOSE-QUALITIES::checking-mq-50-perc
+   (declare (salience 1000))
+   (attribute (name metri-quadri) (value ?mq))
+   (apartment (name ?name1) (metriquadri ?metriquadriapartment))
+   (not (attribute (name best-metri-quadri) (value ?name1) (certainty 85.0)))
+   ;?s <- (attribute (name best-metri-quadri) (value any) (certainty 100.0))
+   ;?p <- (/ (float (+ (float ?mq) (float "20"))) (float "100")) ; calcolo il 20% di mq
+   (and (test (<= (float (str-cat ?mq)) (+ (float  (str-cat ?metriquadriapartment)) (float (/ (float (* (float ?mq) (float "50"))) (float "100"))))))
+       (test (>= (float (str-cat ?mq)) (- (float (str-cat ?metriquadriapartment)) (float (/ (float (* (float ?mq) (float "50"))) (float "100")))))))
+   =>
+   (printout t "MQ 50 PERC APPARTAMENTO: " ?name1 crlf)
+   ;(retract ?s)
+   (assert (attribute (name best-metri-quadri) (value ?name1) (certainty 60.0))))
 
 ; ; regola che controlla se il prezzo massimo che l'utente vuole spendere èì compreso tra il prezzo della casa meno il 90 % e il prezzo della casa più il 90%
-; (defrule CHOOSE-QUALITIES::checking-input-90-perc
-;    (declare (salience 100))
-;    (attribute (name prezzo-massimo) (value ?prezzomassimo))
-;    (apartment (name ?name1) (prezzorichiesto ?prezzorichiesto))
-;    ;?p <- (/ (* (float ?prezzomassimo) (float "20")) (float "100")) ; calcolo il 20% di prezzomassimo
-;    (and (test (<= (float (str-cat ?prezzomassimo)) (+ (float  (str-cat ?prezzorichiesto)) (float (/ (float (* (float ?prezzomassimo) (float "90"))) (float "100"))))))
-;        (test (>= (float (str-cat ?prezzomassimo)) (- (float (str-cat ?prezzorichiesto)) (float (/ (float (* (float ?prezzomassimo) (float "90"))) (float "100")))))))
-;    =>
-;    (printout t "90 PERC APPARTAMENTO" ?name1 crlf))
+(defrule CHOOSE-QUALITIES::checking-mq-90-perc
+   (declare (salience 100))
+   (attribute (name metri-quadri) (value ?mq))
+   (apartment (name ?name1) (metriquadri ?metriquadriapartment))
+   (and (not (attribute (name best-metri-quadri) (value ?name1) (certainty 85.0))) (not (attribute (name best-metri-quadri) (value ?name1) (certainty 60.0))))
+   ;?s <- (attribute (name best-metri-quadri) (value any) (certainty 100.0))
+   ;?p <- (/ (float (+ (float ?mq) (float "20"))) (float "100")) ; calcolo il 20% di mq
+   (and (test (<= (float (str-cat ?mq)) (+ (float  (str-cat ?metriquadriapartment)) (float (/ (float (* (float ?mq) (float "100"))) (float "100"))))))
+       (test (>= (float (str-cat ?mq)) (- (float (str-cat ?metriquadriapartment)) (float (/ (float (* (float ?mq) (float "100"))) (float "100")))))))
+   =>
+   (printout t "MQ 90 PERC APPARTAMENTO: " ?name1 crlf)
+   ;(retract ?s)
+   (assert (attribute (name best-metri-quadri) (value ?name1) (certainty 10.0))))
 
-;---------------------------------------------------------------------FINE REGOLE PER IL MIGLIOR PREZZO---------------------------------------------------------------------
+;---------------------------------------------------------------------FINE REGOLE PER I MIGLIORI MQ---------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
 
 
 
