@@ -107,7 +107,7 @@
    (and (test (<= (float (str-cat ?prezzomassimo)) (+ (float  (str-cat ?prezzorichiesto)) (float (/ (float (* (float ?prezzomassimo) (float "20"))) (float "100"))))))
        (test (>= (float (str-cat ?prezzomassimo)) (- (float (str-cat ?prezzorichiesto)) (float (/ (float (* (float ?prezzomassimo) (float "20"))) (float "100")))))))
    =>
-   (printout t "PREZZO 20 PERC APPARTAMENTO: " ?name1 crlf)
+   ;(printout t "PREZZO 20 PERC APPARTAMENTO: " ?name1 crlf)
    ;(retract ?s)
    (assert (attribute (name best-prezzo-richiesto) (value ?name1) (certainty 85.0))))
 
@@ -123,7 +123,7 @@
    (and (test (<= (float (str-cat ?prezzomassimo)) (+ (float  (str-cat ?prezzorichiesto)) (float (/ (float (* (float ?prezzomassimo) (float "50"))) (float "100"))))))
        (test (>= (float (str-cat ?prezzomassimo)) (- (float (str-cat ?prezzorichiesto)) (float (/ (float (* (float ?prezzomassimo) (float "50"))) (float "100")))))))
    =>
-   (printout t "PREZZO 50 PERC APPARTAMENTO: " ?name1 crlf)
+   ;(printout t "PREZZO 50 PERC APPARTAMENTO: " ?name1 crlf)
    ;(retract ?s)
    (assert (attribute (name best-prezzo-richiesto) (value ?name1) (certainty 60.0))))
 
@@ -139,7 +139,7 @@
    (and (test (<= (float (str-cat ?prezzomassimo)) (+ (float  (str-cat ?prezzorichiesto)) (float (/ (float (* (float ?prezzomassimo) (float "100"))) (float "100"))))))
        (test (>= (float (str-cat ?prezzomassimo)) (- (float (str-cat ?prezzorichiesto)) (float (/ (float (* (float ?prezzomassimo) (float "100"))) (float "100")))))))
    =>
-   (printout t "PREZZO 90 PERC APPARTAMENTO: " ?name1 crlf)
+   ;(printout t "PREZZO 90 PERC APPARTAMENTO: " ?name1 crlf)
    ;(retract ?s)
    (assert (attribute (name best-prezzo-richiesto) (value ?name1) (certainty 10.0))))
 
@@ -149,10 +149,23 @@
    (attribute (name prezzo-massimo) (value ?prezzomassimo))
    (apartment (name ?name1) (prezzorichiesto ?prezzorichiesto))
    (test (eq ?prezzomassimo unknown))    ; se la risposta è unknown bisogna usare questa regola
-   (not (attribute (name best-prezzo-richiesto) (value ?name1) (certainty ?cert)))
+   ;(not (attribute (name best-prezzo-richiesto) (value ?name1) (certainty ?cert)))
    =>
-   (printout t "PREZZO UNKNOWN APPARTAMENTO: " ?name1 crlf)
+   (printout t "VERSIONE 1 PREZZO UNKNOWN APPARTAMENTO: " ?name1 crlf)
    (assert (attribute (name best-prezzo-richiesto) (value ?name1) (certainty 20.0))))
+
+; ; ; regola che viene eseguita solo se la risposta è unknown
+; (defrule CHOOSE-QUALITIES::checking-prezzo-unknown-2
+;    (declare (salience 1000))
+;    (attribute (name prezzo-massimo) (value ?prezzomassimo))
+;    (apartment (name ?name1) (prezzorichiesto ?prezzorichiesto))
+;    (test (eq ?prezzomassimo unknown))    ; se la risposta è unknown bisogna usare questa regola
+;    ?a <- (attribute (name best-prezzo-richiesto) (value ?name1) (certainty ?cert))
+;    =>
+;    (modify ?a (certainty 20.0))
+;    (printout t "VERSIONE 2 PREZZO UNKNOWN APPARTAMENTO: " ?name1 crlf)
+;    ;(assert (attribute (name best-prezzo-richiesto) (value ?name1) (certainty 20.0)))
+;    )
 
 ;---------------------------------------------------------------------FINE REGOLE PER IL MIGLIOR PREZZO---------------------------------------------------------------------
 
@@ -172,7 +185,7 @@
    (and (test (<= (float (str-cat ?mq)) (+ (float  (str-cat ?metriquadriapartment)) (float (/ (float (* (float ?mq) (float "20"))) (float "100"))))))
        (test (>= (float (str-cat ?mq)) (- (float (str-cat ?metriquadriapartment)) (float (/ (float (* (float ?mq) (float "20"))) (float "100")))))))
    =>
-   (printout t "MQ 20 PERC APPARTAMENTO: " ?name1 crlf)
+   ;(printout t "MQ 20 PERC APPARTAMENTO: " ?name1 crlf)
    ;(retract ?s)
    (assert (attribute (name best-metri-quadri) (value ?name1) (certainty 85.0))))
 
@@ -188,7 +201,7 @@
    (and (test (<= (float (str-cat ?mq)) (+ (float  (str-cat ?metriquadriapartment)) (float (/ (float (* (float ?mq) (float "50"))) (float "100"))))))
        (test (>= (float (str-cat ?mq)) (- (float (str-cat ?metriquadriapartment)) (float (/ (float (* (float ?mq) (float "50"))) (float "100")))))))
    =>
-   (printout t "MQ 50 PERC APPARTAMENTO: " ?name1 crlf)
+   ;(printout t "MQ 50 PERC APPARTAMENTO: " ?name1 crlf)
    ;(retract ?s)
    (assert (attribute (name best-metri-quadri) (value ?name1) (certainty 60.0))))
 
@@ -204,7 +217,7 @@
    (and (test (<= (float (str-cat ?mq)) (+ (float  (str-cat ?metriquadriapartment)) (float (/ (float (* (float ?mq) (float "100"))) (float "100"))))))
        (test (>= (float (str-cat ?mq)) (- (float (str-cat ?metriquadriapartment)) (float (/ (float (* (float ?mq) (float "100"))) (float "100")))))))
    =>
-   (printout t "MQ 90 PERC APPARTAMENTO: " ?name1 crlf)
+   ;(printout t "MQ 90 PERC APPARTAMENTO: " ?name1 crlf)
    ;(retract ?s)
    (assert (attribute (name best-metri-quadri) (value ?name1) (certainty 10.0))))
 
@@ -216,7 +229,7 @@
    (test (eq ?mq unknown))    ; se la risposta è unknown bisogna usare questa regola
    (not (attribute (name best-metri-quadri) (value ?name1) (certainty ?cert)))
    =>
-   (printout t "MQ UNKNOWN APPARTAMENTO: " ?name1 crlf)
+   ;(printout t "MQ UNKNOWN APPARTAMENTO: " ?name1 crlf)
    (assert (attribute (name best-metri-quadri) (value ?name1) (certainty 20.0))))
 
 
@@ -419,14 +432,14 @@
   ; TODO: Regole per selezionare il best-prezzo-richiesto 
 
 
-  (rule (if prezzo-massimo is unknown)
-      (then best-prezzo-richiesto is 200000 with certainty 20 and
-            best-prezzo-richiesto is 300000 with certainty 20 and
-            best-prezzo-richiesto is 400000 with certainty 20 and
-            best-prezzo-richiesto is 500000 with certainty 20 and
-            best-prezzo-richiesto is 600000 with certainty 20 and
-            best-prezzo-richiesto is 700000 with certainty 20 and
-            best-prezzo-richiesto is 800000 with certainty 20))
+;   (rule (if prezzo-massimo is unknown)
+;       (then best-prezzo-richiesto is 200000 with certainty 20 and
+;             best-prezzo-richiesto is 300000 with certainty 20 and
+;             best-prezzo-richiesto is 400000 with certainty 20 and
+;             best-prezzo-richiesto is 500000 with certainty 20 and
+;             best-prezzo-richiesto is 600000 with certainty 20 and
+;             best-prezzo-richiesto is 700000 with certainty 20 and
+;             best-prezzo-richiesto is 800000 with certainty 20))
 
 
   ; Regole per selezionare il bast-servizi-vicino

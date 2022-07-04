@@ -2,7 +2,7 @@
 ;;* DOMANDE APPARTAMENTI *
 ;;*******************
 
-(defmodule APARTMENTS-QUESTIONS (import QUESTIONS ?ALL))
+(defmodule APARTMENTS-QUESTIONS (import QUESTIONS ?ALL) (export ?ALL))
 
 (deffacts APARTMENTS-QUESTIONS::question-attributes
     (question (attribute prezzo-massimo)
@@ -60,9 +60,9 @@
     ; ; ; Caratteristiche aggiuntive dell'appartamento
     ; ; ; ----------------------------------------------------------------------------------------
 
-    ; (question (attribute ascensore)
-    ;     (the-question "Deve essere presente l'ascensore? ")
-    ;     (valid-answers si no unknown))
+    (question (attribute ascensore)
+        (the-question "Deve essere presente l'ascensore? ")
+        (valid-answers si no unknown))
 
     ; (question (attribute boxauto)
     ;     (the-question "Deve essere presente il box auto? ")
