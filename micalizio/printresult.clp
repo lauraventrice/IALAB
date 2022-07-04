@@ -18,7 +18,8 @@
   (not (attribute (name apartment) (certainty ?per1&:(> ?per1 ?per))))
   =>
   (retract ?rem)
-  (format t " %-24s %2d%%%n" ?name ?per))
+  (format t " %-24s %2d%%%n" ?name ?per)
+  (assert (attribute (name fine-ciclo) (value "Fine ciclo di interazione") (certainty 100.0))))
 
 (defrule PRINT-RESULTS::remove-poor-apartment-choices ""
   ?rem <- (attribute (name apartment) (certainty ?per&:(< ?per 20)))

@@ -151,6 +151,7 @@
    (attribute (name metri-quadri) (value ?mq))
    (apartment (name ?name1) (metriquadri ?metriquadriapartment))
    (not (attribute (name best-metri-quadri) (value ?name1) (certainty ?perc)))
+   (not (test (eq ?mq unknown)))    ; se la risposta è unknown bisogna usare una regola apposita
    ;(test (= (float ?perc) (float 100)))
    ;?s <- (attribute (name best-metri-quadri) (value any) (certainty 100.0))
    ;?p <- (/ (float (+ (float ?mq) (float "20"))) (float "100")) ; calcolo il 20% di mq
@@ -166,6 +167,7 @@
    (declare (salience 1000))
    (attribute (name metri-quadri) (value ?mq))
    (apartment (name ?name1) (metriquadri ?metriquadriapartment))
+   (not (test (eq ?mq unknown)))    ; se la risposta è unknown bisogna usare una regola apposita
    (not (attribute (name best-metri-quadri) (value ?name1) (certainty 85.0)))
    ;?s <- (attribute (name best-metri-quadri) (value any) (certainty 100.0))
    ;?p <- (/ (float (+ (float ?mq) (float "20"))) (float "100")) ; calcolo il 20% di mq
@@ -181,6 +183,7 @@
    (declare (salience 100))
    (attribute (name metri-quadri) (value ?mq))
    (apartment (name ?name1) (metriquadri ?metriquadriapartment))
+   (not (test (eq ?mq unknown)))    ; se la risposta è unknown bisogna usare una regola apposita
    (and (not (attribute (name best-metri-quadri) (value ?name1) (certainty 85.0))) (not (attribute (name best-metri-quadri) (value ?name1) (certainty 60.0))))
    ;?s <- (attribute (name best-metri-quadri) (value any) (certainty 100.0))
    ;?p <- (/ (float (+ (float ?mq) (float "20"))) (float "100")) ; calcolo il 20% di mq
@@ -190,6 +193,23 @@
    (printout t "MQ 90 PERC APPARTAMENTO: " ?name1 crlf)
    ;(retract ?s)
    (assert (attribute (name best-metri-quadri) (value ?name1) (certainty 10.0))))
+
+; ; regola che viene eseguita solo se la risposta è unknown
+(defrule CHOOSE-QUALITIES::checking-mq-90-perc
+   (declare (salience 10))
+   (attribute (name metri-quadri) (value ?mq))
+   (apartment (name ?name1) (metriquadri ?metriquadriapartment))
+   (test (eq ?mq unknown))    ; se la risposta è unknown bisogna usare questa regola
+   (not (attribute (name best-metri-quadri) (value ?name1) (certainty ?cert)))
+   ;?s <- (attribute (name best-metri-quadri) (value any) (certainty 100.0))
+   ;?p <- (/ (float (+ (float ?mq) (float "20"))) (float "100")) ; calcolo il 20% di mq
+;    (and (test (<= (float (str-cat ?mq)) (+ (float  (str-cat ?metriquadriapartment)) (float (/ (float (* (float ?mq) (float "100"))) (float "100"))))))
+;        (test (>= (float (str-cat ?mq)) (- (float (str-cat ?metriquadriapartment)) (float (/ (float (* (float ?mq) (float "100"))) (float "100")))))))
+   =>
+   (printout t "MQ UNKNOWN PERC APPARTAMENTO: " ?name1 crlf)
+   ;(retract ?s)
+   (assert (attribute (name best-metri-quadri) (value ?name1) (certainty 20.0))))
+
 
 ;---------------------------------------------------------------------FINE REGOLE PER I MIGLIORI MQ---------------------------------------------------------------------
 

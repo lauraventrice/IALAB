@@ -20,7 +20,9 @@
    =>
    (modify ?f (already-asked TRUE))
    (assert (attribute (name ?the-attribute)
-                      (value (ask-question ?the-question ?valid-answers)))))
+                      (value (ask-question ?the-question ?valid-answers))))
+                         ;(printout t "RISPOSTA DATA: " ?the-question crlf)
+                         )
 
 (defrule QUESTIONS::precursor-is-satisfied 
    ?f <- (question (already-asked FALSE)
