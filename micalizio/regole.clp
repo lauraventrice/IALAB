@@ -100,6 +100,7 @@
    (attribute (name prezzo-massimo) (value ?prezzomassimo))
    (apartment (name ?name1) (prezzorichiesto ?prezzorichiesto))
    (not (attribute (name best-prezzo-richiesto) (value ?name1) (certainty ?perc)))
+   (not (test (eq ?prezzomassimo unknown)))    ; se la risposta è unknown bisogna usare una regola apposita
    ;(test (= (float ?perc) (float 100)))
    ;?s <- (attribute (name best-prezzo-richiesto) (value any) (certainty 100.0))
    ;?p <- (/ (float (+ (float ?prezzomassimo) (float "20"))) (float "100")) ; calcolo il 20% di prezzomassimo
@@ -116,6 +117,7 @@
    (attribute (name prezzo-massimo) (value ?prezzomassimo))
    (apartment (name ?name1) (prezzorichiesto ?prezzorichiesto))
    (not (attribute (name best-prezzo-richiesto) (value ?name1) (certainty 85.0)))
+   (not (test (eq ?prezzomassimo unknown)))    ; se la risposta è unknown bisogna usare una regola apposita
    ;?s <- (attribute (name best-prezzo-richiesto) (value any) (certainty 100.0))
    ;?p <- (/ (float (+ (float ?prezzomassimo) (float "20"))) (float "100")) ; calcolo il 20% di prezzomassimo
    (and (test (<= (float (str-cat ?prezzomassimo)) (+ (float  (str-cat ?prezzorichiesto)) (float (/ (float (* (float ?prezzomassimo) (float "50"))) (float "100"))))))
@@ -130,6 +132,7 @@
    (declare (salience 100))
    (attribute (name prezzo-massimo) (value ?prezzomassimo))
    (apartment (name ?name1) (prezzorichiesto ?prezzorichiesto))
+   (not (test (eq ?prezzomassimo unknown)))    ; se la risposta è unknown bisogna usare una regola apposita
    (and (not (attribute (name best-prezzo-richiesto) (value ?name1) (certainty 85.0))) (not (attribute (name best-prezzo-richiesto) (value ?name1) (certainty 60.0))))
    ;?s <- (attribute (name best-prezzo-richiesto) (value any) (certainty 100.0))
    ;?p <- (/ (float (+ (float ?prezzomassimo) (float "20"))) (float "100")) ; calcolo il 20% di prezzomassimo
@@ -139,6 +142,17 @@
    (printout t "PREZZO 90 PERC APPARTAMENTO: " ?name1 crlf)
    ;(retract ?s)
    (assert (attribute (name best-prezzo-richiesto) (value ?name1) (certainty 10.0))))
+
+; ; regola che viene eseguita solo se la risposta è unknown
+(defrule CHOOSE-QUALITIES::checking-prezzo-unknown
+   (declare (salience 10))
+   (attribute (name prezzo-massimo) (value ?prezzomassimo))
+   (apartment (name ?name1) (prezzorichiesto ?prezzorichiesto))
+   (test (eq ?prezzomassimo unknown))    ; se la risposta è unknown bisogna usare questa regola
+   (not (attribute (name best-prezzo-richiesto) (value ?name1) (certainty ?cert)))
+   =>
+   (printout t "PREZZO UNKNOWN APPARTAMENTO: " ?name1 crlf)
+   (assert (attribute (name best-prezzo-richiesto) (value ?name1) (certainty 20.0))))
 
 ;---------------------------------------------------------------------FINE REGOLE PER IL MIGLIOR PREZZO---------------------------------------------------------------------
 
@@ -195,19 +209,14 @@
    (assert (attribute (name best-metri-quadri) (value ?name1) (certainty 10.0))))
 
 ; ; regola che viene eseguita solo se la risposta è unknown
-(defrule CHOOSE-QUALITIES::checking-mq-90-perc
+(defrule CHOOSE-QUALITIES::checking-mq-unknown
    (declare (salience 10))
    (attribute (name metri-quadri) (value ?mq))
    (apartment (name ?name1) (metriquadri ?metriquadriapartment))
    (test (eq ?mq unknown))    ; se la risposta è unknown bisogna usare questa regola
    (not (attribute (name best-metri-quadri) (value ?name1) (certainty ?cert)))
-   ;?s <- (attribute (name best-metri-quadri) (value any) (certainty 100.0))
-   ;?p <- (/ (float (+ (float ?mq) (float "20"))) (float "100")) ; calcolo il 20% di mq
-;    (and (test (<= (float (str-cat ?mq)) (+ (float  (str-cat ?metriquadriapartment)) (float (/ (float (* (float ?mq) (float "100"))) (float "100"))))))
-;        (test (>= (float (str-cat ?mq)) (- (float (str-cat ?metriquadriapartment)) (float (/ (float (* (float ?mq) (float "100"))) (float "100")))))))
    =>
-   (printout t "MQ UNKNOWN PERC APPARTAMENTO: " ?name1 crlf)
-   ;(retract ?s)
+   (printout t "MQ UNKNOWN APPARTAMENTO: " ?name1 crlf)
    (assert (attribute (name best-metri-quadri) (value ?name1) (certainty 20.0))))
 
 

@@ -222,11 +222,10 @@
   ; ; (attribute (name best-metri-quadri-boxauto) (value ?mqba) (certainty ?certainty-10))
   ; (attribute (name best-terrazzino) (value ?t) (certainty ?certainty-11))
 
-  ;(attribute (name best-prezzo-richiesto) (value ?pr) (certainty ?certainty-12))
-  ;(attribute (name best-metri-quadri) (value ?name) (certainty ?certainty-12))
-  (attribute (name best-metri-quadri) (value ?name) (certainty ?certainty-1))
+  (attribute (name best-prezzo-richiesto) (value ?name) (certainty ?certainty-12))
+  ;(attribute (name best-metri-quadri) (value ?name) (certainty ?certainty-1))
   =>
   (assert (attribute (name apartment) (value ?name)
-                     (certainty (min ?certainty-1 ?certainty-1)))))
+                     (certainty (min ?certainty-12 ?certainty-12)))))
 
 ; ?certainty-2 ?certainty-3 ?certainty-4 ?certainty-5 ?certainty-6 ?certainty-7 ?certainty-8 ?certainty-9 ?certainty-11
