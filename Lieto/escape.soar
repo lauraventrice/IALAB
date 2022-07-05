@@ -48,10 +48,10 @@ indifferent-selection -e 0.1 # 10% deviation from greedy
 ### simple state to start working in.
 
 sp {propose*initialize-es
-    (state <s> -^name ^superstate nil)
+   (state <s> -^name ^superstate nil)
     -->
-    (<s> ^operator <o> +)
-    (<o> ^name initialize-escape)
+   (<s> ^operator <o> +)
+   (<o> ^name initialize-escape)
 }
 
 ##
@@ -70,10 +70,9 @@ sp {apply*initialize-escape
         ^spring yes
         ^sprig yes
         ^stone 5
-        ^trunck yes
+        ^trunk yes
         ^comb <c1> <c2> <c3> <c4> <c5>
         ^out no)
-   (<num> ^val 5)
    (<loc> ^x 5.0 ^y 3.0)      
    (<d> ^x 3.0 ^y 4.0)
    (<f> ^broken no ^height 3.5)
@@ -87,10 +86,10 @@ sp {apply*initialize-escape
    (<c3> ^name stone-spring
          ^built no
          ^reward -1)
-   (<c4> ^name stone-trunck
+   (<c4> ^name stone-trunk
          ^built no
          ^reward -1)
-   (<c5> ^name truncks
+   (<c5> ^name trunks
          ^built no
          ^reward 1)
 }
@@ -162,25 +161,25 @@ sp {es*propose*forward
 }
 
 ##
-# Propose rule for moving up with truncks
+# Propose rule for moving up with trunks
 ##
 
-#sp {es*propose*up
-#   (state <s> ^desired <d>
-#              ^location <loc>
-#              ^comb <c>
-#              ^robot <r>
-#              ^window <f>)
-#   (<d> ^x <val1> ^y <val2>)
-#   (<loc> ^x <val1> ^y <val2>)      ##bisogna essere nella stessa pos della finestra
-#   (<f> ^height <val3>)
-#   (<r> ^height <val4> < <val3>)  #non sono ancora arrivata alla finestra
-#   (<c> ^name truncks ^built yes)   ##bisogna avere i tronchi
-#    -->
-#   (<s> ^operator <op>)
-#   (<op> ^name move
-#         ^dir up)
-#}
+sp {es*propose*up
+   (state <s> ^desired <d>
+              ^location <loc>
+              ^comb <c>
+              ^robot <r>
+              ^window <f>)
+   (<d> ^x <val1> ^y <val2>)
+   (<loc> ^x <val1> ^y <val2>)      
+   (<f> ^height <val3>)
+   (<r> ^height <val4> < <val3>)  
+   (<c> ^name trunks ^built yes)  
+    -->
+   (<s> ^operator <op>)
+   (<op> ^name move
+         ^dir up)
+}
 
 
 ##
@@ -188,64 +187,64 @@ sp {es*propose*forward
 ##
 
 sp {es*compare*right*better*forward
-  (state <s> ^desired <d>
-             ^location <loc>)
-  (<d> ^x <val2>)
-  (<loc> ^x <val1> < <val2>) 
-  (<s> ^operator <op-right> +)
-  (<op-right> ^name move
-              ^dir right)
-  (<s> ^operator <op-forward> +)
-  (<op-forward> ^name move
-                ^dir forward)
-  -->
-  (<s> ^operator <op-right> > <op-forward>)
+   (state <s> ^desired <d>
+              ^location <loc>)
+   (<d> ^x <val2>)
+   (<loc> ^x <val1> < <val2>) 
+   (<s> ^operator <op-right> +)
+   (<op-right> ^name move
+               ^dir right)
+   (<s> ^operator <op-forward> +)
+   (<op-forward> ^name move
+                 ^dir forward)
+    -->
+   (<s> ^operator <op-right> > <op-forward>)
 }
 
 sp {es*compare*right*better*backward
-  (state <s> ^desired <d>
-             ^location <loc>)
-  (<d> ^x <val2>)
-  (<loc> ^x <val1> < <val2>) 
-  (<s> ^operator <op-right> +)
-  (<op-right> ^name move
-              ^dir right)
-  (<s> ^operator <op-backward> +)
-  (<op-backward> ^name move
-                ^dir backward)
-  -->
-  (<s> ^operator <op-right> > <op-backward>)
+   (state <s> ^desired <d>
+              ^location <loc>)
+   (<d> ^x <val2>)
+   (<loc> ^x <val1> < <val2>) 
+   (<s> ^operator <op-right> +)
+   (<op-right> ^name move
+               ^dir right)
+   (<s> ^operator <op-backward> +)
+   (<op-backward> ^name move
+                 ^dir backward)
+    -->
+   (<s> ^operator <op-right> > <op-backward>)
 }
 
 sp {es*compare*left*better*backward
-  (state <s> ^desired <d>
-             ^location <loc>)
-  (<d> ^x <val2>)
-  (<loc> ^x <val1> > <val2>) 
-  (<s> ^operator <op-left> +)
-  (<op-left> ^name move
-             ^dir left)
-  (<s> ^operator <op-backward> +)
-  (<op-backward> ^name move
-                 ^dir backward)
-  -->
-  (<s> ^operator <op-left> > <op-backward>)
+   (state <s> ^desired <d>
+              ^location <loc>)
+   (<d> ^x <val2>)
+   (<loc> ^x <val1> > <val2>) 
+   (<s> ^operator <op-left> +)
+   (<op-left> ^name move
+              ^dir left)
+   (<s> ^operator <op-backward> +)
+   (<op-backward> ^name move
+                  ^dir backward)
+    -->
+   (<s> ^operator <op-left> > <op-backward>)
 }  
 
 
 sp {es*compare*left*better*forward
-  (state <s> ^desired <d>
-             ^location <loc>)
-  (<d> ^x <val2>)
-  (<loc> ^x <val1> > <val2>) 
-  (<s> ^operator <op-left> +)
-  (<op-left> ^name move
-             ^dir left)
-  (<s> ^operator <op-forward> +)
-  (<op-forward> ^name move
+   (state <s> ^desired <d>
+              ^location <loc>)
+   (<d> ^x <val2>)
+   (<loc> ^x <val1> > <val2>) 
+   (<s> ^operator <op-left> +)
+   (<op-left> ^name move
+              ^dir left)
+   (<s> ^operator <op-forward> +)
+   (<op-forward> ^name move
                  ^dir forward)
-  -->
-  (<s> ^operator <op-left> > <op-forward>)
+    -->
+   (<s> ^operator <op-left> > <op-forward>)
 }  
 
 ###
@@ -266,160 +265,207 @@ sp {es*compare*left*better*forward
 ## the next decision cycle after it has done what its supposed to do.
 
 sp {es*apply-op*left
-  (state <s>  ^operator <o>
-              ^location <loc>)
-  (<o> ^name move
-       ^dir left)
-  (<loc> ^x <val>)
-  -->
-  (<loc> ^x <val> - (- <val> 0.5))
-  (write (crlf) |          Moved: left! | current | | location: | x: | (- <val> 0.5))
-  (<s> ^operator <o> -)
+   (state <s>  ^operator <o>
+               ^location <loc>)
+   (<o> ^name move
+        ^dir left)
+   (<loc> ^x <val>)
+    -->
+   (<loc> ^x <val> - (- <val> 0.5))
+   (write (crlf) |          Moved: left! | current | | location: | x: | (- <val> 0.5))
+   (<s> ^operator <o> -)
 }
 
 
 ## Implement right
 
 sp {es*apply-op*right
-  (state <s>  ^operator <o>
-              ^location <loc>)
-  (<o> ^name move
-       ^dir right)
-  (<loc> ^x <val>)
-  -->
-  (<loc> ^x <val> - (+ <val> 0.5))
-  (write (crlf) |          Moved: right! | current | | location: | x: | (+ <val> 0.5))
-  (<s> ^operator <o> -)
+   (state <s>  ^operator <o>
+               ^location <loc>)
+   (<o> ^name move
+        ^dir right)
+   (<loc> ^x <val>)
+    -->
+   (<loc> ^x <val> - (+ <val> 0.5))
+   (write (crlf) |          Moved: right! | current | | location: | x: | (+ <val> 0.5))
+   (<s> ^operator <o> -)
 }
 
 ## Implement backward
 
 sp {es*apply-op*backward
-  (state <s>  ^operator <o>
-              ^location <loc>)
-  (<o> ^name move
-       ^dir backward)
-  (<loc> ^y <val>)
-  -->
-  (<loc> ^y <val> - (- <val> 0.5))
-  (write (crlf) |          Moved: backward! | current | | location: | y: | (- <val> 0.5))
-  (<s> ^operator <o> -)
+   (state <s>  ^operator <o>
+               ^location <loc>)
+   (<o> ^name move
+        ^dir backward)
+   (<loc> ^y <val>)
+    -->
+   (<loc> ^y <val> - (- <val> 0.5))
+   (write (crlf) |          Moved: backward! | current | | location: | y: | (- <val> 0.5))
+   (<s> ^operator <o> -)
 }
 
 
 ## Implement forward
 
 sp {es*apply-op*forward
-  (state <s>  ^operator <o>
-              ^location <loc>)
-  (<o> ^name move
+   (state <s>  ^operator <o>
+               ^location <loc>)
+   (<o> ^name move
        ^dir forward)
-  (<loc> ^y <val>)
-  -->
-  (<loc> ^y <val> - (+ <val> 0.5))
-  (write (crlf) |          Moved: forward! | current | | location: | y: | (+ <val> 0.5))
-  (<s> ^operator <o> -)
+   (<loc> ^y <val>)
+    -->
+   (<loc> ^y <val> - (+ <val> 0.5))
+   (write (crlf) |          Moved: forward! | current | | location: | y: | (+ <val> 0.5))
+   (<s> ^operator <o> -)
 }
 
 
 ## Implement up
 
-#sp {es*apply-op*up
-#  (state <s>  ^operator <o>
-#              ^robot <r>)
-#  (<o> ^name move
-#       ^dir up)
-#  (<r> ^height <val>)
-#  -->
-#  (<r> ^height <val> - (+ <val> 0.5))
-#  (write (crlf) |          Moved: up! | current | | location: | height: | (+ <val> 0.5))
-#  (<s> ^operator <o> -)
-#}
+sp {es*apply-op*up
+   (state <s>  ^operator <o>
+               ^robot <r>)
+   (<o> ^name move
+       ^dir up)
+   (<r> ^height <val>)
+    -->
+   (<r> ^height <val> - (+ <val> 0.5))
+   (write (crlf) |          Moved: up! | current | | location | height: | (+ <val> 0.5))
+   (<s> ^operator <o> -)
+}
 
 
 ###
 ###	IV.		Propose the main operators to combine objects into a useful object to escape the room
 ###
 
-## Propose to combine of stone and sprig of wood
-sp {es*propose*combine*stone*sprig
+sp {es*propose*combine
    (state <s> ^window <f>
-              ^sprig yes
-              ^comb <c>)
-   (<f> broken no)  
-   (<s> ^stone <num> > 0)    
-   (<c> ^name stone-sprig 
-        ^built no)     
+              ^comb <c>
+              ^location <loc>
+              ^desired <d>)
+   (<f> ^broken no)   
+   (<c> ^name <obj> 
+        ^built no)
+   (<loc> ^x <val1> ^y <val2>)
+   (<d> ^x <val1> ^y <val2>)
     -->
    (<s> ^operator <op> +)
-   (<op> ^name combine 
-         ^obj stone-sprig)
+   (<op> ^name combine
+         ^obj <obj>)
 }
+
+
+
+## Propose to combine of stone and sprig of wood
+##sp {es*propose*combine*stone*sprig
+##   (state <s> ^window <f>
+##              ^sprig yes
+##              ^comb <c>
+##              ^location <loc>
+##              ^desired <d>)
+##   (<f> ^broken no)  
+##   (<s> ^stone <num> > 0)    
+##   (<c> ^name stone-sprig 
+##        ^built no)
+##   (<loc> ^x <val1> ^y <val2>)
+##   (<d> ^x <val1> ^y <val2>)
+##    -->
+##   (<s> ^operator <op> +)
+##   (<op> ^name combine 
+##         ^obj stone-sprig)
+## }
 
 ## Propose to combine of spring and sprig of wood
 
-sp {es*propose*combine*spring*sprig
-   (state <s> ^window <f>
-              ^spring yes
-              ^sprig yes
-              ^comb <c>)
-   (<f> broken no) 
-   (<c> ^name spring-sprig
-        ^built no)     
-    -->
-   (<s> ^operator <op> +)
-   (<op> ^name combine 
-         ^obj spring-sprig)
-}
+## sp {es*propose*combine*spring*sprig
+##   (state <s> ^window <f>
+##              ^spring yes
+##              ^sprig yes
+##              ^comb <c>
+##              ^location <loc>
+##              ^desired <d>)
+##   (<f> ^broken no) 
+##   (<c> ^name spring-sprig
+##        ^built no)
+##   (<loc> ^x <val1> ^y <val2>)
+##   (<d> ^x <val1> ^y <val2>)
+##    -->
+##   (<s> ^operator <op> +)
+##   (<op> ^name combine 
+##         ^obj spring-sprig)
+##}
 
 ## Propose to combine of stone and spring
 
-sp {es*propose*combine*stone*spring
-   (state <s> ^window <f>
-              ^spring yes
-              ^comb <c>)
-   (<f> broken no)
-   (<s> ^stone <num> > 0) 
-   (<c> ^name stone-spring
-        ^built no)     
-    -->
-   (<s> ^operator <op> +)
-   (<op> ^name combine 
-         ^obj stone-spring)
-}
+##sp {es*propose*combine*stone*spring
+##   (state <s> ^window <f>
+##              ^spring yes
+##              ^comb <c>
+##              ^location <loc>
+##              ^desired <d>)
+##   (<f> ^broken no)
+##   (<s> ^stone <num> > 0) 
+##   (<c> ^name stone-spring
+##        ^built no)     
+##   (<loc> ^x <val1> ^y <val2>)
+##   (<d> ^x <val1> ^y <val2>)
+##    -->
+##   (<s> ^operator <op> +)
+##   (<op> ^name combine 
+##         ^obj stone-spring)
+##}
 
-## Propose to combine of stone and trunck
+## Propose to combine of stone and trunk
 
-sp {es*propose*combine*stone*trunck
-   (state <s> ^window <f>
-              ^trunck yes
-              ^comb <c>)
-   (<f> broken no)
-   (<s> ^stone <num> > 0) 
-   (<c> ^name stone-trunck
-        ^built no)     
-    -->
-   (<s> ^operator <op> +)
-   (<op> ^name combine 
-         ^obj stone-trunck)
-}
+##sp {es*propose*combine*stone*trunk
+##   (state <s> ^window <f>
+##              ^trunk yes
+##              ^comb <c>
+##              ^location <loc>
+##              ^desired <d>)
+##   (<f> ^broken no)
+##   (<s> ^stone <num> > 0) 
+##   (<c> ^name stone-trunk
+##        ^built no)     
+##   (<loc> ^x <val1> ^y <val2>)
+##   (<d> ^x <val1> ^y <val2>)
+##    -->
+##   (<s> ^operator <op> +)
+##   (<op> ^name combine 
+##         ^obj stone-trunk)
+##}
 
 
-## Propose to combine of truncks
+## Propose to combine of trunks
 
-sp {es*propose*combine*stone*trunck
-   (state <s> ^window <f>
-              ^trunck yes
-              ^comb <c>)
-   (<f> broken no)
-   (<c> ^name truncks
-        ^built no)     
-    -->
-   (<s> ^operator <op> +)
-   (<op> ^name combine 
-         ^obj truncks)
-}
+##sp {es*propose*combine*trunks
+##   (state <s> ^window <f>
+##              ^trunk yes
+##              ^comb <c>
+##              ^desired <d>
+##              ^location <loc>)
+##   (<f> ^broken no)
+##   (<c> ^name trunks
+##        ^built no)   
+##   (<loc> ^x <val1> ^y <val2>)
+##   (<d> ^x <val1> ^y <val2>)
+##    -->
+##   (<s> ^operator <op> +)
+##   (<op> ^name combine 
+##         ^obj trunks)
+##}
 
+
+##sp {es*compare*move*better*combine
+##   (state <s> ^operator <op-move> +)
+##   (<op-move> ^name move)
+##   (<s> ^operator <op-combine> +)
+##   (<op-combine> ^name combine)
+##    -->
+##   (<s> ^operator <op-move> > <op-combine>)
+##}
 
 ###
 ### V.     Soar reinforcement learning for the main operators that combine objects into a useful object to escape the room
@@ -431,7 +477,7 @@ sp {es*rl*combine*stone*sprig
    (state <s> ^operator <op> +)
    (<op> ^name combine
          ^obj stone-sprigs)
--->
+    -->
    (<s> ^operator <op> = 0)
 }
 
@@ -441,7 +487,7 @@ sp {es*rl*combine*sprig*wood
    (state <s> ^operator <op> +)
    (<op> ^name combine
          ^obj sprig-wood)
--->
+    -->
    (<s> ^operator <op> = 0)
 }
 
@@ -451,27 +497,27 @@ sp {es*rl*combine*stone*spring
    (state <s> ^operator <op> +)
    (<op> ^name combine
          ^obj stone-spring)
--->
+    -->
    (<s> ^operator <op> = 0)
 }
 
-## Soar-RL rule for combine of stone and trunck -1
+## Soar-RL rule for combine of stone and trunk -1
 
-sp {es*rl*combine*stone*trunck
+sp {es*rl*combine*stone*trunk
    (state <s> ^operator <op> +)
    (<op> ^name combine
          ^obj stone-trunk)
--->
+    -->
    (<s> ^operator <op> = 0)
 }
 
-## Soar-RL rule for combine of truck +1 -> mi serve per salire su e uscire dalla stanza
+## Soar-RL rule for combine of trunk +1 -> mi serve per salire su e uscire dalla stanza
 
-sp {es*rl*combine*stone*sprig
+sp {es*rl*combine*trunks
    (state <s> ^operator <op> +)
    (<op> ^name combine
          ^obj trunks)
--->
+    -->
    (<s> ^operator <op> = 0)
 }
 
@@ -481,14 +527,16 @@ sp {es*rl*combine*stone*sprig
 # - output built
 ##
 sp {apply*combine
-   (state <s> ^operator <op>)
+   (state <s> ^operator <op>
+              ^comb <c>)
    (<op> ^name combine
          ^obj <obj>)
--->
-   (<s> ^comb <c>)
    (<c> ^name <obj>
-        ^built yes)
+        ^built no)
+    -->
+   (<c> ^built no - yes)
    (write (crlf) |Built: | <obj>)
+   (<s> ^operator <op> -)
 }
 
 ##
@@ -496,11 +544,11 @@ sp {apply*combine
 ##
 sp {elaborate*reward
    (state <s> ^reward-link <r>
-              ^combine <dir>)
-   (<dir> ^name <d-name> 
-          ^reward <d-reward>
-          ^built yes)
--->
+              ^comb <c>)
+   (<c> ^name <d-name> 
+        ^reward <d-reward>
+        ^built yes)
+    -->
    (<r> ^reward <rr>)
    (<rr> ^value <d-reward>)
 }
@@ -513,13 +561,23 @@ sp {elaborate*reward
 sp {es*propose*stone*throwing
    (state <s> ^window <f>
               ^comb <c>)
-   (<f> broken no)
+   (<f> ^broken no)
    (<c> ^name spring-sprig
         ^built yes)     
     -->
-   (<s> ^operator <op> +)
-   (<op> ^name combine 
-         ^attempts 0)
+   (<s> ^operator <op>)
+   (<op> ^name throw)
+}
+
+sp {es*apply-op*stone*throwing
+   (state <s> ^operator <o>
+              ^window <f>)        
+   (<o> ^name throw)
+   (<f> ^broken no)    
+    -->
+   (write (crlf) |          Stone throwing! |)
+   (<f> ^broken no - yes)
+   (<s> ^operator <o> -)
 }
 
 ###
@@ -527,49 +585,46 @@ sp {es*propose*stone*throwing
 ###
 
 ## Se è rotta e sono alla finestra allora esco. 
-#sp {es*propose*out
-#   (state <s> ^desired <d>
-#              ^location <loc>
-#              ^robot <r>
-#              ^window <f>)
-#   (<d> ^x <val1> ^y <val2>)
-#   (<loc> ^x <val1> ^y <val2>)
-#   (<r> ^height <h>)
-#   (<f> ^height <h>
-#        ^broken yes) 
-#    -->
-#   (<s> ^operator <op>)
-#   (<op> ^name move
-#         ^dir out)
-#}
+sp {es*propose*out
+   (state <s> ^desired <d>
+              ^location <loc>
+              ^robot <r>
+              ^window <f>)
+   (<d> ^x <val1> ^y <val2>)
+   (<loc> ^x <val1> ^y <val2>)
+   (<r> ^height <h>)
+   (<f> ^height <h>
+        ^broken yes) 
+    -->
+   (<s> ^operator <op>)
+   (<op> ^name move
+         ^dir out)
+}
 
 
-#sp {es*apply-op*out
-#  (state <s>  ^operator <o>)
-#  (<o> ^name move
-#       ^dir out)
-#  -->
-#  (<s> ^out no - yes)
-#  (write (crlf) |          Moved: out! )
-#  (<s> ^operator <o> -)
-#}
+sp {es*apply-op*out
+   (state <s>  ^operator <o>)
+   (<o> ^name move
+        ^dir out)
+    -->
+   (<s> ^out no - yes)
+   (write (crlf) |          Moved: out! )
+   (<s> ^operator <o> -)
+}
 
 
 ###
 ###	IX.	Noticing when goal is reached
 ###
-### This code terminates the problem solving when the goal is reached. 
-### --QUANDO SONO FUORI DALLA STANZA HO RAGGIUNTO IL GOAL out è yes!
+### This code terminates the problem solving when the goal is reached.
 
 
 ## How to tell if you can stop
 sp {es*evaluate*state*success
-  (state <s> ^desired <d>
-             ^location <loc>)
-  (<d> ^x <val1> ^y <val2>)
-  (<loc> ^x <val1> ^y <val2>)
-  -->
-  (<s> ^success <d>)
+   (state <s> ^out yes
+              ^desired <d>)
+    -->
+   (<s> ^success <d>)
 }
 
 
@@ -578,9 +633,9 @@ sp {es*evaluate*state*success
 
 sp {default*top-goal*halt*state*success
     :default
-  (state <s>  ^desired <eb>) 
-  (<s> ^success <eb>)
-  -->
-  (write (crlf)  |  goal for  | <s>  | achieved | )
-  (halt)
+   (state <s>  ^desired <eb>) 
+   (<s> ^success <eb>)
+    -->
+   (write (crlf)  |  goal for  | <s>  | achieved )
+   (halt)
 }
