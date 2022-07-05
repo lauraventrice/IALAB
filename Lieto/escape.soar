@@ -91,8 +91,7 @@ sp {apply*initialize-escape
          ^built no
          ^reward -1)
    (<c5> ^name trunks
-         ^built no
-         ^reward 1)
+         ^built no)
 }
 
 
@@ -348,7 +347,8 @@ sp {es*propose*combine
               ^desired <d>)
    (<f> ^broken no)   
    (<c> ^name <obj> 
-        ^built no)
+        ^built no
+        ^reward <val>)
    (<loc> ^x <val1> ^y <val2>)
    (<d> ^x <val1> ^y <val2>)
     -->
@@ -402,16 +402,6 @@ sp {es*rl*combine*stone*trunk
    (<s> ^operator <op> = 0)
 }
 
-## Soar-RL rule for combine of trunk +1 -> mi serve per salire su e uscire dalla stanza
-
-sp {es*rl*combine*trunks
-   (state <s> ^operator <op> +)
-   (<op> ^name combine
-         ^obj trunks)
-    -->
-   (<s> ^operator <op> = 0)
-}
-
 ##
 # When a combine is chosen:
 # - change object built
@@ -426,7 +416,8 @@ sp {apply*combine
         ^built no)
     -->
    (<c> ^built no - yes)
-   (write (crlf) |Built: | <obj>)
+   (write (crlf) |                           Built: | <obj>)
+   (<s> ^operator <op> -)
 }
 
 ##
@@ -439,12 +430,9 @@ sp {elaborate*reward
    (<c> ^name <d-name> 
         ^reward <d-reward>
         ^built yes)
-   (<op> ^name combine
-         ^obj <d-name>)
     -->
    (<r> ^reward <rr>)
    (<rr> ^value <d-reward>)
-   (<s> ^operator <op> -)
 }
 
 ###
@@ -473,6 +461,20 @@ sp {es*apply-op*stone*throwing
    (write (crlf) |          Stone throwing! |)
    (<s> ^operator <o> -)
 }
+
+
+sp {es*propose*combine*trunks
+   (state <s> ^window <f>
+              ^comb <c>)
+   (<f> ^broken yes)
+   (<c> ^name trunks
+        ^built no)     
+    -->
+   (<s> ^operator <op>) 
+   (<op> ^name combine
+         ^obj trunks)   
+}
+
 
 ###
 ###	VIII.	Propose and apply to go out of the room
@@ -530,6 +532,6 @@ sp {default*top-goal*halt*state*success
    (state <s>  ^desired <eb>) 
    (<s> ^success <eb>)
     -->
-   (write (crlf)  |  goal for  | <s>  | achieved )
+   (write (crlf)  |  goal for  | <s>  | achieved |)
    (halt)
 }
