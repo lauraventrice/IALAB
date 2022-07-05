@@ -1,3 +1,7 @@
+rl -s learning on # enable RL
+indifferent-selection -g # use epsilon-greedy decision making
+indifferent-selection -e 0.1 # 10% deviation from greedy
+
 ##RECAP: 
 # Dobbiamo avere:
 # - operatori di movimento, immaginiamo destra e sinistra?
@@ -36,9 +40,6 @@
 
 #################################################################################################BEGIN
 
-rl -s learning on # enable RL
-indifferent-selection -g # use epsilon-greedy decision making
-indifferent-selection -e 0.1 # 10% deviation from greedy
 
 
 ##
@@ -172,7 +173,7 @@ sp {es*propose*up
               ^window <f>)
    (<d> ^x <val1> ^y <val2>)
    (<loc> ^x <val1> ^y <val2>)      
-   (<f> ^height <val3>)
+   (<f> ^broken yes ^height <val3>)
    (<r> ^height <val4> < <val3>)  
    (<c> ^name trunks ^built yes)  
     -->
@@ -357,116 +358,6 @@ sp {es*propose*combine
 }
 
 
-
-## Propose to combine of stone and sprig of wood
-##sp {es*propose*combine*stone*sprig
-##   (state <s> ^window <f>
-##              ^sprig yes
-##              ^comb <c>
-##              ^location <loc>
-##              ^desired <d>)
-##   (<f> ^broken no)  
-##   (<s> ^stone <num> > 0)    
-##   (<c> ^name stone-sprig 
-##        ^built no)
-##   (<loc> ^x <val1> ^y <val2>)
-##   (<d> ^x <val1> ^y <val2>)
-##    -->
-##   (<s> ^operator <op> +)
-##   (<op> ^name combine 
-##         ^obj stone-sprig)
-## }
-
-## Propose to combine of spring and sprig of wood
-
-## sp {es*propose*combine*spring*sprig
-##   (state <s> ^window <f>
-##              ^spring yes
-##              ^sprig yes
-##              ^comb <c>
-##              ^location <loc>
-##              ^desired <d>)
-##   (<f> ^broken no) 
-##   (<c> ^name spring-sprig
-##        ^built no)
-##   (<loc> ^x <val1> ^y <val2>)
-##   (<d> ^x <val1> ^y <val2>)
-##    -->
-##   (<s> ^operator <op> +)
-##   (<op> ^name combine 
-##         ^obj spring-sprig)
-##}
-
-## Propose to combine of stone and spring
-
-##sp {es*propose*combine*stone*spring
-##   (state <s> ^window <f>
-##              ^spring yes
-##              ^comb <c>
-##              ^location <loc>
-##              ^desired <d>)
-##   (<f> ^broken no)
-##   (<s> ^stone <num> > 0) 
-##   (<c> ^name stone-spring
-##        ^built no)     
-##   (<loc> ^x <val1> ^y <val2>)
-##   (<d> ^x <val1> ^y <val2>)
-##    -->
-##   (<s> ^operator <op> +)
-##   (<op> ^name combine 
-##         ^obj stone-spring)
-##}
-
-## Propose to combine of stone and trunk
-
-##sp {es*propose*combine*stone*trunk
-##   (state <s> ^window <f>
-##              ^trunk yes
-##              ^comb <c>
-##              ^location <loc>
-##              ^desired <d>)
-##   (<f> ^broken no)
-##   (<s> ^stone <num> > 0) 
-##   (<c> ^name stone-trunk
-##        ^built no)     
-##   (<loc> ^x <val1> ^y <val2>)
-##   (<d> ^x <val1> ^y <val2>)
-##    -->
-##   (<s> ^operator <op> +)
-##   (<op> ^name combine 
-##         ^obj stone-trunk)
-##}
-
-
-## Propose to combine of trunks
-
-##sp {es*propose*combine*trunks
-##   (state <s> ^window <f>
-##              ^trunk yes
-##              ^comb <c>
-##              ^desired <d>
-##              ^location <loc>)
-##   (<f> ^broken no)
-##   (<c> ^name trunks
-##        ^built no)   
-##   (<loc> ^x <val1> ^y <val2>)
-##   (<d> ^x <val1> ^y <val2>)
-##    -->
-##   (<s> ^operator <op> +)
-##   (<op> ^name combine 
-##         ^obj trunks)
-##}
-
-
-##sp {es*compare*move*better*combine
-##   (state <s> ^operator <op-move> +)
-##   (<op-move> ^name move)
-##   (<s> ^operator <op-combine> +)
-##   (<op-combine> ^name combine)
-##    -->
-##   (<s> ^operator <op-move> > <op-combine>)
-##}
-
 ###
 ### V.     Soar reinforcement learning for the main operators that combine objects into a useful object to escape the room
 ###
@@ -476,17 +367,17 @@ sp {es*propose*combine
 sp {es*rl*combine*stone*sprig
    (state <s> ^operator <op> +)
    (<op> ^name combine
-         ^obj stone-sprigs)
+         ^obj stone-sprig)
     -->
    (<s> ^operator <op> = 0)
 }
 
 ## Soar-RL rule for combine of spring and sprig of wood +1
 
-sp {es*rl*combine*sprig*wood
+sp {es*rl*combine*spring*sprig
    (state <s> ^operator <op> +)
    (<op> ^name combine
-         ^obj sprig-wood)
+         ^obj spring-sprig)
     -->
    (<s> ^operator <op> = 0)
 }
@@ -536,7 +427,6 @@ sp {apply*combine
     -->
    (<c> ^built no - yes)
    (write (crlf) |Built: | <obj>)
-   (<s> ^operator <op> -)
 }
 
 ##
@@ -544,13 +434,17 @@ sp {apply*combine
 ##
 sp {elaborate*reward
    (state <s> ^reward-link <r>
-              ^comb <c>)
+              ^comb <c>
+              ^operator <op>)
    (<c> ^name <d-name> 
         ^reward <d-reward>
         ^built yes)
+   (<op> ^name combine
+         ^obj <d-name>)
     -->
    (<r> ^reward <rr>)
    (<rr> ^value <d-reward>)
+   (<s> ^operator <op> -)
 }
 
 ###
@@ -575,8 +469,8 @@ sp {es*apply-op*stone*throwing
    (<o> ^name throw)
    (<f> ^broken no)    
     -->
+   (<f> ^broken no - yes) 
    (write (crlf) |          Stone throwing! |)
-   (<f> ^broken no - yes)
    (<s> ^operator <o> -)
 }
 
@@ -608,7 +502,7 @@ sp {es*apply-op*out
         ^dir out)
     -->
    (<s> ^out no - yes)
-   (write (crlf) |          Moved: out! )
+   (write (crlf) |          Moved: out! |)
    (<s> ^operator <o> -)
 }
 
