@@ -89,6 +89,185 @@
 
 
 
+; Regole per selezionare il best-numero-vani 
+(defrule CHOOSE-QUALITIES::numero-vani-valorized
+   (declare (salience 10000))
+   (attribute (name numero-vani) (value ?val))
+   (not (test (eq ?val unknown)))    ; se la risposta è unknown bisogna usare una regola apposita
+   =>
+   ;(printout t "numero-vani SI O NO: " crlf)
+   (assert (attribute (name best-numero-vani) (value ?val) (certainty 40.0))))
+
+(defrule CHOOSE-QUALITIES::numero-vani-unk
+   (declare (salience 10000))
+   (attribute (name numero-vani) (value ?val))
+   (test (eq ?val unknown))    ; se la risposta è unknown bisogna usare una regola apposita
+   =>
+   ;(printout t "numero-vani UNKNOWN: " crlf)
+   (assert (attribute (name best-numero-vani) (value 1) (certainty 20.0)))
+   (assert (attribute (name best-numero-vani) (value 2) (certainty 20.0)))
+   (assert (attribute (name best-numero-vani) (value 3) (certainty 20.0)))
+)
+
+
+
+
+; Regole per selezionare il best-numero-servizi 
+(defrule CHOOSE-QUALITIES::numero-servizi-valorized
+   (declare (salience 10000))
+   (attribute (name numero-servizi) (value ?val))
+   (not (test (eq ?val unknown)))    ; se la risposta è unknown bisogna usare una regola apposita
+   =>
+   ;(printout t "numero-servizi SI O NO: " crlf)
+   (assert (attribute (name best-numero-servizi) (value ?val) (certainty 40.0))))
+
+(defrule CHOOSE-QUALITIES::numero-servizi-unk
+   (declare (salience 10000))
+   (attribute (name numero-servizi) (value ?val))
+   (test (eq ?val unknown))    ; se la risposta è unknown bisogna usare una regola apposita
+   =>
+   ;(printout t "numero-servizi UNKNOWN: " crlf)
+   (assert (attribute (name best-numero-servizi) (value 1) (certainty 20.0)))
+   (assert (attribute (name best-numero-servizi) (value 2) (certainty 20.0)))
+   (assert (attribute (name best-numero-servizi) (value 3) (certainty 20.0)))
+)
+
+
+
+
+; Regole per selezionare il best-numero-piano 
+(defrule CHOOSE-QUALITIES::numero-piano-valorized
+   (declare (salience 10000))
+   (attribute (name numero-piano) (value ?val))
+   (not (test (eq ?val unknown)))    ; se la risposta è unknown bisogna usare una regola apposita
+   =>
+   ;(printout t "numero-piano SI O NO: " crlf)
+   (assert (attribute (name best-numero-piano) (value ?val) (certainty 40.0))))
+
+(defrule CHOOSE-QUALITIES::numero-piano-unk
+   (declare (salience 10000))
+   (attribute (name numero-piano) (value ?val))
+   (test (eq ?val unknown))    ; se la risposta è unknown bisogna usare una regola apposita
+   =>
+   ;(printout t "numero-piano UNKNOWN: " crlf)
+   (assert (attribute (name best-numero-piano) (value terra) (certainty 20.0)))
+   (assert (attribute (name best-numero-piano) (value primo) (certainty 20.0)))
+   (assert (attribute (name best-numero-piano) (value secondo) (certainty 20.0)))
+   (assert (attribute (name best-numero-piano) (value terzo) (certainty 20.0)))
+)
+
+
+
+
+; Regole per selezionare il best-citta
+(defrule CHOOSE-QUALITIES::citta-valorized
+   (declare (salience 10000))
+   (attribute (name citta) (value ?val))
+   (not (test (eq ?val unknown)))    ; se la risposta è unknown bisogna usare una regola apposita
+   =>
+   ;(printout t "citta SI O NO: " crlf)
+   (assert (attribute (name best-citta) (value ?val) (certainty 40.0))))
+
+(defrule CHOOSE-QUALITIES::citta-unk
+   (declare (salience 10000))
+   (attribute (name citta) (value ?val))
+   (test (eq ?val unknown))    ; se la risposta è unknown bisogna usare una regola apposita
+   =>
+   ;(printout t "citta UNKNOWN: " crlf)
+   (assert (attribute (name best-citta) (value torino) (certainty 20.0)))
+   (assert (attribute (name best-citta) (value roma) (certainty 20.0)))
+   (assert (attribute (name best-citta) (value milano) (certainty 20.0)))
+   (assert (attribute (name best-citta) (value firenze) (certainty 20.0)))
+)
+
+
+
+
+; Regole per selezionare il best-zona
+(defrule CHOOSE-QUALITIES::zona-valorized
+   (declare (salience 10000))
+   (attribute (name zona) (value ?val))
+   (not (test (eq ?val unknown)))    ; se la risposta è unknown bisogna usare una regola apposita
+   =>
+   ;(printout t "zona SI O NO: " crlf)
+   (assert (attribute (name best-zona) (value ?val) (certainty 40.0))))
+
+(defrule CHOOSE-QUALITIES::zona-unk
+   (declare (salience 10000))
+   (attribute (name zona) (value ?val))
+   (test (eq ?val unknown))    ; se la risposta è unknown bisogna usare una regola apposita
+   =>
+   ;(printout t "zona UNKNOWN: " crlf)
+   (assert (attribute (name best-zona) (value centro) (certainty 20.0)))
+   (assert (attribute (name best-zona) (value primacintura) (certainty 20.0)))
+   (assert (attribute (name best-zona) (value periferia) (certainty 20.0)))
+)
+
+
+
+
+; Regole per selezionare il best-ascensore 
+
+(defrule CHOOSE-QUALITIES::ascensore-si-no
+   (declare (salience 10000))
+   (attribute (name ascensore) (value ?val))
+   (not (test (eq ?val unknown)))    ; se la risposta è unknown bisogna usare una regola apposita
+   =>
+   ;(printout t "ASCENSORE SI O NO: " crlf)
+   (assert (attribute (name best-ascensore) (value ?val) (certainty 40.0))))
+
+(defrule CHOOSE-QUALITIES::ascensore-unk
+   (declare (salience 10000))
+   (attribute (name ascensore) (value ?val))
+   (test (eq ?val unknown))    ; se la risposta è unknown bisogna usare una regola apposita
+   =>
+   ;(printout t "ASCENSORE UNKNOWN: " crlf)
+   (assert (attribute (name best-ascensore) (value si) (certainty 20.0)))
+   (assert (attribute (name best-ascensore) (value no) (certainty 20.0))))
+
+
+
+
+
+; Regole per selezionare il best-boxauto 
+(defrule CHOOSE-QUALITIES::boxauto-si
+   (declare (salience 10000))
+   (attribute (name boxauto) (value ?val))
+   (not (test (eq ?val unknown)))    ; se la risposta è unknown bisogna usare una regola apposita
+   =>
+   ;(printout t "boxauto SI O NO: " crlf)
+   (assert (attribute (name best-boxauto) (value ?val) (certainty 40.0))))
+
+(defrule CHOOSE-QUALITIES::boxauto-unk
+   (declare (salience 10000))
+   (attribute (name boxauto) (value ?val))
+   (test (eq ?val unknown))    ; se la risposta è unknown bisogna usare una regola apposita
+   =>
+   ;(printout t "boxauto UNKNOWN: " crlf)
+   (assert (attribute (name best-boxauto) (value si) (certainty 20.0)))
+   (assert (attribute (name best-boxauto) (value no) (certainty 20.0))))
+
+
+
+
+
+; Regole per selezionare il best-terrazzino 
+(defrule CHOOSE-QUALITIES::terrazzino-valorized
+   (declare (salience 10000))
+   (attribute (name terrazzino) (value ?val))
+   (not (test (eq ?val unknown)))    ; se la risposta è unknown bisogna usare una regola apposita
+   =>
+   ;(printout t "terrazzino SI O NO: " crlf)
+   (assert (attribute (name best-terrazzino) (value ?val) (certainty 40.0))))
+
+(defrule CHOOSE-QUALITIES::terrazzino-unk
+   (declare (salience 10000))
+   (attribute (name terrazzino) (value ?val))
+   (test (eq ?val unknown))    ; se la risposta è unknown bisogna usare una regola apposita
+   =>
+   ;(printout t "terrazzino UNKNOWN: " crlf)
+   (assert (attribute (name best-terrazzino) (value si) (certainty 20.0)))
+   (assert (attribute (name best-terrazzino) (value no) (certainty 20.0))))
 
 
 
@@ -253,164 +432,161 @@
 
   ; Regole per selezionare il best-numero-vani 
 
-  (rule (if numero-vani is 1)
-        (then best-numero-vani is 1 with certainty 40))
+;   (rule (if numero-vani is 1)
+;         (then best-numero-vani is 1 with certainty 40))
 
-  (rule (if numero-vani is 2)
-        (then best-numero-vani is 2 with certainty 40))
+;   (rule (if numero-vani is 2)
+;         (then best-numero-vani is 2 with certainty 40))
 
-  (rule (if numero-vani is 3)
-        (then best-numero-vani is 3 with certainty 40))
+;   (rule (if numero-vani is 3)
+;         (then best-numero-vani is 3 with certainty 40))
 
-  (rule (if numero-vani is 4)
-        (then best-numero-vani is 4 with certainty 40))
+;   (rule (if numero-vani is 4)
+;         (then best-numero-vani is 4 with certainty 40))
 
-  (rule (if numero-vani is 5)
-        (then best-numero-vani is 5 with certainty 40))
+;   (rule (if numero-vani is 5)
+;         (then best-numero-vani is 5 with certainty 40))
 
-  (rule (if numero-vani is 6)
-        (then best-numero-vani is 6 with certainty 40))
+;   (rule (if numero-vani is 6)
+;         (then best-numero-vani is 6 with certainty 40))
 
-  (rule (if numero-vani is unknown)
-        (then best-numero-vani is 1 with certainty 20 and
-              best-numero-vani is 2 with certainty 20 and
-              best-numero-vani is 3 with certainty 20 and
-              best-numero-vani is 4 with certainty 20 and
-              best-numero-vani is 5 with certainty 20 and
-              best-numero-vani is 6 with certainty 20))
+;   (rule (if numero-vani is unknown)
+;         (then best-numero-vani is 1 with certainty 20 and
+;               best-numero-vani is 2 with certainty 20 and
+;               best-numero-vani is 3 with certainty 20 and
+;               best-numero-vani is 4 with certainty 20 and
+;               best-numero-vani is 5 with certainty 20 and
+;               best-numero-vani is 6 with certainty 20))
 
   ; Regole per selezionare il best-numero-servizi (1, 2, 3 e unknown sono le possibili valide risposte per la domanda sul numero dei servizi)
 
-  (rule (if numero-servizi is 1)
-        (then best-numero-servizi is 1 with certainty 40))
+;   (rule (if numero-servizi is 1)
+;         (then best-numero-servizi is 1 with certainty 40))
 
-  (rule (if numero-servizi is 2)
-        (then best-numero-servizi is 2 with certainty 40))
+;   (rule (if numero-servizi is 2)
+;         (then best-numero-servizi is 2 with certainty 40))
 
-  (rule (if numero-servizi is 3)
-        (then best-numero-servizi is 3 with certainty 40))
+;   (rule (if numero-servizi is 3)
+;         (then best-numero-servizi is 3 with certainty 40))
 
-  (rule (if numero-servizi is unknown)
-        (then best-numero-servizi is 1 with certainty 20 and
-              best-numero-servizi is 2 with certainty 20 and
-              best-numero-servizi is 3 with certainty 20))
+;   (rule (if numero-servizi is unknown)
+;         (then best-numero-servizi is 1 with certainty 20 and
+;               best-numero-servizi is 2 with certainty 20 and
+;               best-numero-servizi is 3 with certainty 20))
 
   ; Regole per selezionare il best-piano 
 
-  (rule (if numero-piano is terra)
-        (then best-numero-piano is terra with certainty 40))
+;   (rule (if numero-piano is terra)
+;         (then best-numero-piano is terra with certainty 40))
 
-  (rule (if numero-piano is primo)
-        (then best-numero-piano is primo with certainty 40))
+;   (rule (if numero-piano is primo)
+;         (then best-numero-piano is primo with certainty 40))
 
-  (rule (if numero-piano is secondo)
-        (then best-numero-piano is secondo with certainty 40))
+;   (rule (if numero-piano is secondo)
+;         (then best-numero-piano is secondo with certainty 40))
 
-  (rule (if numero-piano is terzo)
-        (then best-numero-piano is terzo with certainty 40))
+;   (rule (if numero-piano is terzo)
+;         (then best-numero-piano is terzo with certainty 40))
 
-  (rule (if numero-piano is quarto)
-        (then best-numero-piano is quarto with certainty 40))
+;   (rule (if numero-piano is quarto)
+;         (then best-numero-piano is quarto with certainty 40))
 
-  (rule (if numero-piano is quinto)
-        (then best-numero-piano is quinto with certainty 40))
+;   (rule (if numero-piano is quinto)
+;         (then best-numero-piano is quinto with certainty 40))
 
-  (rule (if numero-piano is sesto)
-        (then best-numero-piano is sesto with certainty 40))
+;   (rule (if numero-piano is sesto)
+;         (then best-numero-piano is sesto with certainty 40))
 
-  (rule (if numero-piano is unknown)
-        (then best-numero-piano is terra with certainty 20 and
-              best-numero-piano is primo with certainty 20 and
-              best-numero-piano is secondo with certainty 20 and
-              best-numero-piano is terzo with certainty 20 and
-              best-numero-piano is quarto with certainty 20 and
-              best-numero-piano is quinto with certainty 20 and
-              best-numero-piano is sesto with certainty 20))
+;   (rule (if numero-piano is unknown)
+;         (then best-numero-piano is terra with certainty 20 and
+;               best-numero-piano is primo with certainty 20 and
+;               best-numero-piano is secondo with certainty 20 and
+;               best-numero-piano is terzo with certainty 20))
 
 
   ; Regole per selezionare il best-citta 
 
-  (rule (if citta is torino)
-        (then best-citta is torino with certainty 40))
+;   (rule (if citta is torino)
+;         (then best-citta is torino with certainty 40))
 
-  (rule (if citta is roma)
-        (then best-citta is roma with certainty 40))
+;   (rule (if citta is roma)
+;         (then best-citta is roma with certainty 40))
 
-  (rule (if citta is milano)
-        (then best-citta is milano with certainty 40))
+;   (rule (if citta is milano)
+;         (then best-citta is milano with certainty 40))
 
-  (rule (if citta is firenze)
-        (then best-citta is firenze with certainty 40))
+;   (rule (if citta is firenze)
+;         (then best-citta is firenze with certainty 40))
 
-  (rule (if citta is unknown)
-        (then best-citta is torino with certainty 20 and
-              best-citta is roma with certainty 20 and
-              best-citta is milano with certainty 20 and
-              best-citta is firenze with certainty 20))
+;   (rule (if citta is unknown)
+;         (then best-citta is torino with certainty 20 and
+;               best-citta is roma with certainty 20 and
+;               best-citta is milano with certainty 20 and
+;               best-citta is firenze with certainty 20))
 
 
   ; Regole per selezionare il best-zona
 
-  (rule (if zona is centro)
-        (then best-zona is centro with certainty 40))
+;   (rule (if zona is centro)
+;         (then best-zona is centro with certainty 40))
 
-  (rule (if zona is primacintura)
-        (then best-zona is primacintura with certainty 40))
+;   (rule (if zona is primacintura)
+;         (then best-zona is primacintura with certainty 40))
 
-  (rule (if zona is periferia)
-        (then best-zona is periferia with certainty 40))
+;   (rule (if zona is periferia)
+;         (then best-zona is periferia with certainty 40))
 
-  (rule (if zona is unknown)
-        (then best-zona is centro with certainty 20 and
-              best-zona is primacintura with certainty 20 and
-              best-zona is periferia with certainty 20))
+;   (rule (if zona is unknown)
+;         (then best-zona is centro with certainty 20 and
+;               best-zona is primacintura with certainty 20 and
+;               best-zona is periferia with certainty 20))
 
   ; TODO: Regole per selezionare il best-quartiere  
   ; TODO: NON SO SE QUESTE REGOLE VADANO BENE COSI'
 
-  (rule (if citta is torino and
-            zona is primacintura)
-      (then best-quartiere is moncalieri with certainty 70 and
-            best-quartiere is mirafiori with certainty 50))
+;   (rule (if citta is torino and
+;             zona is primacintura)
+;       (then best-quartiere is moncalieri with certainty 70 and
+;             best-quartiere is lingotto with certainty 50))
 
-  (rule (if citta is unknown)
-      (then best-quartiere is moncalieri with certainty 20 and
-            best-quartiere is lingotto with certainty 20 and
-            best-quartiere is trastevere with certainty 20 and
-            best-quartiere is campitelli with certainty 20 and
-            best-quartiere is sansiro with certainty 20 and
-            best-quartiere is navigli with certainty 20 and
-            best-quartiere is santacroce with certainty 20 and
-            best-quartiere is rovezzano with certainty 20))
+;   (rule (if citta is unknown)
+;       (then best-quartiere is moncalieri with certainty 20 and
+;             best-quartiere is lingotto with certainty 20 and
+;             best-quartiere is trastevere with certainty 20 and
+;             best-quartiere is campitelli with certainty 20 and
+;             best-quartiere is sansiro with certainty 20 and
+;             best-quartiere is navigli with certainty 20 and
+;             best-quartiere is santacroce with certainty 20 and
+;             best-quartiere is rovezzano with certainty 20))
  
   ; TODO: SE VANNO BENE COSI' BISOGNA FARLE PER TUTTE LE COMBINAZIONI DI QUARTIERI E CITTA'
 
   ; Regole per selezionare il best-ascensore 
 
-  (rule (if ascensore is si)
-        (then best-ascensore is si with certainty 40))
+;   (rule (if ascensore is si)
+;         (then best-ascensore is si with certainty 40))
 
-  (rule (if ascensore is no)
-        (then best-ascensore is no with certainty 40))
+;   (rule (if ascensore is no)
+;         (then best-ascensore is no with certainty 40))
 
-  (rule (if ascensore is unknown)
-        (then best-ascensore is si with certainty 20 and
-              best-ascensore is no with certainty 20))
+;   (rule (if ascensore is unknown)
+;         (then best-ascensore is si with certainty 20 and
+;               best-ascensore is no with certainty 20))
 
-  (rule (if ha-piudi60anni is si)
-      (then best-ascensore is si with certainty 70))  ;se ha più di 60 anni è bene consigliare appartamenti dotati di ascensore!
+;   (rule (if ha-piudi60anni is si)
+;       (then best-ascensore is si with certainty 70))  ;se ha più di 60 anni è bene consigliare appartamenti dotati di ascensore!
 
   ; Regole per selezionare il best-boxauto
 
-  (rule (if boxauto is si)
-        (then best-boxauto is si with certainty 40))
+;   (rule (if boxauto is si)
+;         (then best-boxauto is si with certainty 40))
 
-  (rule (if boxauto is no)
-        (then best-boxauto is no with certainty 40))
+;   (rule (if boxauto is no)
+;         (then best-boxauto is no with certainty 40))
 
-  (rule (if boxauto is unknown)
-        (then best-boxauto is si with certainty 20 and
-              best-boxauto is no with certainty 20))
+;   (rule (if boxauto is unknown)
+;         (then best-boxauto is si with certainty 20 and
+;               best-boxauto is no with certainty 20))
 
   ; TODO: Regole per selezionare il best-metri-quadri-boxauto  
 
@@ -418,15 +594,15 @@
 
   ; Regole per selezionare il best-terrazzino 
 
-  (rule (if terrazzino is si)
-        (then best-terrazzino is si with certainty 40))
+;   (rule (if terrazzino is si)
+;         (then best-terrazzino is si with certainty 40))
 
-  (rule (if terrazzino is no)
-        (then best-terrazzino is no with certainty 40))
+;   (rule (if terrazzino is no)
+;         (then best-terrazzino is no with certainty 40))
 
-  (rule (if terrazzino is unknown)
-        (then best-terrazzino is si with certainty 20 and
-              best-terrazzino is no with certainty 20))
+;   (rule (if terrazzino is unknown)
+;         (then best-terrazzino is si with certainty 20 and
+;               best-terrazzino is no with certainty 20))
 
 
   ; TODO: Regole per selezionare il best-prezzo-richiesto 

@@ -18,16 +18,16 @@
     ;     (valid-answers 50 70 90 110 130 150 170 190 210 230 250 270 290 310 unknown))
 
     ; (question (attribute numero-vani)
-    ;     (the-question "Preferirebbe avere 1, 2, 3, 4, 5 o 6 vani nell'appartamento? ")
-    ;     (valid-answers 1 2 3 4 5 6 unknown))
+    ;     (the-question "Preferirebbe avere 1, 2 o 3 vani nell'appartamento? ")
+    ;     (valid-answers 1 2 3 unknown))
 
     ; (question (attribute numero-servizi)
     ;     (the-question "Preferirebbe avere 1, 2 o 3 servizi nell'appartamento? ")
     ;     (valid-answers 1 2 3 unknown))
 
     ; (question (attribute numero-piano)
-    ;     (the-question "Preferirebbe trovare la casa al primo, secondo, terzo, quarto o quinto piano?  ")
-    ;     (valid-answers terra primo secondo terzo quarto quinto unknown))
+    ;     (the-question "Preferirebbe trovare la casa al primo, secondo o terzo piano?  ")
+    ;     (valid-answers terra primo secondo terzo unknown))
 
     ; (question (attribute citta)
     ;     (the-question "Preferirebbe trovare l'appartamento a torino, roma, milano o firenze? ")
@@ -64,14 +64,14 @@
         (the-question "Deve essere presente l'ascensore? ")
         (valid-answers si no unknown))
 
-    ; (question (attribute boxauto)
-    ;     (the-question "Deve essere presente il box auto? ")
-    ;     (valid-answers si no unknown))
+    (question (attribute boxauto)
+        (the-question "Deve essere presente il box auto? ")
+        (valid-answers si no unknown))
 
-    ; ; (question (attribute metri-quadri-boxauto)
-    ; ;     (precursors boxauto is si)  ; questa domanda deve essere fatta solo se la persona è interessata al box-auto
-    ; ;     (the-question "Di quanti metri quadri deve essere il box auto? ")
-    ; ;     (valid-answers unknown)) ;; TODO: sistemare -> capire che valori mettere di metri quadri 
+    ; (question (attribute metri-quadri-boxauto)
+    ;     (precursors boxauto is si)  ; questa domanda deve essere fatta solo se la persona è interessata al box-auto
+    ;     (the-question "Di quanti metri quadri deve essere il box auto? ")
+    ;     (valid-answers unknown)) ;; TODO: sistemare -> capire che valori mettere di metri quadri 
 
     ; (question (attribute terrazzino)
     ;     (the-question "Deve essere presente il terrazzino? ")

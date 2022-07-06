@@ -42,15 +42,15 @@
     ; lista appartamenti a moncalieri (torino)
     ; OK LUI C'E'
     (apartment  (name "Appartamento su due piani in vendita in strada dei Cunioli Alti, 137")
-                (metriquadri 137) (numerovani 4) (numeroservizi 3) (piano secondo) (citta torino) (zona primacintura) (quartiere moncalieri)
+                (metriquadri 137) (numerovani 3) (numeroservizi 3) (piano secondo) (citta torino) (zona primacintura) (quartiere moncalieri)
                 (ascensore no) (boxauto si) (metri-quadri-boxauto 3) (terrazzino si) (prezzorichiesto 375000) (servizivicino parco scuola mezzipubblici palestra)
     )
 
 
     ; OK LUI C'E'
     (apartment  (name "Quadrilocale in vendita in strada Genova, 255 /4")
-                (metriquadri 110) (numerovani 4) (numeroservizi 2) (piano primo) (citta torino) (zona primacintura) (quartiere moncalieri)
-                (ascensore si) (boxauto si) (metri-quadri-boxauto 5) (terrazzino si) (prezzorichiesto 240000) (servizivicino ospedale parco scuola)
+                (metriquadri 110) (numerovani 3) (numeroservizi 2) (piano primo) (citta torino) (zona primacintura) (quartiere moncalieri)
+                (ascensore si) (boxauto no) (metri-quadri-boxauto 5) (terrazzino si) (prezzorichiesto 240000) (servizivicino ospedale parco scuola)
     )
 
     ; ; OK LUI C'E'
@@ -62,32 +62,32 @@
     ; ; lista appartamenti a lingotto (torino)
     ; ; OK LUI C'E'
     ; (apartment  (name "Attico in vendita in via Onorato Vigliani, 24")
-    ;             (metriquadri 170) (numerovani 7) (numeroservizi 2) (piano quinto) (citta torino) (zona centro) (quartiere lingotto)
+    ;             (metriquadri 170) (numerovani 3) (numeroservizi 2) (piano terzo) (citta torino) (zona centro) (quartiere lingotto)
     ;             (ascensore si) (boxauto si) (metri-quadri-boxauto 7) (terrazzino si) (prezzorichiesto 465000) (servizivicino ospedale mezzipubblici)
     ; )
 
     ; ; OK LUI C'E'
     ; (apartment  (name "Trilocale in vendita in via Fratel Teodoreto, 3")
-    ;             (metriquadri 75) (numerovani 3) (numeroservizi 1) (piano primo) (citta torino) (zona primacintura) (quartiere lingotto)
+    ;             (metriquadri 75) (numerovani 2) (numeroservizi 1) (piano primo) (citta torino) (zona primacintura) (quartiere lingotto)
     ;             (ascensore si) (boxauto no) (terrazzino si) (prezzorichiesto 114000) (servizivicino parco scuola palestra) ; questo appartamento non ha il boxauto e quindi non ha specificato la grandezza di esso
     ; )
 
     ; ; OK LUI C'E'
     ; (apartment  (name "Appartamento in vendita in via Filadelfia, 50")
-    ;             (metriquadri 130) (numerovani 5) (numeroservizi 2) (piano primo) (citta torino) (zona centro) (quartiere lingotto)
+    ;             (metriquadri 130) (numerovani 3) (numeroservizi 2) (piano primo) (citta torino) (zona centro) (quartiere lingotto)
     ;             (ascensore si) (boxauto si) (metri-quadri-boxauto 4) (terrazzino si) (prezzorichiesto 260000) (servizivicino ospedale mezzipubblici palestra)
     ; )
 
     ; ; lista appartamenti a trastevere (roma)
     ; ; OK LUI C'E'
     ; (apartment  (name "Appartamento in vendita in via di San Crisogono")
-    ;             (metriquadri 140) (numerovani 5) (numeroservizi 2) (piano secondo) (citta roma) (zona centro) (quartiere trastevere)
+    ;             (metriquadri 140) (numerovani 3) (numeroservizi 2) (piano secondo) (citta roma) (zona centro) (quartiere trastevere)
     ;             (ascensore no) (boxauto no) (terrazzino no) (prezzorichiesto 895000) (servizivicino ospedale parco) ; questo appartamento non ha il boxauto e quindi non ha specificato la grandezza di esso
     ; )
   
     ; ; OK LUI C'E'
     ; (apartment  (name "Trilocale in vendita in vicolo del Bologna s.n.c")
-    ;             (metriquadri 68) (numerovani 3) (numeroservizi 2) (piano terra) (citta roma) (zona primacintura) (quartiere trastevere)
+    ;             (metriquadri 68) (numerovani 2) (numeroservizi 2) (piano terra) (citta roma) (zona primacintura) (quartiere trastevere)
     ;             (ascensore no) (boxauto no) (terrazzino no) (prezzorichiesto 315000) (servizivicino ospedale scuola palestra) ; questo appartamento non ha il boxauto e quindi non ha specificato la grandezza di esso
     ; )
 
@@ -106,13 +106,13 @@
 
     ; ; OK LUI C'E'
     ; (apartment  (name "Quadrilocale in vendita in via fori imperiali")
-    ;             (metriquadri 120) (numerovani 4) (numeroservizi 2) (piano terzo) (citta roma) (zona centro) (quartiere campitelli)
+    ;             (metriquadri 120) (numerovani 3) (numeroservizi 2) (piano terzo) (citta roma) (zona centro) (quartiere campitelli)
     ;             (ascensore si) (boxauto no) (terrazzino no) (prezzorichiesto 747000) (servizivicino ospedale palestra); questo appartamento non ha il boxauto e quindi non ha specificato la grandezza di esso
     ; )
 
     ; ; OK LUI C'E'
     ; (apartment  (name "Bilocale in vendita a Aventino - San Saba")
-    ;             (metriquadri 120) (numerovani 2) (numeroservizi 2) (piano quarto) (citta roma) (zona periferia) (quartiere campitelli)
+    ;             (metriquadri 120) (numerovani 2) (numeroservizi 2) (piano terzo) (citta roma) (zona periferia) (quartiere campitelli)
     ;             (ascensore si) (boxauto no) (terrazzino no) (prezzorichiesto 950000) (servizivicino ospedale parco scuola palestra) ; questo appartamento non ha il boxauto e quindi non ha specificato la grandezza di esso
     ; )
 
@@ -131,7 +131,7 @@
 
     ; ; OK LUI C'E'
     ; (apartment  (name "Appartamento in vendita in piazza Santa Maria Nascente s.n.c")
-    ;             (metriquadri 200) (numerovani 5) (numeroservizi 1) (piano primo) (citta milano) (zona centro) (quartiere sansiro)
+    ;             (metriquadri 200) (numerovani 3) (numeroservizi 1) (piano primo) (citta milano) (zona centro) (quartiere sansiro)
     ;             (ascensore no) (boxauto si) (metri-quadri-boxauto 6) (terrazzino no) (prezzorichiesto 890000) (servizivicino mezzipubblici palestra)
     ; )
 
@@ -163,7 +163,7 @@
 
     ; ; OK LUI C'E'
     ; (apartment  (name "Quadrilocale in vendita in Santa Croce")
-    ;             (metriquadri 110) (numerovani 4) (numeroservizi 1) (piano primo) (citta firenze) (zona centro) (quartiere santacroce)
+    ;             (metriquadri 110) (numerovani 3) (numeroservizi 1) (piano primo) (citta firenze) (zona centro) (quartiere santacroce)
     ;             (ascensore no) (boxauto no) (terrazzino no) (prezzorichiesto 590000) (servizivicino mezzipubblici); questo appartamento non ha il boxauto e quindi non ha specificato la grandezza di esso
     ; )
 
@@ -176,7 +176,7 @@
     ; ; lista appartamenti a rovezzano (firenze)
     ; ; OK LUI C'E'
     ; (apartment  (name "Quadrilocale in vendita in via SANT'ANDREA A ROVEZZANO s.n.c")
-    ;             (metriquadri 110) (numerovani 4) (numeroservizi 2) (piano primo) (citta firenze) (zona centro) (quartiere rovezzano)
+    ;             (metriquadri 110) (numerovani 3) (numeroservizi 2) (piano primo) (citta firenze) (zona centro) (quartiere rovezzano)
     ;             (ascensore no) (boxauto no) (terrazzino no) (prezzorichiesto 280000) (servizivicino ospedale scuola) ; questo appartamento non ha il boxauto e quindi non ha specificato la grandezza di esso
     ; )
 
@@ -208,24 +208,24 @@
         (metri-quadri-boxauto $? ?mqba $?)
         (terrazzino ?t)
         (prezzorichiesto ?pr))
-  ; ; (attribute (name best-metri-quadri) (value ?mq) (certainty ?certainty-1))
+
   ; (attribute (name best-numero-vani) (value ?nv) (certainty ?certainty-2))
   ; (attribute (name best-numero-servizi) (value ?ns) (certainty ?certainty-3))
   ; (attribute (name best-numero-piano) (value ?p) (certainty ?certainty-4))
   ; (attribute (name best-citta) (value ?c) (certainty ?certainty-5))
   ; (attribute (name best-zona) (value ?z) (certainty ?certainty-6))
-  ; (attribute (name best-quartiere) (value ?q) (certainty ?certainty-7))
-   (attribute (name best-ascensore) (value ?a) (certainty ?certainty-8))
-  ; (attribute (name best-boxauto) (value ?ba) (certainty ?certainty-9))
-  ; ; (attribute (name best-metri-quadri-boxauto) (value ?mqba) (certainty ?certainty-10))
+  ; ; (attribute (name best-quartiere) (value ?q) (certainty ?certainty-7))
+  (attribute (name best-ascensore) (value ?a) (certainty ?certainty-8))
+   (attribute (name best-boxauto) (value ?ba) (certainty ?certainty-9))
+  ; ; ; (attribute (name best-metri-quadri-boxauto) (value ?mqba) (certainty ?certainty-10))
   ; (attribute (name best-terrazzino) (value ?t) (certainty ?certainty-11))
 
   (attribute (name best-prezzo-richiesto) (value ?name) (certainty ?certainty-12))
-  ;(attribute (name best-metri-quadri) (value ?name) (certainty ?certainty-1))
+  ; (attribute (name best-metri-quadri) (value ?name) (certainty ?certainty-1))
   =>
   ;(printout t "GENERO ASSERT APPARTAMENTI" crlf)
   (assert (attribute (name apartment) (value ?name)
-                     (certainty (min ?certainty-8 ?certainty-12)))))
+                     (certainty (min ?certainty-8 ?certainty-9 ?certainty-12)))))
 
 
 
