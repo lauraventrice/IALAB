@@ -68,30 +68,44 @@ sp {apply*initialize-escape
         ^desired <d>
         ^window <f>
         ^robot <r>
-        ^spring yes
-        ^sprig yes
-        ^stone 5
-        ^trunk yes
+        ^objects <o1> <o2> <o3> <o4>
         ^comb <c1> <c2> <c3> <c4> <c5>
         ^out no)
    (<loc> ^x 5.0 ^y 3.0)      
    (<d> ^x 3.0 ^y 4.0)
    (<f> ^broken no ^height 3.5)
    (<r> ^height 1.5)
+   (<o1> ^name spring
+         ^available yes)
+   (<o2> ^name sprig
+         ^available yes)
+   (<o3> ^name stone
+         ^available yes)
+   (<o4> ^name trunk
+         ^available yes)      
    (<c1> ^name stone-sprig
          ^built no
-         ^reward -1)
+         ^reward -1
+         ^object1 stone
+         ^object2 sprig)
    (<c2> ^name spring-sprig
          ^built no
-         ^reward 1)
+         ^reward 1
+         ^object1 spring
+         ^object2 sprig)
    (<c3> ^name stone-spring
          ^built no
-         ^reward -1)
+         ^reward -1
+         ^object1 stone
+         ^object2 spring)
    (<c4> ^name stone-trunk
          ^built no
-         ^reward -1)
+         ^reward -1
+         ^object1 stone
+         ^object2 trunk)
    (<c5> ^name trunks
-         ^built no)
+         ^built no
+         ^object trunk)
 }
 
 
@@ -327,7 +341,7 @@ sp {es*apply-op*up
    (state <s>  ^operator <o>
                ^robot <r>)
    (<o> ^name move
-       ^dir up)
+        ^dir up)
    (<r> ^height <val>)
     -->
    (<r> ^height <val> - (+ <val> 0.5))
@@ -348,9 +362,16 @@ sp {es*propose*combine
    (<f> ^broken no)   
    (<c> ^name <obj> 
         ^built no
-        ^reward <val>)
-   (<loc> ^x <val1> ^y <val2>)
-   (<d> ^x <val1> ^y <val2>)
+        ^reward <val>
+        ^object1 <obj1>
+        ^object2 <obj2>)
+   (<s> ^objects <o1> <o2>)
+   (<o1> ^name <obj1>
+         ^available yes)
+   (<o2> ^name <obj2>
+         ^available yes)                   
+   (<loc> ^x <val3> ^y <val4>)
+   (<d> ^x <val3> ^y <val4>)
     -->
    (<s> ^operator <op> +)
    (<op> ^name combine
@@ -413,11 +434,22 @@ sp {apply*combine
    (<op> ^name combine
          ^obj <obj>)
    (<c> ^name <obj>
-        ^built no)
+        ^reward <val>
+        ^built no
+        ^object1 <obj1>
+        ^object2 <obj2>)
+   (<s> ^objects <o1> <o2>)
+   (<o1> ^name <obj1>
+         ^available yes)
+   (<o2> ^name <obj2>
+         ^available yes)
     -->
+   (<o1> ^name <obj1>
+         ^available yes - no)
+   (<o2> ^name <obj2>
+         ^available yes - no)
    (<c> ^built no - yes)
    (write (crlf) |                           Built: | <obj>)
-   (<s> ^operator <op> -)
 }
 
 ##
@@ -425,14 +457,15 @@ sp {apply*combine
 ##
 sp {elaborate*reward
    (state <s> ^reward-link <r>
-              ^comb <c>
-              ^operator <op>)
+              ^comb <c>)
    (<c> ^name <d-name> 
         ^reward <d-reward>
         ^built yes)
     -->
    (<r> ^reward <rr>)
    (<rr> ^value <d-reward>)
+   (<s> ^rewarded no - yes)
+   (write (crlf) |                           REWARD | <d-name>)
 }
 
 ###
@@ -442,14 +475,26 @@ sp {elaborate*reward
 
 sp {es*propose*stone*throwing
    (state <s> ^window <f>
-              ^comb <c>)
+              ^comb <c>
+              ^rewarded yes)
    (<f> ^broken no)
    (<c> ^name spring-sprig
-        ^built yes)     
-    -->
+        ^built yes)         
+    --> 
    (<s> ^operator <op>)
    (<op> ^name throw)
 }
+
+sp {es*compare*throw*better*combine
+   (state <s> ^operator <op-throw> +)
+   (<op-throw> ^name throw)
+   (<s> ^operator <op-combine> +)
+   (<op-combine> ^name combine)
+   (<op-combine> ^obj <obj> <> trunks)
+    -->
+   (<s> ^operator <op-throw> > <op-combine>)
+}  
+
 
 sp {es*apply-op*stone*throwing
    (state <s> ^operator <o>
@@ -465,10 +510,14 @@ sp {es*apply-op*stone*throwing
 
 sp {es*propose*combine*trunks
    (state <s> ^window <f>
-              ^comb <c>)
+              ^comb <c>
+              ^objects <o>)
    (<f> ^broken yes)
    (<c> ^name trunks
-        ^built no)     
+        ^built no
+        ^object trunk)  
+   (<o> ^name trunk
+        ^available yes)   
     -->
    (<s> ^operator <op>) 
    (<op> ^name combine
@@ -476,6 +525,22 @@ sp {es*propose*combine*trunks
 }
 
 
+sp {es*apply-op*combine*trunks
+   (state <s> ^operator <op>
+              ^comb <c>)
+   (<op> ^name combine
+         ^obj trunks)
+   (<c> ^name trunks
+        ^built no
+        ^object trunk)
+   (<s> ^objects <o>)
+   (<o> ^name trunk
+        ^available yes)
+    -->
+   (<o> ^available yes - no)
+   (<c> ^built no - yes)
+   (write (crlf) |                           Built: | trunks)  
+}
 ###
 ###	VIII.	Propose and apply to go out of the room
 ###
