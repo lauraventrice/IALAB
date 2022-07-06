@@ -89,14 +89,50 @@
 
 
 
-; Regole per selezionare il best-numero-vani 
-(defrule CHOOSE-QUALITIES::numero-vani-valorized
+; ; Regole per selezionare il best-numero-vani 
+; (defrule CHOOSE-QUALITIES::numero-vani-valorized
+;    (declare (salience 10000))
+;    (attribute (name numero-vani) (value ?val))
+;    (not (test (eq ?val unknown)))    ; se la risposta è unknown bisogna usare una regola apposita
+;    =>
+;    ;(printout t "numero-vani SI O NO: " crlf)
+;    (assert (attribute (name best-numero-vani) (value ?val) (certainty 40.0))))
+
+; ------ TENTATIVO NUMERO SERVIZI --------
+
+(defrule CHOOSE-QUALITIES::tentativo-numero-vani-uguale
    (declare (salience 10000))
-   (attribute (name numero-vani) (value ?val))
-   (not (test (eq ?val unknown)))    ; se la risposta è unknown bisogna usare una regola apposita
+   (attribute (name numero-vani) (value ?vaniirisposta))
+   (apartment (name ?name1) (numerovani ?vaniappartamento))
+   (not (test (eq ?vaniirisposta unknown)))    ; se la risposta è unknown bisogna usare una regola apposita
+   (or (test (= (float (str-cat ?vaniappartamento)) (float (str-cat ?vaniirisposta)))))
    =>
-   ;(printout t "numero-vani SI O NO: " crlf)
-   (assert (attribute (name best-numero-vani) (value ?val) (certainty 40.0))))
+   (assert (attribute (name best-numero-vani) (value ?name1) (certainty 90.0))))
+
+
+(defrule CHOOSE-QUALITIES::tentativo-numero-vani-1
+   (declare (salience 10000))
+   (attribute (name numero-vani) (value ?vaniirisposta))
+   (apartment (name ?name1) (numerovani ?vaniappartamento))
+   (not (test (eq ?vaniirisposta unknown)))    ; se la risposta è unknown bisogna usare una regola apposita
+   (or (test (= (float (str-cat ?vaniappartamento)) (+ (float (str-cat ?vaniirisposta)) 1)))
+        (test (= (float (str-cat ?vaniappartamento)) (- (float (str-cat ?vaniirisposta)) 1))))
+   =>
+   (assert (attribute (name best-numero-vani) (value ?name1) (certainty 70.0))))
+
+(defrule CHOOSE-QUALITIES::tentativo-numero-vani-2
+   (declare (salience 10000))
+   (attribute (name numero-vani) (value ?vaniirisposta))
+   (apartment (name ?name1) (numerovani ?vaniappartamento))
+   (not (test (eq ?vaniirisposta unknown)))    ; se la risposta è unknown bisogna usare una regola apposita
+   (or (test (= (float (str-cat ?vaniappartamento)) (+ (float (str-cat ?vaniirisposta)) 2)))
+        (test (= (float (str-cat ?vaniappartamento)) (- (float (str-cat ?vaniirisposta)) 2))))
+   =>
+   (assert (attribute (name best-numero-vani) (value ?name1) (certainty 40.0))))
+
+
+; ------ TENTATIVO NUMERO SERVIZI --------
+
 
 (defrule CHOOSE-QUALITIES::numero-vani-unk
    (declare (salience 10000))
@@ -112,14 +148,50 @@
 
 
 
-; Regole per selezionare il best-numero-servizi 
-(defrule CHOOSE-QUALITIES::numero-servizi-valorized
+; ; Regole per selezionare il best-numero-servizi 
+; (defrule CHOOSE-QUALITIES::numero-servizi-valorized
+;    (declare (salience 10000))
+;    (attribute (name numero-servizi) (value ?val))
+;    (not (test (eq ?val unknown)))    ; se la risposta è unknown bisogna usare una regola apposita
+;    =>
+;    ;(printout t "numero-servizi SI O NO: " crlf)
+;    (assert (attribute (name best-numero-servizi) (value ?val) (certainty 40.0))))
+
+; ------ TENTATIVO NUMERO SERVIZI --------
+
+(defrule CHOOSE-QUALITIES::tentativo-numero-servizi-uguale
    (declare (salience 10000))
-   (attribute (name numero-servizi) (value ?val))
-   (not (test (eq ?val unknown)))    ; se la risposta è unknown bisogna usare una regola apposita
+   (attribute (name numero-servizi) (value ?servizirisposta))
+   (apartment (name ?name1) (numeroservizi ?serviziappartamento))
+   (not (test (eq ?servizirisposta unknown)))    ; se la risposta è unknown bisogna usare una regola apposita
+   (or (test (= (float (str-cat ?serviziappartamento)) (float (str-cat ?servizirisposta)))))
    =>
-   ;(printout t "numero-servizi SI O NO: " crlf)
-   (assert (attribute (name best-numero-servizi) (value ?val) (certainty 40.0))))
+   (assert (attribute (name best-numero-servizi) (value ?name1) (certainty 90.0))))
+
+
+(defrule CHOOSE-QUALITIES::tentativo-numero-servizi-1
+   (declare (salience 10000))
+   (attribute (name numero-servizi) (value ?servizirisposta))
+   (apartment (name ?name1) (numeroservizi ?serviziappartamento))
+   (not (test (eq ?servizirisposta unknown)))    ; se la risposta è unknown bisogna usare una regola apposita
+   (or (test (= (float (str-cat ?serviziappartamento)) (+ (float (str-cat ?servizirisposta)) 1)))
+        (test (= (float (str-cat ?serviziappartamento)) (- (float (str-cat ?servizirisposta)) 1))))
+   =>
+   (assert (attribute (name best-numero-servizi) (value ?name1) (certainty 70.0))))
+
+(defrule CHOOSE-QUALITIES::tentativo-numero-servizi-2
+   (declare (salience 10000))
+   (attribute (name numero-servizi) (value ?servizirisposta))
+   (apartment (name ?name1) (numeroservizi ?serviziappartamento))
+   (not (test (eq ?servizirisposta unknown)))    ; se la risposta è unknown bisogna usare una regola apposita
+   (or (test (= (float (str-cat ?serviziappartamento)) (+ (float (str-cat ?servizirisposta)) 2)))
+        (test (= (float (str-cat ?serviziappartamento)) (- (float (str-cat ?servizirisposta)) 2))))
+   =>
+   (assert (attribute (name best-numero-servizi) (value ?name1) (certainty 40.0))))
+
+
+; ------ TENTATIVO NUMERO SERVIZI --------
+
 
 (defrule CHOOSE-QUALITIES::numero-servizi-unk
    (declare (salience 10000))
@@ -135,14 +207,64 @@
 
 
 
+
+
+
 ; Regole per selezionare il best-numero-piano 
-(defrule CHOOSE-QUALITIES::numero-piano-valorized
+; (defrule CHOOSE-QUALITIES::numero-piano-valorized
+;    (declare (salience 10000))
+;    (attribute (name numero-piano) (value ?val))
+;    (not (test (eq ?val unknown)))    ; se la risposta è unknown bisogna usare una regola apposita
+;    =>
+;    ;(printout t "numero-piano SI O NO: " crlf)
+;    (assert (attribute (name best-numero-piano) (value ?val) (certainty 40.0))))
+
+; ------ TENTATIVO NUMERO PIANO --------
+
+(defrule CHOOSE-QUALITIES::tentativo-numero-piano-uguale
    (declare (salience 10000))
-   (attribute (name numero-piano) (value ?val))
-   (not (test (eq ?val unknown)))    ; se la risposta è unknown bisogna usare una regola apposita
+   (attribute (name numero-piano) (value ?pianorisposta))
+   (apartment (name ?name1) (piano ?pianoappartamento))
+   ;(not (attribute (name best-prezzo-richiesto) (value ?name1) (certainty ?perc)))
+   (not (test (eq ?pianorisposta unknown)))    ; se la risposta è unknown bisogna usare una regola apposita
+   (or (test (= (float (str-cat ?pianoappartamento)) (float (str-cat ?pianorisposta)))))
    =>
-   ;(printout t "numero-piano SI O NO: " crlf)
-   (assert (attribute (name best-numero-piano) (value ?val) (certainty 40.0))))
+   (assert (attribute (name best-numero-piano) (value ?name1) (certainty 90.0))))
+
+
+(defrule CHOOSE-QUALITIES::tentativo-numero-piano-1
+   (declare (salience 10000))
+   (attribute (name numero-piano) (value ?pianorisposta))
+   (apartment (name ?name1) (piano ?pianoappartamento))
+   ;(not (attribute (name best-prezzo-richiesto) (value ?name1) (certainty ?perc)))
+   (not (test (eq ?pianorisposta unknown)))    ; se la risposta è unknown bisogna usare una regola apposita
+   (or (test (= (float (str-cat ?pianoappartamento)) (+ (float (str-cat ?pianorisposta)) 1)))
+        (test (= (float (str-cat ?pianoappartamento)) (- (float (str-cat ?pianorisposta)) 1))))
+   =>
+   (assert (attribute (name best-numero-piano) (value ?name1) (certainty 70.0))))
+
+(defrule CHOOSE-QUALITIES::tentativo-numero-piano-2
+   (declare (salience 10000))
+   (attribute (name numero-piano) (value ?pianorisposta))
+   (apartment (name ?name1) (piano ?pianoappartamento))
+   ;(not (attribute (name best-prezzo-richiesto) (value ?name1) (certainty ?perc)))
+   (not (test (eq ?pianorisposta unknown)))    ; se la risposta è unknown bisogna usare una regola apposita
+   (or (test (= (float (str-cat ?pianoappartamento)) (+ (float (str-cat ?pianorisposta)) 2)))
+        (test (= (float (str-cat ?pianoappartamento)) (- (float (str-cat ?pianorisposta)) 2))))
+   =>
+   (assert (attribute (name best-numero-piano) (value ?name1) (certainty 40.0))))
+
+
+(defrule CHOOSE-QUALITIES::tentativo-numero-piano-pidi60anni      ; se l'appartamento non ha l'ascensore e la persona ha più di 60 anni conviene non proporlo con alta certezza
+   (declare (salience 10000))
+   (attribute (name ha-piudi60anni) (value si))
+   (attribute (name numero-piano) (value ?pianorisposta))
+   (apartment (name ?name1) (piano ?pianoappartamento) (ascensore no))
+   =>
+   (assert (attribute (name best-numero-piano) (value ?name1) (certainty 25.0))))
+
+
+; ------ TENTATIVO NUMERO PIANO --------
 
 (defrule CHOOSE-QUALITIES::numero-piano-unk
    (declare (salience 10000))
@@ -150,11 +272,14 @@
    (test (eq ?val unknown))    ; se la risposta è unknown bisogna usare una regola apposita
    =>
    ;(printout t "numero-piano UNKNOWN: " crlf)
-   (assert (attribute (name best-numero-piano) (value terra) (certainty 20.0)))
-   (assert (attribute (name best-numero-piano) (value primo) (certainty 20.0)))
-   (assert (attribute (name best-numero-piano) (value secondo) (certainty 20.0)))
-   (assert (attribute (name best-numero-piano) (value terzo) (certainty 20.0)))
+   (assert (attribute (name best-numero-piano) (value 0) (certainty 20.0)))
+   (assert (attribute (name best-numero-piano) (value 1) (certainty 20.0)))
+   (assert (attribute (name best-numero-piano) (value 2) (certainty 20.0)))
+   (assert (attribute (name best-numero-piano) (value 3) (certainty 20.0)))
 )
+
+
+
 
 
 
@@ -191,6 +316,13 @@
    =>
    ;(printout t "zona SI O NO: " crlf)
    (assert (attribute (name best-zona) (value ?val) (certainty 40.0))))
+
+; Se l'utente vuole la casa in centro penso sia sensa proporne qualcuna nella prima cintura della città
+(defrule CHOOSE-QUALITIES::zona-valorized-centro
+   (declare (salience 10000))
+   (attribute (name zona) (value centro))
+   =>
+   (assert (attribute (name best-zona) (value primacintura) (certainty 30.0))))
 
 (defrule CHOOSE-QUALITIES::zona-unk
    (declare (salience 10000))

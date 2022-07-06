@@ -12,7 +12,7 @@
    (declare (salience 10000))
    =>
    (printout t t)
-   (printout t "        SELECTED APARTMENT" t t)
+   (printout t crlf "        SELECTED APARTMENT" t t)
    (printout t " APARTMENT                  CERTAINTY" t)
    (printout t " -------------------------------" t crlf)
    (assert (phase print-apartment)))
@@ -130,104 +130,105 @@
 
 ;-------- eregole per cancellare le vecchie risposte ------------
 
-(defrule PRINT-RESULTS::delete-old-answer-prezzo-massimo
-  (declare (salience 10000))
-  (attribute (name risposta) (value si))   
-  ?r <- (attribute (name risposta-unknown) (value prezzo-massimo))   
-  ?a <- (attribute (name best-prezzo-richiesto) (value ?val))   
-   =>
-    (retract ?a)
-)
+; (defrule PRINT-RESULTS::delete-old-answer-prezzo-massimo
+;   (declare (salience 10000))
+;   (attribute (name risposta) (value si))   
+;   ?r <- (attribute (name risposta-unknown) (value prezzo-massimo))   
+;   ?a <- (attribute (name best-prezzo-richiesto) (value ?val))   
+;    =>
+;     (retract ?a)
+; )
 
-(defrule PRINT-RESULTS::delete-old-answer-zona
-  (declare (salience 10000))
-  (attribute (name risposta) (value si))   
-  ?r <- (attribute (name risposta-unknown) (value zona))   
-  ?a <- (attribute (name best-zona) (value ?val))   
-   =>
-    (retract ?a)
-)
+; (defrule PRINT-RESULTS::delete-old-answer-zona
+;   (declare (salience 10000))
+;   (attribute (name risposta) (value si))   
+;   ?r <- (attribute (name risposta-unknown) (value zona))   
+;   ?a <- (attribute (name best-zona) (value ?val))   
+;    =>
+;     (retract ?a)
+; )
 
-(defrule PRINT-RESULTS::delete-old-answer-metri-quadri
-  (declare (salience 10000))
-  (attribute (name risposta) (value si))   
-  ?r <- (attribute (name risposta-unknown) (value metri-quadri))   
-  ?a <- (attribute (name best-metri-quadri) (value ?val))   
-   =>
-    (retract ?a)
-)
+; (defrule PRINT-RESULTS::delete-old-answer-metri-quadri
+;   (declare (salience 10000))
+;   (attribute (name risposta) (value si))   
+;   ?r <- (attribute (name risposta-unknown) (value metri-quadri))   
+;   ?a <- (attribute (name best-metri-quadri) (value ?val))   
+;    =>
+;     (retract ?a)
+; )
 
-(defrule PRINT-RESULTS::delete-old-answer-numero-vani
-  (declare (salience 10000))
-  (attribute (name risposta) (value si))   
-  ?r <- (attribute (name risposta-unknown) (value numero-vani))   
-  ?a <- (attribute (name best-numero-vani) (value ?val))   
-   =>
-    (retract ?a)
-)
+; (defrule PRINT-RESULTS::delete-old-answer-numero-vani
+;   (declare (salience 10000))
+;   (attribute (name risposta) (value si))   
+;   ?r <- (attribute (name risposta-unknown) (value numero-vani))   
+;   ?a <- (attribute (name best-numero-vani) (value ?val))   
+;    =>
+;     (retract ?a)
+; )
 
-(defrule PRINT-RESULTS::delete-old-answer-numero-servizi
-  (declare (salience 10000))
-  (attribute (name risposta) (value si))   
-  ?r <- (attribute (name risposta-unknown) (value numero-servizi))   
-  ?a <- (attribute (name best-numero-servizi) (value ?val))   
-   =>
-    (retract ?a)
-)
+; (defrule PRINT-RESULTS::delete-old-answer-numero-servizi
+;   (declare (salience 10000))
+;   (attribute (name risposta) (value si))   
+;   ?r <- (attribute (name risposta-unknown) (value numero-servizi))   
+;   ?a <- (attribute (name best-numero-servizi) (value ?val))   
+;    =>
+;     (retract ?a)
+; )
 
-(defrule PRINT-RESULTS::delete-old-answer-numero-piano
-  (declare (salience 10000))
-  (attribute (name risposta) (value si))   
-  ?r <- (attribute (name risposta-unknown) (value numero-piano))   
-  ?a <- (attribute (name best-numero-servizi) (value ?val))   
-   =>
-    (retract ?a)
-)
+; (defrule PRINT-RESULTS::delete-old-answer-numero-piano
+;   (declare (salience 10000))
+;   (attribute (name risposta) (value si))   
+;   ?r <- (attribute (name risposta-unknown) (value numero-piano))   
+;   ?a <- (attribute (name best-numero-servizi) (value ?val))   
+;    =>
+;     (retract ?a)
+; )
 
-(defrule PRINT-RESULTS::delete-old-answer-citta
-  (declare (salience 10000))
-  (attribute (name risposta) (value si))   
-  ?r <- (attribute (name risposta-unknown) (value citta))   
-  ?a <- (attribute (name best-citta) (value ?val))   
-   =>
-    (retract ?a)
-)
+; (defrule PRINT-RESULTS::delete-old-answer-citta
+;   (declare (salience 10000))
+;   (attribute (name risposta) (value si))   
+;   ?r <- (attribute (name risposta-unknown) (value citta))   
+;   ?a <- (attribute (name best-citta) (value ?val))   
+;    =>
+;     (retract ?a)
+; )
 
-(defrule PRINT-RESULTS::delete-old-answer-quartiere
-  (declare (salience 10000))
-  (attribute (name risposta) (value si))   
-  ?r <- (attribute (name risposta-unknown) (value quartiere))   
-  ?a <- (attribute (name best-quartiere) (value ?val))   
-   =>
-    (retract ?a)
-)
+; (defrule PRINT-RESULTS::delete-old-answer-quartiere
+;   (declare (salience 10000))
+;   (attribute (name risposta) (value si))   
+;   ?r <- (attribute (name risposta-unknown) (value quartiere))   
+;   ?a <- (attribute (name best-quartiere) (value ?val))   
+;    =>
+;     (retract ?a)
+; )
 
-(defrule PRINT-RESULTS::delete-old-answer-ascensore
-  (declare (salience 10000))
-  (attribute (name risposta) (value si))   
-  ?r <- (attribute (name risposta-unknown) (value ascensore))   
-  ?a <- (attribute (name best-ascensore) (value ?val))   
-   =>
-    (retract ?a)
-)
+; (defrule PRINT-RESULTS::delete-old-answer-ascensore
+;   (declare (salience 10000))
+;   (attribute (name risposta) (value si))   
+;   ?r <- (attribute (name risposta-unknown) (value ascensore))   
+;   ?a <- (attribute (name best-ascensore) (value ?val))   
+;    =>
+;    ;(printout t "RIMUOVO VECCHIE RISPOSTE ASCENSORE: " crlf)
+;     (retract ?a)
+; )
 
-(defrule PRINT-RESULTS::delete-old-answer-boxauto
-  (declare (salience 10000))
-  (attribute (name risposta) (value si))   
-  ?r <- (attribute (name risposta-unknown) (value boxauto))   
-  ?a <- (attribute (name best-boxauto) (value ?val))   
-   =>
-    (retract ?a)
-)
+; (defrule PRINT-RESULTS::delete-old-answer-boxauto
+;   (declare (salience 10000))
+;   (attribute (name risposta) (value si))   
+;   ?r <- (attribute (name risposta-unknown) (value boxauto))   
+;   ?a <- (attribute (name best-boxauto) (value ?val))   
+;    =>
+;     (retract ?a)
+; )
 
-(defrule PRINT-RESULTS::delete-old-answer-terrazzino
-  (declare (salience 10000))
-  (attribute (name risposta) (value si))   
-  ?r <- (attribute (name risposta-unknown) (value terrazzino))   
-  ?a <- (attribute (name best-terrazzino) (value ?val))   
-   =>
-    (retract ?a)
-)
+; (defrule PRINT-RESULTS::delete-old-answer-terrazzino
+;   (declare (salience 10000))
+;   (attribute (name risposta) (value si))   
+;   ?r <- (attribute (name risposta-unknown) (value terrazzino))   
+;   ?a <- (attribute (name best-terrazzino) (value ?val))   
+;    =>
+;     (retract ?a)
+; )
 
 ;-------- fine regole per cancellare le vecchie risposte ------------
 
