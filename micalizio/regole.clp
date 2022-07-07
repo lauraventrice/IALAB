@@ -229,7 +229,7 @@
    (not (test (eq ?pianorisposta unknown)))    ; se la risposta è unknown bisogna usare una regola apposita
    (or (test (= (float (str-cat ?pianoappartamento)) (float (str-cat ?pianorisposta)))))
    =>
-   (assert (attribute (name best-numero-piano) (value ?name1) (certainty 90.0))))
+   (assert (attribute (name best-numero-piano-apartment) (value ?name1) (certainty 90.0))))
 
 
 (defrule CHOOSE-QUALITIES::tentativo-numero-piano-1
@@ -241,7 +241,7 @@
    (or (test (= (float (str-cat ?pianoappartamento)) (+ (float (str-cat ?pianorisposta)) 1)))
         (test (= (float (str-cat ?pianoappartamento)) (- (float (str-cat ?pianorisposta)) 1))))
    =>
-   (assert (attribute (name best-numero-piano) (value ?name1) (certainty 70.0))))
+   (assert (attribute (name best-numero-piano-apartment) (value ?name1) (certainty 70.0))))
 
 (defrule CHOOSE-QUALITIES::tentativo-numero-piano-2
    (declare (salience 10000))
@@ -252,7 +252,7 @@
    (or (test (= (float (str-cat ?pianoappartamento)) (+ (float (str-cat ?pianorisposta)) 2)))
         (test (= (float (str-cat ?pianoappartamento)) (- (float (str-cat ?pianorisposta)) 2))))
    =>
-   (assert (attribute (name best-numero-piano) (value ?name1) (certainty 40.0))))
+   (assert (attribute (name best-numero-piano-apartment) (value ?name1) (certainty 40.0))))
 
 
 (defrule CHOOSE-QUALITIES::tentativo-numero-piano-pidi60anni      ; se l'appartamento non ha l'ascensore e la persona ha più di 60 anni conviene non proporlo con alta certezza
@@ -261,7 +261,20 @@
    (attribute (name numero-piano) (value ?pianorisposta))
    (apartment (name ?name1) (piano ?pianoappartamento) (ascensore no))
    =>
-   (assert (attribute (name best-numero-piano) (value ?name1) (certainty 25.0))))
+   (assert (attribute (name best-numero-piano-apartment) (value ?name1) (certainty 25.0))))
+
+
+(defrule CHOOSE-QUALITIES::tentativo-numero-piano-pidi60anni-v2     ; se l'appartamento non ha l'ascensore ha senso proporre appartamenti ai piani più bassi
+   (declare (salience 10000))
+   (attribute (name ha-piudi60anni) (value si))
+   (attribute (name numero-piano) (value ?pianorisposta))
+   (apartment (name ?name1) (piano ?pianoappartamento) (ascensore no))
+   =>
+   (assert (attribute (name best-numero-piano) (value 0) (certainty 90.0)))
+   (assert (attribute (name best-numero-piano) (value 1) (certainty 75.0)))
+   (assert (attribute (name best-numero-piano) (value 2) (certainty 50.0)))
+   (assert (attribute (name best-numero-piano) (value 3) (certainty 25.0)))
+)
 
 
 ; ------ TENTATIVO NUMERO PIANO --------
@@ -768,9 +781,30 @@
       (then best-servizio-vicino is parco with certainty 75 and
             best-servizio-vicino is palestra with certainty 90))
 
+  (rule (if e-automunito is no)
+      (then best-servizio-vicino is mezzipubblici with certainty 95))
+
+  (rule (if e-automunito is si)
+      (then best-boxauto is si with certainty 85))
+
   (rule (if ha-piudi60anni is si)
       (then best-servizio-vicino is ospedale with certainty 70 and
-            best-servizio-vicino is mezzipubblici with certainty 60))
+            best-servizio-vicino is mezzipubblici with certainty 80))
+
+  (rule (if ha-piudi60anni is si)   ; se ha più di 60 anni ha senso dare l'ascensore
+      (then best-ascensore is si with certainty 90))
+
+  ; se l'utente preferisce il terzo piano e non vuole l'ascensore può avere senso proporre appartamenti ad un piano più basso
+  ; NB: ho messo il primo piano perchè mettere il piano terra potrebbe essere troppo esagerato dato che ne voleva uno più alto
+  (rule (if best-piano is 3 and
+            ascensore is no)
+        (then best-piano is 1 with certainty 60))
+
+  (rule (if best-piano is 2 and
+            ascensore is no)
+        (then best-piano is 1 with certainty 80))
+
+
 
 )
 

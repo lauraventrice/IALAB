@@ -98,4 +98,9 @@
         (the-question "E' uno sportivo? ")
         (valid-answers si no unknown))
 
+    (question (attribute e-automunito)
+        (the-question "E' automunito? ")
+        (valid-answers si no unknown))
+
+
 )
