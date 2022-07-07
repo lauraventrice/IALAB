@@ -1,6 +1,6 @@
 rl -s learning on # enable RL
 indifferent-selection -g # use epsilon-greedy decision making
-indifferent-selection -e 0.5 # 10% deviation from greedy
+indifferent-selection -e 0.7 # 10% deviation from greedy
 
 ##RECAP: 
 # Dobbiamo avere:
@@ -73,7 +73,21 @@ sp {apply*initialize-escape
         ^out no)
    (<loc> ^x 5.0 ^y 3.0)      
    (<d> ^x 3.0 ^y 4.0)
-   (<f> ^broken no ^height 3.5)
+   (<f> ^corners <ul> <ur> <ll> <lr>
+        ^broken no 
+        ^height 3.5)
+   (<ul> ^name upper-left
+         ^hit no
+         ^reward 1)
+   (<ur> ^name upper-right
+         ^hit no
+         ^reward -1)
+   (<ll> ^name lower-left
+         ^hit no
+         ^reward 1)
+   (<lr> ^name lower-right
+         ^hit no
+         ^reward -1)                       
    (<r> ^height 1.5)
    (<o1> ^name spring
          ^available yes)
@@ -85,19 +99,19 @@ sp {apply*initialize-escape
          ^available yes)      
    (<c1> ^name stone-sprig
          ^built no
-         ^reward -1
          ^object1 stone
-         ^object2 sprig)
+         ^object2 sprig
+         ^reward -1)
    (<c2> ^name spring-sprig
          ^built no
-         ^reward 1
          ^object1 spring
-         ^object2 sprig)
+         ^object2 sprig
+         ^reward 1)
    (<c3> ^name stone-spring
          ^built no
-         ^reward -1
          ^object1 stone
-         ^object2 spring)
+         ^object2 spring
+         ^reward -1)
    (<c4> ^name trunks
          ^built no
          ^object trunk)
@@ -357,9 +371,9 @@ sp {es*propose*combine
    (<f> ^broken no)   
    (<c> ^name <obj> 
         ^built no
-        ^reward <val>
         ^object1 <obj1>
-        ^object2 <obj2>)
+        ^object2 <obj2>
+        ^reward <val>)
    (<s> ^objects <o1> <o2>)
    (<o1> ^name <obj1>
          ^available yes)
@@ -419,10 +433,10 @@ sp {apply*combine
    (<op> ^name combine
          ^obj <obj>)
    (<c> ^name <obj>
-        ^reward <val>
         ^built no
         ^object1 <obj1>
-        ^object2 <obj2>)
+        ^object2 <obj2>
+        ^reward <val>)
    (<s> ^objects <o1> <o2>)
    (<o1> ^name <obj1>
          ^available yes)
@@ -441,15 +455,15 @@ sp {apply*combine
 # When a combine is chosen, assert the associated reward
 ##
 sp {elaborate*reward
-   (state <s> ^reward-link <r>
+   (state <s> ^reward-link <rl>
               ^comb <c>)
    (<c> ^name <d-name> 
-        ^reward <d-reward>
-        ^built yes)
+        ^built yes
+        ^reward <rwd>)   
     -->
-   (<r> ^reward <rr>)
-   (<rr> ^value <d-reward>)
-   (write (crlf) |                           REWARD | <d-name>)
+   (<rl> ^reward <r>)
+   (<r> ^value <rwd>)
+   (write (crlf) |                           REWARD | <d-name> | | <rwd>)
 }
 
 
@@ -457,10 +471,12 @@ sp {default*top-goal*halt*operator*failure
    (state <ss> ^impasse no-change ^superstate <s>)
    (<s> ^superstate nil)
     -->
+   (<s> ^operator <o>) 
    (write (crlf) |                          No operator can be selected for the top goal. |) 
    (write (crlf) |                          The robot failed to leave the room. |) 
    (halt)
 }
+
 ###
 ### VI. Propose and apply the main operator to break the window throwing stones
 ###
@@ -468,27 +484,121 @@ sp {default*top-goal*halt*operator*failure
 
 sp {es*propose*stone*throwing
    (state <s> ^window <f>
-              ^comb <c>)
-   (<f> ^broken no)
+              ^comb <c>
+              ^objects <o>)           
+   (<f> ^corners <cr>
+        ^broken no)
+   (<cr> ^name <c-name>)
    (<c> ^name spring-sprig
-        ^built yes)         
+        ^built yes)  
+   (<o> ^name stone
+        ^available yes)            
     --> 
    (<s> ^operator <op>)
-   (<op> ^name throw)
+   (<op> ^name throw
+         ^corner <c-name>)
 }
 
+##RL PER OGNI ANGOLO
+
+## Soar-RL rule for throw at the upper left corner of the window
+
+sp {es*rl*throw*upper*left
+   (state <s> ^operator <op> +)
+   (<op> ^name throw
+         ^corner upper-left)
+    -->
+   (<s> ^operator <op> = 0)
+}
+
+## Soar-RL rule for throw at the upper right corner of the window
+
+sp {es*rl*throw*upper*right
+   (state <s> ^operator <op> +)
+   (<op> ^name throw
+         ^corner upper-right)
+    -->
+   (<s> ^operator <op> = 0)
+}
+
+## Soar-RL rule for throw at the lower left corner of the window
+
+sp {es*rl*throw*lower*left
+   (state <s> ^operator <op> +)
+   (<op> ^name throw
+         ^corner lower-left)
+    -->
+   (<s> ^operator <op> = 0)
+}
+
+## Soar-RL rule for throw at the lower right corner of the window
+
+sp {es*rl*throw*lower*right
+   (state <s> ^operator <op> +)
+   (<op> ^name throw
+         ^corner lower-right)
+    -->
+   (<s> ^operator <op> = 0)
+}
 
 sp {es*apply-op*stone*throwing
    (state <s> ^operator <o>
-              ^window <f>)        
-   (<o> ^name throw)
-   (<f> ^broken no)    
+              ^window <f>
+              ^objects <ob>)
+   (<ob> ^name stone
+         ^available yes)                   
+   (<o> ^name throw
+        ^corner <c-name>)  
+   (<f> ^corners <c>)
+   (<c> ^name <c-name>)     
     -->
-   (<f> ^broken no - yes) 
-   (write (crlf) |          Stone throwing! |)
-   (<s> ^operator <o> -)
+   (<c> ^hit no - yes)
+   (<ob> ^available yes - no)
+   (write (crlf) |                           Stone throwing! | <c-name>)
 }
 
+sp {elaborate*reward*throw
+   (state <s> ^reward-link <rl>
+              ^window <f>
+              ^objects <ob>) 
+   (<f> ^corners <c>)           
+   (<c> ^name <c-name> 
+        ^hit yes
+        ^reward <rwd>)
+   (<ob> ^name stone
+         ^available no)        
+    -->
+   (<rl> ^reward <r>)
+   (<r> ^value <rwd>)
+   (write (crlf) |                           REWARD | <c-name> | | <rwd>)
+}
+
+sp {terminate*reward*throw
+   (state <s> ^reward-link <rl>
+              ^window <f>)
+   (<f> ^corners <c>)
+   (<c> ^hit yes)           
+   (<c> ^name <d-name> <> lower-right)
+   (<c> ^name <d-name> <> upper-left)   
+    -->
+   (<f> ^broken no - yes)
+   (write (crlf) |                           WINDOW | BROKEN | | <d-name>)
+}
+
+##sp {terminate*reward*throw*failure
+##   (state <s> ^reward-link <rl>
+##              ^window <f>)
+##   (<f> ^corners <c>)
+##   (<c> ^hit yes)           
+##   (<c> ^name <d-name> <> lower-right)
+##   (<c> ^name <d-name> <> upper-left)   
+##    -->
+##   (<f> ^broken no)
+##   (write (crlf) |                                                   ehilaaaa | <d-name>)
+##   (halt)
+##}
+
+##FASE DI COMBINAZIONE TRONCHI PER USCIRE
 
 sp {es*propose*combine*trunks
    (state <s> ^window <f>
