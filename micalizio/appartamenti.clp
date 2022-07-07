@@ -50,12 +50,30 @@
     ; OK LUI C'E'
     (apartment  (name "Quadrilocale in vendita in strada Genova, 255 /4")
                 (metriquadri 110) (numerovani 3) (numeroservizi 2) (piano 1) (citta torino) (zona primacintura) (quartiere moncalieri)
-                (ascensore si) (boxauto no) (metri-quadri-boxauto 5) (terrazzino si) (prezzorichiesto 240000) (servizivicino ospedale parco scuola)
+                (ascensore si) (boxauto no) (terrazzino si) (prezzorichiesto 240000) (servizivicino ospedale parco scuola)
     )
 
     ; OK LUI C'E'
     (apartment  (name "Trilocale in vendita in strada Genova, 208")
                 (metriquadri 83) (numerovani 3) (numeroservizi 1) (piano 1) (citta torino) (zona periferia) (quartiere moncalieri)
+                (ascensore no) (boxauto si) (metri-quadri-boxauto 3) (terrazzino si) (prezzorichiesto 157000) (servizivicino parco mezzipubblici palestra)
+    )
+
+    ; OK LUI C'E'
+    (apartment  (name "Appartamento su due piani in vendita in strada dei Pinguini tattici Nucleari")
+                (metriquadri 160) (numerovani 3) (numeroservizi 3) (piano 0) (citta torino) (zona primacintura) (quartiere moncalieri)
+                (ascensore si) (boxauto si) (metri-quadri-boxauto 3) (terrazzino si) (prezzorichiesto 420100) (servizivicino parco scuola mezzipubblici palestra)
+    )
+
+    ; OK LUI C'E'
+    (apartment  (name "Quadrilocale in vendita in strada delle Gazzelle, 45")
+                (metriquadri 120) (numerovani 2) (numeroservizi 2) (piano 1) (citta torino) (zona primacintura) (quartiere moncalieri)
+                (ascensore si) (boxauto si) (terrazzino si) (prezzorichiesto 190900) (servizivicino parco scuola mezzipubblici)
+    )
+
+    ; OK LUI C'E'
+    (apartment  (name "Monolocale in vendita in strada Ranieri, 12")
+                (metriquadri 60) (numerovani 1) (numeroservizi 1) (piano 2) (citta torino) (zona periferia) (quartiere moncalieri)
                 (ascensore no) (boxauto si) (metri-quadri-boxauto 3) (terrazzino si) (prezzorichiesto 157000) (servizivicino parco mezzipubblici palestra)
     )
 
@@ -76,6 +94,24 @@
     (apartment  (name "Appartamento in vendita in via Filadelfia, 50")
                 (metriquadri 130) (numerovani 3) (numeroservizi 2) (piano 1) (citta torino) (zona centro) (quartiere lingotto)
                 (ascensore si) (boxauto si) (metri-quadri-boxauto 4) (terrazzino si) (prezzorichiesto 260000) (servizivicino ospedale mezzipubblici palestra)
+    )
+
+    ; OK LUI C'E'
+    (apartment  (name "Attico in vendita in via Roma, 43")
+                (metriquadri 308) (numerovani 3) (numeroservizi 2) (piano 0) (citta torino) (zona centro) (quartiere lingotto)
+                (ascensore si) (boxauto si) (metri-quadri-boxauto 7) (terrazzino si) (prezzorichiesto 613000) (servizivicino ospedale scuola mezzipubblici)
+    )
+
+    ; OK LUI C'E'
+    (apartment  (name "Trilocale in vendita in via Madama Cristina, 28")
+                (metriquadri 84) (numerovani 3) (numeroservizi 2) (piano 1) (citta torino) (zona primacintura) (quartiere lingotto)
+                (ascensore si) (boxauto si) (terrazzino no) (prezzorichiesto 134500) (servizivicino parco scuola ospedale palestra) 
+    )
+
+    ; OK LUI C'E'
+    (apartment  (name "Appartamento in vendita in via Toledo, 10")
+                (metriquadri 153) (numerovani 3) (numeroservizi 3) (piano 2) (citta torino) (zona primacintura) (quartiere lingotto)
+                (ascensore si) (boxauto no) (terrazzino si) (prezzorichiesto 293000) (servizivicino ospedale mezzipubblici)
     )
 
     ; lista appartamenti a trastevere (roma)
