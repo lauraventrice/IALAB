@@ -349,8 +349,93 @@
    (assert (attribute (name best-zona) (value periferia) (certainty 20.0)))
 )
 
+; ------ REGOLE PER IL BEST QUARTIERE --------
+
+; Regole per selezionare il best-quartiere di Torino
+(defrule CHOOSE-QUALITIES::quartiere-valorized-torino-1
+   (declare (salience 10000))
+   (attribute (name citta) (value torino))
+   (attribute (name zona) (value ?val))
+   (or (test (eq ?val periferia)) (test (eq ?val primacintura)))
+   =>
+   (assert (attribute (name best-quartiere) (value moncalieri) (certainty 80.0)))
+   (assert (attribute (name best-quartiere) (value lingotto) (certainty 60.0)))
+)
+
+(defrule CHOOSE-QUALITIES::quartiere-valorized-torino-2
+   (declare (salience 10000))
+   (attribute (name citta) (value torino))
+   (attribute (name zona) (value ?val))
+   (or (test (eq ?val primacintura)) (test (eq ?val centro)))
+   =>
+   (assert (attribute (name best-quartiere) (value moncalieri) (certainty 60.0)))
+   (assert (attribute (name best-quartiere) (value lingotto) (certainty 80.0)))
+)
+
+; Regole per selezionare il best-quartiere di Milano
+(defrule CHOOSE-QUALITIES::quartiere-valorized-milano-1
+   (declare (salience 10000))
+   (attribute (name citta) (value milano))
+   (attribute (name zona) (value ?val))
+   (or (test (eq ?val periferia)) (test (eq ?val primacintura)))
+   =>
+   (assert (attribute (name best-quartiere) (value sansiro) (certainty 80.0)))
+   (assert (attribute (name best-quartiere) (value navigli) (certainty 60.0)))
+)
+
+(defrule CHOOSE-QUALITIES::quartiere-valorized-milano-2
+   (declare (salience 10000))
+   (attribute (name citta) (value milano))
+   (attribute (name zona) (value ?val))
+   (or (test (eq ?val primacintura)) (test (eq ?val centro)))
+   =>
+   (assert (attribute (name best-quartiere) (value sansiro) (certainty 60.0)))
+   (assert (attribute (name best-quartiere) (value navigli) (certainty 80.0)))
+)
 
 
+; Regole per selezionare il best-quartiere di Firenze
+(defrule CHOOSE-QUALITIES::quartiere-valorized-firenze-1
+   (declare (salience 10000))
+   (attribute (name citta) (value firenze))
+   (attribute (name zona) (value ?val))
+   (or (test (eq ?val periferia)) (test (eq ?val primacintura)))
+   =>
+   (assert (attribute (name best-quartiere) (value rovezzano) (certainty 80.0)))
+   (assert (attribute (name best-quartiere) (value santacroce) (certainty 60.0)))
+)
+
+(defrule CHOOSE-QUALITIES::quartiere-valorized-firenze-2
+   (declare (salience 10000))
+   (attribute (name citta) (value firenze))
+   (attribute (name zona) (value ?val))
+   (or (test (eq ?val primacintura)) (test (eq ?val centro)))
+   =>
+   (assert (attribute (name best-quartiere) (value rovezzano) (certainty 60.0)))
+   (assert (attribute (name best-quartiere) (value santacroce) (certainty 80.0)))
+)
+
+
+; Regole per selezionare il best-quartiere di Roma
+(defrule CHOOSE-QUALITIES::quartiere-valorized-roma-1
+   (declare (salience 10000))
+   (attribute (name citta) (value roma))
+   (attribute (name zona) (value ?val))
+   (or (test (eq ?val periferia)) (test (eq ?val primacintura)))
+   =>
+   (assert (attribute (name best-quartiere) (value trastevere) (certainty 80.0)))
+   (assert (attribute (name best-quartiere) (value campitelli) (certainty 60.0)))
+)
+
+(defrule CHOOSE-QUALITIES::quartiere-valorized-roma-2
+   (declare (salience 10000))
+   (attribute (name citta) (value roma))
+   (attribute (name zona) (value ?val))
+   (or (test (eq ?val primacintura)) (test (eq ?val centro)))
+   =>
+   (assert (attribute (name best-quartiere) (value trastevere) (certainty 60.0)))
+   (assert (attribute (name best-quartiere) (value campitelli) (certainty 80.0)))
+)
 
 ; Regole per selezionare il best-ascensore 
 
@@ -371,6 +456,8 @@
    (assert (attribute (name best-ascensore) (value si) (certainty 20.0)))
    (assert (attribute (name best-ascensore) (value no) (certainty 20.0))))
 
+
+; ------ FINE REGOLE PER IL BEST QUARTIERE --------
 
 
 
