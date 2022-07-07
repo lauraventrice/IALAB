@@ -192,7 +192,7 @@
   ?a <- (attribute (name best-citta) (value ?val))
   (attribute (name preferisce) (value ?preferisce))
    =>
-   (printout t "RIMUOVO VECCHIE RISPOSTE CITTA: " crlf)
+   ;(printout t "RIMUOVO VECCHIE RISPOSTE CITTA: " crlf)
     (assert (attribute (name preferisce) (value ?preferisce) (certainty 22.0)))  ; riasserisco il valore di preferisce così poi mi serve per far riscattare la regola per determinare la migliore città se poi risponde con un valore
     (retract ?a)
 )
