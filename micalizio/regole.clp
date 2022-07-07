@@ -293,7 +293,7 @@
 ; Regole per selezionare il best-quartiere di Torino
 (defrule CHOOSE-QUALITIES::quartiere-valorized-torino-1
    (declare (salience 10000))
-   (attribute (name citta) (value torino))
+   (or (attribute (name citta) (value torino)) (attribute (name best-citta) (value torino)))
    (attribute (name zona) (value ?val))
    (or (test (eq ?val periferia)) (test (eq ?val primacintura)))
    =>
@@ -303,7 +303,7 @@
 
 (defrule CHOOSE-QUALITIES::quartiere-valorized-torino-2
    (declare (salience 10000))
-   (attribute (name citta) (value torino))
+   (or (attribute (name citta) (value torino)) (attribute (name best-citta) (value torino)))
    (attribute (name zona) (value ?val))
    (or (test (eq ?val primacintura)) (test (eq ?val centro)))
    =>
@@ -314,7 +314,7 @@
 ; Regole per selezionare il best-quartiere di Milano
 (defrule CHOOSE-QUALITIES::quartiere-valorized-milano-1
    (declare (salience 10000))
-   (attribute (name citta) (value milano))
+   (or (attribute (name citta) (value milano)) (attribute (name best-citta) (value milano)))
    (attribute (name zona) (value ?val))
    (or (test (eq ?val periferia)) (test (eq ?val primacintura)))
    =>
@@ -324,7 +324,7 @@
 
 (defrule CHOOSE-QUALITIES::quartiere-valorized-milano-2
    (declare (salience 10000))
-   (attribute (name citta) (value milano))
+   (or (attribute (name citta) (value milano)) (attribute (name best-citta) (value milano)))
    (attribute (name zona) (value ?val))
    (or (test (eq ?val primacintura)) (test (eq ?val centro)))
    =>
@@ -336,7 +336,7 @@
 ; Regole per selezionare il best-quartiere di Firenze
 (defrule CHOOSE-QUALITIES::quartiere-valorized-firenze-1
    (declare (salience 10000))
-   (attribute (name citta) (value firenze))
+   (or (attribute (name citta) (value firenze)) (attribute (name best-citta) (value firenze)))
    (attribute (name zona) (value ?val))
    (or (test (eq ?val periferia)) (test (eq ?val primacintura)))
    =>
@@ -346,7 +346,7 @@
 
 (defrule CHOOSE-QUALITIES::quartiere-valorized-firenze-2
    (declare (salience 10000))
-   (attribute (name citta) (value firenze))
+   (or (attribute (name citta) (value firenze)) (attribute (name best-citta) (value firenze)))
    (attribute (name zona) (value ?val))
    (or (test (eq ?val primacintura)) (test (eq ?val centro)))
    =>
@@ -358,7 +358,7 @@
 ; Regole per selezionare il best-quartiere di Roma
 (defrule CHOOSE-QUALITIES::quartiere-valorized-roma-1
    (declare (salience 10000))
-   (attribute (name citta) (value roma))
+   (or (attribute (name citta) (value roma)) (attribute (name best-citta) (value roma)))
    (attribute (name zona) (value ?val))
    (or (test (eq ?val periferia)) (test (eq ?val primacintura)))
    =>
@@ -368,7 +368,7 @@
 
 (defrule CHOOSE-QUALITIES::quartiere-valorized-roma-2
    (declare (salience 10000))
-   (attribute (name citta) (value roma))
+   (or (attribute (name citta) (value roma)) (attribute (name best-citta) (value roma)))
    (attribute (name zona) (value ?val))
    (or (test (eq ?val primacintura)) (test (eq ?val centro)))
    =>

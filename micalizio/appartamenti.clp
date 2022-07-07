@@ -351,7 +351,7 @@
   (attribute (name best-numero-piano) (value ?p) (certainty ?certainty-20)) ; attributo legato proprio al numero del piano
   (attribute (name best-citta) (value ?c) (certainty ?certainty-5))
   (attribute (name best-zona) (value ?z) (certainty ?certainty-6))
-  ; ; (attribute (name best-quartiere) (value ?q) (certainty ?certainty-7))
+  (attribute (name best-quartiere) (value ?q) (certainty ?certainty-7))
   (attribute (name best-ascensore) (value ?a) (certainty ?certainty-8))
   (attribute (name best-boxauto) (value ?ba) (certainty ?certainty-9))
   (attribute (name best-terrazzino) (value ?t) (certainty ?certainty-11))
@@ -364,5 +364,5 @@
   =>
   ;(printout t "GENERO ASSERT APPARTAMENTI" crlf)
   (assert (attribute (name apartment) (value ?name)
-                     (certainty (min ?certainty-1 ?certainty-2 ?certainty-3 ?certainty-4 ?certainty-5 ?certainty-6 ?certainty-8 ?certainty-9 ?certainty-11 ?certainty-12 ?certainty-13 ?certainty-20)))))
+                     (certainty (min ?certainty-1 ?certainty-2 ?certainty-3 ?certainty-4 ?certainty-5 ?certainty-6 ?certainty-7 ?certainty-8 ?certainty-9 ?certainty-11 ?certainty-12 ?certainty-13 ?certainty-20)))))
 
