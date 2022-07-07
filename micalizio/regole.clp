@@ -805,6 +805,23 @@
         (then best-piano is 1 with certainty 80))
 
 
+   ;se l'utente ha risposto unknown alla citta e preferisce la montagna mettiamo torino - milano, altrimenti firenze - roma
+   (rule (if citta is unknown and
+             preferisce is mare)
+        (then best-citta is roma with certainty 85 and
+              best-citta is firenze with certainty 65))
+
+   (rule (if citta is unknown and
+             preferisce is montagna)
+        (then best-citta is torino with certainty 85 and
+              best-citta is milano with certainty 70))
+
+   ; se l'utente risponde unknown alla preferenza tra mare e montagna mettiamo tutte le città con la stessa certezza
+   (rule (if preferisce is unknown)
+        (then best-citta is torino with certainty 20 and
+              best-citta is milano with certainty 20 and
+              best-citta is firenze with certainty 20 and
+              best-citta is roma with certainty 20))
 
 )
 

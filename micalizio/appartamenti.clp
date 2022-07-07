@@ -5,7 +5,6 @@
 (defmodule APPARTAMENTI (import MAIN ?ALL) (export ?ALL))
 
 (deffacts any-attributes
-  ;(attribute (name best-metri-quadri) (value any))
   (attribute (name best-numero-vani) (value any))
   (attribute (name best-numero-servizi) (value any))
   (attribute (name best-numero-piano) (value any))
@@ -14,7 +13,6 @@
   ;(attribute (name best-quartiere) (value any))
   (attribute (name best-ascensore) (value any))
   (attribute (name best-boxauto) (value any))
-  ;(attribute (name best-metri-quadri-boxauto) (value any))
   (attribute (name best-terrazzino) (value any))
   (attribute (name best-prezzo-richiesto) (value any))
 )
@@ -32,7 +30,7 @@
     (slot quartiere (default ?NONE))
     (slot ascensore (default ?NONE))
     (slot boxauto (default ?NONE))
-    (multislot metri-quadri-boxauto (default any))
+    ;(multislot metri-quadri-boxauto (default any))
     (slot terrazzino (default ?NONE))
     (slot prezzorichiesto (default ?NONE))
     (multislot servizivicino (default any))
@@ -245,17 +243,13 @@
         (terrazzino ?t)
         (prezzorichiesto ?pr))
 
-  ;(attribute (name best-numero-vani) (value ?nv) (certainty ?certainty-2))
-  ;(attribute (name best-numero-servizi) (value ?ns) (certainty ?certainty-3))
   (attribute (name best-numero-piano) (value ?p) (certainty ?certainty-20)) ; attributo legato proprio al numero del piano
   (attribute (name best-citta) (value ?c) (certainty ?certainty-5))
   (attribute (name best-zona) (value ?z) (certainty ?certainty-6))
   ; ; (attribute (name best-quartiere) (value ?q) (certainty ?certainty-7))
   (attribute (name best-ascensore) (value ?a) (certainty ?certainty-8))
-   (attribute (name best-boxauto) (value ?ba) (certainty ?certainty-9))
-  ; ; ; (attribute (name best-metri-quadri-boxauto) (value ?mqba) (certainty ?certainty-10))
+  (attribute (name best-boxauto) (value ?ba) (certainty ?certainty-9))
   (attribute (name best-terrazzino) (value ?t) (certainty ?certainty-11))
-
   (attribute (name best-prezzo-richiesto) (value ?name) (certainty ?certainty-12))
   (attribute (name best-metri-quadri) (value ?name) (certainty ?certainty-1))
   (attribute (name best-numero-piano-apartment) (value ?name) (certainty ?certainty-4)) ; attributo legato al numero del piano dell'appartamento specifico
@@ -267,6 +261,3 @@
   (assert (attribute (name apartment) (value ?name)
                      (certainty (min ?certainty-1 ?certainty-2 ?certainty-3 ?certainty-4 ?certainty-5 ?certainty-6 ?certainty-8 ?certainty-9 ?certainty-11 ?certainty-12 ?certainty-13 ?certainty-20)))))
 
-
-
-; ?certainty-2 ?certainty-3 ?certainty-4 ?certainty-5 ?certainty-6 ?certainty-7 ?certainty-8 ?certainty-9 ?certainty-11

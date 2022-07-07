@@ -102,5 +102,9 @@
         (the-question "E' automunito? ")
         (valid-answers si no unknown))
 
+    (question (attribute preferisce)
+        (precursors citta is unknown)   ; se l'utente non ha fornito la risposta per la citta allora chiediamo se preferisce mare o montagna
+        (the-question "Preferisce il mare o la montagna? ")
+        (valid-answers mare montagna unknown))
 
 )
