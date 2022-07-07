@@ -1,6 +1,6 @@
 rl -s learning on # enable RL
 indifferent-selection -g # use epsilon-greedy decision making
-indifferent-selection -e 0.1 # 10% deviation from greedy
+indifferent-selection -e 0.5 # 10% deviation from greedy
 
 ##RECAP: 
 # Dobbiamo avere:
@@ -69,7 +69,7 @@ sp {apply*initialize-escape
         ^window <f>
         ^robot <r>
         ^objects <o1> <o2> <o3> <o4>
-        ^comb <c1> <c2> <c3> <c4> <c5>
+        ^comb <c1> <c2> <c3> <c4>
         ^out no)
    (<loc> ^x 5.0 ^y 3.0)      
    (<d> ^x 3.0 ^y 4.0)
@@ -98,12 +98,7 @@ sp {apply*initialize-escape
          ^reward -1
          ^object1 stone
          ^object2 spring)
-   (<c4> ^name stone-trunk
-         ^built no
-         ^reward -1
-         ^object1 stone
-         ^object2 trunk)
-   (<c5> ^name trunks
+   (<c4> ^name trunks
          ^built no
          ^object trunk)
 }
@@ -413,16 +408,6 @@ sp {es*rl*combine*stone*spring
    (<s> ^operator <op> = 0)
 }
 
-## Soar-RL rule for combine of stone and trunk -1
-
-sp {es*rl*combine*stone*trunk
-   (state <s> ^operator <op> +)
-   (<op> ^name combine
-         ^obj stone-trunk)
-    -->
-   (<s> ^operator <op> = 0)
-}
-
 ##
 # When a combine is chosen:
 # - change object built
@@ -464,10 +449,18 @@ sp {elaborate*reward
     -->
    (<r> ^reward <rr>)
    (<rr> ^value <d-reward>)
-   (<s> ^rewarded no - yes)
    (write (crlf) |                           REWARD | <d-name>)
 }
 
+
+sp {default*top-goal*halt*operator*failure
+   (state <ss> ^impasse no-change ^superstate <s>)
+   (<s> ^superstate nil)
+    -->
+   (write (crlf) |                          No operator can be selected for the top goal. |) 
+   (write (crlf) |                          The robot failed to leave the room. |) 
+   (halt)
+}
 ###
 ### VI. Propose and apply the main operator to break the window throwing stones
 ###
@@ -475,8 +468,7 @@ sp {elaborate*reward
 
 sp {es*propose*stone*throwing
    (state <s> ^window <f>
-              ^comb <c>
-              ^rewarded yes)
+              ^comb <c>)
    (<f> ^broken no)
    (<c> ^name spring-sprig
         ^built yes)         
@@ -484,16 +476,6 @@ sp {es*propose*stone*throwing
    (<s> ^operator <op>)
    (<op> ^name throw)
 }
-
-sp {es*compare*throw*better*combine
-   (state <s> ^operator <op-throw> +)
-   (<op-throw> ^name throw)
-   (<s> ^operator <op-combine> +)
-   (<op-combine> ^name combine)
-   (<op-combine> ^obj <obj> <> trunks)
-    -->
-   (<s> ^operator <op-throw> > <op-combine>)
-}  
 
 
 sp {es*apply-op*stone*throwing
