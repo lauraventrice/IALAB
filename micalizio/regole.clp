@@ -306,18 +306,19 @@
    ;(printout t "citta SI O NO: " crlf)
    (assert (attribute (name best-citta) (value ?val) (certainty 40.0))))
 
-(defrule CHOOSE-QUALITIES::citta-unk
-   (declare (salience 10000))
-   (attribute (name citta) (value ?val))
-   (test (eq ?val unknown))    ; se la risposta è unknown bisogna usare una regola apposita
-   =>
-   ;(printout t "citta UNKNOWN: " crlf)
-   (assert (attribute (name best-citta) (value torino) (certainty 20.0)))
-   (assert (attribute (name best-citta) (value roma) (certainty 20.0)))
-   (assert (attribute (name best-citta) (value milano) (certainty 20.0)))
-   (assert (attribute (name best-citta) (value firenze) (certainty 20.0)))
-)
-
+; Questa regola non dovrebbe servire dato che abbiamo messa quella del "preferisce" ->
+; se l'utente risponde citta unknown e preferisce unknown avviene proprio ciò che faceva avvenire questa regola seguente
+; (defrule CHOOSE-QUALITIES::citta-unk
+;    (declare (salience 10000))
+;    (attribute (name citta) (value ?val))
+;    (test (eq ?val unknown))    ; se la risposta è unknown bisogna usare una regola apposita
+;    =>
+;    ;(printout t "citta UNKNOWN: " crlf)
+;    (assert (attribute (name best-citta) (value torino) (certainty 20.0)))
+;    (assert (attribute (name best-citta) (value roma) (certainty 20.0)))
+;    (assert (attribute (name best-citta) (value milano) (certainty 20.0)))
+;    (assert (attribute (name best-citta) (value firenze) (certainty 20.0)))
+; )
 
 
 
