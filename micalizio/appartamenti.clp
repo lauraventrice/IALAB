@@ -41,7 +41,7 @@
     ; OK LUI C'E'
     (apartment  (name "Appartamento su due piani in vendita in strada dei Cunioli Alti, 137")
                 (metriquadri 137) (numerovani 3) (numeroservizi 3) (piano 2) (citta torino) (zona primacintura) (quartiere moncalieri)
-                (ascensore no) (boxauto si) (metri-quadri-boxauto 3) (terrazzino si) (prezzorichiesto 375000) (servizivicino parco scuola mezzipubblici palestra)
+                (ascensore no) (boxauto si)  (terrazzino si) (prezzorichiesto 375000) (servizivicino parco scuola mezzipubblici palestra)
     )
 
 
@@ -54,13 +54,13 @@
     ; OK LUI C'E'
     (apartment  (name "Trilocale in vendita in strada Genova, 208")
                 (metriquadri 83) (numerovani 3) (numeroservizi 1) (piano 1) (citta torino) (zona periferia) (quartiere moncalieri)
-                (ascensore no) (boxauto si) (metri-quadri-boxauto 3) (terrazzino si) (prezzorichiesto 157000) (servizivicino parco mezzipubblici palestra)
+                (ascensore no) (boxauto si)  (terrazzino si) (prezzorichiesto 157000) (servizivicino parco mezzipubblici palestra)
     )
 
     ; OK LUI C'E'
     (apartment  (name "Appartamento su due piani in vendita in strada dei Pinguini tattici Nucleari")
                 (metriquadri 160) (numerovani 3) (numeroservizi 3) (piano 0) (citta torino) (zona primacintura) (quartiere moncalieri)
-                (ascensore si) (boxauto si) (metri-quadri-boxauto 3) (terrazzino si) (prezzorichiesto 420100) (servizivicino parco scuola mezzipubblici palestra)
+                (ascensore si) (boxauto si)  (terrazzino si) (prezzorichiesto 420100) (servizivicino parco scuola mezzipubblici palestra)
     )
 
     ; OK LUI C'E'
@@ -72,32 +72,32 @@
     ; OK LUI C'E'
     (apartment  (name "Monolocale in vendita in strada Ranieri, 12")
                 (metriquadri 60) (numerovani 1) (numeroservizi 1) (piano 2) (citta torino) (zona periferia) (quartiere moncalieri)
-                (ascensore no) (boxauto si) (metri-quadri-boxauto 3) (terrazzino si) (prezzorichiesto 157000) (servizivicino parco mezzipubblici palestra)
+                (ascensore no) (boxauto si)  (terrazzino si) (prezzorichiesto 157000) (servizivicino parco mezzipubblici palestra)
     )
 
     ; lista appartamenti a lingotto (torino)
     ; OK LUI C'E'
     (apartment  (name "Attico in vendita in via Onorato Vigliani, 24")
                 (metriquadri 170) (numerovani 3) (numeroservizi 2) (piano 3) (citta torino) (zona centro) (quartiere lingotto)
-                (ascensore si) (boxauto si) (metri-quadri-boxauto 7) (terrazzino si) (prezzorichiesto 465000) (servizivicino ospedale mezzipubblici)
+                (ascensore si) (boxauto si)  (terrazzino si) (prezzorichiesto 465000) (servizivicino ospedale mezzipubblici)
     )
 
     ; OK LUI C'E'
     (apartment  (name "Trilocale in vendita in via Fratel Teodoreto, 3")
                 (metriquadri 75) (numerovani 2) (numeroservizi 1) (piano 1) (citta torino) (zona primacintura) (quartiere lingotto)
-                (ascensore si) (boxauto no) (terrazzino si) (prezzorichiesto 114000) (servizivicino parco scuola palestra) ; questo appartamento non ha il boxauto e quindi non ha specificato la grandezza di esso
+                (ascensore si) (boxauto no) (terrazzino no) (prezzorichiesto 114000) (servizivicino parco scuola palestra) ; questo appartamento non ha il boxauto e quindi non ha specificato la grandezza di esso
     )
 
     ; OK LUI C'E'
     (apartment  (name "Appartamento in vendita in via Filadelfia, 50")
                 (metriquadri 130) (numerovani 3) (numeroservizi 2) (piano 1) (citta torino) (zona centro) (quartiere lingotto)
-                (ascensore si) (boxauto si) (metri-quadri-boxauto 4) (terrazzino si) (prezzorichiesto 260000) (servizivicino ospedale mezzipubblici palestra)
+                (ascensore si) (boxauto si)  (terrazzino si) (prezzorichiesto 260000) (servizivicino ospedale mezzipubblici palestra)
     )
 
     ; OK LUI C'E'
     (apartment  (name "Attico in vendita in via Roma, 43")
                 (metriquadri 308) (numerovani 3) (numeroservizi 2) (piano 0) (citta torino) (zona centro) (quartiere lingotto)
-                (ascensore si) (boxauto si) (metri-quadri-boxauto 7) (terrazzino si) (prezzorichiesto 613000) (servizivicino ospedale scuola mezzipubblici)
+                (ascensore si) (boxauto si)  (terrazzino si) (prezzorichiesto 613000) (servizivicino ospedale scuola mezzipubblici)
     )
 
     ; OK LUI C'E'
@@ -160,26 +160,26 @@
     ; OK LUI C'E'
     (apartment  (name "Appartamento su due piani in vendita in via Matteo Civitali, 41")
                 (metriquadri 66) (numerovani 2) (numeroservizi 1) (piano 3) (citta milano) (zona primacintura) (quartiere sansiro)
-                (ascensore no) (boxauto si) (metri-quadri-boxauto 4) (terrazzino no) (prezzorichiesto 450000) (servizivicino scuola mezzipubblici)
+                (ascensore no) (boxauto si)  (terrazzino no) (prezzorichiesto 450000) (servizivicino scuola mezzipubblici)
     )
 
     ; OK LUI C'E'
     (apartment  (name "Appartamento in vendita in piazza Santa Maria Nascente s.n.c")
                 (metriquadri 200) (numerovani 3) (numeroservizi 1) (piano 1) (citta milano) (zona centro) (quartiere sansiro)
-                (ascensore no) (boxauto si) (metri-quadri-boxauto 6) (terrazzino no) (prezzorichiesto 890000) (servizivicino mezzipubblici palestra)
+                (ascensore no) (boxauto si)  (terrazzino no) (prezzorichiesto 890000) (servizivicino mezzipubblici palestra)
     )
 
     ; lista appartamenti a navigli (milano)
     ; OK LUI C'E'
     (apartment  (name "Trilocale in vendita in via San Calocero, 9")
                 (metriquadri 102) (numerovani 3) (numeroservizi 3) (piano 3) (citta milano) (zona centro) (quartiere navigli)
-                (ascensore si) (boxauto si) (metri-quadri-boxauto 6) (terrazzino no) (prezzorichiesto 950000) (servizivicino parco mezzipubblici)
+                (ascensore si) (boxauto si)  (terrazzino no) (prezzorichiesto 950000) (servizivicino parco mezzipubblici)
     )
 
     ; OK LUI C'E'
     (apartment  (name "Bilocale in vendita in piazza Ventiquattro Maggio s.n.c")
                 (metriquadri 50) (numerovani 2) (numeroservizi 2) (piano 1) (citta milano) (zona periferia) (quartiere navigli)
-                (ascensore no) (boxauto si) (metri-quadri-boxauto 4) (terrazzino si) (prezzorichiesto 235000) (servizivicino ospedale parco scuola mezzipubblici palestra)
+                (ascensore no) (boxauto si)  (terrazzino si) (prezzorichiesto 235000) (servizivicino ospedale parco scuola mezzipubblici palestra)
     )
 
     ; OK LUI C'E'
@@ -217,13 +217,13 @@
     ; OK LUI C'E'
     (apartment  (name "Bilocale in vendita in Piazza Benedetto da Rovezzano")
                 (metriquadri 250) (numerovani 1) (numeroservizi 2) (piano 1) (citta firenze) (zona primacintura) (quartiere rovezzano)
-                (ascensore no) (boxauto si) (metri-quadri-boxauto 6) (terrazzino si) (prezzorichiesto 500000) (servizivicino scuola mezzipubblici)
+                (ascensore no) (boxauto si)  (terrazzino si) (prezzorichiesto 500000) (servizivicino scuola mezzipubblici)
     )
 
     ; OK LUI C'E'
     (apartment  (name "Monolocale in vendita in via di Rocca Tedalda s.n.c")
                 (metriquadri 30) (numerovani 1) (numeroservizi 1) (piano 0) (citta firenze) (zona periferia) (quartiere rovezzano)
-                (ascensore no) (boxauto si) (metri-quadri-boxauto 6) (terrazzino si) (prezzorichiesto 168000) (servizivicino parco scuola mezzipubblici palestra)
+                (ascensore no) (boxauto si)  (terrazzino si) (prezzorichiesto 168000) (servizivicino parco scuola mezzipubblici palestra)
     )
 )
 
@@ -239,7 +239,7 @@
         (quartiere ?q)
         (ascensore ?a)
         (boxauto ?ba)
-        (metri-quadri-boxauto $? ?mqba $?)
+        ;(metri-quadri-boxauto $? ?mqba $?)
         (terrazzino ?t)
         (prezzorichiesto ?pr))
 
