@@ -36,7 +36,7 @@
   ?rem2 <- (attribute (name ?rel) (value ?val) (certainty ?per2))
   (test (neq ?rem1 ?rem2))
   =>
-  (printout t "        STO COMBINANDO : " ?rel t ?per1 t ?per2 t  (/ (- (* 100 (+ ?per1 ?per2)) (* ?per1 ?per2)) 100) crlf)
+  ;(printout t "        STO COMBINANDO : " ?rel t ?per1 t ?per2 t  (/ (- (* 100 (+ ?per1 ?per2)) (* ?per1 ?per2)) 100) crlf)
   (retract ?rem1)
   (modify ?rem2 (certainty (/ (- (* 100 (+ ?per1 ?per2)) (* ?per1 ?per2)) 100))))
 
