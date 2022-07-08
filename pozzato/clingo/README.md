@@ -25,7 +25,7 @@ Il file _'progettoPiccoloBase.cl'_ include i seguenti vincoli:
 - il campionato prevede ***10 giornate, 5 di andata e 5 di ritorno NON simmetriche***, ossia la giornata 1 di ritorno non coincide necessariamente con la giornata 1 di andata a campi invertiti;
 - tutti quelli presenti per _'progettoBase.cl_ .
 
-Il file _'progettoPiccoloBase.cl'_ include i seguenti vincoli:
+Il file _'progettoFacoltativi.cl'_ include i seguenti vincoli:
 
 - ciascuna squadra non deve giocare mai più di ***due partite consecutive in casa o fuori casa***;
 - ci sono ***4 derby***;
