@@ -27,13 +27,6 @@
   )
 
 
-;   (defrule PRINT-RESULTS::print-apartment-ended ""
-;  (declare (salience 1000))
-;   (not (attribute (name apartment)))
-;   =>
-;   (printout t "        NON CI SNON ALTRI APPARTMENTI" t t)
-;   )
-
 (defrule PRINT-RESULTS::remove-poor-apartment-choices ""
   (declare (salience 1000))
   ?rem <- (attribute (name apartment) (certainty ?per&:(< ?per 20)))
@@ -47,7 +40,7 @@
    (assert (attribute (name fine-ciclo) (value "Fine ciclo di interazione") (certainty 100.0))))
 
 
-(defrule PRINT-RESULTS::end-cycle      ;Quindi al principio questa regola sarà attivata per tutte le domande
+(defrule PRINT-RESULTS::end-cycle      
   (declare (salience 1000))
   ;(attribute (name fine-ciclo))         
   (test (neq (length$ (find-all-facts ((?f attribute)) (eq ?f:name fine-ciclo))) 2))         
@@ -57,52 +50,7 @@
 )
 
 
-
-
-; (defrule PRINT-RESULTS::generate-apartments-v2
-
-;   (attribute (name fine-ciclo))
-;   ; (test (eq (length$ (find-all-facts ((?f attribute)) (eq ?f:name fine-ciclo))) 1))         
-;   (apartment (name ?name)
-;         (metriquadri ?mq)
-;         (numerovani ?nv)
-;         (numeroservizi ?ns)
-;         (piano ?p)
-;         (citta ?c)
-;         (zona ?z)
-;         (quartiere ?q)
-;         (ascensore ?a)
-;         (boxauto ?ba)
-;         (metri-quadri-boxauto $? ?mqba $?)
-;         (terrazzino ?t)
-;         (prezzorichiesto ?pr))
-;   ; ; (attribute (name best-metri-quadri) (value ?mq) (certainty ?certainty-1))
-;   ; (attribute (name best-numero-vani) (value ?nv) (certainty ?certainty-2))
-;   ; (attribute (name best-numero-servizi) (value ?ns) (certainty ?certainty-3))
-;   ; (attribute (name best-numero-piano) (value ?p) (certainty ?certainty-4))
-;   ; (attribute (name best-citta) (value ?c) (certainty ?certainty-5))
-;   ; (attribute (name best-zona) (value ?z) (certainty ?certainty-6))
-;   ; (attribute (name best-quartiere) (value ?q) (certainty ?certainty-7))
-;     (attribute (name best-ascensore) (value ?a) (certainty ?certainty-8))
-;   ; ; (attribute (name best-boxauto) (value ?ba) (certainty ?certainty-9))
-;   ; ; ; (attribute (name best-metri-quadri-boxauto) (value ?mqba) (certainty ?certainty-10))
-;   ; ; (attribute (name best-terrazzino) (value ?t) (certainty ?certainty-11))
-
-;    (attribute (name best-prezzo-richiesto) (value ?name) (certainty ?certainty-12))
-;   ;(attribute (name best-metri-quadri) (value ?name) (certainty ?certainty-1))
-;   =>
-;   (printout t "GENERO ASSERT APPARTAMENTI V2" crlf)
-;    (assert (attribute (name apartment) (value ?name)
-;                       (certainty (min ?certainty-8 ?certainty-12))))
-;                      )
-
-
-
-
-
-
-
-(defrule PRINT-RESULTS::first-change-response-done      ;Quindi al principio questa regola sarà attivata per tutte le domande
+(defrule PRINT-RESULTS::first-change-response-done     
   (declare (salience 10000))
   (attribute (name risposta) (value si))   
   (attribute (name ?name) (value unknown))     
@@ -111,7 +59,7 @@
     (assert (attribute (name risposta-unknown) (value ?name)))
     )
 
-(defrule PRINT-RESULTS::change-response-done      ;Quindi al principio questa regola sarà attivata per tutte le domande
+(defrule PRINT-RESULTS::change-response-done     
     (declare (salience 1000))
   (attribute (name risposta) (value si))   
   ?a <- (attribute (name ?name) (value ?val))   
@@ -184,7 +132,7 @@
     (retract ?a)
 )
 
-; TODO: qua c'è qualcosa da sistemare
+; TODO: qua c'è qualcosa da sistemare -> non so se faccia ciòò che vada fatto
 (defrule PRINT-RESULTS::delete-old-answer-citta
   (declare (salience 10000))
   (attribute (name risposta) (value si))   
@@ -237,7 +185,7 @@
 ;-------- fine regole per cancellare le vecchie risposte ------------
 
 
-
+; TODO: i commenti nella regola seguente teoricamente possono essere cancellati - il comportamento giusto si ottiene senza di loro
 
 (defrule PRINT-RESULTS::restart
   (declare (salience 100))
@@ -253,54 +201,3 @@
   (set-fact-duplication TRUE)
   (focus QUESTIONS CHOOSE-QUALITIES APPARTAMENTI PRINT-RESULTS)
 )
-
-; (defrule PRINT-RESULTS::generate-apartments-2
-;   (apartment (name ?name)
-;         (metriquadri ?mq)
-;         (numerovani ?nv)
-;         (numeroservizi ?ns)
-;         (piano ?p)
-;         (citta ?c)
-;         (zona ?z)
-;         (quartiere ?q)
-;         (ascensore ?a)
-;         (boxauto ?ba)
-;         (metri-quadri-boxauto $? ?mqba $?)
-;         (terrazzino ?t)
-;         (prezzorichiesto ?pr))
-;   ; ; (attribute (name best-metri-quadri) (value ?mq) (certainty ?certainty-1))
-;   ; (attribute (name best-numero-vani) (value ?nv) (certainty ?certainty-2))
-;   ; (attribute (name best-numero-servizi) (value ?ns) (certainty ?certainty-3))
-;   ; (attribute (name best-numero-piano) (value ?p) (certainty ?certainty-4))
-;   ; (attribute (name best-citta) (value ?c) (certainty ?certainty-5))
-;   ; (attribute (name best-zona) (value ?z) (certainty ?certainty-6))
-;   ; (attribute (name best-quartiere) (value ?q) (certainty ?certainty-7))
-;    (attribute (name best-ascensore) (value ?a) (certainty ?certainty-8))
-;   ; (attribute (name best-boxauto) (value ?ba) (certainty ?certainty-9))
-;   ; ; (attribute (name best-metri-quadri-boxauto) (value ?mqba) (certainty ?certainty-10))
-;   ; (attribute (name best-terrazzino) (value ?t) (certainty ?certainty-11))
-
-;   (attribute (name best-prezzo-richiesto) (value ?name) (certainty ?certainty-12))
-;   ;(attribute (name best-metri-quadri) (value ?name) (certainty ?certainty-1))
-;   =>
-;   (printout t "GENERO ASSERT APPARTAMENTI" crlf)
-;   (assert (attribute (name apartment) (value ?name)
-;                      (certainty (min ?certainty-8 ?certainty-12)))))
-
-; (defrule PRINT-RESULTS::check-responses      ;Quindi al principio questa regola sarà attivata per tutte le domande
-;    (attribute (name ?name) (value unknown))
-;   ;  ?f <- (question (already-asked ?val)
-;   ;                  (precursors)
-;   ;                  (the-question ?the-question)
-;   ;                  (attribute ?name)
-;   ;                  (valid-answers $?valid-answers))
-  
-;                          ;(printout t "RISPOSTA DATA: " ?the-question crlf)
-;    =>
-;      (assert (attribute (name unknown-available)
-;                       (value "")))
-;   ;  (modify ?f (already-asked TRUE))
-;   ;  (assert (attribute (name ?the-attribute)
-;   ;                     (value (ask-question ?the-question ?valid-answers))))
-;   ;                        ;(printout t "RISPOSTA DATA: " ?the-question crlf)
-;                          )

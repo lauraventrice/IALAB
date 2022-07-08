@@ -10,7 +10,7 @@
   (attribute (name best-numero-piano) (value any))
   (attribute (name best-citta) (value any))
   (attribute (name best-zona) (value any))
-  ;(attribute (name best-quartiere) (value any))
+  (attribute (name best-quartiere) (value any))
   (attribute (name best-ascensore) (value any))
   (attribute (name best-boxauto) (value any))
   (attribute (name best-terrazzino) (value any))
@@ -30,7 +30,6 @@
     (slot quartiere (default ?NONE))
     (slot ascensore (default ?NONE))
     (slot boxauto (default ?NONE))
-    ;(multislot metri-quadri-boxauto (default any))
     (slot terrazzino (default ?NONE))
     (slot prezzorichiesto (default ?NONE))
     (multislot servizivicino (default any))
@@ -46,6 +45,11 @@
                 (ascensore no) (boxauto si)  (terrazzino si) (prezzorichiesto 375000) (servizivicino parco scuola mezzipubblici palestra)
     )
 
+
+    (apartment  (name "Appartamento su tre piani in vendita via Abramo Lincoln, 160b")
+                (metriquadri 137) (numerovani 3) (numeroservizi 3) (piano 3) (citta torino) (zona primacintura) (quartiere moncalieri)
+                (ascensore no) (boxauto si)  (terrazzino si) (prezzorichiesto 410000) (servizivicino parco scuola mezzipubblici ospedale palestra)
+    )
 
     
     (apartment  (name "Quadrilocale in vendita in strada Genova, 255 /4")

@@ -11,11 +11,11 @@ Spostasersi nella directory corretta:
         - (batch "../../../Desktop/Parallels\ Shared\ Folders/DATI/GIT/IALAB/micalizio/makefileLinux.bat")
 
     - Per macOS: 
-        -  (chdir "/Volumes/DATI/GIT/IALAB/micalizio/codiceProf")
+        - (chdir "/Volumes/DATI/GIT/IALAB/micalizio/codiceProf")
         - (load "/Volumes/DATI/GIT/IALAB/micalizio/codiceProf/progetto-vini.clp")
         - (batch "/Volumes/DATI/GIT/IALAB/micalizio/codiceProf/makefile.bat")
-        - (batch "/Volumes/DATI/GIT/IALAB/micalizio/makefile.bat")
         - (load "/Volumes/DATI/GIT/IALAB/micalizio/codiceProf/prova.clp")
+        - (batch "/Volumes/DATI/GIT/IALAB/micalizio/makefile.bat")
 
 - Per Laura: 
 

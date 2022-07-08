@@ -33,6 +33,12 @@
         (the-question "Preferirebbe trovare l'appartamento a torino, roma, milano o firenze? ")
         (valid-answers torino roma milano firenze unknown)) 
 
+    ; ; ; NB: io eviterei di fare queste domande!
+    ; ; ; credo abbia senso proporre un appartamento in un certo quartiere in base alla zona in cui preferisce l'appartamento l'utente
+    ; ; ; per questo ho fatto le regole che in base alla zona e alla città aumenta la certezza di un quartiere
+    ; ; ; ----------------------------------------------------------------------------------------
+    
+
     ; ; ; domande sul quartiere in base alla città inserita
     ; ; ; ----------------------------------------------------------------------------------------
     
@@ -67,11 +73,6 @@
     (question (attribute boxauto)
         (the-question "Deve essere presente il box auto? ")
         (valid-answers si no unknown))
-
-    ; (question (attribute metri-quadri-boxauto)
-    ;     (precursors boxauto is si)  ; questa domanda deve essere fatta solo se la persona è interessata al box-auto
-    ;     (the-question "Di quanti metri quadri deve essere il box auto? ")
-    ;     (valid-answers unknown)) ;; TODO: sistemare -> capire che valori mettere di metri quadri 
 
     (question (attribute terrazzino)
         (the-question "Deve essere presente il terrazzino? ")
