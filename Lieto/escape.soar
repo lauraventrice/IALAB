@@ -64,18 +64,20 @@ sp {apply*initialize-escape
    (<o> ^name initialize-escape)
     -->
    (<s> ^name escape
-        ^location <loc>
         ^desired <d>
-        ^window <f>
         ^robot <r>
+        ^window <w> 
         ^objects <o1> <o2> <o3> <o4>
-        ^comb <c1> <c2> <c3> <c4>
-        ^out no)
-   (<loc> ^x 5.0 ^y 3.0)      
-   (<d> ^x 3.0 ^y 4.0)
-   (<f> ^corners <ul> <ur> <ll> <lr>
+        ^comb <c1> <c2> <c3> <c4>)
+   (<d> ^out no)
+   (<r> ^height 1.5
+        ^location <loc1>)
+   (<loc1> ^x 5.0 ^y 3.0)         
+   (<w> ^location <loc2>
+        ^corners <ul> <ur> <ll> <lr>
         ^broken no 
         ^height 3.5)
+   (<loc2> ^x 3.0 ^y 4.0)
    (<ul> ^name upper-left
          ^hit no
          ^reward 1)
@@ -87,8 +89,7 @@ sp {apply*initialize-escape
          ^reward 1)
    (<lr> ^name lower-right
          ^hit no
-         ^reward -1)                       
-   (<r> ^height 1.5)
+         ^reward -1)                              
    (<o1> ^name spring
          ^available yes)
    (<o2> ^name sprig
@@ -127,10 +128,15 @@ sp {apply*initialize-escape
 # Propose rule for moving left
 ##
 sp {es*propose*left
-   (state <s> ^desired <d>
-              ^location <loc>)
-   (<d> ^x <val2>)
-   (<loc> ^x <val1> > <val2>)
+   (state <s> ^name escape
+              ^desired <d>
+              ^robot <r>
+              ^window <w>)
+   (<d> ^out no)                      
+   (<r> ^location <loc1>)
+   (<w> ^location <loc2>)
+   (<loc2> ^x <val2>)
+   (<loc1> ^x <val1> > <val2>)
     -->
    (<s> ^operator <op>)
    (<op> ^name move
@@ -142,10 +148,15 @@ sp {es*propose*left
 ##
 
 sp {es*propose*right
-   (state <s> ^desired <d>
-              ^location <loc>)
-   (<d> ^x <val2>)
-   (<loc> ^x <val1> < <val2>)
+   (state <s> ^name escape
+              ^desired <d>
+              ^robot <r>
+              ^window <w>)
+   (<d> ^out no)
+   (<r> ^location <loc1>)
+   (<w> ^location <loc2>)           
+   (<loc2> ^x <val2>)
+   (<loc1> ^x <val1> < <val2>)
     -->
    (<s> ^operator <op>)
    (<op> ^name move
@@ -158,10 +169,15 @@ sp {es*propose*right
 ##
 
 sp {es*propose*backward
-   (state <s> ^desired <d>
-              ^location <loc>)
-   (<d> ^y <val2>)
-   (<loc> ^y <val1> > <val2>)
+   (state <s> ^name escape
+              ^desired <d>
+              ^robot <r>
+              ^window <w>)
+   (<d> ^out no)
+   (<r> ^location <loc1>)
+   (<w> ^location <loc2>)           
+   (<loc2> ^y <val2>)
+   (<loc1> ^y <val1> > <val2>)
     -->
    (<s> ^operator <op>)
    (<op> ^name move
@@ -173,10 +189,15 @@ sp {es*propose*backward
 ##
 
 sp {es*propose*forward
-   (state <s> ^desired <d>
-              ^location <loc>)
-   (<d> ^y <val2>)
-   (<loc> ^y <val1> < <val2>)      
+   (state <s> ^name escape
+              ^desired <d>
+              ^robot <r>
+              ^window <w>)
+   (<d> ^out no)
+   (<r> ^location <loc1>)
+   (<w> ^location <loc2>)
+   (<loc2> ^y <val2>)
+   (<loc1> ^y <val1> < <val2>)      
     -->
    (<s> ^operator <op>)
    (<op> ^name move
@@ -188,16 +209,20 @@ sp {es*propose*forward
 ##
 
 sp {es*propose*up
-   (state <s> ^desired <d>
-              ^location <loc>
+   (state <s> ^name escape
+              ^desired <d>
               ^comb <c>
               ^robot <r>
-              ^window <f>)
-   (<d> ^x <val1> ^y <val2>)
-   (<loc> ^x <val1> ^y <val2>)      
-   (<f> ^broken yes ^height <val3>)
-   (<r> ^height <val4> < <val3>)  
-   (<c> ^name trunks ^built yes)  
+              ^window <w>)
+   (<d> ^out no)
+   (<c> ^name trunks ^built yes)
+   (<w> ^broken yes 
+        ^height <val1>
+        ^location <loc2>)
+   (<r> ^height <val2> < <val1>) 
+   (<r> ^location <loc1>)            
+   (<loc1> ^x <val3> ^y <val4>)
+   (<loc2> ^x <val3> ^y <val4>)    
     -->
    (<s> ^operator <op>)
    (<op> ^name move
@@ -210,10 +235,9 @@ sp {es*propose*up
 ##
 
 sp {es*compare*right*better*forward
-   (state <s> ^desired <d>
-              ^location <loc>)
-   (<d> ^x <val2>)
-   (<loc> ^x <val1> < <val2>) 
+   (state <s> ^name escape
+              ^desired <d>)
+   (<d> ^out no)
    (<s> ^operator <op-right> +)
    (<op-right> ^name move
                ^dir right)
@@ -225,10 +249,9 @@ sp {es*compare*right*better*forward
 }
 
 sp {es*compare*right*better*backward
-   (state <s> ^desired <d>
-              ^location <loc>)
-   (<d> ^x <val2>)
-   (<loc> ^x <val1> < <val2>) 
+   (state <s> ^name escape
+              ^desired <d>)
+   (<d> ^out no)
    (<s> ^operator <op-right> +)
    (<op-right> ^name move
                ^dir right)
@@ -240,10 +263,9 @@ sp {es*compare*right*better*backward
 }
 
 sp {es*compare*left*better*backward
-   (state <s> ^desired <d>
-              ^location <loc>)
-   (<d> ^x <val2>)
-   (<loc> ^x <val1> > <val2>) 
+   (state <s> ^name escape
+              ^desired <d>)
+   (<d> ^out no) 
    (<s> ^operator <op-left> +)
    (<op-left> ^name move
               ^dir left)
@@ -256,10 +278,9 @@ sp {es*compare*left*better*backward
 
 
 sp {es*compare*left*better*forward
-   (state <s> ^desired <d>
-              ^location <loc>)
-   (<d> ^x <val2>)
-   (<loc> ^x <val1> > <val2>) 
+   (state <s> ^name escape
+              ^desired <d>)
+   (<d> ^out no)
    (<s> ^operator <op-left> +)
    (<op-left> ^name move
               ^dir left)
@@ -271,27 +292,20 @@ sp {es*compare*left*better*forward
 }  
 
 ###
-###	III.	Implement the main operators
+###	III.	Implement the main operators for move 
 ###
 
 ## Implement the operators with productions that modify the state once
 ## the operators have been selected, and then terminate them after
-## they have done
-
-## what they need to do
-##
-## Note: We make the new value acceptable and reject the previous
-## value.
-
-##
-## The reconsider preference effectively terminates the operator on 
-## the next decision cycle after it has done what its supposed to do.
+## they have done. 
 
 sp {es*apply-op*left
-   (state <s>  ^operator <o>
-               ^location <loc>)
+   (state <s>  ^name escape
+               ^operator <o>
+               ^robot <r>)            
    (<o> ^name move
         ^dir left)
+   (<r> ^location <loc>)     
    (<loc> ^x <val>)
     -->
    (<loc> ^x <val> - (- <val> 0.5))
@@ -303,10 +317,12 @@ sp {es*apply-op*left
 ## Implement right
 
 sp {es*apply-op*right
-   (state <s>  ^operator <o>
-               ^location <loc>)
+   (state <s>  ^name escape
+               ^operator <o>
+               ^robot <r>)
    (<o> ^name move
         ^dir right)
+   (<r> ^location <loc>)   
    (<loc> ^x <val>)
     -->
    (<loc> ^x <val> - (+ <val> 0.5))
@@ -317,10 +333,12 @@ sp {es*apply-op*right
 ## Implement backward
 
 sp {es*apply-op*backward
-   (state <s>  ^operator <o>
-               ^location <loc>)
+   (state <s>  ^name escape
+               ^operator <o>
+               ^robot <r>)
    (<o> ^name move
         ^dir backward)
+   (<r> ^location <loc>)     
    (<loc> ^y <val>)
     -->
    (<loc> ^y <val> - (- <val> 0.5))
@@ -332,10 +350,12 @@ sp {es*apply-op*backward
 ## Implement forward
 
 sp {es*apply-op*forward
-   (state <s>  ^operator <o>
-               ^location <loc>)
+   (state <s>  ^name escape
+               ^operator <o>
+               ^robot <r>)
    (<o> ^name move
        ^dir forward)
+   (<r> ^location <loc>)    
    (<loc> ^y <val>)
     -->
    (<loc> ^y <val> - (+ <val> 0.5))
@@ -347,7 +367,8 @@ sp {es*apply-op*forward
 ## Implement up
 
 sp {es*apply-op*up
-   (state <s>  ^operator <o>
+   (state <s>  ^name escape
+               ^operator <o>
                ^robot <r>)
    (<o> ^name move
         ^dir up)
@@ -364,23 +385,26 @@ sp {es*apply-op*up
 ###
 
 sp {es*propose*combine
-   (state <s> ^window <f>
-              ^comb <c>
-              ^location <loc>
-              ^desired <d>)
-   (<f> ^broken no)   
+   (state <s> ^name escape
+              ^desired <d>
+              ^window <w>
+              ^robot <r>
+              ^comb <c>)
+   (<d> ^out no)
+   (<w> ^broken no
+        ^location <loc1>) 
+   (<loc1> ^x <val1> ^y <val2>)
+   (<r> ^location <loc2>)        
+   (<loc2> ^x <val1> ^y <val2>)      
    (<c> ^name <obj> 
         ^built no
         ^object1 <obj1>
-        ^object2 <obj2>
-        ^reward <val>)
+        ^object2 <obj2>)
    (<s> ^objects <o1> <o2>)
    (<o1> ^name <obj1>
          ^available yes)
    (<o2> ^name <obj2>
-         ^available yes)                   
-   (<loc> ^x <val3> ^y <val4>)
-   (<d> ^x <val3> ^y <val4>)
+         ^available yes)        
     -->
    (<s> ^operator <op> +)
    (<op> ^name combine
@@ -392,30 +416,33 @@ sp {es*propose*combine
 ### V.     Soar reinforcement learning for the main operators that combine objects into a useful object to escape the room
 ###
 
-## Soar-RL rule for combine of stone and sprig of wood -1
+## Soar-RL rule for combine of stone and sprig of wood 
 
 sp {es*rl*combine*stone*sprig
-   (state <s> ^operator <op> +)
+   (state <s> ^name escape
+              ^operator <op> +)
    (<op> ^name combine
          ^obj stone-sprig)
     -->
    (<s> ^operator <op> = 0)
 }
 
-## Soar-RL rule for combine of spring and sprig of wood +1
+## Soar-RL rule for combine of spring and sprig of wood
 
 sp {es*rl*combine*spring*sprig
-   (state <s> ^operator <op> +)
+   (state <s> ^name escape
+              ^operator <op> +)
    (<op> ^name combine
          ^obj spring-sprig)
     -->
    (<s> ^operator <op> = 0)
 }
 
-## Soar-RL rule for combine of stone and spring -1
+## Soar-RL rule for combine of stone and spring
 
 sp {es*rl*combine*stone*spring
-   (state <s> ^operator <op> +)
+   (state <s> ^name escape
+              ^operator <op> +)
    (<op> ^name combine
          ^obj stone-spring)
     -->
@@ -425,19 +452,21 @@ sp {es*rl*combine*stone*spring
 ##
 # When a combine is chosen:
 # - change object built
+# - change object combined available
 # - output built
 ##
+
 sp {apply*combine
-   (state <s> ^operator <op>
-              ^comb <c>)
+   (state <s> ^name escape
+              ^operator <op>
+              ^comb <c>
+              ^objects <o1> <o2>)
    (<op> ^name combine
          ^obj <obj>)
    (<c> ^name <obj>
         ^built no
         ^object1 <obj1>
-        ^object2 <obj2>
-        ^reward <val>)
-   (<s> ^objects <o1> <o2>)
+        ^object2 <obj2>)
    (<o1> ^name <obj1>
          ^available yes)
    (<o2> ^name <obj2>
@@ -466,6 +495,10 @@ sp {elaborate*reward
    (write (crlf) |                           REWARD | <d-name> | | <rwd>)
 }
 
+##
+# When the combination is not correct, a state of empasse is reached 
+# because there will be no applicable operators
+##
 
 sp {default*top-goal*halt*operator*failure
    (state <ss> ^impasse no-change ^superstate <s>)
@@ -483,28 +516,28 @@ sp {default*top-goal*halt*operator*failure
 
 
 sp {es*propose*stone*throwing
-   (state <s> ^window <f>
+   (state <s> ^name escape
+              ^window <w>
               ^comb <c>
-              ^objects <o>)           
-   (<f> ^corners <cr>
+              ^objects <ob>)            
+   (<w> ^corners <cr>
         ^broken no)
    (<cr> ^name <c-name>)
    (<c> ^name spring-sprig
         ^built yes)  
-   (<o> ^name stone
-        ^available yes)            
+   (<ob> ^name stone
+         ^available yes)            
     --> 
    (<s> ^operator <op>)
    (<op> ^name throw
          ^corner <c-name>)
 }
 
-##RL PER OGNI ANGOLO
-
 ## Soar-RL rule for throw at the upper left corner of the window
 
 sp {es*rl*throw*upper*left
-   (state <s> ^operator <op> +)
+   (state <s> ^name escape
+              ^operator <op> +)
    (<op> ^name throw
          ^corner upper-left)
     -->
@@ -514,7 +547,8 @@ sp {es*rl*throw*upper*left
 ## Soar-RL rule for throw at the upper right corner of the window
 
 sp {es*rl*throw*upper*right
-   (state <s> ^operator <op> +)
+   (state <s> ^name escape
+              ^operator <op> +)
    (<op> ^name throw
          ^corner upper-right)
     -->
@@ -524,7 +558,8 @@ sp {es*rl*throw*upper*right
 ## Soar-RL rule for throw at the lower left corner of the window
 
 sp {es*rl*throw*lower*left
-   (state <s> ^operator <op> +)
+   (state <s> ^name escape
+              ^operator <op> +)
    (<op> ^name throw
          ^corner lower-left)
     -->
@@ -534,23 +569,32 @@ sp {es*rl*throw*lower*left
 ## Soar-RL rule for throw at the lower right corner of the window
 
 sp {es*rl*throw*lower*right
-   (state <s> ^operator <op> +)
+   (state <s> ^name escape
+              ^operator <op> +)
    (<op> ^name throw
          ^corner lower-right)
     -->
    (<s> ^operator <op> = 0)
 }
 
+##
+# When a corner is chosen:
+# - change corner hit
+# - change object stone available
+# - output stone throwing
+##
+
 sp {es*apply-op*stone*throwing
-   (state <s> ^operator <o>
-              ^window <f>
-              ^objects <ob>)
+   (state <s> ^name escape
+              ^operator <op>
+              ^window <w>
+              ^objects <ob>)                   
+   (<op> ^name throw
+         ^corner <c-name>)  
+   (<w> ^corners <c>)
+   (<c> ^name <c-name>)
    (<ob> ^name stone
-         ^available yes)                   
-   (<o> ^name throw
-        ^corner <c-name>)  
-   (<f> ^corners <c>)
-   (<c> ^name <c-name>)     
+         ^available yes)     
     -->
    (<c> ^hit no - yes)
    (<ob> ^available yes - no)
@@ -558,10 +602,11 @@ sp {es*apply-op*stone*throwing
 }
 
 sp {elaborate*reward*throw
-   (state <s> ^reward-link <rl>
-              ^window <f>
+   (state <s> ^name escape
+              ^reward-link <rl>
+              ^window <w>
               ^objects <ob>) 
-   (<f> ^corners <c>)           
+   (<w> ^corners <c>)           
    (<c> ^name <c-name> 
         ^hit yes
         ^reward <rwd>)
@@ -573,38 +618,35 @@ sp {elaborate*reward*throw
    (write (crlf) |                           REWARD | <c-name> | | <rwd>)
 }
 
+##
+# When the stone hits particular predetermined angles, the window is broken. 
+# The corners with associated positive rewards are the correct ones to hit. 
+##
+
 sp {terminate*reward*throw
-   (state <s> ^reward-link <rl>
-              ^window <f>)
-   (<f> ^corners <c>)
+   (state <s> ^name escape
+              ^reward-link <rl>
+              ^window <w>)
+   (<w> ^corners <c>)
    (<c> ^hit yes)           
    (<c> ^name <d-name> <> lower-right)
    (<c> ^name <d-name> <> upper-left)   
     -->
-   (<f> ^broken no - yes)
+   (<w> ^broken no - yes)
    (write (crlf) |                           WINDOW | BROKEN | | <d-name>)
 }
 
-##sp {terminate*reward*throw*failure
-##   (state <s> ^reward-link <rl>
-##              ^window <f>)
-##   (<f> ^corners <c>)
-##   (<c> ^hit yes)           
-##   (<c> ^name <d-name> <> lower-right)
-##   (<c> ^name <d-name> <> upper-left)   
-##    -->
-##   (<f> ^broken no)
-##   (write (crlf) |                                                   ehilaaaa | <d-name>)
-##   (halt)
-##}
-
-##FASE DI COMBINAZIONE TRONCHI PER USCIRE
+###
+### VII. Propose and apply the main operator to combine trunks in order to reach 
+### the window and leave the room. 
+###
 
 sp {es*propose*combine*trunks
-   (state <s> ^window <f>
+   (state <s> ^name escape
+              ^window <w>
               ^comb <c>
               ^objects <o>)
-   (<f> ^broken yes)
+   (<w> ^broken yes)
    (<c> ^name trunks
         ^built no
         ^object trunk)  
@@ -618,14 +660,15 @@ sp {es*propose*combine*trunks
 
 
 sp {es*apply-op*combine*trunks
-   (state <s> ^operator <op>
-              ^comb <c>)
+   (state <s> ^name escape
+              ^operator <op>
+              ^comb <c>
+              ^objects <o>)
    (<op> ^name combine
          ^obj trunks)
    (<c> ^name trunks
         ^built no
         ^object trunk)
-   (<s> ^objects <o>)
    (<o> ^name trunk
         ^available yes)
     -->
@@ -633,21 +676,25 @@ sp {es*apply-op*combine*trunks
    (<c> ^built no - yes)
    (write (crlf) |                           Built: | trunks)  
 }
-###
-###	VIII.	Propose and apply to go out of the room
-###
 
-## Se è rotta e sono alla finestra allora esco. 
+###
+### VIII. Propose and apply to go out of the room if the window is broken 
+### and the robot is at the window. 
+###
+ 
 sp {es*propose*out
-   (state <s> ^desired <d>
-              ^location <loc>
+   (state <s> ^name escape
+              ^desired <d>
               ^robot <r>
-              ^window <f>)
-   (<d> ^x <val1> ^y <val2>)
-   (<loc> ^x <val1> ^y <val2>)
-   (<r> ^height <h>)
-   (<f> ^height <h>
-        ^broken yes) 
+              ^window <w>)
+   (<d> ^out no)           
+   (<r> ^height <h>
+        ^location <loc1>)
+   (<loc1> ^x <val1> ^y <val2>)     
+   (<w> ^height <h>
+        ^broken yes
+        ^location <loc2>) 
+   (<loc2> ^x <val1> ^y <val2>)     
     -->
    (<s> ^operator <op>)
    (<op> ^name move
@@ -656,11 +703,14 @@ sp {es*propose*out
 
 
 sp {es*apply-op*out
-   (state <s>  ^operator <o>)
-   (<o> ^name move
+   (state <s>  ^name escape
+               ^operator <o>
+               ^desired <d>)
+   (<o> ^name move 
         ^dir out)
+   (<d> ^out no)     
     -->
-   (<s> ^out no - yes)
+   (<d> ^out no - yes)
    (write (crlf) |          Moved: out! |)
    (<s> ^operator <o> -)
 }
@@ -671,11 +721,10 @@ sp {es*apply-op*out
 ###
 ### This code terminates the problem solving when the goal is reached.
 
-
-## How to tell if you can stop
 sp {es*evaluate*state*success
-   (state <s> ^out yes
+   (state <s> ^name escape
               ^desired <d>)
+   (<d> ^out yes)           
     -->
    (<s> ^success <d>)
 }
