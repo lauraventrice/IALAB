@@ -41,7 +41,7 @@
     ; lista appartamenti a moncalieri (torino)
     
     (apartment  (name "Appartamento su due piani in vendita in strada dei Cunioli Alti, 137")
-                (metriquadri 137) (numerovani 3) (numeroservizi 3) (piano 2) (citta torino) (zona primacintura) (quartiere moncalieri)
+                (metriquadri 115) (numerovani 3) (numeroservizi 1) (piano 2) (citta torino) (zona primacintura) (quartiere moncalieri)
                 (ascensore no) (boxauto si)  (terrazzino si) (prezzorichiesto 375000) (servizivicino parco scuola mezzipubblici palestra)
     )
 
