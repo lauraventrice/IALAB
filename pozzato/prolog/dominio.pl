@@ -1,13 +1,11 @@
 /* Considerazioni iniziali: 
 
-1   2   3
-4   v   5
-6   7   8
+1   2   3   4  
+5   6   7   8
+15  9   10  11
+12  13  v   14
 
-stato iniziale: [1, 2, 3, 4, v, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
-
-1, 3, 4, 6 indici
- 
+stato iniziale: [1, 2, 3, 4, 5, 6, 7, 8, 15, 9, 10, 11, 12, 13, v, 14]
 
 stato finale: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, v]
 
@@ -23,8 +21,6 @@ membership(Elem, [Head|_]) :-
     Elem == Head, !.
 membership(Elem, [_|Tail]) :-
     membership(Elem, Tail).
-
-
 
 iniziale([1, 2, 3, 4, 5, 6, 7, 8, 15, 9, 10, 11, 12, 13, v, 14]).
 

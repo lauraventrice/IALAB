@@ -26,8 +26,7 @@ membership(Elem, [_|Tail]) :-
 
 
 
-iniziale([1, 3, v, 7, 2, 4, 8, 6, 5]). % [1, 2, 3, 4, v, 5, 6, 7, 8]
-%iniziale([1, 2, 3, 4, 5, 6, 7, v, 8]).
+iniziale([1, 3, v, 7, 2, 4, 8, 6, 5]). 
 finale([1, 2, 3, 4, 5, 6, 7, 8, v]).
 
 % index_move(EmptyPosition, ListIndexes): list of indexes, that are position that can be moved, linked with the empty position

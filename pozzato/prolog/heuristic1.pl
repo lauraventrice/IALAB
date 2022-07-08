@@ -6,9 +6,6 @@
 
 :- ['dominio.pl'].
 
-heuristic_1_wrapper_fake(_, Result) :-
-    Result is 0.
-
 heuristic_1_wrapper(CurrentState, Result) :-
     finale(FinalState),
     heuristic_1(CurrentState, FinalState, 0, Result).

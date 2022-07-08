@@ -2,27 +2,27 @@
 
 % VISITA IN PROFONDITA' BASIC
 
-% cerca_soluzione(-MoveList)
+% cerca_soluzione(-MoveList) 
 cerca_soluzione(MoveList) :-
     iniziale(InitialS),
     profondita(InitialS, MoveList, []),
-    write("\nLista azioni: "), write(MoveList).
+    write("\nLista azioni: "), write(MoveList), write("\nNumero mosse: "), write(length(MoveList)).
 
 % profondita(CurrentState, MoveList, VisitatedStates)
 profondita(CurrentS, [], _):-
     finale(CurrentS), !.
 profondita(CurrentS,[Move|MoveList],Visited):-
     applicabile(Move, CurrentS),
-    trasforma(Move,CurrentS,NewS),
-    \+member(NewS,Visited),
-    profondita(NewS,MoveList,[CurrentS|Visited]).
+    trasforma(Move, CurrentS, NewS),
+    \+member(NewS, Visited),
+    profondita(NewS, MoveList, [CurrentS|Visited]).
 
 
 % ITERATIVE DEEPENING
 ricercaSoluzioniIterativeDeepening(MoveList):-
     iniziale(CurrentS),
-    iterativeDeepening(CurrentS,MoveList,30), %%%%%%%%%%%%%%%%%%%%%%%%
-    write("\nLista azioni: "), write(MoveList).
+    iterativeDeepening(CurrentS, MoveList, 30), 
+    write("\nLista azioni: "), write(MoveList), write("\nNumero mosse: "), write(length(MoveList)).
 
 iterativeDeepening(CurrentS,MoveList,ProfonditaCorrente):-
     prof_limitata(CurrentS, MoveList, [],ProfonditaCorrente),
@@ -39,7 +39,7 @@ iterativeDeepening(CurrentS,MoveList,ProfonditaCorrente):-
 cerca_soluzione_limitata(MoveList, Bound):-
     iniziale(InitialS),
     prof_limitata(InitialS,MoveList,[],Bound),
-    write("\nLista azioni: "), write(MoveList).
+    write("\nLista azioni: "), write(MoveList), write("\nNumero mosse: "), write(length(MoveList)).
 
 % prof_limitata(CurrentS, MoveListAzioni, Visited, Bound)
 prof_limitata(CurrentS,[],_,_):-

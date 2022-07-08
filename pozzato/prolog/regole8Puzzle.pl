@@ -1,11 +1,3 @@
-/*
-applicabile(NumberToMove, CurrentState) :-
-    get_index_wrapper(v, CurrentState, IndexV),
-    get_index_wrapper(Numero, CurrentState, IndexNum),
-    index_move(IndexV, S),
-    membership(IndexNum, S). 
-*/
-
 :- ['dominio8puzzle.pl'].
 
 applicabile(1, CurrentState) :-

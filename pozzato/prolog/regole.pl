@@ -1,11 +1,3 @@
-/*
-applicabile(NumberToMove, CurrentState) :-
-    get_index_wrapper(v, CurrentState, IndexV),
-    get_index_wrapper(Numero, CurrentState, IndexNum),
-    index_move(IndexV, S),
-    membership(IndexNum, S). 
-*/
-
 :- ['dominio.pl'].
 
 applicabile(1, CurrentState) :-
@@ -128,7 +120,7 @@ get_index(Elem, [_|Tail], CurrentIndex, ResultIndex) :-
 /*
 Return a new list which has Elem1 and Elem2 swapped. 
 PRECOND: List contains both Elem1 and Elem2. 
-swap(Elem1, Elem2, List, ListResult)
+    swap(Elem1, Elem2, List, ListResult)
 */
 
 swap(_, _, [], []) :- !.

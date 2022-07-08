@@ -21,7 +21,8 @@ startIDAstarHeuristic2 :-
     statistics(cputime, TEnd), nl, nl,
     write("Tempo di fine: "), write(TEnd), nl, nl,
     TotalTime is TEnd - TStart,
-    write("Tempo totale di esecuzione: "), write(TotalTime), write(" secondi\n"), !.    %NB. se rimuoviamo il cut ci dà due volte la stessa soluzione: questo deve essere dovuto all'implementzione della seconda euristica (numero di inversioni), la quale restituisce per due volte il numero di inversioni.
+    write("Tempo totale di esecuzione: "), write(TotalTime), write(" secondi\n"), !.    
+
 
 % regola per avviare l'algoritmo di ricerca in profondità basic
 startRicercaProfonditaBasic :- 
@@ -33,6 +34,7 @@ startRicercaProfonditaBasic :-
     TotalTime is TEnd - TStart,
     write("Tempo totale di esecuzione: "), write(TotalTime), write(" secondi\n").
 
+
 % regola per avviare l'algoritmo di ricerca in profondità limitata basic
 startRicercaProfonditaLimitata :- 
     statistics(cputime, TStart),
@@ -42,6 +44,7 @@ startRicercaProfonditaLimitata :-
     write("Tempo di fine: "), write(TEnd), nl, nl,
     TotalTime is TEnd - TStart,
     write("Tempo totale di esecuzione: "), write(TotalTime), write(" secondi\n").
+
 
 % regola per avviare l'algoritmo di ricerca iterative deepening
 startRicercaIterativeDeepening :- 

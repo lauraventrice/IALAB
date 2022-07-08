@@ -6,13 +6,13 @@ ida_wrapperV1(MoveList):-
     iniziale(S),
     heuristic_1_wrapper(S, InitialThreshold),
     ida_star_loopV1(S, MoveList, [S], 0, InitialThreshold),
-    write("\nLista azioni: "), write(MoveList).
+    length(MoveList, N),
+    write("\nLista azioni: "), write(MoveList), write("\nNumero mosse: "), write(N).
 
 ida_star_loopV1(InitialS, MoveList, Visited, G, Bound) :-
     ricercaV1(InitialS, MoveList, Visited, G, Bound), !.
 
 ida_star_loopV1(InitialS, MoveList, Visited, _, Bound) :-
-    %\+ricerca(InitialS, MoveList, Visited, G, Bound),
     findall(FS, costoNodo(_, FS), CostList),
     exclude(>=(Bound), CostList, OverCostList),
     sort(OverCostList, SortedOverCostList), 
@@ -22,7 +22,6 @@ ida_star_loopV1(InitialS, MoveList, Visited, _, Bound) :-
 
 ricercaV1(S, [], _, _, _):-
     finale(S).
-    %write("LO STATO E' FINALE!\n").
 ricercaV1(CurrentS, [Move|MoveList], Visited, G, Bound) :-
     write("CurrentS: "), write(CurrentS), write("\n"),
     applicabile(Move, CurrentS),
@@ -34,7 +33,7 @@ ricercaV1(CurrentS, [Move|MoveList], Visited, G, Bound) :-
     heuristic_1_wrapper(NewState, HeuristicNewState),
     write("HeuristicNewState: "), write(HeuristicNewState), write("\n"), 
     FNewState is GNewState + HeuristicNewState,
-    assert(costoNodo(NewState, FNewState)),  % aggiunto
+    assert(costoNodo(NewState, FNewState)),
     write("FNewState: "), write(FNewState), write("\n"),  write("Bound: "), write(Bound),  write("\n"),  write("\n"),
     FNewState =< Bound,
     ricercaV1(NewState, MoveList, [NewState|Visited], GNewState, Bound). 
