@@ -80,10 +80,10 @@ sp {apply*initialize-escape
    (<loc2> ^x 3.0 ^y 4.0)
    (<ul> ^name upper-left
          ^hit no
-         ^reward 1)
+         ^reward -1)
    (<ur> ^name upper-right
          ^hit no
-         ^reward -1)
+         ^reward 1)
    (<ll> ^name lower-left
          ^hit no
          ^reward 1)
@@ -489,7 +489,7 @@ sp {elaborate*reward
    (<c> ^name <d-name> 
         ^built yes
         ^reward <rwd>)   
-    -->
+    --> 
    (<rl> ^reward <r>)
    (<r> ^value <rwd>)
    (write (crlf) |                           REWARD | <d-name> | | <rwd>)
@@ -504,7 +504,7 @@ sp {default*top-goal*halt*operator*failure
    (state <ss> ^impasse no-change ^superstate <s>)
    (<s> ^superstate nil)
     -->
-   (<s> ^operator <o>) 
+   (<s> ^operator <o> -) 
    (write (crlf) |                          No operator can be selected for the top goal. |) 
    (write (crlf) |                          The robot failed to leave the room. |) 
    (halt)
