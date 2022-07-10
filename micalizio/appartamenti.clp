@@ -72,7 +72,7 @@
     
     (apartment  (name "Quadrilocale in vendita in strada delle Gazzelle, 45")
                 (metriquadri 120) (numerovani 2) (numeroservizi 2) (piano 1) (citta torino) (zona primacintura) (quartiere moncalieri)
-                (ascensore si) (boxauto si) (terrazzino si) (prezzorichiesto 190900) (servizivicino parco scuola mezzipubblici)
+                (ascensore si) (boxauto si)  (terrazzino si) (prezzorichiesto 190900) (servizivicino parco scuola mezzipubblici)
     )
 
     

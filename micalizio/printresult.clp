@@ -9,7 +9,7 @@
                             (import MAIN ?ALL))
 
 (defrule PRINT-RESULTS::header ""
-   (declare (salience 10000))
+   (declare (salience 10))
    =>
    (printout t t)
    (printout t crlf "        SELECTED APARTMENT" t t)
@@ -18,7 +18,7 @@
    (assert (phase print-apartment)))
 
 (defrule PRINT-RESULTS::print-apartment ""
- (declare (salience 1000))
+ ;(declare (salience 1000))
   ?rem <- (attribute (name apartment) (value ?name) (certainty ?per))		  
   (not (attribute (name apartment) (certainty ?per1&:(> ?per1 ?per))))
   =>
@@ -28,8 +28,8 @@
 
 
 (defrule PRINT-RESULTS::remove-poor-apartment-choices ""
-  (declare (salience 1000))
-  ?rem <- (attribute (name apartment) (certainty ?per&:(< ?per 20)))
+  (declare (salience 100))
+  ?rem <- (attribute (name apartment) (certainty ?per&:(< ?per 10)))
   =>
   (retract ?rem))
 
