@@ -96,11 +96,11 @@
         (valid-answers si no unknown))
 
     (question (attribute e-sportivo)
-        (the-question "E' uno sportivo? ")
+        (the-question "E' uno sportiv*? ")
         (valid-answers si no unknown))
 
     (question (attribute e-automunito)
-        (the-question "E' automunito? ")
+        (the-question "E' automunit*? ")
         (valid-answers si no unknown))
 
     (question (attribute preferisce)
