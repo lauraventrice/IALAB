@@ -27,7 +27,7 @@
   (declare (salience 10000))
   =>
   (set-fact-duplication TRUE)
-  (focus QUESTIONS CHOOSE-QUALITIES APPARTAMENTI PRINT-RESULTS))
+  (focus QUESTIONS CHOOSE-QUALITIES APPARTAMENTI PRINT-RESULTS RESTART))
 
 (defrule MAIN::combine-certainties ""
   (declare (salience 100)

@@ -4,5 +4,6 @@
 (load "/Volumes/DATI/GIT/IALAB/micalizio/appartamenti.clp")
 (load "/Volumes/DATI/GIT/IALAB/micalizio/regole.clp")
 (load "/Volumes/DATI/GIT/IALAB/micalizio/printresult.clp")
+(load "/Volumes/DATI/GIT/IALAB/micalizio/restart.clp")
 (reset)
 (run)
