@@ -1,0 +1,52 @@
+FIRE   78 generate-apartments: f-28,f-76,f-59,f-60,f-81,f-82,f-83,f-57,f-64,f-70,f-66,f-68,f-93
+==> f-95    (attribute (name apartment) (value "Appartamento su tre piani in vendita via Abramo Lincoln, 160b") (certainty 40.0))
+FIRE   79 generate-apartments: f-28,f-76,f-59,f-60,f-81,f-82,f-83,f-57,f-64,f-70,f-66,f-68,f-84
+==> f-96    (attribute (name apartment) (value "Appartamento su tre piani in vendita via Abramo Lincoln, 160b") (certainty 40.0))
+FIRE   80 combine-certainties: f-96,f-95
+<== f-96    (attribute (name apartment) (value "Appartamento su tre piani in vendita via Abramo Lincoln, 160b") (certainty 40.0))
+<== f-95    (attribute ... (certainty 40.0))
+==> f-95    (attribute ... (certainty 64.0))
+FIRE   81 generate-apartments: f-28,f-76,f-59,f-60,f-81,f-82,f-83,f-57,f-64,f-70,f-66,f-68,f-90
+==> f-97    (attribute (name apartment) (value "Appartamento su tre piani in vendita via Abramo Lincoln, 160b") (certainty 40.0))
+FIRE   82 combine-certainties: f-97,f-95
+<== f-97    (attribute (name apartment) (value "Appartamento su tre piani in vendita via Abramo Lincoln, 160b") (certainty 40.0))
+<== f-95    (attribute ... (certainty 64.0))
+==> f-95    (attribute ... (certainty 78.4))
+FIRE   83 generate-apartments: f-28,f-76,f-59,f-60,f-81,f-82,f-83,f-57,f-64,f-70,f-66,f-68,f-89
+==> f-98    (attribute (name apartment) (value "Appartamento su tre piani in vendita via Abramo Lincoln, 160b") (certainty 40.0))
+FIRE   84 combine-certainties: f-98,f-95
+<== f-98    (attribute (name apartment) (value "Appartamento su tre piani in vendita via Abramo Lincoln, 160b") (certainty 40.0))
+<== f-95    (attribute ... (certainty 78.4))
+==> f-95    (attribute ... (certainty 87.04))
+FIRE   85 generate-apartments: f-28,f-76,f-59,f-60,f-81,f-82,f-83,f-57,f-64,f-70,f-66,f-68,f-85
+==> f-99    (attribute (name apartment) (value "Appartamento su tre piani in vendita via Abramo Lincoln, 160b") (certainty 40.0))
+FIRE   86 combine-certainties: f-99,f-95
+<== f-99    (attribute (name apartment) (value "Appartamento su tre piani in vendita via Abramo Lincoln, 160b") (certainty 40.0))
+<== f-95    (attribute ... (certainty 87.04))
+==> f-95    (attribute ... (certainty 92.224))
+FIRE   87 generate-apartments: f-27,f-76,f-59,f-60,f-81,f-82,f-83,f-58,f-65,f-71,f-67,f-69,f-93
+==> f-100   (attribute (name apartment) (value "Appartamento su due piani in vendita in strada dei Cunioli Alti, 137") (certainty 40.0))
+FIRE   88 generate-apartments: f-27,f-76,f-59,f-60,f-81,f-82,f-83,f-58,f-65,f-71,f-67,f-69,f-84
+==> f-101   (attribute (name apartment) (value "Appartamento su due piani in vendita in strada dei Cunioli Alti, 137") (certainty 40.0))
+FIRE   89 combine-certainties: f-101,f-100
+<== f-101   (attribute (name apartment) (value "Appartamento su due piani in vendita in strada dei Cunioli Alti, 137") (certainty 40.0))
+<== f-100   (attribute ... (certainty 40.0))
+==> f-100   (attribute ... (certainty 64.0))
+FIRE   90 generate-apartments: f-27,f-76,f-59,f-60,f-81,f-82,f-83,f-58,f-65,f-71,f-67,f-69,f-90
+==> f-102   (attribute (name apartment) (value "Appartamento su due piani in vendita in strada dei Cunioli Alti, 137") (certainty 40.0))
+FIRE   91 combine-certainties: f-102,f-100
+<== f-102   (attribute (name apartment) (value "Appartamento su due piani in vendita in strada dei Cunioli Alti, 137") (certainty 40.0))
+<== f-100   (attribute ... (certainty 64.0))
+==> f-100   (attribute ... (certainty 78.4))
+FIRE   92 generate-apartments: f-27,f-76,f-59,f-60,f-81,f-82,f-83,f-58,f-65,f-71,f-67,f-69,f-89
+==> f-103   (attribute (name apartment) (value "Appartamento su due piani in vendita in strada dei Cunioli Alti, 137") (certainty 40.0))
+FIRE   93 combine-certainties: f-103,f-100
+<== f-103   (attribute (name apartment) (value "Appartamento su due piani in vendita in strada dei Cunioli Alti, 137") (certainty 40.0))
+<== f-100   (attribute ... (certainty 78.4))
+==> f-100   (attribute ... (certainty 87.04))
+FIRE   94 generate-apartments: f-27,f-76,f-59,f-60,f-81,f-82,f-83,f-58,f-65,f-71,f-67,f-69,f-85
+==> f-104   (attribute (name apartment) (value "Appartamento su due piani in vendita in strada dei Cunioli Alti, 137") (certainty 40.0))
+FIRE   95 combine-certainties: f-104,f-100
+<== f-104   (attribute (name apartment) (value "Appartamento su due piani in vendita in strada dei Cunioli Alti, 137") (certainty 40.0))
+<== f-100   (attribute ... (certainty 87.04))
+==> f-100   (attribute ... (certainty 92.224))
