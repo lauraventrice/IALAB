@@ -324,24 +324,26 @@
 
 (defrule CHOOSE-QUALITIES::citta-unkwown-second-iteration-mont
    (declare (salience 10000))
+   (attribute (name fine-ciclo))  
    (attribute (name citta) (value ?val))
    (test (eq ?val unknown))    ; se la risposta è unknown bisogna usare una regola apposita
    (attribute (name preferisce) (value montagna))
    =>
-   ;(printout t "citta SI O NO: " crlf)
-   (assert (attribute (name best-citta) (value torino) (certainty 20.0)))
-   (assert (attribute (name best-citta) (value milano) (certainty 20.0)))
+   (printout t "citta SI O NO: " crlf)
+   (assert (attribute (name best-citta) (value torino) (certainty 85.0)))
+   (assert (attribute (name best-citta) (value milano) (certainty 85.0)))
 )
 
 (defrule CHOOSE-QUALITIES::citta-unkwown-second-iteration-mare
    (declare (salience 10000))
+   (attribute (name fine-ciclo))  
    (attribute (name citta) (value ?val))
    (test (eq ?val unknown))    ; se la risposta è unknown bisogna usare una regola apposita
    (attribute (name preferisce) (value mare))
    =>
-   ;(printout t "citta SI O NO: " crlf)
-   (assert (attribute (name best-citta) (value roma) (certainty 20.0)))
-   (assert (attribute (name best-citta) (value firenze) (certainty 20.0))) 
+   (printout t "citta SI O NO: " crlf)
+   (assert (attribute (name best-citta) (value roma) (certainty 85.0)))
+   (assert (attribute (name best-citta) (value firenze) (certainty 85.0))) 
 )
 
 ; Questa regola non dovrebbe servire dato che abbiamo messa quella del "preferisce" ->
