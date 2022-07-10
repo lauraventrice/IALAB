@@ -18,4 +18,4 @@ Spostasersi nella directory corretta:
         - (batch "/Volumes/DATI/GIT/IALAB/micalizio/makefile.bat")
 
 - Per Laura: 
-
+    - (batch "../Uni/IALAB/micalizio/makefileL.bat")
