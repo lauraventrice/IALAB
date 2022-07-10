@@ -103,11 +103,12 @@
    (declare (salience 10000))
    (attribute (name numero-vani) (value ?val))
    (test (eq ?val unknown))    ; se la risposta è unknown bisogna usare una regola apposita
+   (apartment (name ?name1) (numerovani ?vaniappartamento))
    =>
    ;(printout t "numero-vani UNKNOWN: " crlf)
-   (assert (attribute (name best-numero-vani) (value 1) (certainty 20.0)))
-   (assert (attribute (name best-numero-vani) (value 2) (certainty 20.0)))
-   (assert (attribute (name best-numero-vani) (value 3) (certainty 20.0)))
+   (assert (attribute (name best-numero-vani) (value ?name1) (certainty 20.0)))
+   ; (assert (attribute (name best-numero-vani) (value 2) (certainty 20.0)))
+   ; (assert (attribute (name best-numero-vani) (value 3) (certainty 20.0)))
 )
 
 
@@ -148,11 +149,12 @@
    (declare (salience 10000))
    (attribute (name numero-servizi) (value ?val))
    (test (eq ?val unknown))    ; se la risposta è unknown bisogna usare una regola apposita
+   (apartment (name ?name1) (numeroservizi ?serviziappartamento))
    =>
    ;(printout t "numero-servizi UNKNOWN: " crlf)
-   (assert (attribute (name best-numero-servizi) (value 1) (certainty 20.0)))
-   (assert (attribute (name best-numero-servizi) (value 2) (certainty 20.0)))
-   (assert (attribute (name best-numero-servizi) (value 3) (certainty 20.0)))
+   (assert (attribute (name best-numero-servizi) (value ?name1) (certainty 20.0)))
+   ; (assert (attribute (name best-numero-servizi) (value 2) (certainty 20.0)))
+   ; (assert (attribute (name best-numero-servizi) (value 3) (certainty 20.0)))
 )
 
 
@@ -593,7 +595,146 @@
 ;---------------------------------------------------------------------FINE REGOLE PER I MIGLIORI MQ---------------------------------------------------------------------
 
 
+; TORINO
+(defrule CHOOSE-QUALITIES::torino-1
+   (attribute (name preferisce) (value ?val))
+   (not (test (eq ?val unknown)))  
+   (exists (attribute (name  best-citta) (value torino)))
+   (exists (attribute (name  best-zona) (value centro)))
+   =>
+   ;(printout t "MQ UNKNOWN APPARTAMENTO: " ?name1 crlf)
+   (assert (attribute (name best-quartiere) (value lingotto) (certainty 90.0)))
+   (assert (attribute (name best-quartiere) (value moncalieri) (certainty 90.0)))
+)
 
+(defrule CHOOSE-QUALITIES::torino-2
+   (attribute (name preferisce) (value ?val))
+   (not (test (eq ?val unknown)))  
+   (exists (attribute (name  best-citta) (value torino)))
+   (exists (attribute (name  best-zona) (value periferia)))
+   =>
+   ;(printout t "MQ UNKNOWN APPARTAMENTO: " ?name1 crlf)
+   (assert (attribute (name best-quartiere) (value lingotto) (certainty 30.0)))
+   (assert (attribute (name best-quartiere) (value moncalieri) (certainty 60.0)))
+)
+
+(defrule CHOOSE-QUALITIES::torino-3
+   (attribute (name preferisce) (value ?val))
+   (not (test (eq ?val unknown)))  
+   (exists (attribute (name  best-citta) (value torino)))
+   (exists (attribute (name  best-zona) (value primacintura)))
+   =>
+   ;(printout t "MQ UNKNOWN APPARTAMENTO: " ?name1 crlf)
+   (assert (attribute (name best-quartiere) (value lingotto) (certainty 80.0)))
+   (assert (attribute (name best-quartiere) (value moncalieri) (certainty 80.0)))
+)
+
+; MILANO
+(defrule CHOOSE-QUALITIES::milano-1
+   (attribute (name preferisce) (value ?val))
+   (not (test (eq ?val unknown)))   
+   (exists (attribute (name  best-citta) (value milano)))
+   (exists (attribute (name  best-zona) (value centro)))
+   =>
+   ;(printout t "MQ UNKNOWN APPARTAMENTO: " ?name1 crlf)
+   (assert (attribute (name best-quartiere) (value navigli) (certainty 90.0)))
+   (assert (attribute (name best-quartiere) (value sansiro) (certainty 90.0)))
+)
+
+(defrule CHOOSE-QUALITIES::milano-2
+   (attribute (name preferisce) (value ?val))
+   (not (test (eq ?val unknown)))     
+   (exists (attribute (name  best-citta) (value milano)))
+   (exists (attribute (name  best-zona) (value periferia)))
+   =>
+   ;(printout t "MQ UNKNOWN APPARTAMENTO: " ?name1 crlf)
+   (assert (attribute (name best-quartiere) (value navigli) (certainty 30.0)))
+   (assert (attribute (name best-quartiere) (value sansiro) (certainty 60.0)))
+)
+
+(defrule CHOOSE-QUALITIES::milano-3
+   (attribute (name preferisce) (value ?val))
+   (not (test (eq ?val unknown)))  
+   (exists (attribute (name  best-citta) (value milano)))
+   (exists (attribute (name  best-zona) (value primacintura)))
+   =>
+   ;(printout t "MQ UNKNOWN APPARTAMENTO: " ?name1 crlf)
+   (assert (attribute (name best-quartiere) (value navigli) (certainty 80.0)))
+   (assert (attribute (name best-quartiere) (value sansiro) (certainty 80.0)))
+)
+
+
+
+; ROMA
+(defrule CHOOSE-QUALITIES::roma-1
+   (attribute (name preferisce) (value ?val))
+   (not (test (eq ?val unknown)))  
+   (exists (attribute (name  best-citta) (value roma)))
+   (exists (attribute (name  best-zona) (value centro)))
+   =>
+   ;(printout t "MQ UNKNOWN APPARTAMENTO: " ?name1 crlf)
+   (assert (attribute (name best-quartiere) (value trastevere) (certainty 90.0)))
+   (assert (attribute (name best-quartiere) (value campitelli) (certainty 90.0)))
+)
+
+(defrule CHOOSE-QUALITIES::roma-2
+   (attribute (name preferisce) (value ?val))
+   (not (test (eq ?val unknown)))  
+   (exists (attribute (name  best-citta) (value roma)))
+   (exists (attribute (name  best-zona) (value periferia)))
+   =>
+   ;(printout t "MQ UNKNOWN APPARTAMENTO: " ?name1 crlf)
+   (assert (attribute (name best-quartiere) (value trastevere) (certainty 30.0)))
+   (assert (attribute (name best-quartiere) (value campitelli) (certainty 60.0)))
+)
+
+(defrule CHOOSE-QUALITIES::roma-3
+   (attribute (name preferisce) (value ?val))
+   (not (test (eq ?val unknown)))  
+   (exists (attribute (name  best-citta) (value roma)))
+   (exists (attribute (name  best-zona) (value primacintura)))
+   =>
+   ;(printout t "MQ UNKNOWN APPARTAMENTO: " ?name1 crlf)
+   (assert (attribute (name best-quartiere) (value trastevere) (certainty 80.0)))
+   (assert (attribute (name best-quartiere) (value campitelli) (certainty 80.0)))
+)
+
+
+
+
+; FIRENZE
+(defrule CHOOSE-QUALITIES::firenze-1
+   (attribute (name preferisce) (value ?val))
+   (not (test (eq ?val unknown)))  
+   (exists (attribute (name  best-citta) (value firenze)))
+   (exists (attribute (name  best-zona) (value centro)))
+   =>
+   ;(printout t "MQ UNKNOWN APPARTAMENTO: " ?name1 crlf)
+   (assert (attribute (name best-quartiere) (value santacroce) (certainty 90.0)))
+   (assert (attribute (name best-quartiere) (value rovezzano) (certainty 90.0)))
+)
+
+(defrule CHOOSE-QUALITIES::firenze-2
+   (attribute (name preferisce) (value ?val))
+   (not (test (eq ?val unknown)))  
+   (exists (attribute (name  best-citta) (value firenze)))
+   (exists (attribute (name  best-zona) (value periferia)))
+   =>
+   ;(printout t "MQ UNKNOWN APPARTAMENTO: " ?name1 crlf)
+   (assert (attribute (name best-quartiere) (value santacroce) (certainty 30.0)))
+   (assert (attribute (name best-quartiere) (value rovezzano) (certainty 60.0)))
+)
+
+(defrule CHOOSE-QUALITIES::firenze-3
+   (attribute (name preferisce) (value ?val))
+   (not (test (eq ?val unknown)))  
+   (exists (attribute (name  best-citta) (value firenze)))
+   (exists (attribute (name  best-zona) (value primacintura)))
+   =>
+   ;(printout t "MQ UNKNOWN APPARTAMENTO: " ?name1 crlf)
+   (assert (attribute (name best-quartiere) (value santacroce) (certainty 80.0)))
+   (assert (attribute (name best-quartiere) (value rovezzano) (certainty 80.0)))
+)
 
 
 (deffacts the-apartment-rules
@@ -656,7 +797,92 @@
         (then best-citta is torino with certainty 20 and
               best-citta is milano with certainty 20 and
               best-citta is firenze with certainty 20 and
-              best-citta is roma with certainty 20))
+              best-citta is roma with certainty 20 and
+              best-quartiere is lingotto with certainty 20 and
+              best-quartiere is moncalieri with certainty 20 and 
+              best-quartiere is navigli with certainty 20 and 
+              best-quartiere is sansiro with certainty 20 and 
+              best-quartiere is trastevere with certainty 20 and 
+              best-quartiere is campitelli with certainty 20 and 
+              best-quartiere is rovezzano with certainty 20 and 
+              best-quartiere is santacroce with certainty 20))
 
+   ; ; regole per il best-quartiere quando l'utente non ha risposto con la città, ma ha risposto cosa preferisce
+   
+   ; ; TORINO
+   ; (rule (if preferisce is not unknown and 
+   ;           best-citta is torino and
+   ;           best-zona is centro)
+   ;      (then best-quartiere is lingotto with certainty 90 and
+   ;            best-quartiere is moncalieri with certainty 70))
+
+   ; (rule (if preferisce is not unknown and 
+   ;           best-citta is torino and
+   ;           best-zona is periferia)
+   ;      (then best-quartiere is lingotto with certainty 30 and
+   ;            best-quartiere is moncalieri with certainty 60))
+
+   ; (rule (if preferisce is not unknown and 
+   ;           best-citta is torino and
+   ;           best-zona is primacintura)
+   ;      (then best-quartiere is lingotto with certainty 80 and
+   ;            best-quartiere is moncalieri with certainty 80))
+
+   ; ; MILANO
+   ; (rule (if preferisce is not unknown and 
+   ;           best-citta is milano and
+   ;           best-zona is centro)
+   ;      (then best-quartiere is navigli with certainty 90 and
+   ;            best-quartiere is sansiro with certainty 70))
+
+   ; (rule (if preferisce is not unknown and 
+   ;           best-citta is milano and
+   ;           best-zona is periferia)
+   ;      (then best-quartiere is navigli with certainty 30 and
+   ;            best-quartiere is sansiro with certainty 60))
+
+   ; (rule (if preferisce is not unknown and 
+   ;           best-citta is milano and
+   ;           best-zona is primacintura)
+   ;      (then best-quartiere is navigli with certainty 80 and
+   ;            best-quartiere is sansiro with certainty 80))
+
+   ; ; ROMA
+   ; (rule (if preferisce is not unknown and 
+   ;           best-citta is roma and
+   ;           best-zona is centro)
+   ;      (then best-quartiere is trastevere with certainty 90 and
+   ;            best-quartiere is campitelli with certainty 70))
+
+   ; (rule (if preferisce is not unknown and 
+   ;           best-citta is roma and
+   ;           best-zona is periferia)
+   ;      (then best-quartiere is trastevere with certainty 30 and
+   ;            best-quartiere is campitelli with certainty 60))
+
+   ; (rule (if preferisce is not unknown and 
+   ;           best-citta is roma and
+   ;           best-zona is primacintura)
+   ;      (then best-quartiere is trastevere with certainty 80 and
+   ;            best-quartiere is campitelli with certainty 80))
+
+   ; ; FIRENZE
+   ; (rule (if preferisce is not unknown and 
+   ;           best-citta is firenze and
+   ;           best-zona is centro)
+   ;      (then best-quartiere is santacroce with certainty 90 and
+   ;            best-quartiere is rovezzano with certainty 70))
+
+   ; (rule (if preferisce is not unknown and 
+   ;           best-citta is firenze and
+   ;           best-zona is periferia)
+   ;      (then best-quartiere is santacroce with certainty 30 and
+   ;            best-quartiere is rovezzano with certainty 60))
+
+   ; (rule (if preferisce is not unknown and 
+   ;           best-citta is firenze and
+   ;           best-zona is primacintura)
+   ;      (then best-quartiere is santacroce with certainty 80 and
+   ;            best-quartiere is rovezzano with certainty 80))
 )
 

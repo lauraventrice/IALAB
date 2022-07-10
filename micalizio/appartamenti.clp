@@ -353,6 +353,7 @@
         (prezzorichiesto ?pr)
         (servizivicino $? ?sv $?))
 
+  ; TODO: (FARE ATTENZIONE AL VALORE IN CASO) vedere i risultati con questo best-numero-piano e decidere se tenerlo
   ;(attribute (name best-numero-piano) (value ?p) (certainty ?certainty-20)) ; attributo legato proprio al numero del piano
   (attribute (name best-citta) (value ?c) (certainty ?certainty-5))
   (attribute (name best-zona) (value ?z) (certainty ?certainty-6))
