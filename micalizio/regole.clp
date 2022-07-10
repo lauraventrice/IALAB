@@ -203,40 +203,80 @@
    (assert (attribute (name best-numero-piano-apartment) (value ?name1) (certainty 25.0))))
 
 
-;; PROVA NUOVA REGOLA
-(defrule CHOOSE-QUALITIES::tentativo-numero-piano-pidi60anni-piano0   ; se l'appartamento non ha l'ascensore ha senso proporre appartamenti ai piani più bassi
+;; a prescindere dal pinao che ha scelto l'utente per ogni appartamento asserisco una certainty in base al fatto che abbia o meno l'ascensore
+(defrule CHOOSE-QUALITIES::ascensore-no-piano0   ; se l'appartamento è al piano terra e non ha l'ascensore meglio dargli una certainty alta
    (declare (salience 10000))
    (attribute (name numero-piano) (value ?pianorisposta))
    (apartment (name ?name1) (piano 0) (ascensore no))
    =>
-   (assert (attribute (name best-numero-piano) (value ?name1) (certainty 90.0)))
+   (assert (attribute (name best-numero-piano-apartment) (value ?name1) (certainty 90.0)))
 )
 
-(defrule CHOOSE-QUALITIES::tentativo-numero-piano-pidi60anni-piano1   ; se l'appartamento non ha l'ascensore ha senso proporre appartamenti ai piani più bassi
+(defrule CHOOSE-QUALITIES::ascensore-no-piano1   ; se l'appartamento è al primo piano e non ha l'ascensore meglio dargli una certainty medio-alta
    (declare (salience 10000))
    (attribute (name numero-piano) (value ?pianorisposta))
    (apartment (name ?name1) (piano 1) (ascensore no))
    =>
-   (assert (attribute (name best-numero-piano) (value ?name1) (certainty 75.0)))
+   (assert (attribute (name best-numero-piano-apartment) (value ?name1) (certainty 75.0)))
 )
 
 
-(defrule CHOOSE-QUALITIES::tentativo-numero-piano-pidi60anni-piano2   ; se l'appartamento non ha l'ascensore ha senso proporre appartamenti ai piani più bassi
+(defrule CHOOSE-QUALITIES::ascensore-no-piano2   ; se l'appartamento è al secondo piano e non ha l'ascensore meglio dargli una certainty media
    (declare (salience 10000))
    (attribute (name numero-piano) (value ?pianorisposta))
    (apartment (name ?name1) (piano 2) (ascensore no))
    =>
-   (assert (attribute (name best-numero-piano) (value ?name1) (certainty 50.0)))
+   (assert (attribute (name best-numero-piano-apartment) (value ?name1) (certainty 50.0)))
 )
 
 
-(defrule CHOOSE-QUALITIES::tentativo-numero-piano-pidi60anni-piano3   ; se l'appartamento non ha l'ascensore ha senso proporre appartamenti ai piani più bassi
+(defrule CHOOSE-QUALITIES::ascensore-no-piano3   ; se l'appartamento è al terzo piano e non ha l'ascensore meglio dargli una certainty bassa
    (declare (salience 10000))
    (attribute (name numero-piano) (value ?pianorisposta))
    (apartment (name ?name1) (piano 3) (ascensore no))
    =>
-   (assert (attribute (name best-numero-piano) (value ?name1) (certainty 25.0)))
+   (assert (attribute (name best-numero-piano-apartment) (value ?name1) (certainty 25.0)))
 )
+
+
+; per le seguenti ho messo delle certainties descrescenti al crescere del piano perchè in caso di rottura dell'ascensore bisogna farsi a piedi tutte le scale!
+
+(defrule CHOOSE-QUALITIES::ascensore-si-piano0   
+   (declare (salience 10000))
+   (attribute (name numero-piano) (value ?pianorisposta))
+   (apartment (name ?name1) (piano 0) (ascensore si))
+   =>
+   (assert (attribute (name best-numero-piano-apartment) (value ?name1) (certainty 95.0)))
+)
+
+(defrule CHOOSE-QUALITIES::ascensore-si-piano1  
+   (declare (salience 10000))
+   (attribute (name numero-piano) (value ?pianorisposta))
+   (apartment (name ?name1) (piano 1) (ascensore si))
+   =>
+   (assert (attribute (name best-numero-piano-apartment) (value ?name1) (certainty 85.0)))
+)
+
+
+(defrule CHOOSE-QUALITIES::ascensore-si-piano2   
+   (declare (salience 10000))
+   (attribute (name numero-piano) (value ?pianorisposta))
+   (apartment (name ?name1) (piano 2) (ascensore si))
+   =>
+   (assert (attribute (name best-numero-piano-apartment) (value ?name1) (certainty 75.0)))
+)
+
+
+(defrule CHOOSE-QUALITIES::ascensore-si-piano3  
+   (declare (salience 10000))
+   (attribute (name numero-piano) (value ?pianorisposta))
+   (apartment (name ?name1) (piano 3) (ascensore si))
+   =>
+   (assert (attribute (name best-numero-piano-apartment) (value ?name1) (certainty 65.0)))
+)
+
+
+
 
 
 ; (defrule CHOOSE-QUALITIES::tentativo-numero-piano-pidi60anni-v2     ; se l'appartamento non ha l'ascensore ha senso proporre appartamenti ai piani più bassi
@@ -254,17 +294,19 @@
 ; ; TODO: forse anche così in fin dei conti potrebbe andare bene
 ; ; TODO: terzao ragionamento! non va bene! andrei ad asserire le cose scritte nelle 4 righe del conseguente per ogni appartamento che non ha l'ascensore!!!!
 
-(defrule CHOOSE-QUALITIES::numero-piano-unk
-   (declare (salience 10000))
-   (attribute (name numero-piano) (value ?val))
-   (test (eq ?val unknown))    ; se la risposta è unknown bisogna usare una regola apposita
-   =>
-   ;(printout t "numero-piano UNKNOWN: " crlf)
-   (assert (attribute (name best-numero-piano) (value 0) (certainty 20.0)))
-   (assert (attribute (name best-numero-piano) (value 1) (certainty 20.0)))
-   (assert (attribute (name best-numero-piano) (value 2) (certainty 20.0)))
-   (assert (attribute (name best-numero-piano) (value 3) (certainty 20.0)))
-)
+
+; (defrule CHOOSE-QUALITIES::numero-piano-unk
+;    (declare (salience 10000))
+;    (attribute (name numero-piano) (value ?val))
+;    (test (eq ?val unknown))    ; se la risposta è unknown bisogna usare una regola apposita
+;    (apartment (name ?name1) (piano ?piano))
+;    =>
+;    ;(printout t "numero-piano UNKNOWN: " crlf)
+;    (assert (attribute (name best-numero-piano) (value 0) (certainty 20.0)))
+;    (assert (attribute (name best-numero-piano) (value 1) (certainty 20.0)))
+;    (assert (attribute (name best-numero-piano) (value 2) (certainty 20.0)))
+;    (assert (attribute (name best-numero-piano) (value 3) (certainty 20.0)))
+; )
 
 
 

@@ -38,12 +38,30 @@
                 (precursors)
                 (the-question ?the-question)
                 (attribute ?name)
-                (valid-answers $?valid-answers))     
+                (valid-answers $?valid-answers))
+  (not (test (eq ?name preferisce)))  ; quando riparte il ciclio meglio non rifare la domanda "preferisce il mare o la montagna?"
    =>
-    ;(printout t "MODIFICO DOMANDA; ORA POSSO RIFARLA " crlf)
+    (printout t "MODIFICO DOMANDA; ORA POSSO RIFARLA " crlf)
     (retract ?a)
     (retract ?r)
     (modify ?f (already-asked FALSE))
+)
+
+(defrule RESTART::change-response-done-preferisce   
+    (declare (salience 1000))
+  (attribute (name risposta) (value si))   
+  ?a <- (attribute (name ?name) (value ?val))   
+  ?r <- (attribute (name risposta-unknown) (value ?name))
+  ?f <- (question (already-asked TRUE)
+                (precursors)
+                (the-question ?the-question)
+                (attribute ?name)
+                (valid-answers $?valid-answers))
+  (test (eq ?name preferisce))  ; quando riparte il ciclio meglio non rifare la domanda "preferisce il mare o la montagna?"
+   =>
+    (printout t "MODIFICO DOMANDA; ORA POSSO RIFARLA " crlf)
+    (retract ?a)
+    (retract ?r)
 )
 
 ;-------- eregole per cancellare le vecchie risposte ------------
