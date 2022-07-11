@@ -390,6 +390,44 @@
    (assert (attribute (name best-zona) (value periferia) (certainty 20.0)))
 )
 
+
+(defrule CHOOSE-QUALITIES::zona-unk-torino
+   (declare (salience 10000))
+   (attribute (name zona) (value unknown))
+   (attribute (name citta) (value torino))
+   =>
+   (assert (attribute (name best-quartiere) (value lingotto) (certainty 20.0)))
+   (assert (attribute (name best-quartiere) (value moncalieri) (certainty 20.0)))
+)
+
+(defrule CHOOSE-QUALITIES::zona-unk-milano
+   (declare (salience 10000))
+   (attribute (name zona) (value unknown))
+   (attribute (name citta) (value milano))
+   =>
+   (assert (attribute (name best-quartiere) (value navigli) (certainty 20.0)))
+   (assert (attribute (name best-quartiere) (value sansiro) (certainty 20.0)))
+)
+
+(defrule CHOOSE-QUALITIES::zona-unk-roma
+   (declare (salience 10000))
+   (attribute (name zona) (value unknown))
+   (attribute (name citta) (value roma))
+   =>
+   (assert (attribute (name best-quartiere) (value trastevere) (certainty 20.0)))
+   (assert (attribute (name best-quartiere) (value campitelli) (certainty 20.0)))
+)
+
+(defrule CHOOSE-QUALITIES::zona-unk-firenze
+   (declare (salience 10000))
+   (attribute (name zona) (value unknown))
+   (attribute (name citta) (value firenze))
+   =>
+   (assert (attribute (name best-quartiere) (value rovezzano) (certainty 20.0)))
+   (assert (attribute (name best-quartiere) (value santacroce) (certainty 20.0)))
+)
+
+
 ; ------ REGOLE PER IL BEST QUARTIERE --------
 
 ; Regole per selezionare il best-quartiere di Torino
@@ -592,9 +630,8 @@
 ; ; regola che viene eseguita solo se la risposta è unknown
 (defrule CHOOSE-QUALITIES::checking-prezzo-unknown
    (declare (salience 10))
-   (attribute (name prezzo-massimo) (value ?prezzomassimo))
+   (attribute (name prezzo-massimo) (value unknown))
    (apartment (name ?name1) (prezzorichiesto ?prezzorichiesto))
-   (test (eq ?prezzomassimo unknown))    ; se la risposta è unknown bisogna usare questa regola
    =>
    ;(printout t "VERSIONE 1 PREZZO UNKNOWN APPARTAMENTO: " ?name1 crlf)
    (assert (attribute (name best-prezzo-richiesto) (value ?name1) (certainty 20.0))))
@@ -650,9 +687,8 @@
 ; ; regola che viene eseguita solo se la risposta è unknown
 (defrule CHOOSE-QUALITIES::checking-mq-unknown
    (declare (salience 10))
-   (attribute (name metri-quadri) (value ?mq))
+   (attribute (name metri-quadri) (value unknown))
    (apartment (name ?name1) (metriquadri ?metriquadriapartment))
-   (test (eq ?mq unknown))    ; se la risposta è unknown bisogna usare questa regola
    (not (attribute (name best-metri-quadri) (value ?name1) (certainty ?cert)))
    =>
    ;(printout t "MQ UNKNOWN APPARTAMENTO: " ?name1 crlf)
@@ -664,8 +700,7 @@
 
 ; TORINO
 (defrule CHOOSE-QUALITIES::torino-1
-   (attribute (name preferisce) (value ?val))
-   (not (test (eq ?val unknown)))  
+   (attribute (name preferisce) (value ~unknown))
    (exists (attribute (name  best-citta) (value torino)))
    (exists (attribute (name  best-zona) (value centro)))
    =>
@@ -675,8 +710,7 @@
 )
 
 (defrule CHOOSE-QUALITIES::torino-2
-   (attribute (name preferisce) (value ?val))
-   (not (test (eq ?val unknown)))  
+   (attribute (name preferisce) (value ~unknown))
    (exists (attribute (name  best-citta) (value torino)))
    (exists (attribute (name  best-zona) (value periferia)))
    =>
@@ -686,8 +720,7 @@
 )
 
 (defrule CHOOSE-QUALITIES::torino-3
-   (attribute (name preferisce) (value ?val))
-   (not (test (eq ?val unknown)))  
+   (attribute (name preferisce) (value ~unknown))
    (exists (attribute (name  best-citta) (value torino)))
    (exists (attribute (name  best-zona) (value primacintura)))
    =>
@@ -698,8 +731,7 @@
 
 ; MILANO
 (defrule CHOOSE-QUALITIES::milano-1
-   (attribute (name preferisce) (value ?val))
-   (not (test (eq ?val unknown)))   
+   (attribute (name preferisce) (value ~unknown))
    (exists (attribute (name  best-citta) (value milano)))
    (exists (attribute (name  best-zona) (value centro)))
    =>
@@ -709,8 +741,7 @@
 )
 
 (defrule CHOOSE-QUALITIES::milano-2
-   (attribute (name preferisce) (value ?val))
-   (not (test (eq ?val unknown)))     
+   (attribute (name preferisce) (value ~unknown))
    (exists (attribute (name  best-citta) (value milano)))
    (exists (attribute (name  best-zona) (value periferia)))
    =>
@@ -720,8 +751,7 @@
 )
 
 (defrule CHOOSE-QUALITIES::milano-3
-   (attribute (name preferisce) (value ?val))
-   (not (test (eq ?val unknown)))  
+   (attribute (name preferisce) (value ~unknown))
    (exists (attribute (name  best-citta) (value milano)))
    (exists (attribute (name  best-zona) (value primacintura)))
    =>
@@ -734,8 +764,7 @@
 
 ; ROMA
 (defrule CHOOSE-QUALITIES::roma-1
-   (attribute (name preferisce) (value ?val))
-   (not (test (eq ?val unknown)))  
+   (attribute (name preferisce) (value ~unknown))
    (exists (attribute (name  best-citta) (value roma)))
    (exists (attribute (name  best-zona) (value centro)))
    =>
@@ -745,8 +774,7 @@
 )
 
 (defrule CHOOSE-QUALITIES::roma-2
-   (attribute (name preferisce) (value ?val))
-   (not (test (eq ?val unknown)))  
+   (attribute (name preferisce) (value ~unknown))
    (exists (attribute (name  best-citta) (value roma)))
    (exists (attribute (name  best-zona) (value periferia)))
    =>
@@ -756,8 +784,7 @@
 )
 
 (defrule CHOOSE-QUALITIES::roma-3
-   (attribute (name preferisce) (value ?val))
-   (not (test (eq ?val unknown)))  
+   (attribute (name preferisce) (value ~unknown))
    (exists (attribute (name  best-citta) (value roma)))
    (exists (attribute (name  best-zona) (value primacintura)))
    =>
@@ -771,8 +798,7 @@
 
 ; FIRENZE
 (defrule CHOOSE-QUALITIES::firenze-1
-   (attribute (name preferisce) (value ?val))
-   (not (test (eq ?val unknown)))  
+   (attribute (name preferisce) (value ~unknown))
    (exists (attribute (name  best-citta) (value firenze)))
    (exists (attribute (name  best-zona) (value centro)))
    =>
@@ -782,8 +808,7 @@
 )
 
 (defrule CHOOSE-QUALITIES::firenze-2
-   (attribute (name preferisce) (value ?val))
-   (not (test (eq ?val unknown)))  
+   (attribute (name preferisce) (value ~unknown))
    (exists (attribute (name  best-citta) (value firenze)))
    (exists (attribute (name  best-zona) (value periferia)))
    =>
@@ -793,8 +818,7 @@
 )
 
 (defrule CHOOSE-QUALITIES::firenze-3
-   (attribute (name preferisce) (value ?val))
-   (not (test (eq ?val unknown)))  
+   (attribute (name preferisce) (value ~unknown))
    (exists (attribute (name  best-citta) (value firenze)))
    (exists (attribute (name  best-zona) (value primacintura)))
    =>
