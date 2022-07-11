@@ -395,7 +395,7 @@
   (attribute (name best-prezzo-richiesto) (value ?name) (certainty ?certainty-12))
   (attribute (name best-metri-quadri) (value ?name) (certainty ?certainty-1))
   (attribute (name best-numero-piano-apartment) (value ?name) (certainty ?certainty-4)) ; attributo legato al numero del piano dell'appartamento specifico
-  (attribute (name best-numero-vani) (value ?name) (certainty ?certainty-2))
+  (attribute (name best-numero-vani) (value ?nv) (certainty ?certainty-2))
   (attribute (name best-numero-servizi) (value ?name) (certainty ?certainty-3))
   (attribute (name best-servizio-vicino) (value ?sv) (certainty ?certainty-13))
   =>

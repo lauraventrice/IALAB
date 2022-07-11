@@ -71,44 +71,60 @@
 (defrule CHOOSE-QUALITIES::tentativo-numero-vani-uguale
    (declare (salience 10000))
    (attribute (name numero-vani) (value ?vaniirisposta))
-   (apartment (name ?name1) (numerovani ?vaniappartamento))
+   ;(apartment (name ?name1) (numerovani ?vaniappartamento))
    (not (test (eq ?vaniirisposta unknown)))    ; se la risposta è unknown bisogna usare una regola apposita
-   (or (test (= (float (str-cat ?vaniappartamento)) (float (str-cat ?vaniirisposta)))))
+   ;(or (test (= (float (str-cat ?vaniappartamento)) (float (str-cat ?vaniirisposta)))))
    =>
-   (assert (attribute (name best-numero-vani) (value ?name1) (certainty 90.0))))
+   (assert (attribute (name best-numero-vani) (value ?vaniirisposta) (certainty 90.0))))
 
 
 (defrule CHOOSE-QUALITIES::tentativo-numero-vani-1
    (declare (salience 10000))
-   (attribute (name numero-vani) (value ?vaniirisposta))
-   (apartment (name ?name1) (numerovani ?vaniappartamento))
-   (not (test (eq ?vaniirisposta unknown)))    ; se la risposta è unknown bisogna usare una regola apposita
-   (or (test (= (float (str-cat ?vaniappartamento)) (+ (float (str-cat ?vaniirisposta)) 1)))
-        (test (= (float (str-cat ?vaniappartamento)) (- (float (str-cat ?vaniirisposta)) 1))))
+   (attribute (name numero-vani) (value 1))
+   ;(apartment (name ?name1) (numerovani ?vaniappartamento))
+   ;(not (test (eq ?vaniirisposta unknown)))    ; se la risposta è unknown bisogna usare una regola apposita
+   ; (or (test (= (float (str-cat ?vaniappartamento)) (+ (float (str-cat ?vaniirisposta)) 1)))
+   ;      (test (= (float (str-cat ?vaniappartamento)) (- (float (str-cat ?vaniirisposta)) 1))))
    =>
-   (assert (attribute (name best-numero-vani) (value ?name1) (certainty 70.0))))
+   (assert (attribute (name best-numero-vani) (value 2) (certainty 70.0)))
+   (assert (attribute (name best-numero-vani) (value 3) (certainty 40.0)))
+)
 
 (defrule CHOOSE-QUALITIES::tentativo-numero-vani-2
    (declare (salience 10000))
-   (attribute (name numero-vani) (value ?vaniirisposta))
-   (apartment (name ?name1) (numerovani ?vaniappartamento))
-   (not (test (eq ?vaniirisposta unknown)))    ; se la risposta è unknown bisogna usare una regola apposita
-   (or (test (= (float (str-cat ?vaniappartamento)) (+ (float (str-cat ?vaniirisposta)) 2)))
-        (test (= (float (str-cat ?vaniappartamento)) (- (float (str-cat ?vaniirisposta)) 2))))
+   (attribute (name numero-vani) (value 2))
+   ;(apartment (name ?name1) (numerovani ?vaniappartamento))
+   ; (not (test (eq ?vaniirisposta unknown)))    ; se la risposta è unknown bisogna usare una regola apposita
+   ; (or (test (= (float (str-cat ?vaniappartamento)) (+ (float (str-cat ?vaniirisposta)) 2)))
+   ;      (test (= (float (str-cat ?vaniappartamento)) (- (float (str-cat ?vaniirisposta)) 2))))
    =>
-   (assert (attribute (name best-numero-vani) (value ?name1) (certainty 40.0))))
+   (assert (attribute (name best-numero-vani) (value 1) (certainty 70.0)))
+   (assert (attribute (name best-numero-vani) (value 3) (certainty 70.0)))
+)
+
+(defrule CHOOSE-QUALITIES::tentativo-numero-vani-2
+   (declare (salience 10000))
+   (attribute (name numero-vani) (value 3))
+   ;(apartment (name ?name1) (numerovani ?vaniappartamento))
+   ; (not (test (eq ?vaniirisposta unknown)))    ; se la risposta è unknown bisogna usare una regola apposita
+   ; (or (test (= (float (str-cat ?vaniappartamento)) (+ (float (str-cat ?vaniirisposta)) 2)))
+   ;      (test (= (float (str-cat ?vaniappartamento)) (- (float (str-cat ?vaniirisposta)) 2))))
+   =>
+   (assert (attribute (name best-numero-vani) (value 1) (certainty 40.0)))
+   (assert (attribute (name best-numero-vani) (value 2) (certainty 70.0)))
+)
 
 
 (defrule CHOOSE-QUALITIES::numero-vani-unk
    (declare (salience 10000))
    (attribute (name numero-vani) (value ?val))
    (test (eq ?val unknown))    ; se la risposta è unknown bisogna usare una regola apposita
-   (apartment (name ?name1) (numerovani ?vaniappartamento))
+   ;(apartment (name ?name1) (numerovani ?vaniappartamento))
    =>
    ;(printout t "numero-vani UNKNOWN: " crlf)
-   (assert (attribute (name best-numero-vani) (value ?name1) (certainty 20.0)))
-   ; (assert (attribute (name best-numero-vani) (value 2) (certainty 20.0)))
-   ; (assert (attribute (name best-numero-vani) (value 3) (certainty 20.0)))
+   (assert (attribute (name best-numero-vani) (value 1) (certainty 20.0)))
+   (assert (attribute (name best-numero-vani) (value 2) (certainty 20.0)))
+   (assert (attribute (name best-numero-vani) (value 3) (certainty 20.0)))
 )
 
 
