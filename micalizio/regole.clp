@@ -102,7 +102,7 @@
    (assert (attribute (name best-numero-vani) (value 3) (certainty 70.0)))
 )
 
-(defrule CHOOSE-QUALITIES::tentativo-numero-vani-2
+(defrule CHOOSE-QUALITIES::tentativo-numero-vani-3
    (declare (salience 10000))
    (attribute (name numero-vani) (value 3))
    ;(apartment (name ?name1) (numerovani ?vaniappartamento))
@@ -133,32 +133,48 @@
 (defrule CHOOSE-QUALITIES::tentativo-numero-servizi-uguale
    (declare (salience 10000))
    (attribute (name numero-servizi) (value ?servizirisposta))
-   (apartment (name ?name1) (numeroservizi ?serviziappartamento))
+   ;(apartment (name ?name1) (numeroservizi ?serviziappartamento))
    (not (test (eq ?servizirisposta unknown)))    ; se la risposta è unknown bisogna usare una regola apposita
-   (or (test (= (float (str-cat ?serviziappartamento)) (float (str-cat ?servizirisposta)))))
+   ;(or (test (= (float (str-cat ?serviziappartamento)) (float (str-cat ?servizirisposta)))))
    =>
-   (assert (attribute (name best-numero-servizi) (value ?name1) (certainty 90.0))))
+   (assert (attribute (name best-numero-servizi) (value ?servizirisposta) (certainty 90.0))))
 
 
 (defrule CHOOSE-QUALITIES::tentativo-numero-servizi-1
    (declare (salience 10000))
-   (attribute (name numero-servizi) (value ?servizirisposta))
-   (apartment (name ?name1) (numeroservizi ?serviziappartamento))
-   (not (test (eq ?servizirisposta unknown)))    ; se la risposta è unknown bisogna usare una regola apposita
-   (or (test (= (float (str-cat ?serviziappartamento)) (+ (float (str-cat ?servizirisposta)) 1)))
-        (test (= (float (str-cat ?serviziappartamento)) (- (float (str-cat ?servizirisposta)) 1))))
+   (attribute (name numero-servizi) (value 1))
+   ; (apartment (name ?name1) (numeroservizi ?serviziappartamento))
+   ; (not (test (eq ?servizirisposta unknown)))    ; se la risposta è unknown bisogna usare una regola apposita
+   ; (or (test (= (float (str-cat ?serviziappartamento)) (+ (float (str-cat ?servizirisposta)) 1)))
+   ;      (test (= (float (str-cat ?serviziappartamento)) (- (float (str-cat ?servizirisposta)) 1))))
    =>
-   (assert (attribute (name best-numero-servizi) (value ?name1) (certainty 70.0))))
+   (assert (attribute (name best-numero-servizi) (value 2) (certainty 70.0)))
+   (assert (attribute (name best-numero-servizi) (value 3) (certainty 40.0)))
+)
 
 (defrule CHOOSE-QUALITIES::tentativo-numero-servizi-2
    (declare (salience 10000))
-   (attribute (name numero-servizi) (value ?servizirisposta))
-   (apartment (name ?name1) (numeroservizi ?serviziappartamento))
-   (not (test (eq ?servizirisposta unknown)))    ; se la risposta è unknown bisogna usare una regola apposita
-   (or (test (= (float (str-cat ?serviziappartamento)) (+ (float (str-cat ?servizirisposta)) 2)))
-        (test (= (float (str-cat ?serviziappartamento)) (- (float (str-cat ?servizirisposta)) 2))))
+   (attribute (name numero-servizi) (value 2))
+   ; (apartment (name ?name1) (numeroservizi ?serviziappartamento))
+   ; (not (test (eq ?servizirisposta unknown)))    ; se la risposta è unknown bisogna usare una regola apposita
+   ; (or (test (= (float (str-cat ?serviziappartamento)) (+ (float (str-cat ?servizirisposta)) 2)))
+   ;      (test (= (float (str-cat ?serviziappartamento)) (- (float (str-cat ?servizirisposta)) 2))))
    =>
-   (assert (attribute (name best-numero-servizi) (value ?name1) (certainty 40.0))))
+   (assert (attribute (name best-numero-servizi) (value 1) (certainty 70.0)))
+   (assert (attribute (name best-numero-servizi) (value 3) (certainty 70.0)))
+)
+
+(defrule CHOOSE-QUALITIES::tentativo-numero-servizi-3
+   (declare (salience 10000))
+   (attribute (name numero-servizi) (value 3))
+   ; (apartment (name ?name1) (numeroservizi ?serviziappartamento))
+   ; (not (test (eq ?servizirisposta unknown)))    ; se la risposta è unknown bisogna usare una regola apposita
+   ; (or (test (= (float (str-cat ?serviziappartamento)) (+ (float (str-cat ?servizirisposta)) 2)))
+   ;      (test (= (float (str-cat ?serviziappartamento)) (- (float (str-cat ?servizirisposta)) 2))))
+   =>
+   (assert (attribute (name best-numero-servizi) (value 1) (certainty 40.0)))
+   (assert (attribute (name best-numero-servizi) (value 2) (certainty 70.0)))
+)
 
 
 (defrule CHOOSE-QUALITIES::numero-servizi-unk
