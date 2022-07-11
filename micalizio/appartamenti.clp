@@ -14,7 +14,6 @@
   (attribute (name best-ascensore) (value any))
   (attribute (name best-boxauto) (value any))
   (attribute (name best-terrazzino) (value any))
-  ;(attribute (name best-prezzo-richiesto) (value any))
 )
 ;;******************************************************************************************************
 
