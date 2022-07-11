@@ -69,7 +69,7 @@
 ; ------ REGOLE NUMERO VANI --------
 
 (defrule CHOOSE-QUALITIES::tentativo-numero-vani-uguale
-   (declare (salience 10000))
+
    (attribute (name numero-vani) (value ?vaniirisposta &~unknown))
    ;(apartment (name ?name1) (numerovani ?vaniappartamento))
    ;(not (test (eq ?vaniirisposta unknown)))    ; se la risposta è unknown bisogna usare una regola apposita
@@ -79,7 +79,7 @@
 
 
 (defrule CHOOSE-QUALITIES::tentativo-numero-vani-1
-   (declare (salience 10000))
+
    (attribute (name numero-vani) (value 1))
    ;(apartment (name ?name1) (numerovani ?vaniappartamento))
    ;(not (test (eq ?vaniirisposta unknown)))    ; se la risposta è unknown bisogna usare una regola apposita
@@ -91,7 +91,7 @@
 )
 
 (defrule CHOOSE-QUALITIES::tentativo-numero-vani-2
-   (declare (salience 10000))
+
    (attribute (name numero-vani) (value 2))
    ;(apartment (name ?name1) (numerovani ?vaniappartamento))
    ; (not (test (eq ?vaniirisposta unknown)))    ; se la risposta è unknown bisogna usare una regola apposita
@@ -103,7 +103,7 @@
 )
 
 (defrule CHOOSE-QUALITIES::tentativo-numero-vani-3
-   (declare (salience 10000))
+
    (attribute (name numero-vani) (value 3))
    ;(apartment (name ?name1) (numerovani ?vaniappartamento))
    ; (not (test (eq ?vaniirisposta unknown)))    ; se la risposta è unknown bisogna usare una regola apposita
@@ -116,7 +116,7 @@
 
 
 (defrule CHOOSE-QUALITIES::numero-vani-unk
-   (declare (salience 10000))
+
    (attribute (name numero-vani) (value unknown))
    ;(test (eq ?val unknown))    ; se la risposta è unknown bisogna usare una regola apposita
    ;(apartment (name ?name1) (numerovani ?vaniappartamento))
@@ -131,7 +131,7 @@
 ; ------ REGOLE NUMERO SERVIZI --------
 
 (defrule CHOOSE-QUALITIES::tentativo-numero-servizi-uguale
-   (declare (salience 10000))
+
    (attribute (name numero-servizi) (value ?servizirisposta &~unknown))
    ;(apartment (name ?name1) (numeroservizi ?serviziappartamento))
    ;(not (test (eq ?servizirisposta unknown)))    ; se la risposta è unknown bisogna usare una regola apposita
@@ -141,7 +141,7 @@
 
 
 (defrule CHOOSE-QUALITIES::tentativo-numero-servizi-1
-   (declare (salience 10000))
+
    (attribute (name numero-servizi) (value 1))
    ; (apartment (name ?name1) (numeroservizi ?serviziappartamento))
    ; (not (test (eq ?servizirisposta unknown)))    ; se la risposta è unknown bisogna usare una regola apposita
@@ -153,7 +153,7 @@
 )
 
 (defrule CHOOSE-QUALITIES::tentativo-numero-servizi-2
-   (declare (salience 10000))
+
    (attribute (name numero-servizi) (value 2))
    ; (apartment (name ?name1) (numeroservizi ?serviziappartamento))
    ; (not (test (eq ?servizirisposta unknown)))    ; se la risposta è unknown bisogna usare una regola apposita
@@ -165,7 +165,7 @@
 )
 
 (defrule CHOOSE-QUALITIES::tentativo-numero-servizi-3
-   (declare (salience 10000))
+
    (attribute (name numero-servizi) (value 3))
    ; (apartment (name ?name1) (numeroservizi ?serviziappartamento))
    ; (not (test (eq ?servizirisposta unknown)))    ; se la risposta è unknown bisogna usare una regola apposita
@@ -178,7 +178,7 @@
 
 
 (defrule CHOOSE-QUALITIES::numero-servizi-unk
-   (declare (salience 10000))
+
    (attribute (name numero-servizi) (value ?val))
    (test (eq ?val unknown))    ; se la risposta è unknown bisogna usare una regola apposita
    (apartment (name ?name1) (numeroservizi ?serviziappartamento))
@@ -196,7 +196,7 @@
 ; ------ REGOLE NUMERO PIANO --------
 
 (defrule CHOOSE-QUALITIES::tentativo-numero-piano-uguale
-   (declare (salience 10000))
+
    (attribute (name numero-piano) (value ?pianorisposta &~unknown))
    ; (apartment (name ?name1) (piano ?pianoappartamento))
    ;(not (test (eq ?pianorisposta unknown)))    ; se la risposta è unknown bisogna usare una regola apposita
@@ -206,7 +206,7 @@
 
 
 (defrule CHOOSE-QUALITIES::tentativo-numero-piano-0
-   (declare (salience 10000))
+
    (attribute (name numero-piano) (value 0))
    ; (apartment (name ?name1) (piano ?pianoappartamento))
    ; (not (test (eq ?pianorisposta unknown)))    ; se la risposta è unknown bisogna usare una regola apposita
@@ -219,7 +219,7 @@
 )
 
 (defrule CHOOSE-QUALITIES::tentativo-numero-piano-1
-   (declare (salience 10000))
+
    (attribute (name numero-piano) (value 1))
    ; (apartment (name ?name1) (piano ?pianoappartamento))
    ; (not (test (eq ?pianorisposta unknown)))    ; se la risposta è unknown bisogna usare una regola apposita
@@ -232,7 +232,7 @@
 )
 
 (defrule CHOOSE-QUALITIES::tentativo-numero-piano-2
-   (declare (salience 10000))
+
    (attribute (name numero-piano) (value 2))
    ; (apartment (name ?name1) (piano ?pianoappartamento))
    ; (not (test (eq ?pianorisposta unknown)))    ; se la risposta è unknown bisogna usare una regola apposita
@@ -245,7 +245,7 @@
 )
 
 (defrule CHOOSE-QUALITIES::tentativo-numero-piano-3
-   (declare (salience 10000))
+
    (attribute (name numero-piano) (value 2))
    ; (apartment (name ?name1) (piano ?pianoappartamento))
    ; (not (test (eq ?pianorisposta unknown)))    ; se la risposta è unknown bisogna usare una regola apposita
@@ -259,7 +259,7 @@
 
 
 (defrule CHOOSE-QUALITIES::tentativo-numero-piano-pidi60anni      ; se l'appartamento non ha l'ascensore e la persona ha più di 60 anni conviene non proporlo con alta certezza
-   (declare (salience 10000))
+
    (attribute (name ha-piudi60anni) (value si))
    ;(attribute (name numero-piano) (value ?pianorisposta))
    ;(apartment (name ?name1) (piano ?pianoappartamento) (ascensore no))
@@ -273,7 +273,7 @@
 
 ; ;; a prescindere dal pinao che ha scelto l'utente per ogni appartamento asserisco una certainty in base al fatto che abbia o meno l'ascensore
 ; (defrule CHOOSE-QUALITIES::ascensore-no-piano0   ; se l'appartamento è al piano terra e non ha l'ascensore meglio dargli una certainty alta
-;    (declare (salience 10000))
+; 
 ;    ;(attribute (name numero-piano) (value ?pianorisposta))
 ;    (apartment (name ?name1) (piano 0) (ascensore no))
 ;    =>
@@ -281,7 +281,7 @@
 ; )
 
 ; (defrule CHOOSE-QUALITIES::ascensore-no-piano1   ; se l'appartamento è al primo piano e non ha l'ascensore meglio dargli una certainty medio-alta
-;    (declare (salience 10000))
+; 
 ;    ;(attribute (name numero-piano) (value ?pianorisposta))
 ;    (apartment (name ?name1) (piano 1) (ascensore no))
 ;    =>
@@ -290,7 +290,7 @@
 
 
 ; (defrule CHOOSE-QUALITIES::ascensore-no-piano2   ; se l'appartamento è al secondo piano e non ha l'ascensore meglio dargli una certainty media
-;    (declare (salience 10000))
+; 
 ;    ;(attribute (name numero-piano) (value ?pianorisposta))
 ;    (apartment (name ?name1) (piano 2) (ascensore no))
 ;    =>
@@ -299,7 +299,7 @@
 
 
 ; (defrule CHOOSE-QUALITIES::ascensore-no-piano3   ; se l'appartamento è al terzo piano e non ha l'ascensore meglio dargli una certainty bassa
-;    (declare (salience 10000))
+; 
 ;    (attribute (name numero-piano) (value ?pianorisposta))
 ;    (apartment (name ?name1) (piano 3) (ascensore no))
 ;    =>
@@ -310,7 +310,7 @@
 ; ; per le seguenti ho messo delle certainties descrescenti al crescere del piano perchè in caso di rottura dell'ascensore bisogna farsi a piedi tutte le scale!
 
 ; (defrule CHOOSE-QUALITIES::ascensore-si-piano0   
-;    (declare (salience 10000))
+; 
 ;    (attribute (name numero-piano) (value ?pianorisposta))
 ;    (apartment (name ?name1) (piano 0) (ascensore si))
 ;    =>
@@ -318,7 +318,7 @@
 ; )
 
 ; (defrule CHOOSE-QUALITIES::ascensore-si-piano1  
-;    (declare (salience 10000))
+; 
 ;    (attribute (name numero-piano) (value ?pianorisposta))
 ;    (apartment (name ?name1) (piano 1) (ascensore si))
 ;    =>
@@ -327,7 +327,7 @@
 
 
 ; (defrule CHOOSE-QUALITIES::ascensore-si-piano2   
-;    (declare (salience 10000))
+; 
 ;    (attribute (name numero-piano) (value ?pianorisposta))
 ;    (apartment (name ?name1) (piano 2) (ascensore si))
 ;    =>
@@ -336,7 +336,7 @@
 
 
 ; (defrule CHOOSE-QUALITIES::ascensore-si-piano3  
-;    (declare (salience 10000))
+; 
 ;    (attribute (name numero-piano) (value ?pianorisposta))
 ;    (apartment (name ?name1) (piano 3) (ascensore si))
 ;    =>
@@ -348,7 +348,7 @@
 
 
 ; (defrule CHOOSE-QUALITIES::tentativo-numero-piano-pidi60anni-v2     ; se l'appartamento non ha l'ascensore ha senso proporre appartamenti ai piani più bassi
-;    (declare (salience 10000))
+; 
 ;    ;(attribute (name ha-piudi60anni) (value si))   ; penso che questa riga sia rimasta per un mio copia e incolla della regola sopra, ma non ha senso averla!
 ;    (attribute (name numero-piano) (value ?pianorisposta))
 ;    (apartment (name ?name1) (piano ?pianoappartamento) (ascensore no))
@@ -364,7 +364,7 @@
 
 
 ; (defrule CHOOSE-QUALITIES::numero-piano-unk
-;    (declare (salience 10000))
+; 
 ;    (attribute (name numero-piano) (value ?val))
 ;    (test (eq ?val unknown))    ; se la risposta è unknown bisogna usare una regola apposita
 ;    (apartment (name ?name1) (piano ?piano))
@@ -382,7 +382,7 @@
 
 ; Regole per selezionare il best-citta
 (defrule CHOOSE-QUALITIES::citta-valorized
-   (declare (salience 10000))
+
    (attribute (name citta) (value ?val &~unknown))
    ;(not (test (eq ?val unknown)))    ; se la risposta è unknown bisogna usare una regola apposita
    =>
@@ -391,7 +391,7 @@
 
 
 (defrule CHOOSE-QUALITIES::citta-unkwown-second-iteration-mont
-   (declare (salience 10000))
+
    (attribute (name fine-ciclo))  
    (attribute (name citta) (value ?val))
    (test (eq ?val unknown))    ; se la risposta è unknown bisogna usare una regola apposita
@@ -403,7 +403,7 @@
 )
 
 (defrule CHOOSE-QUALITIES::citta-unkwown-second-iteration-mare
-   (declare (salience 10000))
+
    (attribute (name fine-ciclo))  
    (attribute (name citta) (value ?val))
    (test (eq ?val unknown))    ; se la risposta è unknown bisogna usare una regola apposita
@@ -417,7 +417,7 @@
 ; Questa regola non dovrebbe servire dato che abbiamo messa quella del "preferisce" ->
 ; se l'utente risponde citta unknown e preferisce unknown avviene proprio ciò che faceva avvenire questa regola seguente
 ; (defrule CHOOSE-QUALITIES::citta-unk
-;    (declare (salience 10000))
+; 
 ;    (attribute (name citta) (value ?val))
 ;    (test (eq ?val unknown))    ; se la risposta è unknown bisogna usare una regola apposita
 ;    =>
@@ -433,7 +433,7 @@
 
 ; Regole per selezionare il best-zona
 (defrule CHOOSE-QUALITIES::zona-valorized
-   (declare (salience 10000))
+
    (attribute (name zona) (value ?val &~unknown))
    ;(not (test (eq ?val unknown)))    ; se la risposta è unknown bisogna usare una regola apposita
    =>
@@ -442,13 +442,13 @@
 
 ; Se l'utente vuole la casa in centro penso sia sensa proporne qualcuna nella prima cintura della città
 (defrule CHOOSE-QUALITIES::zona-valorized-centro
-   (declare (salience 10000))
+
    (attribute (name zona) (value centro))
    =>
    (assert (attribute (name best-zona) (value primacintura) (certainty 30.0))))
 
 (defrule CHOOSE-QUALITIES::zona-unk
-   (declare (salience 10000))
+
    (attribute (name zona) (value ?val))
    (test (eq ?val unknown))    ; se la risposta è unknown bisogna usare una regola apposita
    =>
@@ -460,7 +460,7 @@
 
 
 (defrule CHOOSE-QUALITIES::zona-unk-torino
-   (declare (salience 10000))
+
    (attribute (name zona) (value unknown))
    (attribute (name citta) (value torino))
    =>
@@ -469,7 +469,7 @@
 )
 
 (defrule CHOOSE-QUALITIES::zona-unk-milano
-   (declare (salience 10000))
+
    (attribute (name zona) (value unknown))
    (attribute (name citta) (value milano))
    =>
@@ -478,7 +478,7 @@
 )
 
 (defrule CHOOSE-QUALITIES::zona-unk-roma
-   (declare (salience 10000))
+
    (attribute (name zona) (value unknown))
    (attribute (name citta) (value roma))
    =>
@@ -487,7 +487,7 @@
 )
 
 (defrule CHOOSE-QUALITIES::zona-unk-firenze
-   (declare (salience 10000))
+
    (attribute (name zona) (value unknown))
    (attribute (name citta) (value firenze))
    =>
@@ -500,7 +500,7 @@
 
 ; Regole per selezionare il best-quartiere di Torino
 (defrule CHOOSE-QUALITIES::quartiere-valorized-torino-1
-   (declare (salience 10000))
+
    (or (attribute (name citta) (value torino)) (attribute (name best-citta) (value torino)))
    (attribute (name zona) (value ?val))
    (or (test (eq ?val periferia)) (test (eq ?val primacintura)))
@@ -510,7 +510,7 @@
 )
 
 (defrule CHOOSE-QUALITIES::quartiere-valorized-torino-2
-   (declare (salience 10000))
+
    (or (attribute (name citta) (value torino)) (attribute (name best-citta) (value torino)))
    (attribute (name zona) (value ?val))
    (or (test (eq ?val primacintura)) (test (eq ?val centro)))
@@ -521,7 +521,7 @@
 
 ; Regole per selezionare il best-quartiere di Milano
 (defrule CHOOSE-QUALITIES::quartiere-valorized-milano-1
-   (declare (salience 10000))
+
    (or (attribute (name citta) (value milano)) (attribute (name best-citta) (value milano)))
    (attribute (name zona) (value ?val))
    (or (test (eq ?val periferia)) (test (eq ?val primacintura)))
@@ -531,7 +531,7 @@
 )
 
 (defrule CHOOSE-QUALITIES::quartiere-valorized-milano-2
-   (declare (salience 10000))
+
    (or (attribute (name citta) (value milano)) (attribute (name best-citta) (value milano)))
    (attribute (name zona) (value ?val))
    (or (test (eq ?val primacintura)) (test (eq ?val centro)))
@@ -543,7 +543,7 @@
 
 ; Regole per selezionare il best-quartiere di Firenze
 (defrule CHOOSE-QUALITIES::quartiere-valorized-firenze-1
-   (declare (salience 10000))
+
    (or (attribute (name citta) (value firenze)) (attribute (name best-citta) (value firenze)))
    (attribute (name zona) (value ?val))
    (or (test (eq ?val periferia)) (test (eq ?val primacintura)))
@@ -553,7 +553,7 @@
 )
 
 (defrule CHOOSE-QUALITIES::quartiere-valorized-firenze-2
-   (declare (salience 10000))
+
    (or (attribute (name citta) (value firenze)) (attribute (name best-citta) (value firenze)))
    (attribute (name zona) (value ?val))
    (or (test (eq ?val primacintura)) (test (eq ?val centro)))
@@ -565,7 +565,7 @@
 
 ; Regole per selezionare il best-quartiere di Roma
 (defrule CHOOSE-QUALITIES::quartiere-valorized-roma-1
-   (declare (salience 10000))
+
    (or (attribute (name citta) (value roma)) (attribute (name best-citta) (value roma)))
    (attribute (name zona) (value ?val))
    (or (test (eq ?val periferia)) (test (eq ?val primacintura)))
@@ -575,7 +575,7 @@
 )
 
 (defrule CHOOSE-QUALITIES::quartiere-valorized-roma-2
-   (declare (salience 10000))
+
    (or (attribute (name citta) (value roma)) (attribute (name best-citta) (value roma)))
    (attribute (name zona) (value ?val))
    (or (test (eq ?val primacintura)) (test (eq ?val centro)))
@@ -587,7 +587,7 @@
 ; Regole per selezionare il best-ascensore 
 
 (defrule CHOOSE-QUALITIES::ascensore-si-no
-   (declare (salience 10000))
+
    (attribute (name ascensore) (value ?val &~unknown))
    ;(not (test (eq ?val unknown)))    ; se la risposta è unknown bisogna usare una regola apposita
    =>
@@ -595,7 +595,7 @@
    (assert (attribute (name best-ascensore) (value ?val) (certainty 40.0))))
 
 (defrule CHOOSE-QUALITIES::ascensore-unk
-   (declare (salience 10000))
+
    (attribute (name ascensore) (value ?val))
    (test (eq ?val unknown))    ; se la risposta è unknown bisogna usare una regola apposita
    =>
@@ -611,7 +611,7 @@
 
 ; Regole per selezionare il best-boxauto 
 (defrule CHOOSE-QUALITIES::boxauto-si
-   (declare (salience 10000))
+
    (attribute (name boxauto) (value ?val &~unknown))
    ;(not (test (eq ?val unknown)))    ; se la risposta è unknown bisogna usare una regola apposita
    =>
@@ -619,7 +619,7 @@
    (assert (attribute (name best-boxauto) (value ?val) (certainty 40.0))))
 
 (defrule CHOOSE-QUALITIES::boxauto-unk
-   (declare (salience 10000))
+
    (attribute (name boxauto) (value ?val))
    (test (eq ?val unknown))    ; se la risposta è unknown bisogna usare una regola apposita
    =>
@@ -633,7 +633,7 @@
 
 ; Regole per selezionare il best-terrazzino 
 (defrule CHOOSE-QUALITIES::terrazzino-valorized
-   (declare (salience 10000))
+
    (attribute (name terrazzino) (value ?val &~unknown))
    ;(not (test (eq ?val unknown)))    ; se la risposta è unknown bisogna usare una regola apposita
    =>
@@ -641,7 +641,7 @@
    (assert (attribute (name best-terrazzino) (value ?val) (certainty 40.0))))
 
 (defrule CHOOSE-QUALITIES::terrazzino-unk
-   (declare (salience 10000))
+
    (attribute (name terrazzino) (value ?val))
    (test (eq ?val unknown))    ; se la risposta è unknown bisogna usare una regola apposita
    =>

@@ -310,7 +310,7 @@
 
 
     (apartment  (name "FIRENZE Quadrilocale in vendita in via Enrico Stili, 26")
-                (metriquadri 102) (numerovani 4) (numeroservizi 3) (piano 3) (citta firenze) (zona primacintura) (quartiere santacroce)
+                (metriquadri 102) (numerovani 3) (numeroservizi 3) (piano 3) (citta firenze) (zona primacintura) (quartiere santacroce)
                 (ascensore si) (boxauto si)  (terrazzino no) (prezzorichiesto 650000) (servizivicino parco mezzipubblici)
     )
 
