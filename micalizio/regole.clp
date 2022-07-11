@@ -438,7 +438,8 @@
    ;(not (test (eq ?val unknown)))    ; se la risposta è unknown bisogna usare una regola apposita
    =>
    ;(printout t "zona SI O NO: " crlf)
-   (assert (attribute (name best-zona) (value ?val) (certainty 40.0))))
+   (assert (attribute (name best-zona) (value ?val) (certainty 40.0)))
+)
 
 ; Se l'utente vuole la casa in centro penso sia sensa proporne qualcuna nella prima cintura della città
 (defrule CHOOSE-QUALITIES::zona-valorized-centro
