@@ -385,7 +385,7 @@
         (servizivicino $? ?sv $?))
 
   ; TODO: (FARE ATTENZIONE AL VALORE IN CASO) vedere i risultati con questo best-numero-piano e decidere se tenerlo
-  ;(attribute (name best-numero-piano) (value ?p) (certainty ?certainty-20)) ; attributo legato proprio al numero del piano
+  (attribute (name best-numero-piano) (value ?p) (certainty ?certainty-20)) ; attributo legato proprio al numero del piano
   (attribute (name best-citta) (value ?c) (certainty ?certainty-5))
   (attribute (name best-zona) (value ?z) (certainty ?certainty-6))
   (attribute (name best-quartiere) (value ?q) (certainty ?certainty-7))
@@ -394,12 +394,12 @@
   (attribute (name best-terrazzino) (value ?t) (certainty ?certainty-11))
   (attribute (name best-prezzo-richiesto) (value ?name) (certainty ?certainty-12))
   (attribute (name best-metri-quadri) (value ?name) (certainty ?certainty-1))
-  (attribute (name best-numero-piano-apartment) (value ?name) (certainty ?certainty-4)) ; attributo legato al numero del piano dell'appartamento specifico
+  ;(attribute (name best-numero-piano-apartment) (value ?name) (certainty ?certainty-4)) ; attributo legato al numero del piano dell'appartamento specifico
   (attribute (name best-numero-vani) (value ?nv) (certainty ?certainty-2))
   (attribute (name best-numero-servizi) (value ?ns) (certainty ?certainty-3))
   (attribute (name best-servizio-vicino) (value ?sv) (certainty ?certainty-13))
   =>
   ;(printout t "GENERO ASSERT APPARTAMENTI" crlf)
   (assert (attribute (name apartment) (value ?name)
-                     (certainty (min ?certainty-1 ?certainty-2 ?certainty-3 ?certainty-4 ?certainty-5 ?certainty-6 ?certainty-7 ?certainty-8 ?certainty-9 ?certainty-11 ?certainty-12 ?certainty-13)))))
+                     (certainty (min ?certainty-1 ?certainty-2 ?certainty-3 ?certainty-5 ?certainty-6 ?certainty-7 ?certainty-8 ?certainty-9 ?certainty-11 ?certainty-12 ?certainty-13 ?certainty-20)))))
 
