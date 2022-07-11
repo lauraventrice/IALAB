@@ -67,15 +67,15 @@
     ; ; ; ----------------------------------------------------------------------------------------
 
     (question (attribute ascensore)
-        (the-question "Deve essere presente l'ascensore? ")
+        (the-question "Preferirebbe che fosse presente l'ascensore? ")
         (valid-answers si no unknown))
 
     (question (attribute boxauto)
-        (the-question "Deve essere presente il box auto? ")
+        (the-question "Preferirebbe che fosse presente il box auto? ")
         (valid-answers si no unknown))
 
     (question (attribute terrazzino)
-        (the-question "Deve essere presente il terrazzino? ")
+        (the-question "Preferirebbe che fosse presente il terrazzino? ")
         (valid-answers si no unknown))
 
     ; ; ; Domande più generiche sulla persona che cerca l'appartamento
