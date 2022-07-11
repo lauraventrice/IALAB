@@ -15,7 +15,7 @@ Spostasersi nella directory corretta:
         - (load "/Volumes/DATI/GIT/IALAB/micalizio/codiceProf/progetto-vini.clp")
         - (batch "/Volumes/DATI/GIT/IALAB/micalizio/codiceProf/makefile.bat")
         - (load "/Volumes/DATI/GIT/IALAB/micalizio/codiceProf/prova.clp")
-        - (batch "/Volumes/DATI/GIT/IALAB/micalizio/makefile.bat")
+        - (batch "/Volumes/DATI/GIT/IALAB/micalizio/progetto/makefile.bat")
 
 - Per Laura: 
-    - (batch "../Uni/IALAB/micalizio/makefileL.bat")
+    - (batch "../Uni/IALAB/micalizio/progetto/makefileL.bat")
