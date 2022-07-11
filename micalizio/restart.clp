@@ -12,7 +12,6 @@
 
 (defrule RESTART::end-cycle      
   (declare (salience 1000))
-  ;(attribute (name fine-ciclo))         
   (test (neq (length$ (find-all-facts ((?f attribute)) (eq ?f:name fine-ciclo))) 2))         
    =>
     (printout t crlf "        Vuoi cambiare le risposte alle domande a cui hai risposto unknown? : " )
@@ -25,7 +24,6 @@
   (attribute (name risposta) (value si))   
   (attribute (name ?name) (value unknown))     
    =>
-    ;(printout t "ASSERISCO UN FATTO PER LE RISPOSTE UNKNOWN " crlf)
     (assert (attribute (name risposta-unknown) (value ?name)))
     )
 
@@ -41,7 +39,6 @@
                 (valid-answers $?valid-answers))
   (not (test (eq ?name preferisce)))  ; quando riparte il ciclio meglio non rifare la domanda "preferisce il mare o la montagna?"
    =>
-    ;(printout t "MODIFICO DOMANDA; ORA POSSO RIFARLA " crlf)
     (retract ?a)
     (retract ?r)
     (modify ?f (already-asked FALSE))
@@ -59,7 +56,6 @@
                 (valid-answers $?valid-answers))
   (test (eq ?name preferisce))  ; quando riparte il ciclio meglio non rifare la domanda "preferisce il mare o la montagna?"
    =>
-    ;(printout t "MODIFICO DOMANDA; ORA POSSO RIFARLA " crlf)
     (retract ?a)
     (retract ?r)
 )
@@ -120,7 +116,6 @@
     (retract ?a)
 )
 
-; TODO: qua c'è qualcosa da sistemare -> non so se faccia ciòò che vada fatto
 (defrule RESTART::delete-old-answer-citta
   (declare (salience 10000))
   (attribute (name risposta) (value si))   
@@ -128,7 +123,6 @@
   ?a <- (attribute (name best-citta) (value ?val))
   (attribute (name preferisce) (value ?preferisce))
    =>
-   ;(printout t "RIMUOVO VECCHIE RISPOSTE CITTA: " crlf)
     (assert (attribute (name preferisce) (value ?preferisce) (certainty 22.0)))  ; riasserisco il valore di preferisce così poi mi serve per far riscattare la regola per determinare la migliore città se poi risponde con un valore
     (retract ?a)
 )
@@ -148,7 +142,6 @@
   ?r <- (attribute (name risposta-unknown) (value ascensore))   
   ?a <- (attribute (name best-ascensore) (value ?val))   
    =>
-   ;(printout t "RIMUOVO VECCHIE RISPOSTE ASCENSORE: " crlf)
     (retract ?a)
 )
 
@@ -172,20 +165,14 @@
 
 ;-------- fine regole per cancellare le vecchie risposte ------------
 
-
-; TODO: i commenti nella regola seguente teoricamente possono essere cancellati - il comportamento giusto si ottiene senza di loro
-
 (defrule RESTART::restart
   (declare (salience 100))
   (not (exists (attribute (name risposta-unknown) (value ?name))))
-  ;(forall (attribute (name ?name) (value unknown)) (attribute (name risposta-unknown) (value ?name)))
-  ;not (attribute (name risposta-unknown) (value ?name)))
   (question (already-asked FALSE))  
   ?s <- (attribute (name risposta) (value si))  
   ?f <- (attribute (name fine-ciclo)) 
   =>
   (retract ?s)
-  ;(retract ?f)
   (set-fact-duplication TRUE)
   (focus QUESTIONS CHOOSE-QUALITIES APPARTAMENTI PRINT-RESULTS RESTART)
 )

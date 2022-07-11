@@ -33,36 +33,6 @@
         (the-question "Preferirebbe trovare l'appartamento a torino, roma, milano o firenze? ")
         (valid-answers torino roma milano firenze unknown)) 
 
-    ; ; ; NB: io eviterei di fare queste domande!
-    ; ; ; credo abbia senso proporre un appartamento in un certo quartiere in base alla zona in cui preferisce l'appartamento l'utente
-    ; ; ; per questo ho fatto le regole che in base alla zona e alla città aumenta la certezza di un quartiere
-    ; ; ; ----------------------------------------------------------------------------------------
-    
-
-    ; ; ; domande sul quartiere in base alla città inserita
-    ; ; ; ----------------------------------------------------------------------------------------
-    
-    ; ; (question (attribute quartiere)
-    ; ;     (precursors citta is torino)
-    ; ;     (the-question "Preferirebbe trovare l'appartamento in zona lingotto o moncalieri? ")
-    ; ;     (valid-answers lingotto moncalieri unknown))
-
-    ; ; (question (attribute quartiere)
-    ; ;     (precursors citta is roma)
-    ; ;     (the-question "Preferirebbe trovare l'appartamento in zona trastevere o campitelli? ")
-    ; ;     (valid-answers trastevere campitelli unknown))
-
-    ; ; (question (attribute quartiere)
-    ; ;     (precursors citta is milano)
-    ; ;     (the-question "Preferirebbe trovare l'appartamento in zona sansiro o navigli? ")
-    ; ;     (valid-answers sansiro navigli unknown))
-
-    ; ; (question (attribute quartiere)
-    ; ;     (precursors citta is firenze)
-    ; ;     (the-question "Preferirebbe trovare l'appartamento in zona santacroce o rovezzano? ")
-    ; ;     (valid-answers santacroce rovezzano unknown))
-
-
     ; ; ; Caratteristiche aggiuntive dell'appartamento
     ; ; ; ----------------------------------------------------------------------------------------
 
@@ -81,27 +51,25 @@
     ; ; ; Domande più generiche sulla persona che cerca l'appartamento
     ; ; ; ----------------------------------------------------------------------------------------
 
-    ; ; ; TODO: capire che fare -> PER ME LA RISPSOTA UNKNOWN NON HA SENSO PER QUESTE DOMANDE!
-
     (question (attribute ha-figli-piccoli)
         (the-question "Ha dei figli piccoli? ")
-        (valid-answers si no unknown))  
+        (valid-answers si no))  
 
     (question (attribute ha-animali)
         (the-question "Ha degli animali domestici? ")
-        (valid-answers si no unknown))
+        (valid-answers si no))
 
     (question (attribute ha-piudi60anni)
         (the-question "Ha più di 60 anni? ")
-        (valid-answers si no unknown))
+        (valid-answers si no))
 
     (question (attribute e-sportivo)
         (the-question "E' uno sportiv*? ")
-        (valid-answers si no unknown))
+        (valid-answers si no))
 
     (question (attribute e-automunito)
         (the-question "E' automunit*? ")
-        (valid-answers si no unknown))
+        (valid-answers si no))
 
     (question (attribute preferisce)
         (precursors citta is unknown)   ; se l'utente non ha fornito la risposta per la citta allora chiediamo se preferisce mare o montagna

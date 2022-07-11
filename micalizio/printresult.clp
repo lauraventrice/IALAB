@@ -18,7 +18,6 @@
    (assert (phase print-apartment)))
 
 (defrule PRINT-RESULTS::print-apartment ""
- ;(declare (salience 1000))
   ?rem <- (attribute (name apartment) (value ?name) (certainty ?per))		  
   (not (attribute (name apartment) (certainty ?per1&:(> ?per1 ?per))))
   =>
