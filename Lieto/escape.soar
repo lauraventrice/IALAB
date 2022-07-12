@@ -483,32 +483,48 @@ sp {apply*combine
 ##
 # When a combine is chosen, assert the associated reward
 ##
-sp {elaborate*reward
+sp {elaborate*reward*success
    (state <s> ^reward-link <rl>
               ^comb <c>)
-   (<c> ^name <d-name> 
+   (<c> ^name <c-name> 
         ^built yes
-        ^reward <rwd>)   
+        ^reward <rwd> > 0)   
     --> 
    (<rl> ^reward <r>)
    (<r> ^value <rwd>)
-   (write (crlf) |                           REWARD | <d-name> | | <rwd>)
+   (write (crlf) |                           REWARD | <c-name> | | <rwd>)
 }
+
+sp {elaborate*reward*failure
+   (state <s> ^reward-link <rl>
+              ^comb <c>)
+   (<c> ^name <c-name> 
+        ^built yes
+        ^reward <rwd> < 0)   
+    --> 
+   (<rl> ^reward <r>)
+   (<r> ^value <rwd>)
+   (write (crlf) |                           REWARD | <c-name> | | <rwd>)
+   (write (crlf) |                          No operator can be selected for the top goal. |) 
+   (write (crlf) |                          The robot failed to leave the room. |)    
+   (halt)
+}
+
 
 ##
 # When the combination is not correct, a state of empasse is reached 
 # because there will be no applicable operators
 ##
 
-sp {default*top-goal*halt*operator*failure
-   (state <ss> ^impasse no-change ^superstate <s>)
-   (<s> ^superstate nil)
-    -->
-   (<s> ^operator <o> -) 
-   (write (crlf) |                          No operator can be selected for the top goal. |) 
-   (write (crlf) |                          The robot failed to leave the room. |) 
-   (halt)
-}
+##sp {default*top-goal*halt*operator*failure
+##   (state <ss> ^impasse no-change ^superstate <s>)
+##   (<s> ^superstate nil)
+##    -->
+##   (<s> ^operator <o> -) 
+##   (write (crlf) |                          No operator can be selected for the top goal. |) 
+##   (write (crlf) |                          The robot failed to leave the room. |) 
+##   (halt)
+##}
 
 ###
 ### VI. Propose and apply the main operator to break the window throwing stones
@@ -601,21 +617,33 @@ sp {es*apply-op*stone*throwing
    (write (crlf) |                           Stone throwing! | <c-name>)
 }
 
-sp {elaborate*reward*throw
-   (state <s> ^name escape
-              ^reward-link <rl>
-              ^window <w>
-              ^objects <ob>) 
+sp {elaborate*reward*throw*success
+   (state <s> ^reward-link <rl>
+              ^window <w>) 
    (<w> ^corners <c>)           
    (<c> ^name <c-name> 
         ^hit yes
-        ^reward <rwd>)
-   (<ob> ^name stone
-         ^available no)        
+        ^reward <rwd>)    
     -->
    (<rl> ^reward <r>)
    (<r> ^value <rwd>)
    (write (crlf) |                           REWARD | <c-name> | | <rwd>)
+}
+
+sp {elaborate*reward*throw*failure
+   (state <s> ^reward-link <rl>
+              ^window <w>) 
+   (<w> ^corners <c>)           
+   (<c> ^name <c-name> 
+        ^hit yes
+        ^reward <rwd> < 0)     
+    -->
+   (<rl> ^reward <r>)
+   (<r> ^value <rwd>)
+   #(write (crlf) |                           REWARD | <c-name> | | <rwd>)
+   (write (crlf) |                          No operator can be selected for the top goal. |) 
+   (write (crlf) |                          The robot failed to leave the room. |)    
+   (halt)
 }
 
 ##
@@ -623,18 +651,17 @@ sp {elaborate*reward*throw
 # The corners with associated positive rewards are the correct ones to hit. 
 ##
 
-sp {terminate*reward*throw
+sp {terminate*reward*throw*success
    (state <s> ^name escape
-              ^reward-link <rl>
               ^window <w>)
    (<w> ^corners <c>)
-   (<c> ^hit yes)           
-   (<c> ^name <d-name> <> lower-right)
-   (<c> ^name <d-name> <> upper-left)   
+   (<c> ^hit yes
+        ^reward <val> > 0) 
     -->
    (<w> ^broken no - yes)
-   (write (crlf) |                           WINDOW | BROKEN | | <d-name>)
+   (write (crlf) |                           WINDOW | BROKEN )
 }
+
 
 ###
 ### VII. Propose and apply the main operator to combine trunks in order to reach 
