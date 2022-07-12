@@ -1,42 +1,6 @@
 rl -s learning on # enable RL
 indifferent-selection -g # use epsilon-greedy decision making
-indifferent-selection -e 0.7 # 10% deviation from greedy
-
-##RECAP: 
-# Dobbiamo avere:
-# - operatori di movimento, immaginiamo destra e sinistra?
-# - Uno o più operatori di combinazioni di oggetti, cosa creano, quali #sono ammissibli e quelli non ammissibili devono avere rinforzo negativo, NB: dopo la combinazione NON li togliamo dal mondo, perchè gli oggetti originali non servono per risolvere il problema, non li riutilizza ma usa solo quelli combinati.
-# - Oggetti: devono essere descritti -> ci possiamo fare alcune cose e non altre
-# - Finestra: è un oggetto, ma alcuni attributi della finestra servono ad identificare lo stato goal che vogliamo raggiungere. (rotta/intera)
-# - Definire l'agente, come l'altezza
-# - Definire la finestra, come l’altezza della finestra
-# - Dobbiamo definire le proprietà che rendono la finestra rompibile in alcuni punti e su azioni ripetute
-# - L'agente deve saper afferrare degli oggetti, combinarli, lanciare (lanciare forse no, dipende come lo progettiamo), deve saper salire
-# - Trovare un modo poco scontato per rompere la finestra, guardare la consegna!
-# - Modelliamo solo gli elementi di conoscenza che servono all'agente rispetto al goal, dovendosi muovere direi che la dimensione della stanza è importante
-##
-
-##
-# Per runnare ricorda: 
-#     - load 
-#     - watch 5 
-#     - Step (se vuoi)
-#     - print --full --rl
-#     - Run 
-#     - print --full --rl
-#     - print --rl
-#     - se vuoi vedere l'apprendimento fai init-soar e riparti dalla quinta istruzione! :)  
-##
-
-##TODO: 
-# 1. Far muovere questo agente                                                              OK
-# 2. Definire la finestra, in particolare la sua altezza (NB: h 3.5)                        OK
-# 3. Dagli struttura, è importante per noi la sua altezza (1.5 metri)                       OK
-# 4. Fai raggiungere l'agente la stessa pos della finestra per arrivarci con i due tronchi  OK? ne discutiamo un attimo
-# 5. Definire gli oggetti: molla, rametto in legno, pietre, 2 tronchi di legno              OK
-# 6. Aggiungere un reward per la creazione degli oggetti definiti come nella consegna       OK 
-# 7. Capire come gestire il fatto di rompere la finestra 
-# 8. Capire come gestire il fatto di salire e uscire dalla stanza                           OK
+indifferent-selection -e 0.1 # 10% deviation from greedy
 
 #################################################################################################BEGIN
 
@@ -495,6 +459,11 @@ sp {elaborate*reward*success
    (write (crlf) |                           REWARD | <c-name> | | <rwd>)
 }
 
+##
+# When the combination is not correct, a state of empasse is reached 
+# because there will be no applicable operators
+##
+
 sp {elaborate*reward*failure
    (state <s> ^reward-link <rl>
               ^comb <c>)
@@ -511,20 +480,6 @@ sp {elaborate*reward*failure
 }
 
 
-##
-# When the combination is not correct, a state of empasse is reached 
-# because there will be no applicable operators
-##
-
-##sp {default*top-goal*halt*operator*failure
-##   (state <ss> ^impasse no-change ^superstate <s>)
-##   (<s> ^superstate nil)
-##    -->
-##   (<s> ^operator <o> -) 
-##   (write (crlf) |                          No operator can be selected for the top goal. |) 
-##   (write (crlf) |                          The robot failed to leave the room. |) 
-##   (halt)
-##}
 
 ###
 ### VI. Propose and apply the main operator to break the window throwing stones
@@ -640,7 +595,6 @@ sp {elaborate*reward*throw*failure
     -->
    (<rl> ^reward <r>)
    (<r> ^value <rwd>)
-   #(write (crlf) |                           REWARD | <c-name> | | <rwd>)
    (write (crlf) |                          No operator can be selected for the top goal. |) 
    (write (crlf) |                          The robot failed to leave the room. |)    
    (halt)
