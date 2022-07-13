@@ -1,4 +1,4 @@
-(load "../Uni/IALAB/micalizioprogetto//MAIN.clp")
+(load "../Uni/IALAB/micalizio/progetto/MAIN.clp")
 (load "../Uni/IALAB/micalizio/progetto/regoleDomande.clp")
 (load "../Uni/IALAB/micalizio/progetto/domande.clp")
 (load "../Uni/IALAB/micalizio/progetto/appartamenti.clp")
