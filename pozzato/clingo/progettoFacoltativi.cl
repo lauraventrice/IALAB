@@ -36,7 +36,7 @@ giornata(1..38).
 1 {assegnaAGiornata(G, SquadraCasa, SquadraOspite) : giornata(G), not assegnaAGiornata(G, SquadraCasa, Squadra2)} 1 :- partita(SquadraCasa, SquadraOspite), partita(SquadraCasa, Squadra2),  Squadra2 <> SquadraOspite.
 
 
-%3 partite per giornata
+%10 partite per giornata
 10 {assegnaAGiornata(G, SquadraCasa, SquadraOspite) : partita(SquadraCasa, SquadraOspite)} 10 :- giornata(G).
 
 % una squadra non può giocare due partite diverse nella stessa giornata
@@ -54,8 +54,8 @@ giornata(1..38).
 %FACOLTATIVI ---------------------------------------------------------------------------------------------------
 
 % distanza di 10 partite tra andata e ritorno 
-:- assegnaAGiornata(G1, Squadra1, Squadra2), assegnaAGiornata(G2, Squadra2, Squadra1), G1 > 19, G2 <= 19, G1-G2 < 10.
-:- assegnaAGiornata(G1, Squadra1, Squadra2), assegnaAGiornata(G2, Squadra2, Squadra1), G1 <= 19, G2 >= 19, G2-G1 < 10.
+:- assegnaAGiornata(G1, Squadra1, Squadra2), assegnaAGiornata(G2, Squadra2, Squadra1), G1 >= 19, G2 < 19, G1-G2 < 10.
+:- assegnaAGiornata(G1, Squadra1, Squadra2), assegnaAGiornata(G2, Squadra2, Squadra1), G1 <= 19, G2 > 19, G2-G1 < 10.
 
 % non si possono giocare due partite di seguito in casa o fuori casa 
 %:- assegnaAGiornata(G, Squadra1, Squadra2), assegnaAGiornata(G1, Squadra1, Squadra3), G == G1 + 1.
