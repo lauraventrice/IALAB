@@ -151,7 +151,9 @@
    (apartment (name ?name1) (numeroservizi ?serviziappartamento))
    =>
    ;(printout t "numero-servizi UNKNOWN: " crlf)
-   (assert (attribute (name best-numero-servizi) (value ?name1) (certainty 20.0)))
+   (assert (attribute (name best-numero-servizi) (value 1) (certainty 20.0)))
+   (assert (attribute (name best-numero-servizi) (value 2) (certainty 20.0)))
+   (assert (attribute (name best-numero-servizi) (value 3) (certainty 20.0)))
 )
 
 
