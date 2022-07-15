@@ -1,0 +1,8 @@
+(load "../../../Desktop/Parallels\ Shared\ Folders/DATI/GIT/IALAB/micalizio/progetto/MAIN.clp")
+(load "../../../Desktop/Parallels\ Shared\ Folders/DATI/GIT/IALAB/micalizio/progetto/regoleDomande.clp")
+(load "../../../Desktop/Parallels\ Shared\ Folders/DATI/GIT/IALAB/micalizio/progetto/domande.clp")
+(load "../../../Desktop/Parallels\ Shared\ Folders/DATI/GIT/IALAB/micalizio/progetto/appartamenti.clp")
+(load "../../../Desktop/Parallels\ Shared\ Folders/DATI/GIT/IALAB/micalizio/progetto/regole.clp")
+(load "../../../Desktop/Parallels\ Shared\ Folders/DATI/GIT/IALAB/micalizio/progetto/printresult.clp")
+(reset)
+(run)
